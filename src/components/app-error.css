@@ -1,0 +1,13 @@
+.app-error .card {
+  width: 30rem;
+}
+
+.app-error .card-title {
+  font-size: 8rem;
+  font-weight: 200;
+}
+
+.app-error p {
+  font-size: 2rem;
+  font-weight: 200;
+}

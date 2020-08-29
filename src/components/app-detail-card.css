@@ -1,0 +1,9 @@
+.card.app-detail-card {
+  width: 30rem;
+}
+
+.card.app-detail-card img {
+  align-self: center;
+  padding: 1rem;
+  height: 20rem;
+}
