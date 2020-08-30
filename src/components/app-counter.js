@@ -25,7 +25,7 @@ export class AppCounter extends MobxLitElement {
         <div class="card app-detail-card">
           <div class="card-body">
             <h4 class="card-title">${counterStore.value}</h4>
-            <p class="card-text">Demo counter implemented with MobX.</p>
+            <p class="card-text">Demo counter</p>
             <a href class="btn btn-primary" @click="${this.handleDecrement}">
               -
             </a>

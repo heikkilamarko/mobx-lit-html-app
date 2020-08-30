@@ -1,41 +1,20 @@
-import { LitElement, html } from 'lit-element';
-import axios from 'axios';
+import { html } from 'lit-element';
+import { MobxLitElement } from '@adobe/lit-mobx';
+import browseStore from '../stores/browseStore';
 import './app-browse-card';
 import './app-error';
 
-export class AppBrowse extends LitElement {
-  static get properties() {
-    return {
-      items: { type: Array },
-      error: { type: Object },
-    };
-  }
-
-  constructor() {
-    super();
-    this.items = [];
-    this.error = null;
-  }
-
-  async load() {
-    try {
-      const { data } = await axios.get('/data.json');
-      this.items = data;
-    } catch (error) {
-      this.error = error;
-    }
-  }
-
+export class AppBrowse extends MobxLitElement {
   async firstUpdated() {
-    await this.load();
+    await browseStore.load();
   }
 
   render() {
     return html`
-      ${!this.error && this.items
+      ${!browseStore.hasError
         ? html`
             <div class="row p-2">
-              ${this.items.map(
+              ${browseStore.items.map(
                 (item) =>
                   html`<app-browse-card
                     class="col-6 col-md-4 col-lg-3 p-2"
@@ -45,8 +24,8 @@ export class AppBrowse extends LitElement {
             </div>
           `
         : null}
-      ${this.error
-        ? html`<app-error text="${this.error.message}"></app-error>`
+      ${browseStore.hasError
+        ? html`<app-error text="${browseStore.error.message}"></app-error>`
         : null}
     `;
   }
