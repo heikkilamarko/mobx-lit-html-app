@@ -1,12 +1,6 @@
 import { Reaction } from 'mobx';
 import { LitElement } from 'lit-element';
 
-export function noop() {}
-
-export function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 const reactionSymbol = Symbol();
 const requestUpdateSymbol = Symbol();
 
@@ -28,10 +22,8 @@ export class MobxLitElement extends LitElement {
   }
 
   disconnectedCallback() {
-    if (this[reactionSymbol]) {
-      this[reactionSymbol].dispose();
-      this[reactionSymbol] = null;
-    }
+    this[reactionSymbol]?.dispose();
+    this[reactionSymbol] = null;
 
     super.disconnectedCallback();
   }

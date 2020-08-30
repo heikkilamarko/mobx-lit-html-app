@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
-import './app-browse-card.css';
 import routeStore from '../stores/routeStore';
+import './app-browse-card.css';
 
 export class AppBrowseCard extends LitElement {
   static get properties() {

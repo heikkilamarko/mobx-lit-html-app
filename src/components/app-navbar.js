@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
-import { MobxLitElement } from '../utils';
 import { classMap } from 'lit-html/directives/class-map';
+import { MobxLitElement } from '../utils';
 import routeStore from '../stores/routeStore';
 
 export class AppNavbar extends MobxLitElement {

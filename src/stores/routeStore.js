@@ -1,7 +1,6 @@
 import { action, decorate, observable, computed } from 'mobx';
 import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
-import { noop } from '../utils';
 
 const routes = [
   { name: 'browse', path: '/' },
@@ -11,22 +10,16 @@ const routes = [
 
 class RouteStore {
   constructor() {
-    this.router = null;
-    this.disposeFn = noop;
+    this.router = createRouter(routes, { allowNotFound: true });
+    this.router.usePlugin(browserPlugin());
+    this.unsubscribe = null;
 
     this.route = null;
     this.previousRoute = null;
   }
 
   get isNotFoundRoute() {
-    return this.route.name === '@@router5/UNKNOWN_ROUTE';
-  }
-
-  listen() {
-    this.router = createRouter(routes, { allowNotFound: true });
-    this.router.usePlugin(browserPlugin());
-    this.disposeFn = this.router.subscribe(this.setRoute.bind(this));
-    this.router.start();
+    return this.route?.name === '@@router5/UNKNOWN_ROUTE';
   }
 
   setRoute({ route, previousRoute }) {
@@ -34,9 +27,17 @@ class RouteStore {
     this.previousRoute = previousRoute;
   }
 
-  unlisten() {
-    this.disposeFn();
-    this.disposeFn = noop;
+  start() {
+    if (!this.router.isStarted()) {
+      this.unsubscribe = this.router.subscribe(this.setRoute.bind(this));
+      this.router.start();
+    }
+  }
+
+  stop() {
+    this.router.stop();
+    this.unsubscribe?.();
+    this.unsubscribe = null;
   }
 
   navigate(routeName, routeParams, options, done) {

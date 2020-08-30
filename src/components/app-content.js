@@ -1,9 +1,10 @@
 import { html } from 'lit-element';
 import { MobxLitElement } from '../utils';
+import routeStore from '../stores/routeStore';
 import './app-browse';
 import './app-detail';
 import './app-counter';
-import routeStore from '../stores/routeStore';
+import './app-error';
 
 export class AppContent extends MobxLitElement {
   getContent() {
