@@ -5,8 +5,8 @@ import './app-browse-card';
 import './app-error';
 
 export class AppBrowse extends MobxLitElement {
-  async firstUpdated() {
-    await browseStore.load();
+  firstUpdated() {
+    browseStore.load();
   }
 
   render() {

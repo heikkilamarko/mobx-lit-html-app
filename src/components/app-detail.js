@@ -7,8 +7,8 @@ import './app-error';
 import './app-detail-card';
 
 export class AppDetail extends MobxLitElement {
-  async firstUpdated() {
-    await browseStore.load(routeStore.route.params.id);
+  firstUpdated() {
+    browseStore.load(routeStore.route.params.id);
   }
 
   render() {

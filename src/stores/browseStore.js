@@ -19,6 +19,7 @@ class BrowseStore {
   async load(itemId = null) {
     try {
       this.selectedItemId = itemId;
+      this.error = null;
       const { data } = await axios.get('/data.json');
       this.items = data;
     } catch (error) {
