@@ -22,7 +22,7 @@ export class AppCounter extends MobxLitElement {
   render() {
     return html`
       <section class="d-flex align-items-center justify-content-center p-4">
-        <div class="card app-detail-card">
+        <div class="card app-counter-card">
           <div class="card-body">
             <h4 class="card-title">${counterStore.value}</h4>
             <p class="card-text">Demo counter</p>

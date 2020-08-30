@@ -1,6 +1,5 @@
 import { html } from 'lit-element';
 import { MobxLitElement } from '@adobe/lit-mobx';
-import './app-content.css';
 import './app-browse';
 import './app-detail';
 import './app-counter';
@@ -15,6 +14,9 @@ export class AppContent extends MobxLitElement {
         ${route === 'browse' ? html`<app-browse></app-browse>` : null}
         ${route === 'detail' ? html`<app-detail></app-detail>` : null}
         ${route === 'counter' ? html`<app-counter></app-counter>` : null}
+        ${routeStore.isNotFoundRoute
+          ? html`<app-error title="404" text="Not Found" />`
+          : null}
       </main>
     `;
   }

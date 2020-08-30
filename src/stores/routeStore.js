@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, decorate, observable, computed } from 'mobx';
 import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
 import { noop } from '../utils';
@@ -16,6 +16,10 @@ class RouteStore {
 
     this.route = null;
     this.previousRoute = null;
+  }
+
+  get isNotFoundRoute() {
+    return this.route.name === '@@router5/UNKNOWN_ROUTE';
   }
 
   listen() {
@@ -47,6 +51,7 @@ class RouteStore {
 decorate(RouteStore, {
   route: observable.ref,
   previousRoute: observable.ref,
+  isNotFoundRoute: computed,
   setRoute: action,
 });
 
