@@ -1,5 +1,5 @@
 import { html } from 'lit-element';
-import { MobxLitElement } from '@adobe/lit-mobx';
+import { MobxLitElement } from '../utils';
 import counterStore from '../stores/CounterStore';
 import './app-counter.css';
 

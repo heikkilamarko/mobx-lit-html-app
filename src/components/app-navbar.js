@@ -1,5 +1,5 @@
 import { html } from 'lit-element';
-import { MobxLitElement } from '@adobe/lit-mobx';
+import { MobxLitElement } from '../utils';
 import { classMap } from 'lit-html/directives/class-map.js';
 import routeStore from '../stores/routeStore';
 

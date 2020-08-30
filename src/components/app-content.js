@@ -1,5 +1,5 @@
 import { html } from 'lit-element';
-import { MobxLitElement } from '@adobe/lit-mobx';
+import { MobxLitElement } from '../utils';
 import './app-browse';
 import './app-detail';
 import './app-counter';
