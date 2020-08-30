@@ -25,4 +25,4 @@ decorate(CounterStore, {
   reset: action,
 });
 
-export default CounterStore;
+export default new CounterStore();
