@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 import { MobxLitElement } from '../utils';
-import counterStore from '../stores/CounterStore';
+import counterStore from '../stores/counterStore';
 import './app-counter.css';
 
 export class AppCounter extends MobxLitElement {
