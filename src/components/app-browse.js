@@ -10,21 +10,20 @@ export class AppBrowse extends MobxLitElement {
   }
 
   render() {
-    return html`
-      ${browseStore.hasError
-        ? html`<app-error text="${browseStore.error.message}"></app-error>`
-        : html`
-            <div class="row p-2">
-              ${browseStore.items.map(
-                (item) =>
-                  html`<app-browse-card
-                    class="col-6 col-md-4 col-lg-3 p-2"
-                    .data="${item}"
-                  />`,
-              )}
-            </div>
-          `}
-    `;
+    return browseStore.hasError
+      ? html`<app-error text="${browseStore.error.message}"></app-error>`
+      : html`
+          <div class="row p-2">
+            ${browseStore.items.map(
+              (item) => html`
+                <app-browse-card
+                  class="col-6 col-md-4 col-lg-3 p-2"
+                  .data="${item}"
+                ></app-browse-card>
+              `,
+            )}
+          </div>
+        `;
   }
 
   createRenderRoot() {
