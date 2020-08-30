@@ -11,8 +11,9 @@ export class AppBrowse extends MobxLitElement {
 
   render() {
     return html`
-      ${!browseStore.hasError
-        ? html`
+      ${browseStore.hasError
+        ? html`<app-error text="${browseStore.error.message}"></app-error>`
+        : html`
             <div class="row p-2">
               ${browseStore.items.map(
                 (item) =>
@@ -22,11 +23,7 @@ export class AppBrowse extends MobxLitElement {
                   />`,
               )}
             </div>
-          `
-        : null}
-      ${browseStore.hasError
-        ? html`<app-error text="${browseStore.error.message}"></app-error>`
-        : null}
+          `}
     `;
   }
 

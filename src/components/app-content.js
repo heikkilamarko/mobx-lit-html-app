@@ -6,19 +6,21 @@ import './app-counter';
 import routeStore from '../stores/routeStore';
 
 export class AppContent extends MobxLitElement {
-  render() {
-    const route = routeStore.route.name;
+  getContent() {
+    switch (routeStore.route.name) {
+      case 'browse':
+        return html`<app-browse></app-browse>`;
+      case 'detail':
+        return html`<app-detail></app-detail>`;
+      case 'counter':
+        return html`<app-counter></app-counter>`;
+      default:
+        return html`<app-error title="404" text="Not Found" />`;
+    }
+  }
 
-    return html`
-      <main class="container">
-        ${route === 'browse' ? html`<app-browse></app-browse>` : null}
-        ${route === 'detail' ? html`<app-detail></app-detail>` : null}
-        ${route === 'counter' ? html`<app-counter></app-counter>` : null}
-        ${routeStore.isNotFoundRoute
-          ? html`<app-error title="404" text="Not Found" />`
-          : null}
-      </main>
-    `;
+  render() {
+    return html`<main class="container">${this.getContent()}</main>`;
   }
 
   createRenderRoot() {

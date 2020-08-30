@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit-element';
+import { nothing } from 'lit-html';
 import './app-error.css';
 
 export class AppError extends LitElement {
@@ -23,7 +24,7 @@ export class AppError extends LitElement {
         <div class="card text-center text-danger">
           <div class="card-body">
             <h5 class="card-title">${this.title}</h5>
-            ${this.text ? html`<p class="card-text">${this.text}</p>` : null}
+            ${this.text ? html`<p class="card-text">${this.text}</p>` : nothing}
           </div>
         </div>
       </section>

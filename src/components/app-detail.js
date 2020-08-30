@@ -11,20 +11,24 @@ export class AppDetail extends MobxLitElement {
     browseStore.load(routeStore.route.params.id);
   }
 
+  getContent() {
+    if (browseStore.hasError) {
+      return html`<app-error text="${browseStore.error.message}"></app-error>`;
+    }
+
+    if (browseStore.selectedItem) {
+      return html`
+        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
+      `;
+    }
+
+    return html`<app-error text="Not Found" title="404"></app-error>`;
+  }
+
   render() {
     return html`
       <section class="d-flex align-items-center justify-content-center p-4">
-        ${browseStore.hasError
-          ? html`<app-error text="${browseStore.error.message}"></app-error>`
-          : null}
-        ${!browseStore.selectedItem
-          ? html`<app-error text="Not Found" title="404"></app-error>`
-          : null}
-        ${browseStore.selectedItem
-          ? html`<app-detail-card
-              .data="${browseStore.selectedItem}"
-            ></app-detail-card>`
-          : null}
+        ${this.getContent()}
       </section>
     `;
   }
