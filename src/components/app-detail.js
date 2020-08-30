@@ -42,7 +42,7 @@ export class AppDetail extends LitElement {
   }
 
   async firstUpdated() {
-    this.id = routeStore.getRouteParams().id;
+    this.id = routeStore.route.params.id;
     await this.load();
   }
 

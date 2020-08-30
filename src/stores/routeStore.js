@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { action, decorate, observable } from 'mobx';
 import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
 import { noop } from '../utils';
@@ -6,82 +6,48 @@ import { noop } from '../utils';
 const routes = [
   { name: 'browse', path: '/' },
   { name: 'detail', path: '/items/:id' },
+  { name: 'counter', path: '/counter' },
 ];
 
-const actions = {
-  UPDATED: 'app.store.route.updated',
-};
+class RouteStore {
+  constructor() {
+    this.router = null;
+    this.disposeFn = noop;
 
-function createStore() {
-  let state = { route: null, previousRoute: null };
-
-  let router;
-  let disposeFn = noop;
-
-  function setState(fn) {
-    const newState = produce(state, (d) => {
-      fn(d);
-    });
-
-    if (newState !== state) {
-      state = newState;
-      window.dispatchEvent(new CustomEvent(actions.UPDATED));
-    }
+    this.route = null;
+    this.previousRoute = null;
   }
 
-  function getState() {
-    return state;
+  listen() {
+    this.router = createRouter(routes, { allowNotFound: true });
+    this.router.usePlugin(browserPlugin());
+    this.disposeFn = this.router.subscribe(this.setRoute.bind(this));
+    this.router.start();
   }
 
-  function getRoute() {
-    return state.route;
+  setRoute({ route, previousRoute }) {
+    this.route = route;
+    this.previousRoute = previousRoute;
   }
 
-  function getRouteName() {
-    return state.route?.name;
+  unlisten() {
+    this.disposeFn();
+    this.disposeFn = noop;
   }
 
-  function getRouteParams() {
-    return state.route?.params;
+  navigate(routeName, routeParams, options, done) {
+    this.router.navigate(routeName, routeParams, options, done);
   }
 
-  function listen() {
-    router = createRouter(routes, { allowNotFound: true });
-    router.usePlugin(browserPlugin());
-    disposeFn = router.subscribe(({ route, previousRoute }) =>
-      setState((d) => {
-        d.route = route;
-        d.previousRoute = previousRoute;
-      }),
-    );
-    router.start();
-  }
-
-  function unlisten() {
-    disposeFn();
-    disposeFn = noop;
-  }
-
-  function navigate(routeName, routeParams, options, done) {
-    router.navigate(routeName, routeParams, options, done);
-  }
-
-  function navigateBack() {
+  navigateBack() {
     history.back();
   }
-
-  return {
-    getState,
-    getRoute,
-    getRouteName,
-    getRouteParams,
-    listen,
-    unlisten,
-    navigate,
-    navigateBack,
-  };
 }
 
-export { actions };
+decorate(RouteStore, {
+  route: observable.ref,
+  previousRoute: observable.ref,
+  setRoute: action,
+});
 
-export default createStore();
+export default new RouteStore();

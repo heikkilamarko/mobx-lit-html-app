@@ -1,29 +1,20 @@
-import { LitElement, html } from 'lit-element';
+import { html } from 'lit-element';
+import { MobxLitElement } from '@adobe/lit-mobx';
 import './app-content.css';
 import './app-browse';
 import './app-detail';
-import routeStore, { actions } from '../stores/routeStore';
+import './app-counter';
+import routeStore from '../stores/routeStore';
 
-export class AppContent extends LitElement {
-  handleStoreUpdate = () => this.requestUpdate();
-
-  connectedCallback() {
-    super.connectedCallback();
-    window.addEventListener(actions.UPDATED, this.handleStoreUpdate);
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener(actions.UPDATED, this.handleStoreUpdate);
-    super.disconnectedCallback();
-  }
-
+export class AppContent extends MobxLitElement {
   render() {
-    const r = routeStore.getRoute();
+    const route = routeStore.route.name;
 
     return html`
       <main class="container">
-        ${r.name === 'browse' ? html`<app-browse></app-browse>` : null}
-        ${r.name === 'detail' ? html`<app-detail></app-detail>` : null}
+        ${route === 'browse' ? html`<app-browse></app-browse>` : null}
+        ${route === 'detail' ? html`<app-detail></app-detail>` : null}
+        ${route === 'counter' ? html`<app-counter></app-counter>` : null}
       </main>
     `;
   }
