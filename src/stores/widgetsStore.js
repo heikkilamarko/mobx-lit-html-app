@@ -19,6 +19,24 @@ class WidgetsStore {
     this.error = error;
   }
 
+  containsWidget(id) {
+    return this.widgets.some((w) => w.id === id);
+  }
+
+  getWidget(id) {
+    return this.widgets.find((w) => w.id === id) ?? null;
+  }
+
+  parseWidgetId(id, defaultValue = null) {
+    const idn = +id;
+    return id !== undefined &&
+      id != null &&
+      Number.isInteger(idn) &&
+      this.containsWidget(idn)
+      ? idn
+      : defaultValue;
+  }
+
   async load() {
     try {
       this.setError(null);

@@ -14,15 +14,11 @@ export class AppWidgets extends MobxLitElement {
   }
 
   get widgetId() {
-    const id = routeStore.route.params.id;
-    return id !== undefined ? +id : null;
+    return widgetsStore.parseWidgetId(routeStore.route.params.id, '');
   }
 
   get widgetElement() {
-    const widgetId = this.widgetId;
-    const widget = widgetsStore.widgets.find(
-      (widget) => widget.id === widgetId,
-    );
+    const widget = widgetsStore.getWidget(this.widgetId);
     return widget ? createElement(widget) : nothing;
   }
 
