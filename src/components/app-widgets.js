@@ -1,5 +1,7 @@
 import { html } from 'lit-element';
-import { MobxLitElement } from '../utils';
+import { nothing } from 'lit-html';
+import { MobxLitElement, createElement } from '../utils';
+import routeStore from '../stores/routeStore';
 import widgetsStore from '../stores/widgetsStore';
 
 export class AppWidgets extends MobxLitElement {
@@ -8,17 +10,28 @@ export class AppWidgets extends MobxLitElement {
   }
 
   handleWidgetChange(event) {
-    widgetsStore.setSelectedWidgetId(+event.target.value);
+    routeStore.navigate('widgets', { id: +event.target.value || undefined });
+  }
+
+  get widgetId() {
+    const id = routeStore.route.params.id;
+    return id !== undefined ? +id : null;
+  }
+
+  get widgetElement() {
+    const widgetId = this.widgetId;
+    const widget = widgetsStore.widgets.find(
+      (widget) => widget.id === widgetId,
+    );
+    return widget ? createElement(widget) : nothing;
   }
 
   get selectOptions() {
-    const selectedId = widgetsStore.selectedWidgetId;
+    const widgetId = this.widgetId;
     return widgetsStore.widgets.map(
-      ({ id, name, tagName }) =>
+      ({ id, name }) =>
         html`
-          <option value="${id}" ?selected=${id === selectedId}>
-            ${`${name} (<${tagName}>)`}
-          </option>
+          <option .value=${id} ?selected=${id === widgetId}>${name}</option>
         `,
     );
   }
@@ -30,13 +43,14 @@ export class AppWidgets extends MobxLitElement {
           <select
             class="form-select"
             aria-label="Widget select"
+            .value=${this.widgetId}
             @change="${this.handleWidgetChange}"
           >
             <option value="">Select widget...</option>
             ${this.selectOptions}
           </select>
         </div>
-        ${widgetsStore.selectedWidget}
+        ${this.widgetElement}
       </main>
     `;
   }

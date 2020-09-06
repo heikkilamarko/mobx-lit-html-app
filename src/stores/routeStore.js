@@ -11,7 +11,10 @@ const routes = [
 
 class RouteStore {
   constructor() {
-    this.router = createRouter(routes, { allowNotFound: true });
+    this.router = createRouter(routes, {
+      allowNotFound: true,
+      queryParamsMode: 'loose',
+    });
     this.router.usePlugin(browserPlugin());
     this.unsubscribe = null;
 

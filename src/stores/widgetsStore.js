@@ -1,20 +1,10 @@
-import { nothing } from 'lit-html';
 import { action, computed, decorate, observable } from 'mobx';
 import axios from 'axios';
-import { createElement } from '../utils';
 
 class WidgetsStore {
   constructor() {
     this.widgets = [];
-    this.selectedWidgetId = null;
     this.error = null;
-  }
-
-  get selectedWidget() {
-    const widget =
-      this.widgets.find((widget) => widget.id === this.selectedWidgetId) ||
-      null;
-    return widget ? createElement(widget) : nothing;
   }
 
   get hasError() {
@@ -23,10 +13,6 @@ class WidgetsStore {
 
   setWidgets(widgets) {
     this.widgets = widgets;
-  }
-
-  setSelectedWidgetId(widgetId) {
-    this.selectedWidgetId = widgetId;
   }
 
   setError(error) {
@@ -46,12 +32,9 @@ class WidgetsStore {
 
 decorate(WidgetsStore, {
   widgets: observable.ref,
-  selectedWidgetId: observable.ref,
   error: observable.ref,
-  selectedWidget: computed,
   hasError: computed,
   setWidgets: action,
-  setSelectedWidgetId: action,
   setError: action,
   load: action,
 });
