@@ -7,6 +7,10 @@ class WidgetsStore {
     this.error = null;
   }
 
+  get hasWidgets() {
+    return !!this.widgets.length;
+  }
+
   get hasError() {
     return !!this.error;
   }
@@ -51,6 +55,7 @@ class WidgetsStore {
 decorate(WidgetsStore, {
   widgets: observable.ref,
   error: observable.ref,
+  hasWidgets: computed,
   hasError: computed,
   setWidgets: action,
   setError: action,

@@ -6,7 +6,7 @@ import widgetsStore from '../stores/widgetsStore';
 
 export class AppWidgets extends MobxLitElement {
   firstUpdated() {
-    widgetsStore.load();
+    !widgetsStore.hasWidgets && widgetsStore.load();
   }
 
   handleWidgetChange(event) {
