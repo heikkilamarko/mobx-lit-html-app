@@ -19,5 +19,11 @@
       "title": "Error",
       "text": "Error text."
     }
+  },
+  {
+    "id": 4,
+    "name": "Undefined",
+    "tagName": "app-undefined",
+    "props": {}
   }
 ]

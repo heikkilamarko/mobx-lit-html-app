@@ -38,5 +38,6 @@ export class MobxLitElement extends LitElement {
 }
 
 export function createElement({ tagName, props }) {
-  return Object.assign(document.createElement(tagName), props);
+  const ctor = customElements.get(tagName);
+  return ctor ? Object.assign(document.createElement(tagName), props) : null;
 }

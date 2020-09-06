@@ -18,8 +18,17 @@ export class AppWidgets extends MobxLitElement {
   }
 
   get widgetElement() {
+    if (this.widgetId === '') return nothing;
     const widget = widgetsStore.getWidget(this.widgetId);
-    return widget ? createElement(widget) : nothing;
+    if (widget) {
+      const widgetEl = createElement(widget);
+      if (widgetEl) return widgetEl;
+    }
+    return html`
+      <div class="alert alert-danger" role="alert">
+        The selected widget was not found in the registry.
+      </div>
+    `;
   }
 
   get selectOptions() {
