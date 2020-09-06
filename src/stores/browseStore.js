@@ -16,14 +16,26 @@ class BrowseStore {
     return !!this.error;
   }
 
+  setItems(items) {
+    this.items = items;
+  }
+
+  setSelectedItemId(itemId) {
+    this.selectedItemId = itemId;
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
   async load(itemId = null) {
     try {
-      this.selectedItemId = itemId;
-      this.error = null;
+      this.setSelectedItemId(itemId);
+      this.setError(null);
       const { data } = await axios.get('/data.json');
-      this.items = data;
+      this.setItems(data);
     } catch (error) {
-      this.error = error;
+      this.setError(error);
     }
   }
 }
@@ -34,6 +46,9 @@ decorate(BrowseStore, {
   error: observable.ref,
   selectedItem: computed,
   hasError: computed,
+  setItems: action,
+  setSelectedItemId: action,
+  setError: action,
   load: action,
 });
 
