@@ -1,5 +1,5 @@
 import { action, decorate, observable, computed } from 'mobx';
-import createRouter from 'router5';
+import createRouter, { constants } from 'router5';
 import browserPlugin from 'router5-plugin-browser';
 
 const routes = [
@@ -19,7 +19,7 @@ class RouteStore {
   }
 
   get isNotFoundRoute() {
-    return this.route?.name === '@@router5/UNKNOWN_ROUTE';
+    return this.route?.name === constants.UNKNOWN_ROUTE;
   }
 
   setRoute({ route, previousRoute }) {
