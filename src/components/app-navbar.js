@@ -14,6 +14,11 @@ export class AppNavbar extends MobxLitElement {
     routeStore.navigate('counter');
   }
 
+  navigateWidgets(event) {
+    event.preventDefault();
+    routeStore.navigate('widgets');
+  }
+
   render() {
     const route = routeStore.route.name;
 
@@ -56,6 +61,17 @@ export class AppNavbar extends MobxLitElement {
                   @click="${this.navigateCounter}"
                   href="/counter"
                   >Counter</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="${classMap({
+                    'nav-link': true,
+                    active: route === 'widgets',
+                  })}"
+                  @click="${this.navigateWidgets}"
+                  href="/widgets"
+                  >Widgets</a
                 >
               </li>
             </ul>

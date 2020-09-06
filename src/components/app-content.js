@@ -4,6 +4,7 @@ import routeStore from '../stores/routeStore';
 import './app-browse';
 import './app-detail';
 import './app-counter';
+import './app-widgets';
 import './app-error';
 
 export class AppContent extends MobxLitElement {
@@ -15,6 +16,8 @@ export class AppContent extends MobxLitElement {
         return html`<app-detail></app-detail>`;
       case 'counter':
         return html`<app-counter></app-counter>`;
+      case 'widgets':
+        return html`<app-widgets></app-widgets>`;
       default:
         return html`<app-error title="404" text="Not Found" />`;
     }

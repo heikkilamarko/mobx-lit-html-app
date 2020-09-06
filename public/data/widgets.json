@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Browse",
+    "tagName": "app-browse",
+    "props": {}
+  },
+  {
+    "id": 2,
+    "name": "Counter",
+    "tagName": "app-counter",
+    "props": {}
+  },
+  {
+    "id": 3,
+    "name": "Error",
+    "tagName": "app-error",
+    "props": {
+      "title": "Error",
+      "text": "Error text."
+    }
+  }
+]

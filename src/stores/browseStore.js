@@ -32,7 +32,7 @@ class BrowseStore {
     try {
       this.setSelectedItemId(itemId);
       this.setError(null);
-      const { data } = await axios.get('/data.json');
+      const { data } = await axios.get('/data/browse.json');
       this.setItems(data);
     } catch (error) {
       this.setError(error);
