@@ -3,6 +3,7 @@ import { nothing } from 'lit-html';
 import { MobxLitElement, createElement } from '../utils';
 import routeStore from '../stores/routeStore';
 import widgetsStore from '../stores/widgetsStore';
+import './app-widgets.css';
 
 export class AppWidgets extends MobxLitElement {
   firstUpdated() {
@@ -44,9 +45,10 @@ export class AppWidgets extends MobxLitElement {
   render() {
     return html`
       <main class="container">
-        <div class="row mx-1 my-5">
+        <div class="row mx-1 my-5 justify-content-center">
           <select
-            class="form-select"
+            id="select-widget"
+            class="form-select form-select-lg"
             aria-label="Widget select"
             .value=${this.widgetId}
             @change="${this.handleWidgetChange}"
