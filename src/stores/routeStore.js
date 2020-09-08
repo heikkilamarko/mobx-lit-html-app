@@ -1,4 +1,4 @@
-import { action, decorate, observable, computed } from 'mobx';
+import { makeObservable, action, observable, computed } from 'mobx';
 import createRouter, { constants } from 'router5';
 import browserPlugin from 'router5-plugin-browser';
 
@@ -10,16 +10,24 @@ const routes = [
 ];
 
 class RouteStore {
+  route = null;
+  previousRoute = null;
+  router = null;
+  unsubscribe = null;
+
   constructor() {
+    makeObservable(this, {
+      route: observable.ref,
+      previousRoute: observable.ref,
+      isNotFoundRoute: computed,
+      setRoute: action,
+    });
+
     this.router = createRouter(routes, {
       allowNotFound: true,
       queryParamsMode: 'loose',
     });
     this.router.usePlugin(browserPlugin());
-    this.unsubscribe = null;
-
-    this.route = null;
-    this.previousRoute = null;
   }
 
   get isNotFoundRoute() {
@@ -52,12 +60,5 @@ class RouteStore {
     history.back();
   }
 }
-
-decorate(RouteStore, {
-  route: observable.ref,
-  previousRoute: observable.ref,
-  isNotFoundRoute: computed,
-  setRoute: action,
-});
 
 export default new RouteStore();

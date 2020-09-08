@@ -1,8 +1,15 @@
-import { action, decorate, observable } from 'mobx';
+import { makeObservable, action, observable } from 'mobx';
 
 class CounterStore {
+  value = 0;
+
   constructor() {
-    this.value = 0;
+    makeObservable(this, {
+      value: observable,
+      increment: action,
+      decrement: action,
+      reset: action,
+    });
   }
 
   increment() {
@@ -17,12 +24,5 @@ class CounterStore {
     this.value = 0;
   }
 }
-
-decorate(CounterStore, {
-  value: observable,
-  increment: action,
-  decrement: action,
-  reset: action,
-});
 
 export default new CounterStore();

@@ -1,11 +1,23 @@
-import { action, computed, decorate, observable } from 'mobx';
+import { makeObservable, action, computed, observable } from 'mobx';
 import axios from 'axios';
 
 class BrowseStore {
+  items = [];
+  selectedItemId = null;
+  error = null;
+
   constructor() {
-    this.items = [];
-    this.selectedItemId = null;
-    this.error = null;
+    makeObservable(this, {
+      items: observable.ref,
+      selectedItemId: observable.ref,
+      error: observable.ref,
+      selectedItem: computed,
+      hasError: computed,
+      setItems: action,
+      setSelectedItemId: action,
+      setError: action,
+      load: action,
+    });
   }
 
   get selectedItem() {
@@ -39,17 +51,5 @@ class BrowseStore {
     }
   }
 }
-
-decorate(BrowseStore, {
-  items: observable.ref,
-  selectedItemId: observable.ref,
-  error: observable.ref,
-  selectedItem: computed,
-  hasError: computed,
-  setItems: action,
-  setSelectedItemId: action,
-  setError: action,
-  load: action,
-});
 
 export default new BrowseStore();

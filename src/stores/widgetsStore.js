@@ -1,10 +1,20 @@
-import { action, computed, decorate, observable } from 'mobx';
+import { makeObservable, action, computed, observable } from 'mobx';
 import axios from 'axios';
 
 class WidgetsStore {
+  widgets = [];
+  error = null;
+
   constructor() {
-    this.widgets = [];
-    this.error = null;
+    makeObservable(this, {
+      widgets: observable.ref,
+      error: observable.ref,
+      hasWidgets: computed,
+      hasError: computed,
+      setWidgets: action,
+      setError: action,
+      load: action,
+    });
   }
 
   get hasWidgets() {
@@ -51,15 +61,5 @@ class WidgetsStore {
     }
   }
 }
-
-decorate(WidgetsStore, {
-  widgets: observable.ref,
-  error: observable.ref,
-  hasWidgets: computed,
-  hasError: computed,
-  setWidgets: action,
-  setError: action,
-  load: action,
-});
 
 export default new WidgetsStore();
