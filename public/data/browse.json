@@ -1,30 +1,37 @@
 [
   {
+    "id": "web-components",
+    "name": "Web Components",
+    "description": "Web components are a set of web platform APIs that allow you to create new custom, reusable, encapsulated HTML tags to use in web pages and web apps. Custom components and widgets build on the Web Component standards, will work across modern browsers, and can be used with any JavaScript library or framework that works with HTML.\n\nWeb components are based on existing web standards. Features to support web components are currently being added to the HTML and DOM specs, letting web developers easily extend HTML with new elements with encapsulated styling and custom behavior.",
+    "logo_url": "/data/images/web-components.svg",
+    "homepage_url": "https://www.webcomponents.org/"
+  },
+  {
     "id": "react",
     "name": "React",
     "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
-    "logo_url": "/images/react.svg",
+    "logo_url": "/data/images/react.svg",
     "homepage_url": "https://reactjs.org/"
   },
   {
     "id": "svelte",
     "name": "Svelte",
     "description": "Cybernetically enhanced web apps.",
-    "logo_url": "/images/svelte.svg",
+    "logo_url": "/data/images/svelte.svg",
     "homepage_url": "https://svelte.dev/"
   },
   {
     "id": "vue",
     "name": "Vue",
     "description": "A progressive, incrementally-adoptable framework for building UI on the web.",
-    "logo_url": "/images/vue.svg",
+    "logo_url": "/data/images/vue.svg",
     "homepage_url": "https://vuejs.org/"
   },
   {
     "id": "angular",
     "name": "Angular",
     "description": "One framework. Mobile & desktop.",
-    "logo_url": "/images/angular.svg",
+    "logo_url": "/data/images/angular.svg",
     "homepage_url": "https://angular.io/"
   }
 ]

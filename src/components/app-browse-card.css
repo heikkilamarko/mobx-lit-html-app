@@ -7,6 +7,10 @@
   box-shadow: var(--app-box-shadow);
 }
 
+.card.app-browse-card .card-title {
+  white-space: nowrap;
+}
+
 .card.app-browse-card img {
   object-fit: contain;
 }

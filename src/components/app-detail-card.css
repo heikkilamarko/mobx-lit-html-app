@@ -7,3 +7,11 @@
   padding: 1rem;
   height: 20rem;
 }
+
+.card.app-detail-card .card-title {
+  white-space: nowrap;
+}
+
+.card.app-detail-card .card-text {
+  white-space: pre-wrap;
+}
