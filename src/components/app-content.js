@@ -8,7 +8,7 @@ import './app-widgets';
 import './app-error';
 
 export class AppContent extends MobxLitElement {
-  getContent() {
+  get content() {
     switch (routeStore.route.name) {
       case 'browse':
         return html`<app-browse></app-browse>`;
@@ -24,7 +24,7 @@ export class AppContent extends MobxLitElement {
   }
 
   render() {
-    return html`<main class="container">${this.getContent()}</main>`;
+    return html`<main class="container">${this.content}</main>`;
   }
 
   createRenderRoot() {

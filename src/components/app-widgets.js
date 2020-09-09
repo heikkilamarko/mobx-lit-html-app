@@ -7,7 +7,7 @@ import './app-widgets.css';
 
 export class AppWidgets extends MobxLitElement {
   firstUpdated() {
-    !widgetsStore.hasWidgets && widgetsStore.load();
+    widgetsStore.load();
   }
 
   handleWidgetChange(event) {
