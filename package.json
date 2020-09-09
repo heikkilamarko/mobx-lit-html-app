@@ -17,6 +17,6 @@
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@snowpack/app-scripts-lit-element": "1.8.4",
     "prettier": "2.1.1",
-    "snowpack": "2.10.1"
+    "snowpack": "2.10.3"
   }
 }
