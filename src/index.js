@@ -7,7 +7,7 @@ configure({
   enforceActions: 'observed',
   computedRequiresReaction: true,
   reactionRequiresObservable: true,
-  observableRequiresReaction: true,
+  observableRequiresReaction: false,
   isolateGlobalState: true,
 });
 
