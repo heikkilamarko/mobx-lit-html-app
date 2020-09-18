@@ -11,7 +11,7 @@ export class AppDetail extends MobxLitElement {
     browseStore.load(routeStore.route.params.id);
   }
 
-  getContent() {
+  get content() {
     if (browseStore.hasError) {
       return html`<app-error text="${browseStore.error.message}"></app-error>`;
     }
@@ -28,7 +28,7 @@ export class AppDetail extends MobxLitElement {
   render() {
     return html`
       <section class="d-flex align-items-center justify-content-center p-4">
-        ${this.getContent()}
+        ${this.content}
       </section>
     `;
   }

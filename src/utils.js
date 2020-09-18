@@ -29,10 +29,12 @@ export class MobxLitElement extends LitElement {
   }
 
   update(changedProperties) {
-    if (this[reactionSymbol]) {
-      this[reactionSymbol].track(super.update.bind(this, changedProperties));
-    } else {
-      super.update(changedProperties);
+    if (this.isConnected) {
+      if (this[reactionSymbol]) {
+        this[reactionSymbol].track(super.update.bind(this, changedProperties));
+      } else {
+        super.update(changedProperties);
+      }
     }
   }
 }

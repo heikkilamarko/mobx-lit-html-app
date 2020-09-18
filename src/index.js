@@ -5,6 +5,9 @@ import './index.css';
 
 configure({
   enforceActions: 'observed',
+  computedRequiresReaction: true,
+  reactionRequiresObservable: true,
+  observableRequiresReaction: true,
   isolateGlobalState: true,
 });
 
