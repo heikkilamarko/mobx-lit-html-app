@@ -15,3 +15,7 @@
 .card.app-detail-card .card-text {
   white-space: pre-wrap;
 }
+
+.app-detail-card__btn-back {
+  float: right;
+}

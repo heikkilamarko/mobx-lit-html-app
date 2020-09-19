@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit-element';
+import routeStore from '../stores/routeStore';
 import './app-detail-card.css';
 
 export class AppDetailCard extends LitElement {
@@ -27,6 +28,13 @@ export class AppDetailCard extends LitElement {
           >
             Homepage
           </a>
+          <button
+            type="button"
+            class="btn btn-light app-detail-card__btn-back"
+            @click=${routeStore.navigateBack}
+          >
+            Back
+          </button>
         </div>
       </div>
     `;
