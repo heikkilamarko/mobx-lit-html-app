@@ -1,17 +1,22 @@
 import { makeObservable, action, computed, observable } from 'mobx';
 import axios from 'axios';
+import { createElement } from '../utils';
 
 class WidgetsStore {
   widgets = [];
+  widgetId = null;
   error = null;
 
   constructor() {
     makeObservable(this, {
       widgets: observable.ref,
+      widgetId: observable.ref,
       error: observable.ref,
       hasWidgets: computed,
       hasError: computed,
+      widgetEl: computed,
       setWidgets: action,
+      setWidgetId: action,
       setError: action,
       load: action,
     });
@@ -25,33 +30,33 @@ class WidgetsStore {
     return !!this.error;
   }
 
+  get widgetEl() {
+    const id = this.widgetId;
+    if (!id) return null;
+    const widget = this.widgets.find((w) => w.id === id);
+    if (!widget) return null;
+    return createElement(widget);
+  }
+
   setWidgets(widgets) {
     this.widgets = widgets;
+  }
+
+  setWidgetId(widgetId) {
+    this.widgetId =
+      widgetId != null
+        ? Number.isInteger(+widgetId)
+          ? +widgetId
+          : null
+        : null;
   }
 
   setError(error) {
     this.error = error;
   }
 
-  containsWidget(id) {
-    return this.widgets.some((w) => w.id === id);
-  }
-
-  getWidget(id) {
-    return this.widgets.find((w) => w.id === id) ?? null;
-  }
-
-  parseWidgetId(id, defaultValue = null) {
-    const idn = +id;
-    return id !== undefined &&
-      id != null &&
-      Number.isInteger(idn) &&
-      this.containsWidget(idn)
-      ? idn
-      : defaultValue;
-  }
-
-  async load() {
+  async load(refresh = false) {
+    if (this.hasWidgets && !refresh) return;
     try {
       this.setError(null);
       const { data } = await axios.get('/data/widgets.json');

@@ -1,8 +1,9 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
-import { MobxLitElement, createElement } from '../utils';
-import routeStore from '../stores/routeStore';
+import { reaction } from 'mobx';
+import { MobxLitElement } from '../utils';
 import widgetsStore from '../stores/widgetsStore';
+import routeStore from '../stores/routeStore';
 import './app-widgets.css';
 
 export class AppWidgets extends MobxLitElement {
@@ -14,32 +15,43 @@ export class AppWidgets extends MobxLitElement {
     routeStore.navigate('widgets', { id: +event.target.value || undefined });
   }
 
-  get widgetId() {
-    return widgetsStore.parseWidgetId(routeStore.route.params.id, '');
-  }
-
   get widgetElement() {
-    if (this.widgetId === '') return nothing;
-    const widget = widgetsStore.getWidget(this.widgetId);
-    if (widget) {
-      const widgetEl = createElement(widget);
-      if (widgetEl) return widgetEl;
-    }
-    return html`
-      <div class="alert alert-danger" role="alert">
-        The selected widget was not found in the registry.
-      </div>
-    `;
+    return widgetsStore.widgetId
+      ? widgetsStore.widgetEl ??
+          html`
+            <div class="alert alert-danger" role="alert">
+              The selected widget was not found in the registry.
+            </div>
+          `
+      : nothing;
   }
 
   get selectOptions() {
-    const widgetId = this.widgetId;
+    const id = widgetsStore.widgetId;
     return widgetsStore.widgets.map(
-      ({ id, name }) =>
+      (w) =>
         html`
-          <option .value=${id} ?selected=${id === widgetId}>${name}</option>
+          <option .value=${w.id} ?selected=${w.id === id}>${w.name}</option>
         `,
     );
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.reaction = reaction(
+      () => routeStore.route,
+      (route) => {
+        if (route.name === 'widgets') {
+          widgetsStore.setWidgetId(route.params.id);
+        }
+      },
+      { fireImmediately: true },
+    );
+  }
+
+  disconnectedCallback() {
+    this.reaction?.();
+    super.disconnectedCallback();
   }
 
   render() {
@@ -50,7 +62,7 @@ export class AppWidgets extends MobxLitElement {
             id="select-widget"
             class="form-select form-select-lg"
             aria-label="Widget select"
-            .value=${this.widgetId}
+            .value=${widgetsStore.widgetId}
             @change="${this.handleWidgetChange}"
           >
             <option value="">Select widget...</option>
