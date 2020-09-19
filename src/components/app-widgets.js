@@ -3,6 +3,7 @@ import { nothing } from 'lit-html';
 import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
 import { routeStore, widgetsStore } from '../stores';
+import './app-error';
 import './app-widgets.css';
 
 export class AppWidgets extends MobxLitElement {
@@ -15,14 +16,26 @@ export class AppWidgets extends MobxLitElement {
   }
 
   get widgetElement() {
-    return widgetsStore.widgetId
-      ? widgetsStore.widgetEl ??
-          html`
-            <div class="alert alert-danger" role="alert">
-              The selected widget was not found in the registry.
-            </div>
-          `
-      : nothing;
+    if (widgetsStore.isLoading) {
+      return nothing;
+    }
+
+    if (widgetsStore.hasError) {
+      return html`<app-error text="${widgetsStore.error.message}"></app-error>`;
+    }
+
+    if (!widgetsStore.widgetId) {
+      return nothing;
+    }
+
+    return (
+      widgetsStore.widgetEl ??
+      html`
+        <div class="alert alert-danger" role="alert">
+          The selected widget was not found in the registry.
+        </div>
+      `
+    );
   }
 
   get selectOptions() {

@@ -3,9 +3,8 @@ import { nothing } from 'lit-html';
 import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
 import { routeStore, browseStore } from '../stores';
-import './app-browse-card';
-import './app-error';
 import './app-detail-card';
+import './app-error';
 
 export class AppDetail extends MobxLitElement {
   get content() {

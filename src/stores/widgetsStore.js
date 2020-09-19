@@ -6,12 +6,14 @@ import routeStore from './routeStore';
 class WidgetsStore {
   widgets = [];
   widgetId = null;
+  isLoading = false;
   error = null;
 
   constructor() {
     makeObservable(this, {
       widgets: observable.ref,
       widgetId: observable.ref,
+      isLoading: observable.ref,
       error: observable.ref,
       hasWidgets: computed,
       hasError: computed,
@@ -19,6 +21,7 @@ class WidgetsStore {
       widgetRoute: computed,
       setWidgets: action,
       setWidgetId: action,
+      setLoading: action,
       setError: action,
       load: action,
       navigate: action,
@@ -59,6 +62,10 @@ class WidgetsStore {
         : null;
   }
 
+  setLoading(isLoading) {
+    this.isLoading = isLoading;
+  }
+
   setError(error) {
     this.error = error;
   }
@@ -66,11 +73,14 @@ class WidgetsStore {
   async load(refresh = false) {
     if (this.hasWidgets && !refresh) return;
     try {
+      this.setLoading(true);
       this.setError(null);
       const widgets = await getWidgets();
       this.setWidgets(widgets);
     } catch (error) {
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
   }
 
