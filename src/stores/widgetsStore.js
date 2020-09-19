@@ -1,6 +1,7 @@
 import { makeObservable, action, computed, observable } from 'mobx';
 import { getWidgets } from '../api';
 import { createElement } from '../utils';
+import routeStore from './routeStore';
 
 class WidgetsStore {
   widgets = [];
@@ -15,10 +16,12 @@ class WidgetsStore {
       hasWidgets: computed,
       hasError: computed,
       widgetEl: computed,
+      widgetRoute: computed,
       setWidgets: action,
       setWidgetId: action,
       setError: action,
       load: action,
+      navigate: action,
     });
   }
 
@@ -36,6 +39,11 @@ class WidgetsStore {
     const widget = this.widgets.find((w) => w.id === id);
     if (!widget) return null;
     return createElement(widget);
+  }
+
+  get widgetRoute() {
+    const id = this.widgetId;
+    return id != null ? `/widgets?id=${id}` : '/widgets';
   }
 
   setWidgets(widgets) {
@@ -64,6 +72,13 @@ class WidgetsStore {
     } catch (error) {
       this.setError(error);
     }
+  }
+
+  navigate(widgetId = null) {
+    const id =
+      widgetId == null ? this.widgetId ?? undefined : widgetId || undefined;
+
+    routeStore.navigate('widgets', { id });
   }
 }
 

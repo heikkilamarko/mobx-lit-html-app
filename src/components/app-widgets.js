@@ -11,8 +11,7 @@ export class AppWidgets extends MobxLitElement {
   }
 
   handleWidgetChange(event) {
-    const id = +event.target.value || undefined;
-    routeStore.navigate('widgets', { id });
+    widgetsStore.navigate(+event.target.value);
   }
 
   get widgetElement() {
@@ -62,7 +61,7 @@ export class AppWidgets extends MobxLitElement {
             id="select-widget"
             class="form-select form-select-lg"
             aria-label="Widget select"
-            .value=${widgetsStore.widgetId}
+            .value=${widgetsStore.widgetId ?? ''}
             @change="${this.handleWidgetChange}"
           >
             <option value="">Select widget...</option>

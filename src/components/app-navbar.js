@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { MobxLitElement } from '../utils';
-import { routeStore } from '../stores';
+import { routeStore, widgetsStore } from '../stores';
 
 export class AppNavbar extends MobxLitElement {
   navigateHome(event) {
@@ -16,7 +16,7 @@ export class AppNavbar extends MobxLitElement {
 
   navigateWidgets(event) {
     event.preventDefault();
-    routeStore.navigate('widgets');
+    widgetsStore.navigate();
   }
 
   render() {
@@ -70,7 +70,7 @@ export class AppNavbar extends MobxLitElement {
                     active: route === 'widgets',
                   })}"
                   @click="${this.navigateWidgets}"
-                  href="/widgets"
+                  href="${widgetsStore.widgetRoute}"
                   >Widgets</a
                 >
               </li>
