@@ -1,5 +1,5 @@
 import { makeObservable, action, computed, observable } from 'mobx';
-import axios from 'axios';
+import { getBrowseItems } from '../api';
 
 class BrowseStore {
   items = [];
@@ -44,8 +44,8 @@ class BrowseStore {
     try {
       this.setSelectedItemId(itemId);
       this.setError(null);
-      const { data } = await axios.get('/data/browse.json');
-      this.setItems(data);
+      const items = await getBrowseItems();
+      this.setItems(items);
     } catch (error) {
       this.setError(error);
     }

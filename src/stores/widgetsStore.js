@@ -1,5 +1,5 @@
 import { makeObservable, action, computed, observable } from 'mobx';
-import axios from 'axios';
+import { getWidgets } from '../api';
 import { createElement } from '../utils';
 
 class WidgetsStore {
@@ -59,8 +59,8 @@ class WidgetsStore {
     if (this.hasWidgets && !refresh) return;
     try {
       this.setError(null);
-      const { data } = await axios.get('/data/widgets.json');
-      this.setWidgets(data);
+      const widgets = await getWidgets();
+      this.setWidgets(widgets);
     } catch (error) {
       this.setError(error);
     }
