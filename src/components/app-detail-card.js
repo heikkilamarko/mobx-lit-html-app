@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 import { arrowLeft, boxArrowUpRight } from './icons';
-import routeStore from '../stores/routeStore';
+import { routeStore } from '../stores';
 import './app-detail-card.css';
 
 export class AppDetailCard extends LitElement {

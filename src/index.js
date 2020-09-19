@@ -1,5 +1,5 @@
 import { configure } from 'mobx';
-import routeStore from './stores/routeStore';
+import { routeStore } from './stores';
 import './components/app-root';
 import './index.css';
 

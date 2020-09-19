@@ -2,8 +2,7 @@ import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
-import widgetsStore from '../stores/widgetsStore';
-import routeStore from '../stores/routeStore';
+import { routeStore, widgetsStore } from '../stores';
 import './app-widgets.css';
 
 export class AppWidgets extends MobxLitElement {
@@ -12,7 +11,8 @@ export class AppWidgets extends MobxLitElement {
   }
 
   handleWidgetChange(event) {
-    routeStore.navigate('widgets', { id: +event.target.value || undefined });
+    const id = +event.target.value || undefined;
+    routeStore.navigate('widgets', { id });
   }
 
   get widgetElement() {

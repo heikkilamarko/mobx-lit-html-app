@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 import { MobxLitElement } from '../utils';
-import browseStore from '../stores/browseStore';
+import { browseStore } from '../stores';
 import './app-browse-card';
 import './app-error';
 

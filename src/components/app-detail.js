@@ -1,8 +1,7 @@
 import { html } from 'lit-element';
 import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
-import browseStore from '../stores/browseStore';
-import routeStore from '../stores/routeStore';
+import { routeStore, browseStore } from '../stores';
 import './app-browse-card';
 import './app-error';
 import './app-detail-card';

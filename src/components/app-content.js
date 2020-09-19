@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 import { MobxLitElement } from '../utils';
-import routeStore from '../stores/routeStore';
+import { routeStore } from '../stores';
 import './app-browse';
 import './app-detail';
 import './app-counter';

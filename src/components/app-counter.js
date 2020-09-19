@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import { MobxLitElement } from '../utils';
-import counterStore from '../stores/counterStore';
+import { counterStore } from '../stores';
 import './app-counter.css';
 
 export class AppCounter extends MobxLitElement {

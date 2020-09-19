@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import routeStore from '../stores/routeStore';
+import { routeStore } from '../stores';
 import './app-browse-card.css';
 
 export class AppBrowseCard extends LitElement {
