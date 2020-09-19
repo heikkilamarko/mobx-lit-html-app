@@ -1,4 +1,5 @@
 import { html } from 'lit-element';
+import { nothing } from 'lit-html';
 import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
 import { routeStore, browseStore } from '../stores';
@@ -8,6 +9,10 @@ import './app-detail-card';
 
 export class AppDetail extends MobxLitElement {
   get content() {
+    if (browseStore.isLoading) {
+      return nothing;
+    }
+
     if (browseStore.hasError) {
       return html`<app-error text="${browseStore.error.message}"></app-error>`;
     }

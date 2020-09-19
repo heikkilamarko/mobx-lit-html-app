@@ -4,17 +4,20 @@ import { getBrowseItems } from '../api';
 class BrowseStore {
   items = [];
   selectedItemId = null;
+  isLoading = false;
   error = null;
 
   constructor() {
     makeObservable(this, {
       items: observable.ref,
       selectedItemId: observable.ref,
+      isLoading: observable.ref,
       error: observable.ref,
       selectedItem: computed,
       hasError: computed,
       setItems: action,
       setSelectedItemId: action,
+      setLoading: action,
       setError: action,
       load: action,
     });
@@ -36,18 +39,25 @@ class BrowseStore {
     this.selectedItemId = itemId;
   }
 
+  setLoading(isLoading) {
+    this.isLoading = isLoading;
+  }
+
   setError(error) {
     this.error = error;
   }
 
   async load(itemId = null) {
     try {
-      this.setSelectedItemId(itemId);
+      this.setLoading(true);
       this.setError(null);
+      this.setSelectedItemId(itemId);
       const items = await getBrowseItems();
       this.setItems(items);
     } catch (error) {
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
   }
 }
