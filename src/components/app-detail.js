@@ -1,4 +1,5 @@
 import { html } from 'lit-element';
+import { reaction } from 'mobx';
 import { MobxLitElement } from '../utils';
 import browseStore from '../stores/browseStore';
 import routeStore from '../stores/routeStore';
@@ -7,10 +8,6 @@ import './app-error';
 import './app-detail-card';
 
 export class AppDetail extends MobxLitElement {
-  firstUpdated() {
-    browseStore.load(routeStore.route.params.id);
-  }
-
   get content() {
     if (browseStore.hasError) {
       return html`<app-error text="${browseStore.error.message}"></app-error>`;
@@ -23,6 +20,24 @@ export class AppDetail extends MobxLitElement {
     }
 
     return html`<app-error text="Not Found" title="404"></app-error>`;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.reaction = reaction(
+      () => routeStore.route,
+      (route) => {
+        if (route.name === 'detail') {
+          browseStore.load(route.params.id);
+        }
+      },
+      { fireImmediately: true },
+    );
+  }
+
+  disconnectedCallback() {
+    this.reaction?.();
+    super.disconnectedCallback();
   }
 
   render() {
