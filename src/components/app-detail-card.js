@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit-element';
+import { arrowLeft, boxArrowUpRight } from './icons';
 import routeStore from '../stores/routeStore';
 import './app-detail-card.css';
 
@@ -24,16 +25,16 @@ export class AppDetailCard extends LitElement {
           <a
             href="${this.data.homepage_url}"
             target="_blank"
-            class="btn btn-primary"
+            class="btn btn-primary app-detail-card__btn-homepage"
           >
-            Homepage
+            Homepage ${boxArrowUpRight}
           </a>
           <button
             type="button"
             class="btn btn-light app-detail-card__btn-back"
             @click=${routeStore.navigateBack}
           >
-            Back
+            ${arrowLeft}
           </button>
         </div>
       </div>

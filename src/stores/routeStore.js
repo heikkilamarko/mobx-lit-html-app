@@ -4,7 +4,7 @@ import browserPlugin from 'router5-plugin-browser';
 
 const routes = [
   { name: 'browse', path: '/' },
-  { name: 'detail', path: '/items/:id' },
+  { name: 'detail', path: '/browse/:id' },
   { name: 'counter', path: '/counter' },
   { name: 'widgets', path: '/widgets' },
 ];

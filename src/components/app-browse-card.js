@@ -19,7 +19,7 @@ export class AppBrowseCard extends LitElement {
       <a
         class="card text-center app-browse-card"
         @click="${this.handleClick}"
-        href="/items/${this.data.id}"
+        href="/browse/${this.data.id}"
       >
         <div class="card-body">
           <h4 class="card-title">${this.data.name}</h4>
