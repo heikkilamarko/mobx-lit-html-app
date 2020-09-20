@@ -3,9 +3,17 @@ import { classMap } from 'lit-html/directives/class-map';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import { MobxLitElement } from '../utils';
 import { counterStore } from '../stores';
+import './app-counter-modal';
 import './app-counter.css';
 
 export class AppCounter extends MobxLitElement {
+  disconnectedCallback() {
+    this.modal?.hide();
+    this.modal?.dispose();
+    this.modal = undefined;
+    super.disconnectedCallback();
+  }
+
   handleIncrement(event) {
     event.preventDefault();
     counterStore.increment();
@@ -18,7 +26,20 @@ export class AppCounter extends MobxLitElement {
 
   handleReset(event) {
     event.preventDefault();
+    this.modal ??= new bootstrap.Modal(
+      document.getElementById('app-counter-modal'),
+      {},
+    );
+    this.modal.show();
+  }
+
+  handleResetOk(_event) {
+    this.modal?.hide();
     counterStore.reset();
+  }
+
+  handleResetCancel(_event) {
+    this.modal?.hide();
   }
 
   render() {
@@ -59,6 +80,10 @@ export class AppCounter extends MobxLitElement {
           </div>
         </div>
       </section>
+      <app-counter-modal
+        @modal-ok=${this.handleResetOk}
+        @modal-cancel=${this.handleResetCancel}
+      ></app-counter-modal>
     `;
   }
 
