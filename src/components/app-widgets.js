@@ -11,43 +11,6 @@ export class AppWidgets extends MobxLitElement {
     widgetsStore.load();
   }
 
-  handleWidgetChange(event) {
-    widgetsStore.navigate(+event.target.value);
-  }
-
-  get widgetElement() {
-    if (widgetsStore.isLoading) {
-      return nothing;
-    }
-
-    if (widgetsStore.hasError) {
-      return html`<app-error text="${widgetsStore.error.message}"></app-error>`;
-    }
-
-    if (!widgetsStore.widgetId) {
-      return nothing;
-    }
-
-    return (
-      widgetsStore.widgetEl ??
-      html`
-        <div class="alert alert-danger" role="alert">
-          The selected widget was not found in the registry.
-        </div>
-      `
-    );
-  }
-
-  get selectOptions() {
-    const id = widgetsStore.widgetId;
-    return widgetsStore.widgets.map(
-      (w) =>
-        html`
-          <option .value=${w.id} ?selected=${w.id === id}>${w.name}</option>
-        `,
-    );
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.reaction = reaction(
@@ -66,7 +29,44 @@ export class AppWidgets extends MobxLitElement {
     super.disconnectedCallback();
   }
 
+  get selectOptions() {
+    const id = widgetsStore.widgetId;
+    return widgetsStore.widgets.map(
+      (w) =>
+        html`
+          <option .value=${w.id} ?selected=${w.id === id}>${w.name}</option>
+        `,
+    );
+  }
+
+  get widgetElement() {
+    if (!widgetsStore.widgetId) {
+      return nothing;
+    }
+
+    return (
+      widgetsStore.widgetEl ??
+      html`
+        <div class="alert alert-danger" role="alert">
+          The selected widget was not found in the registry.
+        </div>
+      `
+    );
+  }
+
+  handleWidgetChange(event) {
+    widgetsStore.navigate(+event.target.value);
+  }
+
   render() {
+    if (widgetsStore.isLoading) {
+      return nothing;
+    }
+
+    if (widgetsStore.hasError) {
+      return html`<app-error text="${widgetsStore.error.message}"></app-error>`;
+    }
+
     return html`
       <main class="container">
         <div class="row mx-1 my-5 justify-content-center">

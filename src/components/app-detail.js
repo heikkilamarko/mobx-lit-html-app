@@ -7,24 +7,6 @@ import './app-detail-card';
 import './app-error';
 
 export class AppDetail extends MobxLitElement {
-  get content() {
-    if (browseStore.isLoading) {
-      return nothing;
-    }
-
-    if (browseStore.hasError) {
-      return html`<app-error text="${browseStore.error.message}"></app-error>`;
-    }
-
-    if (browseStore.selectedItem) {
-      return html`
-        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
-      `;
-    }
-
-    return html`<app-error text="Not Found" title="404"></app-error>`;
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.reaction = reaction(
@@ -41,6 +23,24 @@ export class AppDetail extends MobxLitElement {
   disconnectedCallback() {
     this.reaction?.();
     super.disconnectedCallback();
+  }
+
+  get content() {
+    if (browseStore.isLoading) {
+      return nothing;
+    }
+
+    if (browseStore.hasError) {
+      return html`<app-error text="${browseStore.error.message}"></app-error>`;
+    }
+
+    if (browseStore.selectedItem) {
+      return html`
+        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
+      `;
+    }
+
+    return html`<app-error text="Not Found" title="404"></app-error>`;
   }
 
   render() {
