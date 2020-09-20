@@ -10,11 +10,6 @@ export class AppDetailCard extends LitElement {
     };
   }
 
-  constructor() {
-    super();
-    this.data = null;
-  }
-
   render() {
     return html`
       <div class="card app-detail-card">

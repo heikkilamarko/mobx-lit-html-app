@@ -1,5 +1,4 @@
 import { LitElement, html } from 'lit-element';
-import { routeStore } from '../stores';
 import './app-browse-card.css';
 
 export class AppBrowseCard extends LitElement {
@@ -9,16 +8,10 @@ export class AppBrowseCard extends LitElement {
     };
   }
 
-  handleClick(event) {
-    event.preventDefault();
-    routeStore.navigate('detail', { id: this.data.id });
-  }
-
   render() {
     return html`
       <a
         class="card text-center app-browse-card"
-        @click="${this.handleClick}"
         href="/browse/${this.data.id}"
       >
         <div class="card-body">

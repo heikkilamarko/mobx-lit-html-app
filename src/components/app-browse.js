@@ -1,13 +1,18 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { MobxLitElement } from '../utils';
-import { browseStore } from '../stores';
+import { routeStore, browseStore } from '../stores';
 import './app-browse-card';
 import './app-error';
 
 export class AppBrowse extends MobxLitElement {
   firstUpdated() {
     browseStore.load();
+  }
+
+  handleCardClick(event, item) {
+    event.preventDefault();
+    routeStore.navigate('detail', { id: item.id });
   }
 
   render() {
@@ -26,6 +31,7 @@ export class AppBrowse extends MobxLitElement {
             <app-browse-card
               class="col-6 col-md-4 col-lg-3 p-2"
               .data="${item}"
+              @click="${(event) => this.handleCardClick(event, item)}"
             ></app-browse-card>
           `,
         )}
