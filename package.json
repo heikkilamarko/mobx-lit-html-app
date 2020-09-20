@@ -14,8 +14,7 @@
     "router5-plugin-browser": "8.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.10.4",
-    "@snowpack/app-scripts-lit-element": "1.8.4",
+    "@snowpack/plugin-dotenv": "2.0.1",
     "@snowpack/plugin-optimize": "0.2.1",
     "prettier": "2.1.2",
     "snowpack": "2.11.1"
