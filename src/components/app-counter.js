@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { autorun } from 'mobx';
+import { autorun, reaction } from 'mobx';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import { counterStore } from '../stores';
 import { addReaction, clearReactions } from '../utils';
@@ -13,6 +13,23 @@ import './app-counter.css';
 class AppCounter extends HTMLElement {
   constructor() {
     super();
+
+    addReaction(
+      this,
+      reaction(
+        () => counterStore.value,
+        (value) => {
+          if (value < -10) {
+            counterStore.value = -10;
+            alert('-10 is the minimum value!');
+          } else if (10 < value) {
+            counterStore.value = 10;
+            alert('10 is the maximum value!');
+          }
+        },
+      ),
+    );
+
     addReaction(
       this,
       autorun(() => {
