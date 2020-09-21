@@ -5,7 +5,7 @@ import { routeStore, browseStore } from '../stores';
 import './app-browse-card';
 import './app-error';
 
-export class AppBrowse extends MobxLitElement {
+class AppBrowse extends MobxLitElement {
   firstUpdated() {
     browseStore.load();
   }

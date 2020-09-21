@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit-element';
 import { nothing } from 'lit-html';
 import './app-error.css';
 
-export class AppError extends LitElement {
+class AppError extends LitElement {
   static get properties() {
     return {
       title: { type: String },

@@ -6,7 +6,7 @@ import { routeStore, widgetsStore } from '../stores';
 import './app-error';
 import './app-widgets.css';
 
-export class AppWidgets extends MobxLitElement {
+class AppWidgets extends MobxLitElement {
   firstUpdated() {
     widgetsStore.load();
   }

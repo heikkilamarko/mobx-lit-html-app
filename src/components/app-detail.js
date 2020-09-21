@@ -6,7 +6,7 @@ import { routeStore, browseStore } from '../stores';
 import './app-detail-card';
 import './app-error';
 
-export class AppDetail extends MobxLitElement {
+class AppDetail extends MobxLitElement {
   connectedCallback() {
     super.connectedCallback();
     this.reaction = reaction(

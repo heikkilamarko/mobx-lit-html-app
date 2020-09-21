@@ -3,7 +3,7 @@ import { arrowLeft, boxArrowUpRight } from './icons';
 import { routeStore } from '../stores';
 import './app-detail-card.css';
 
-export class AppDetailCard extends LitElement {
+class AppDetailCard extends LitElement {
   static get properties() {
     return {
       data: { type: Object },

@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 
-export class AppCounterModal extends LitElement {
+class AppCounterModal extends LitElement {
   handleOk(_event) {
     this.dispatchEvent(new Event('modal-ok'));
   }

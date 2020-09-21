@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import './app-browse-card.css';
 
-export class AppBrowseCard extends LitElement {
+class AppBrowseCard extends LitElement {
   static get properties() {
     return {
       data: { type: Object },

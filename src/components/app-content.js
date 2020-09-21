@@ -7,7 +7,7 @@ import './app-counter';
 import './app-widgets';
 import './app-error';
 
-export class AppContent extends MobxLitElement {
+class AppContent extends MobxLitElement {
   get content() {
     switch (routeStore.route.name) {
       case 'browse':
