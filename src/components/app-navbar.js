@@ -15,7 +15,7 @@ class AppNavbar extends HTMLElement {
               @click="${(event) => this.navigateHome(event)}"
               href="/"
             >
-              LitElement App
+              Demo App
             </a>
             <button
               class="navbar-toggler"
