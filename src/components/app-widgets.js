@@ -26,7 +26,7 @@ class AppWidgets extends HTMLElement {
 
       if (widgetsStore.hasError) {
         return html`
-          <app-error text="${widgetsStore.error.message}"></app-error>
+          <app-error .text=${widgetsStore.error.message}></app-error>
         `;
       }
 

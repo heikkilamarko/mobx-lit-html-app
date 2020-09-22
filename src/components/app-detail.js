@@ -37,7 +37,7 @@ class AppDetail extends HTMLElement {
     }
 
     if (browseStore.hasError) {
-      return html`<app-error text="${browseStore.error.message}"></app-error>`;
+      return html`<app-error .text=${browseStore.error.message}></app-error>`;
     }
 
     if (browseStore.selectedItem) {
@@ -46,7 +46,7 @@ class AppDetail extends HTMLElement {
       `;
     }
 
-    return html`<app-error text="Not Found" title="404"></app-error>`;
+    return html`<app-error .title=${'404'} .text=${'Not Found'}></app-error>`;
   }
 }
 
