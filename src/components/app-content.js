@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
-import { routeStore } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
+import { routeStore } from '../stores';
 import './app-browse';
 import './app-detail';
 import './app-counter';
@@ -8,6 +8,17 @@ import './app-widgets';
 import './app-error';
 
 class AppContent extends HTMLElement {
+  connectedCallback() {
+    addRenderReaction(
+      this,
+      () => html`<main class="container">${this.content}</main>`,
+    );
+  }
+
+  disconnectedCallback() {
+    clearReactions(this);
+  }
+
   get content() {
     switch (routeStore.route.name) {
       case 'browse':
@@ -21,17 +32,6 @@ class AppContent extends HTMLElement {
       default:
         return html`<app-error title="404" text="Not Found" />`;
     }
-  }
-
-  connectedCallback() {
-    addRenderReaction(
-      this,
-      () => html`<main class="container">${this.content}</main>`,
-    );
-  }
-
-  disconnectedCallback() {
-    clearReactions(this);
   }
 }
 

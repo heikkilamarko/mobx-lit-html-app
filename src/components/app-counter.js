@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { dashCircle, plusCircle, xCircle } from './icons';
-import { counterStore } from '../stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
+import { counterStore } from '../stores';
+import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
 import './app-counter.css';
 
@@ -13,10 +13,10 @@ class AppCounter extends HTMLElement {
       () => counterStore.value,
       (value) => {
         if (value < -10) {
-          counterStore.value = -10;
+          counterStore.setValue(-10);
           alert('-10 is the minimum value!');
         } else if (10 < value) {
-          counterStore.value = 10;
+          counterStore.setValue(10);
           alert('10 is the maximum value!');
         }
       },
@@ -42,21 +42,21 @@ class AppCounter extends HTMLElement {
               <a
                 href
                 class="btn btn-link text-danger"
-                @click="${this.handleDecrement.bind(this)}"
+                @click="${(event) => this.handleDecrement(event)}"
               >
                 ${dashCircle}
               </a>
               <a
                 href
                 class="btn btn-link text-success"
-                @click="${this.handleIncrement.bind(this)}"
+                @click="${(event) => this.handleIncrement(event)}"
               >
                 ${plusCircle}
               </a>
               <a
                 href
                 class="btn btn-link"
-                @click=${this.handleReset.bind(this)}
+                @click=${(event) => this.handleReset(event)}
               >
                 ${xCircle}
               </a>
@@ -64,8 +64,8 @@ class AppCounter extends HTMLElement {
           </div>
         </section>
         <app-counter-modal
-          @modal-ok=${this.handleResetOk.bind(this)}
-          @modal-cancel=${this.handleResetCancel.bind(this)}
+          @ok=${() => this.handleResetOk()}
+          @cancel=${() => this.handleResetCancel()}
         ></app-counter-modal>
       `;
     });
@@ -79,14 +79,14 @@ class AppCounter extends HTMLElement {
     this.modal = undefined;
   }
 
-  handleIncrement(event) {
-    event.preventDefault();
-    counterStore.increment();
-  }
-
   handleDecrement(event) {
     event.preventDefault();
     counterStore.decrement();
+  }
+
+  handleIncrement(event) {
+    event.preventDefault();
+    counterStore.increment();
   }
 
   handleReset(event) {
@@ -97,12 +97,12 @@ class AppCounter extends HTMLElement {
     this.modal.show();
   }
 
-  handleResetOk(_event) {
+  handleResetOk() {
     this.modal?.hide();
     counterStore.reset();
   }
 
-  handleResetCancel(_event) {
+  handleResetCancel() {
     this.modal?.hide();
   }
 }

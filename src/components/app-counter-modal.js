@@ -1,14 +1,6 @@
 import { html, render } from 'lit-html';
 
 class AppCounterModal extends HTMLElement {
-  handleOk(_event) {
-    this.dispatchEvent(new Event('modal-ok'));
-  }
-
-  handleCancel(_event) {
-    this.dispatchEvent(new Event('modal-cancel'));
-  }
-
   connectedCallback() {
     render(
       html`
@@ -21,7 +13,7 @@ class AppCounterModal extends HTMLElement {
                   type="button"
                   class="close"
                   aria-label="Close"
-                  @click=${this.handleCancel.bind(this)}
+                  @click=${() => this.handleCancel()}
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -33,14 +25,14 @@ class AppCounterModal extends HTMLElement {
                 <button
                   type="button"
                   class="btn btn-secondary"
-                  @click=${this.handleCancel.bind(this)}
+                  @click=${() => this.handleCancel()}
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   class="btn btn-primary"
-                  @click=${this.handleOk.bind(this)}
+                  @click=${() => this.handleOk()}
                 >
                   Ok
                 </button>
@@ -51,6 +43,14 @@ class AppCounterModal extends HTMLElement {
       `,
       this,
     );
+  }
+
+  handleOk() {
+    this.dispatchEvent(new Event('ok'));
+  }
+
+  handleCancel() {
+    this.dispatchEvent(new Event('cancel'));
   }
 }
 

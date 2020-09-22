@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit-html';
-import { routeStore, browseStore } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
+import { routeStore, browseStore } from '../stores';
 import './app-browse-card';
 import './app-error';
 
@@ -14,9 +14,9 @@ class AppBrowse extends HTMLElement {
       }
 
       if (browseStore.hasError) {
-        return html`<app-error
-          text="${browseStore.error.message}"
-        ></app-error>`;
+        return html`
+          <app-error text="${browseStore.error.message}"></app-error>
+        `;
       }
 
       return html`

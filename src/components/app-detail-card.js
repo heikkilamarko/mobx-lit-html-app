@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
 import { addRenderReaction, clearReactions } from '../utils';
-import { arrowLeft, boxArrowUpRight } from './icons';
 import { routeStore } from '../stores';
+import { arrowLeft, boxArrowUpRight } from './icons';
 import './app-detail-card.css';
 
 class AppDetailCard extends HTMLElement {

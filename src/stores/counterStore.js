@@ -6,10 +6,15 @@ class CounterStore {
   constructor() {
     makeObservable(this, {
       value: observable,
+      setValue: action,
       increment: action,
       decrement: action,
       reset: action,
     });
+  }
+
+  setValue(value) {
+    this.value = value;
   }
 
   increment() {

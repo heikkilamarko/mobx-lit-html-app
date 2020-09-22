@@ -1,31 +1,20 @@
-import { html, nothing } from 'lit-html';
+import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { addRenderReaction, clearReactions } from '../utils';
 import { routeStore, widgetsStore } from '../stores';
 
 class AppNavbar extends HTMLElement {
-  navigateHome(event) {
-    event.preventDefault();
-    routeStore.navigate('browse');
-  }
-
-  navigateCounter(event) {
-    event.preventDefault();
-    routeStore.navigate('counter');
-  }
-
-  navigateWidgets(event) {
-    event.preventDefault();
-    widgetsStore.navigate();
-  }
-
   connectedCallback() {
     addRenderReaction(this, () => {
       const route = routeStore.route.name;
       return html`
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="container-fluid">
-            <a class="navbar-brand" @click="${this.navigateHome}" href="/">
+            <a
+              class="navbar-brand"
+              @click="${(event) => this.navigateHome(event)}"
+              href="/"
+            >
               LitElement App
             </a>
             <button
@@ -47,7 +36,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'browse' || route === 'detail',
                     })}"
-                    @click="${this.navigateHome}"
+                    @click="${(event) => this.navigateHome(event)}"
                     href="/"
                     >Browse</a
                   >
@@ -58,7 +47,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'counter',
                     })}"
-                    @click="${this.navigateCounter}"
+                    @click="${(event) => this.navigateCounter(event)}"
                     href="/counter"
                     >Counter</a
                   >
@@ -69,7 +58,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'widgets',
                     })}"
-                    @click="${this.navigateWidgets}"
+                    @click="${(event) => this.navigateWidgets(event)}"
                     href="${widgetsStore.widgetRoute}"
                     >Widgets</a
                   >
@@ -84,6 +73,21 @@ class AppNavbar extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  navigateHome(event) {
+    event.preventDefault();
+    routeStore.navigate('browse');
+  }
+
+  navigateCounter(event) {
+    event.preventDefault();
+    routeStore.navigate('counter');
+  }
+
+  navigateWidgets(event) {
+    event.preventDefault();
+    widgetsStore.navigate();
   }
 }
 

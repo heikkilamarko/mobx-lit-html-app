@@ -1,28 +1,10 @@
 import { html, nothing } from 'lit-html';
-import { routeStore, browseStore } from '../stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
+import { routeStore, browseStore } from '../stores';
 import './app-detail-card';
 import './app-error';
 
 class AppDetail extends HTMLElement {
-  get content() {
-    if (browseStore.isLoading) {
-      return nothing;
-    }
-
-    if (browseStore.hasError) {
-      return html`<app-error text="${browseStore.error.message}"></app-error>`;
-    }
-
-    if (browseStore.selectedItem) {
-      return html`
-        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
-      `;
-    }
-
-    return html`<app-error text="Not Found" title="404"></app-error>`;
-  }
-
   connectedCallback() {
     addWatchReaction(
       this,
@@ -47,6 +29,24 @@ class AppDetail extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  get content() {
+    if (browseStore.isLoading) {
+      return nothing;
+    }
+
+    if (browseStore.hasError) {
+      return html`<app-error text="${browseStore.error.message}"></app-error>`;
+    }
+
+    if (browseStore.selectedItem) {
+      return html`
+        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
+      `;
+    }
+
+    return html`<app-error text="Not Found" title="404"></app-error>`;
   }
 }
 
