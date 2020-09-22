@@ -1,34 +1,10 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { reaction } from 'mobx';
-import { MobxLitElement } from '../utils';
+import { html, nothing } from 'lit-html';
+import { addWatchReaction, addRenderReaction, clearReactions } from '../utils';
 import { routeStore, widgetsStore } from '../stores';
 import './app-error';
 import './app-widgets.css';
 
-class AppWidgets extends MobxLitElement {
-  firstUpdated() {
-    widgetsStore.load();
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.reaction = reaction(
-      () => routeStore.route,
-      (route) => {
-        if (route.name === 'widgets') {
-          widgetsStore.setWidgetId(route.params.id);
-        }
-      },
-      { fireImmediately: true },
-    );
-  }
-
-  disconnectedCallback() {
-    this.reaction?.();
-    super.disconnectedCallback();
-  }
-
+class AppWidgets extends HTMLElement {
   get selectOptions() {
     const id = widgetsStore.widgetId;
     return widgetsStore.widgets.map(
@@ -58,36 +34,53 @@ class AppWidgets extends MobxLitElement {
     widgetsStore.navigate(+event.target.value);
   }
 
-  render() {
-    if (widgetsStore.isLoading) {
-      return nothing;
-    }
+  connectedCallback() {
+    widgetsStore.load();
 
-    if (widgetsStore.hasError) {
-      return html`<app-error text="${widgetsStore.error.message}"></app-error>`;
-    }
+    addWatchReaction(
+      this,
+      () => routeStore.route,
+      (route) => {
+        if (route.name === 'widgets') {
+          widgetsStore.setWidgetId(route.params.id);
+        }
+      },
+      { fireImmediately: true },
+    );
 
-    return html`
-      <main class="container">
-        <div class="row mx-1 my-5 justify-content-center">
-          <select
-            id="select-widget"
-            class="form-select form-select-lg"
-            aria-label="Widget select"
-            .value=${widgetsStore.widgetId ?? ''}
-            @change="${this.handleWidgetChange}"
-          >
-            <option value="">Select widget...</option>
-            ${this.selectOptions}
-          </select>
-        </div>
-        ${this.widgetElement}
-      </main>
-    `;
+    addRenderReaction(this, () => {
+      if (widgetsStore.isLoading) {
+        return nothing;
+      }
+
+      if (widgetsStore.hasError) {
+        return html`<app-error
+          text="${widgetsStore.error.message}"
+        ></app-error>`;
+      }
+
+      return html`
+        <main class="container">
+          <div class="row mx-1 my-5 justify-content-center">
+            <select
+              id="select-widget"
+              class="form-select form-select-lg"
+              aria-label="Widget select"
+              .value=${widgetsStore.widgetId ?? ''}
+              @change="${this.handleWidgetChange}"
+            >
+              <option value="">Select widget...</option>
+              ${this.selectOptions}
+            </select>
+          </div>
+          ${this.widgetElement}
+        </main>
+      `;
+    });
   }
 
-  createRenderRoot() {
-    return this;
+  disconnectedCallback() {
+    clearReactions(this);
   }
 }
 

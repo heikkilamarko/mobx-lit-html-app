@@ -1,6 +1,6 @@
 import { configure } from 'mobx';
 import { routeStore } from './stores';
-import './components/app-root';
+import AppRoot from './components/app-root';
 import './index.css';
 
 configure({
@@ -12,3 +12,5 @@ configure({
 });
 
 routeStore.start();
+
+customElements.define('app-root', AppRoot);

@@ -1,13 +1,13 @@
-import { html } from 'lit-element';
-import { MobxLitElement } from '../utils';
+import { html } from 'lit-html';
 import { routeStore } from '../stores';
+import { addRenderReaction, clearReactions } from '../utils';
 import './app-browse';
 import './app-detail';
 import './app-counter';
 import './app-widgets';
 import './app-error';
 
-class AppContent extends MobxLitElement {
+class AppContent extends HTMLElement {
   get content() {
     switch (routeStore.route.name) {
       case 'browse':
@@ -23,12 +23,15 @@ class AppContent extends MobxLitElement {
     }
   }
 
-  render() {
-    return html`<main class="container">${this.content}</main>`;
+  connectedCallback() {
+    addRenderReaction(
+      this,
+      () => html`<main class="container">${this.content}</main>`,
+    );
   }
 
-  createRenderRoot() {
-    return this;
+  disconnectedCallback() {
+    clearReactions(this);
   }
 }
 

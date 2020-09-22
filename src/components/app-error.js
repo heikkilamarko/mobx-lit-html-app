@@ -1,38 +1,42 @@
-import { LitElement, html } from 'lit-element';
-import { nothing } from 'lit-html';
+import { html, nothing } from 'lit-html';
+import { makeObservable, observable } from 'mobx';
+import { addRenderReaction, clearReactions } from '../utils';
 import './app-error.css';
 
-class AppError extends LitElement {
-  static get properties() {
-    return {
-      title: { type: String },
-      text: { type: String },
-    };
-  }
+class AppError extends HTMLElement {
+  title = 'Error';
+  text = null;
 
   constructor() {
     super();
-    this.title = 'Error';
-    this.text = null;
+    makeObservable(this, {
+      title: observable.ref,
+      text: observable.ref,
+    });
   }
 
-  render() {
-    return html`
-      <section
-        class="d-flex align-items-center justify-content-center p-4 app-error"
-      >
-        <div class="card text-center text-danger">
-          <div class="card-body">
-            <h5 class="card-title">${this.title}</h5>
-            ${this.text ? html`<p class="card-text">${this.text}</p>` : nothing}
+  connectedCallback() {
+    addRenderReaction(
+      this,
+      () => html`
+        <section
+          class="d-flex align-items-center justify-content-center p-4 app-error"
+        >
+          <div class="card text-center text-danger">
+            <div class="card-body">
+              <h5 class="card-title">${this.title}</h5>
+              ${this.text
+                ? html`<p class="card-text">${this.text}</p>`
+                : nothing}
+            </div>
           </div>
-        </div>
-      </section>
-    `;
+        </section>
+      `,
+    );
   }
 
-  createRenderRoot() {
-    return this;
+  disconnectedCallback() {
+    clearReactions(this);
   }
 }
 

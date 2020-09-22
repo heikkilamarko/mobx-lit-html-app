@@ -6,9 +6,6 @@ import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import './app-counter-modal';
 import './app-counter.css';
 
-// This is an experimental custom element / web component
-// implemented without LitElement.
-
 class AppCounter extends HTMLElement {
   connectedCallback() {
     addWatchReaction(

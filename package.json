@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "axios": "0.20.0",
-    "lit-element": "2.4.0",
     "lit-html": "1.3.0",
     "mobx": "beta",
     "router5": "8.0.1",
