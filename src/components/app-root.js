@@ -2,7 +2,7 @@ import { html, render } from 'lit-html';
 import './app-navbar';
 import './app-content';
 
-export default class AppRoot extends HTMLElement {
+class AppRoot extends HTMLElement {
   connectedCallback() {
     render(
       html`
@@ -13,3 +13,5 @@ export default class AppRoot extends HTMLElement {
     );
   }
 }
+
+customElements.define('app-root', AppRoot);

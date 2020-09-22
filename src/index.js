@@ -1,6 +1,7 @@
 import { configure } from 'mobx';
+import { renderApp } from './utils';
 import { routeStore } from './stores';
-import AppRoot from './components/app-root';
+import './components/app-root';
 import './index.css';
 
 configure({
@@ -13,4 +14,9 @@ configure({
 
 routeStore.start();
 
-customElements.define('app-root', AppRoot);
+try {
+  renderApp({ tagName: 'app-root' });
+} catch (error) {
+  console.error(error);
+  alert('App startup failed.');
+}

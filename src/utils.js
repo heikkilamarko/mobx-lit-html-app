@@ -1,6 +1,18 @@
 import { autorun, reaction } from 'mobx';
 import { render } from 'lit-html';
 
+export function renderApp(options) {
+  const el = createElement(options);
+
+  if (!el) {
+    throw new Error(
+      `Element <${options.tagName}> not found in the custom element registry.`,
+    );
+  }
+
+  (options.target ?? document.body).appendChild(el);
+}
+
 export function createElement({ tagName, props }) {
   const ctor = customElements.get(tagName);
   return ctor ? Object.assign(document.createElement(tagName), props) : null;
