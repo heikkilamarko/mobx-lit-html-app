@@ -15,8 +15,9 @@ configure({
 routeStore.start();
 
 try {
-  renderApp({ tagName: 'app-root' });
+  renderApp({ tagName: 'app-root', props: {} });
 } catch (error) {
   console.error(error);
-  alert('App startup failed.');
+  document.body.innerHTML =
+    '<h1 class="d-flex justify-content-center align-items-center vh-100 bg-danger text-white display-1 font-weight-lighter">Close, but No Cigar</h1>';
 }
