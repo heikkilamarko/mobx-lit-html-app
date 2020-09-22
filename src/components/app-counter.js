@@ -106,8 +106,7 @@ class AppCounter extends HTMLElement {
   handleReset(event) {
     event.preventDefault();
     this.modal ??= new bootstrap.Modal(
-      document.getElementById('app-counter-modal'),
-      {},
+      this.querySelector('app-counter-modal > .modal'),
     );
     this.modal.show();
   }

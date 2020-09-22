@@ -11,7 +11,7 @@ class AppCounterModal extends LitElement {
 
   render() {
     return html`
-      <div id="app-counter-modal" class="modal" tabindex="-1">
+      <div class="modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
