@@ -11,9 +11,7 @@ import './app-counter.css';
 // implemented without LitElement.
 
 class AppCounter extends HTMLElement {
-  constructor() {
-    super();
-
+  connectedCallback() {
     addReaction(
       this,
       reaction(
