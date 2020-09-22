@@ -1,5 +1,6 @@
-import { Reaction } from 'mobx';
+import { autorun, reaction, Reaction } from 'mobx';
 import { LitElement } from 'lit-element';
+import { render } from 'lit-html';
 
 const reactionSymbol = Symbol();
 const requestUpdateSymbol = Symbol();
@@ -44,6 +45,22 @@ export function createElement({ tagName, props }) {
 
 export function addReaction(target, reactionDisposer) {
   (target._r ??= []).push(reactionDisposer);
+}
+
+export function addRenderReaction(target, templateFn) {
+  addReaction(
+    target,
+    autorun(() => render(templateFn(), target)),
+  );
+}
+
+export function addWatchReaction(
+  target,
+  triggerFn,
+  effectFn,
+  options = undefined,
+) {
+  addReaction(target, reaction(triggerFn, effectFn, options));
 }
 
 export function clearReactions(target) {

@@ -1,9 +1,8 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { autorun, reaction } from 'mobx';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import { counterStore } from '../stores';
-import { addReaction, clearReactions } from '../utils';
+import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import './app-counter-modal';
 import './app-counter.css';
 
@@ -12,77 +11,67 @@ import './app-counter.css';
 
 class AppCounter extends HTMLElement {
   connectedCallback() {
-    addReaction(
+    addWatchReaction(
       this,
-      reaction(
-        () => counterStore.value,
-        (value) => {
-          if (value < -10) {
-            counterStore.value = -10;
-            alert('-10 is the minimum value!');
-          } else if (10 < value) {
-            counterStore.value = 10;
-            alert('10 is the maximum value!');
-          }
-        },
-      ),
+      () => counterStore.value,
+      (value) => {
+        if (value < -10) {
+          counterStore.value = -10;
+          alert('-10 is the minimum value!');
+        } else if (10 < value) {
+          counterStore.value = 10;
+          alert('10 is the maximum value!');
+        }
+      },
     );
 
-    addReaction(
-      this,
-      autorun(() => {
-        const value = counterStore.value;
-        render(
-          html`
-            <section
-              class="d-flex align-items-center justify-content-center p-4"
-            >
-              <div class="card app-counter-card">
-                <div class="card-body">
-                  <h1
-                    class=${classMap({
-                      'card-title': true,
-                      'display-1': true,
-                      'text-danger': value < 0,
-                      'text-success': 0 < value,
-                    })}
-                  >
-                    ${value}
-                  </h1>
-                  <p class="card-text">Counter</p>
-                  <a
-                    href
-                    class="btn btn-link text-danger"
-                    @click="${this.handleDecrement.bind(this)}"
-                  >
-                    ${dashCircle}
-                  </a>
-                  <a
-                    href
-                    class="btn btn-link text-success"
-                    @click="${this.handleIncrement.bind(this)}"
-                  >
-                    ${plusCircle}
-                  </a>
-                  <a
-                    href
-                    class="btn btn-link"
-                    @click=${this.handleReset.bind(this)}
-                  >
-                    ${xCircle}
-                  </a>
-                </div>
-              </div>
-            </section>
-            <app-counter-modal
-              @modal-ok=${this.handleResetOk.bind(this)}
-              @modal-cancel=${this.handleResetCancel.bind(this)}
-            ></app-counter-modal>
-          `,
-          this,
-        );
-      }),
-    );
+    addRenderReaction(this, () => {
+      const value = counterStore.value;
+      return html`
+        <section class="d-flex align-items-center justify-content-center p-4">
+          <div class="card app-counter-card">
+            <div class="card-body">
+              <h1
+                class=${classMap({
+                  'card-title': true,
+                  'display-1': true,
+                  'text-danger': value < 0,
+                  'text-success': 0 < value,
+                })}
+              >
+                ${value}
+              </h1>
+              <p class="card-text">Counter</p>
+              <a
+                href
+                class="btn btn-link text-danger"
+                @click="${this.handleDecrement.bind(this)}"
+              >
+                ${dashCircle}
+              </a>
+              <a
+                href
+                class="btn btn-link text-success"
+                @click="${this.handleIncrement.bind(this)}"
+              >
+                ${plusCircle}
+              </a>
+              <a
+                href
+                class="btn btn-link"
+                @click=${this.handleReset.bind(this)}
+              >
+                ${xCircle}
+              </a>
+            </div>
+          </div>
+        </section>
+        <app-counter-modal
+          @modal-ok=${this.handleResetOk.bind(this)}
+          @modal-cancel=${this.handleResetCancel.bind(this)}
+        ></app-counter-modal>
+      `;
+    });
   }
 
   disconnectedCallback() {
