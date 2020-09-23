@@ -25,10 +25,10 @@ export function addReaction(target, reactionDisposer) {
   (target[R] ??= []).push(reactionDisposer);
 }
 
-export function addRenderReaction(target, templateFn) {
+export function addRenderReaction(target, templateFn, options = undefined) {
   addReaction(
     target,
-    autorun(() => render(templateFn(), target)),
+    autorun(() => render(templateFn(), target), options),
   );
 }
 
