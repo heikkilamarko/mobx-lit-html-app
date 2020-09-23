@@ -1,6 +1,9 @@
 import { autorun, reaction } from 'mobx';
 import { render } from 'lit-html';
 
+const R = Symbol('reactions');
+const I = Symbol('intervals');
+
 export function renderApp(options) {
   const el = createElement(options);
 
@@ -19,7 +22,7 @@ export function createElement({ tagName, props }) {
 }
 
 export function addReaction(target, reactionDisposer) {
-  (target._r ??= []).push(reactionDisposer);
+  (target[R] ??= []).push(reactionDisposer);
 }
 
 export function addRenderReaction(target, templateFn) {
@@ -39,13 +42,15 @@ export function addWatchReaction(
 }
 
 export function clearReactions(target) {
-  target._r && target._r.forEach((r) => r());
+  target[R] && target[R].forEach((r) => r());
+  target[R] = [];
 }
 
 export function addInterval(target, intervalHandle) {
-  (target._i ??= []).push(intervalHandle);
+  (target[I] ??= []).push(intervalHandle);
 }
 
 export function clearIntervals(target) {
-  target._i && target._i.forEach((h) => clearInterval(h));
+  target[I] && target[I].forEach((h) => clearInterval(h));
+  target[I] = [];
 }
