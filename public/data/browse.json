@@ -23,9 +23,9 @@
   {
     "id": "vue",
     "name": "Vue",
-    "description": "A progressive, incrementally-adoptable framework for building UI on the web.",
+    "description": "The Progressive JavaScript Framework.",
     "logo_url": "/data/images/vue.svg",
-    "homepage_url": "https://vuejs.org/"
+    "homepage_url": "https://v3.vuejs.org/"
   },
   {
     "id": "angular",
