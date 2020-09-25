@@ -8,9 +8,9 @@ import {
 } from '../utils';
 
 const timeFormat = new Intl.DateTimeFormat('default', {
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
 });
 
 class AppClock extends HTMLElement {
