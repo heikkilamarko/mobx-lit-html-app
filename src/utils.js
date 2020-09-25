@@ -46,8 +46,8 @@ export function clearReactions(target) {
   target[R] = [];
 }
 
-export function addInterval(target, intervalHandle) {
-  (target[I] ??= []).push(intervalHandle);
+export function addInterval(target, fn, delay) {
+  (target[I] ??= []).push(setInterval(fn, delay));
 }
 
 export function clearIntervals(target) {

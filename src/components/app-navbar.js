@@ -2,6 +2,7 @@ import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { addRenderReaction, clearReactions } from '../utils';
 import { routeStore, widgetsStore } from '../stores';
+import './app-clock';
 
 class AppNavbar extends HTMLElement {
   connectedCallback() {
@@ -64,6 +65,9 @@ class AppNavbar extends HTMLElement {
                   >
                 </li>
               </ul>
+              <div class="d-flex text-white py-2">
+                <app-clock></app-clock>
+              </div>
             </div>
           </div>
         </nav>
