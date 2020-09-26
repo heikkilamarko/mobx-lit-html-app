@@ -30,7 +30,12 @@ class AppContent extends HTMLElement {
       case 'widgets':
         return html`<app-widgets></app-widgets>`;
       default:
-        return html`<app-error .title=${'404'} .text=${'Not Found'} />`;
+        return html`
+          <app-error
+            .title=${'404'}
+            .text=${stores.i18nStore.t('notfound')}
+          ></app-error>
+        `;
     }
   }
 }

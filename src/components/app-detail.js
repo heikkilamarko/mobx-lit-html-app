@@ -50,7 +50,12 @@ class AppDetail extends HTMLElement {
       `;
     }
 
-    return html`<app-error .title=${'404'} .text=${'Not Found'}></app-error>`;
+    return html`
+      <app-error
+        .title=${'404'}
+        .text=${stores.i18nStore.t('notfound')}
+      ></app-error>
+    `;
   }
 }
 
