@@ -37,9 +37,9 @@ class AppDetail extends HTMLElement {
     }
 
     if (stores.browseStore.hasError) {
-      return html`<app-error
-        .text=${stores.browseStore.error.message}
-      ></app-error>`;
+      return html`
+        <app-error .text=${stores.browseStore.error.message}></app-error>
+      `;
     }
 
     if (stores.browseStore.selectedItem) {
