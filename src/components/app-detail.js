@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit-html';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
-import { routeStore, browseStore } from '../stores';
+import { stores } from '../stores';
 import './app-detail-card';
 import './app-error';
 
@@ -8,10 +8,10 @@ class AppDetail extends HTMLElement {
   connectedCallback() {
     addWatchReaction(
       this,
-      () => routeStore.route,
+      () => stores.routeStore.route,
       (route) => {
         if (route.name === 'detail') {
-          browseStore.load(route.params.id);
+          stores.browseStore.load(route.params.id);
         }
       },
       { fireImmediately: true },
@@ -32,17 +32,21 @@ class AppDetail extends HTMLElement {
   }
 
   get content() {
-    if (browseStore.isLoading) {
+    if (stores.browseStore.isLoading) {
       return nothing;
     }
 
-    if (browseStore.hasError) {
-      return html`<app-error .text=${browseStore.error.message}></app-error>`;
+    if (stores.browseStore.hasError) {
+      return html`<app-error
+        .text=${stores.browseStore.error.message}
+      ></app-error>`;
     }
 
-    if (browseStore.selectedItem) {
+    if (stores.browseStore.selectedItem) {
       return html`
-        <app-detail-card .data="${browseStore.selectedItem}"></app-detail-card>
+        <app-detail-card
+          .data="${stores.browseStore.selectedItem}"
+        ></app-detail-card>
       `;
     }
 

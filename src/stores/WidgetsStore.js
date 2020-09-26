@@ -1,15 +1,16 @@
 import { makeObservable, action, computed, observable } from 'mobx';
 import { getWidgets } from '../api';
 import { createElement } from '../utils';
-import routeStore from './routeStore';
 
-class WidgetsStore {
+export default class WidgetsStore {
   widgets = [];
   widgetId = null;
   isLoading = false;
   error = null;
 
-  constructor() {
+  constructor(routeStore) {
+    this.routeStore = routeStore;
+
     makeObservable(this, {
       widgets: observable.ref,
       widgetId: observable.ref,
@@ -88,8 +89,6 @@ class WidgetsStore {
     const id =
       widgetId == null ? this.widgetId ?? undefined : widgetId || undefined;
 
-    routeStore.navigate('widgets', { id });
+    this.routeStore.navigate('widgets', { id });
   }
 }
-
-export default new WidgetsStore();

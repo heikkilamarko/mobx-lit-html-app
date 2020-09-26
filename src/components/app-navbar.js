@@ -1,13 +1,17 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { addRenderReaction, clearReactions } from '../utils';
-import { routeStore, widgetsStore } from '../stores';
+import { stores } from '../stores';
 import './app-clock';
 
 class AppNavbar extends HTMLElement {
+  constructor() {
+    super();
+    this.t = stores.i18nStore.t;
+  }
   connectedCallback() {
     addRenderReaction(this, () => {
-      const route = routeStore.route.name;
+      const route = stores.routeStore.route.name;
       return html`
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="container-fluid">
@@ -39,7 +43,7 @@ class AppNavbar extends HTMLElement {
                     })}"
                     @click="${(event) => this.navigateHome(event)}"
                     href="/"
-                    >Browse</a
+                    >${this.t('browse')}</a
                   >
                 </li>
                 <li class="nav-item">
@@ -50,7 +54,7 @@ class AppNavbar extends HTMLElement {
                     })}"
                     @click="${(event) => this.navigateCounter(event)}"
                     href="/counter"
-                    >Counter</a
+                    >${this.t('counter')}</a
                   >
                 </li>
                 <li class="nav-item">
@@ -60,8 +64,8 @@ class AppNavbar extends HTMLElement {
                       active: route === 'widgets',
                     })}"
                     @click="${(event) => this.navigateWidgets(event)}"
-                    href="${widgetsStore.widgetRoute}"
-                    >Widgets</a
+                    href="${stores.widgetsStore.widgetRoute}"
+                    >${this.t('widgets')}</a
                   >
                 </li>
               </ul>
@@ -81,17 +85,17 @@ class AppNavbar extends HTMLElement {
 
   navigateHome(event) {
     event.preventDefault();
-    routeStore.navigate('browse');
+    stores.routeStore.navigate('browse');
   }
 
   navigateCounter(event) {
     event.preventDefault();
-    routeStore.navigate('counter');
+    stores.routeStore.navigate('counter');
   }
 
   navigateWidgets(event) {
     event.preventDefault();
-    widgetsStore.navigate();
+    stores.widgetsStore.navigate();
   }
 }
 

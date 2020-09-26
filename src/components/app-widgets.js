@@ -1,32 +1,37 @@
 import { html, nothing } from 'lit-html';
 import { addWatchReaction, addRenderReaction, clearReactions } from '../utils';
-import { routeStore, widgetsStore } from '../stores';
+import { stores } from '../stores';
 import './app-error';
 import './app-widgets.css';
 
 class AppWidgets extends HTMLElement {
+  constructor() {
+    super();
+    this.t = stores.i18nStore.t;
+  }
+
   connectedCallback() {
-    widgetsStore.load();
+    stores.widgetsStore.load();
 
     addWatchReaction(
       this,
-      () => routeStore.route,
+      () => stores.routeStore.route,
       (route) => {
         if (route.name === 'widgets') {
-          widgetsStore.setWidgetId(route.params.id);
+          stores.widgetsStore.setWidgetId(route.params.id);
         }
       },
       { fireImmediately: true },
     );
 
     addRenderReaction(this, () => {
-      if (widgetsStore.isLoading) {
+      if (stores.widgetsStore.isLoading) {
         return nothing;
       }
 
-      if (widgetsStore.hasError) {
+      if (stores.widgetsStore.hasError) {
         return html`
-          <app-error .text=${widgetsStore.error.message}></app-error>
+          <app-error .text=${stores.widgetsStore.error.message}></app-error>
         `;
       }
 
@@ -37,10 +42,10 @@ class AppWidgets extends HTMLElement {
               id="select-widget"
               class="form-select form-select-lg"
               aria-label="Widget select"
-              .value=${widgetsStore.widgetId ?? ''}
+              .value=${stores.widgetsStore.widgetId ?? ''}
               @change="${(event) => this.handleWidgetChange(event)}"
             >
-              <option value="">Select widget...</option>
+              <option value="">${this.t('selectWidget')}</option>
               ${this.selectOptions}
             </select>
           </div>
@@ -55,8 +60,8 @@ class AppWidgets extends HTMLElement {
   }
 
   get selectOptions() {
-    const id = widgetsStore.widgetId;
-    return widgetsStore.widgets.map(
+    const id = stores.widgetsStore.widgetId;
+    return stores.widgetsStore.widgets.map(
       (w) =>
         html`
           <option .value=${w.id} ?selected=${w.id === id}>${w.name}</option>
@@ -65,12 +70,12 @@ class AppWidgets extends HTMLElement {
   }
 
   get widgetElement() {
-    if (!widgetsStore.widgetId) {
+    if (!stores.widgetsStore.widgetId) {
       return nothing;
     }
 
     return (
-      widgetsStore.widgetEl ??
+      stores.widgetsStore.widgetEl ??
       html`
         <div class="alert alert-danger" role="alert">
           The selected widget was not found in the registry.
@@ -80,7 +85,7 @@ class AppWidgets extends HTMLElement {
   }
 
   handleWidgetChange(event) {
-    widgetsStore.navigate(+event.target.value);
+    stores.widgetsStore.navigate(+event.target.value);
   }
 }
 

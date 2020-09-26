@@ -1,6 +1,6 @@
 import { makeObservable, action, observable } from 'mobx';
 
-class CounterStore {
+export default class CounterStore {
   value = 0;
 
   constructor() {
@@ -29,5 +29,3 @@ class CounterStore {
     this.value = 0;
   }
 }
-
-export default new CounterStore();

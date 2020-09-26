@@ -9,7 +9,7 @@ const routes = [
   { name: 'widgets', path: '/widgets' },
 ];
 
-class RouteStore {
+export default class RouteStore {
   route = null;
   previousRoute = null;
   router = null;
@@ -60,5 +60,3 @@ class RouteStore {
     history.back();
   }
 }
-
-export default new RouteStore();

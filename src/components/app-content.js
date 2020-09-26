@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
 import { addRenderReaction, clearReactions } from '../utils';
-import { routeStore } from '../stores';
+import { stores } from '../stores';
 import './app-browse';
 import './app-detail';
 import './app-counter';
@@ -20,7 +20,7 @@ class AppContent extends HTMLElement {
   }
 
   get content() {
-    switch (routeStore.route.name) {
+    switch (stores.routeStore.route.name) {
       case 'browse':
         return html`<app-browse></app-browse>`;
       case 'detail':

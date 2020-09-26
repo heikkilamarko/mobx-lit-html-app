@@ -1,0 +1,23 @@
+{
+  "en-US": {
+    "browse": "Browse",
+    "counter": "Counter",
+    "counterModalMessage": "Are you sure you want to reset the counter?",
+    "widgets": "Widgets",
+    "selectWidget": "Select widget...",
+    "homepage": "Homepage",
+    "ok": "Ok",
+    "cancel": "Cancel"
+  },
+
+  "fi-FI": {
+    "browse": "Selaa",
+    "counter": "Laskuri",
+    "counterModalMessage": "Oletko varma, että haluat nollata laskurin?",
+    "widgets": "Widgetit",
+    "selectWidget": "Valitse widgetti...",
+    "homepage": "Kotisivu",
+    "ok": "Kyllä",
+    "cancel": "Peruuta"
+  }
+}

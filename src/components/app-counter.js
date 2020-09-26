@@ -1,29 +1,34 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
-import { counterStore } from '../stores';
+import { stores } from '../stores';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
 import './app-counter.css';
 
 class AppCounter extends HTMLElement {
+  constructor() {
+    super();
+    this.t = stores.i18nStore.t;
+  }
+
   connectedCallback() {
     addWatchReaction(
       this,
-      () => counterStore.value,
+      () => stores.counterStore.value,
       (value) => {
         if (value < -10) {
-          counterStore.setValue(-10);
+          stores.counterStore.setValue(-10);
           alert('-10 is the minimum value!');
         } else if (10 < value) {
-          counterStore.setValue(10);
+          stores.counterStore.setValue(10);
           alert('10 is the maximum value!');
         }
       },
     );
 
     addRenderReaction(this, () => {
-      const value = counterStore.value;
+      const value = stores.counterStore.value;
       return html`
         <section class="d-flex align-items-center justify-content-center p-4">
           <div class="card app-counter-card">
@@ -38,7 +43,7 @@ class AppCounter extends HTMLElement {
               >
                 ${value}
               </h1>
-              <p class="card-text">Counter</p>
+              <p class="card-text">${this.t('counter')}</p>
               <a
                 href
                 class="btn btn-link text-danger"
@@ -81,12 +86,12 @@ class AppCounter extends HTMLElement {
 
   handleDecrement(event) {
     event.preventDefault();
-    counterStore.decrement();
+    stores.counterStore.decrement();
   }
 
   handleIncrement(event) {
     event.preventDefault();
-    counterStore.increment();
+    stores.counterStore.increment();
   }
 
   handleReset(event) {
@@ -99,7 +104,7 @@ class AppCounter extends HTMLElement {
 
   handleResetOk() {
     this.modal?.hide();
-    counterStore.reset();
+    stores.counterStore.reset();
   }
 
   handleResetCancel() {

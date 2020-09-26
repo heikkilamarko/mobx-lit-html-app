@@ -1,19 +1,19 @@
 import { html, nothing } from 'lit-html';
 import { addRenderReaction, clearReactions } from '../utils';
-import { routeStore, browseStore } from '../stores';
+import { stores } from '../stores';
 import './app-browse-card';
 import './app-error';
 
 class AppBrowse extends HTMLElement {
   connectedCallback() {
-    browseStore.load();
+    stores.browseStore.load();
 
     addRenderReaction(this, () => {
-      if (browseStore.isLoading) {
+      if (stores.browseStore.isLoading) {
         return nothing;
       }
 
-      if (browseStore.hasError) {
+      if (stores.browseStore.hasError) {
         return html`
           <app-error .text=${browseStore.error.message}></app-error>
         `;
@@ -21,7 +21,7 @@ class AppBrowse extends HTMLElement {
 
       return html`
         <div class="row p-2">
-          ${browseStore.items.map(
+          ${stores.browseStore.items.map(
             (item) => html`
               <app-browse-card
                 class="col-6 col-md-4 col-lg-3 p-2"
@@ -41,7 +41,7 @@ class AppBrowse extends HTMLElement {
 
   handleCardClick(event, item) {
     event.preventDefault();
-    routeStore.navigate('detail', { id: item.id });
+    stores.routeStore.navigate('detail', { id: item.id });
   }
 }
 

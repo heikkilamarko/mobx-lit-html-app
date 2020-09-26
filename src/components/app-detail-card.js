@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
 import { addRenderReaction, clearReactions } from '../utils';
-import { routeStore } from '../stores';
+import { stores } from '../stores';
 import { arrowLeft, boxArrowUpRight } from './icons';
 import './app-detail-card.css';
 
@@ -10,6 +10,7 @@ class AppDetailCard extends HTMLElement {
 
   constructor() {
     super();
+    this.t = stores.i18nStore.t;
     makeObservable(this, {
       data: observable.ref,
     });
@@ -29,12 +30,12 @@ class AppDetailCard extends HTMLElement {
               target="_blank"
               class="btn btn-primary app-detail-card__btn-homepage"
             >
-              Homepage ${boxArrowUpRight}
+              ${this.t('homepage')} ${boxArrowUpRight}
             </a>
             <button
               type="button"
               class="btn btn-light app-detail-card__btn-back"
-              @click=${routeStore.navigateBack}
+              @click=${stores.routeStore.navigateBack}
             >
               ${arrowLeft}
             </button>
