@@ -5,7 +5,7 @@ import './components/app-root';
 import './index.css';
 
 configure({
-  enforceActions: 'observed',
+  enforceActions: 'never',
   computedRequiresReaction: true,
   reactionRequiresObservable: true,
   observableRequiresReaction: true,

@@ -13,17 +13,8 @@
   },
   {
     "id": 3,
-    "name": "Error",
-    "tagName": "app-error",
-    "props": {
-      "title": "Error",
-      "text": "Error text."
-    }
-  },
-  {
-    "id": 4,
-    "name": "Undefined",
-    "tagName": "app-undefined",
+    "name": "Unregistered",
+    "tagName": "app-unregistered",
     "props": {}
   }
 ]

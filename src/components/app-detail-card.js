@@ -31,7 +31,7 @@ class AppDetailCard extends HTMLElement {
               target="_blank"
               class="btn btn-primary app-detail-card__btn-homepage"
             >
-              ${t('homepage')} ${boxArrowUpRight}
+              ${t('browse.detail.homepage')} ${boxArrowUpRight}
             </a>
             <button
               type="button"

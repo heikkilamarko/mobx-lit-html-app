@@ -1,29 +1,33 @@
 {
   "en-US": {
     "browse": "Browse",
-    "counter": "Counter",
-    "counterModalMessage": "Are you sure you want to reset the counter?",
-    "counterMinValueAlert": "{value} is the minimum value!",
-    "counterMaxValueAlert": "{value} is the maximum value!",
-    "widgets": "Widgets",
-    "selectWidget": "Select widget...",
-    "homepage": "Homepage",
-    "ok": "Ok",
+    "browse.detail.homepage": "Homepage",
     "cancel": "Cancel",
-    "locale": "Language"
+    "counter": "Counter",
+    "counter.alert.max": "{value} is the maximum value!",
+    "counter.alert.min": "{value} is the minimum value!",
+    "counter.modal.message": "Are you sure you want to reset the counter?",
+    "error": "Error",
+    "locale": "Language",
+    "ok": "Ok",
+    "widgets": "Widgets",
+    "widgets.error.notfound": "The selected widget was not found in the custom element registry.",
+    "widgets.select.placeholder": "Select widget..."
   },
 
   "fi-FI": {
     "browse": "Selaa",
-    "counter": "Laskuri",
-    "counterModalMessage": "Oletko varma, että haluat nollata laskurin?",
-    "counterMinValueAlert": "{value} on minimiarvo!",
-    "counterMaxValueAlert": "{value} on maksimiarvo!",
-    "widgets": "Widgetit",
-    "selectWidget": "Valitse widgetti...",
-    "homepage": "Kotisivu",
-    "ok": "Kyllä",
+    "browse.detail.homepage": "Kotisivu",
     "cancel": "Peruuta",
-    "locale": "Kieli"
+    "counter": "Laskuri",
+    "counter.alert.max": "{value} on maksimiarvo!",
+    "counter.alert.min": "{value} on minimiarvo!",
+    "counter.modal.message": "Oletko varma, että haluat nollata laskurin?",
+    "error": "Virhe",
+    "locale": "Kieli",
+    "ok": "Kyllä",
+    "widgets": "Widgetit",
+    "widgets.error.notfound": "Valittua widgettiä ei löydy rekisteristä.",
+    "widgets.select.placeholder": "Valitse widgetti..."
   }
 }

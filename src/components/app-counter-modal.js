@@ -24,7 +24,7 @@ class AppCounterModal extends HTMLElement {
                 </button>
               </div>
               <div class="modal-body">
-                <p>${t('counterModalMessage')}</p>
+                <p>${t('counter.modal.message')}</p>
               </div>
               <div class="modal-footer">
                 <button

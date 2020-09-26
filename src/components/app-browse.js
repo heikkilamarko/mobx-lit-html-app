@@ -15,7 +15,7 @@ class AppBrowse extends HTMLElement {
 
       if (stores.browseStore.hasError) {
         return html`
-          <app-error .text=${browseStore.error.message}></app-error>
+          <app-error .text=${stores.browseStore.error.message}></app-error>
         `;
       }
 

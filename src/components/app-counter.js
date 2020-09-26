@@ -16,10 +16,10 @@ class AppCounter extends HTMLElement {
       (value) => {
         if (value < -10) {
           stores.counterStore.setValue(-10);
-          alert(t('counterMinValueAlert', { value: -10 }));
+          alert(t('counter.alert.min', { value: -10 }));
         } else if (10 < value) {
           stores.counterStore.setValue(10);
-          alert(t('counterMaxValueAlert', { value: 10 }));
+          alert(t('counter.alert.max', { value: 10 }));
         }
       },
     );

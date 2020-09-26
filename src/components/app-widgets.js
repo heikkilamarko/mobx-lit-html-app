@@ -42,7 +42,7 @@ class AppWidgets extends HTMLElement {
               .value=${stores.widgetsStore.widgetId ?? ''}
               @change="${(event) => this.handleWidgetChange(event)}"
             >
-              <option value="">${t('selectWidget')}</option>
+              <option value="">${t('widgets.select.placeholder')}</option>
               ${this.selectOptions}
             </select>
           </div>
@@ -67,16 +67,22 @@ class AppWidgets extends HTMLElement {
   }
 
   get widgetElement() {
-    if (!stores.widgetsStore.widgetId) {
+    const {
+      i18nStore: { t },
+      widgetsStore: { widgetId, widgetEl },
+    } = stores;
+
+    if (!widgetId) {
       return nothing;
     }
 
     return (
-      stores.widgetsStore.widgetEl ??
+      widgetEl ??
       html`
-        <div class="alert alert-danger" role="alert">
-          The selected widget was not found in the registry.
-        </div>
+        <app-error
+          .title=${t('error')}
+          .text=${t('widgets.error.notfound')}
+        ></app-error>
       `
     );
   }
