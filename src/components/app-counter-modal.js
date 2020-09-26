@@ -2,19 +2,16 @@ import { html, render } from 'lit-html';
 import { stores } from '../stores';
 
 class AppCounterModal extends HTMLElement {
-  constructor() {
-    super();
-    this.t = stores.i18nStore.t;
-  }
-
   connectedCallback() {
+    const { t } = stores.i18nStore;
+
     render(
       html`
         <div class="modal" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">${this.t('counter')}</h5>
+                <h5 class="modal-title">${t('counter')}</h5>
                 <button
                   type="button"
                   class="close"
@@ -25,7 +22,7 @@ class AppCounterModal extends HTMLElement {
                 </button>
               </div>
               <div class="modal-body">
-                <p>${this.t('counterModalMessage')}</p>
+                <p>${t('counterModalMessage')}</p>
               </div>
               <div class="modal-footer">
                 <button
@@ -33,14 +30,14 @@ class AppCounterModal extends HTMLElement {
                   class="btn btn-secondary"
                   @click=${() => this.handleCancel()}
                 >
-                  ${this.t('cancel')}
+                  ${t('cancel')}
                 </button>
                 <button
                   type="button"
                   class="btn btn-primary"
                   @click=${() => this.handleOk()}
                 >
-                  ${this.t('ok')}
+                  ${t('ok')}
                 </button>
               </div>
             </div>

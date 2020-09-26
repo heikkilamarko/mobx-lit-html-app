@@ -9,7 +9,8 @@
     "selectWidget": "Select widget...",
     "homepage": "Homepage",
     "ok": "Ok",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "locale": "Language"
   },
 
   "fi-FI": {
@@ -22,6 +23,7 @@
     "selectWidget": "Valitse widgetti...",
     "homepage": "Kotisivu",
     "ok": "Kyllä",
-    "cancel": "Peruuta"
+    "cancel": "Peruuta",
+    "locale": "Kieli"
   }
 }

@@ -2,16 +2,15 @@ import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { addRenderReaction, clearReactions } from '../utils';
 import { stores } from '../stores';
+import './app-locale-nav-link';
 import './app-clock';
 
 class AppNavbar extends HTMLElement {
-  constructor() {
-    super();
-    this.t = stores.i18nStore.t;
-  }
   connectedCallback() {
     addRenderReaction(this, () => {
+      const { t } = stores.i18nStore;
       const route = stores.routeStore.route.name;
+
       return html`
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="container-fluid">
@@ -34,7 +33,7 @@ class AppNavbar extends HTMLElement {
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav mr-auto">
+              <ul class="navbar-nav">
                 <li class="nav-item">
                   <a
                     class="${classMap({
@@ -43,7 +42,7 @@ class AppNavbar extends HTMLElement {
                     })}"
                     @click="${(event) => this.navigateHome(event)}"
                     href="/"
-                    >${this.t('browse')}</a
+                    >${t('browse')}</a
                   >
                 </li>
                 <li class="nav-item">
@@ -54,7 +53,7 @@ class AppNavbar extends HTMLElement {
                     })}"
                     @click="${(event) => this.navigateCounter(event)}"
                     href="/counter"
-                    >${this.t('counter')}</a
+                    >${t('counter')}</a
                   >
                 </li>
                 <li class="nav-item">
@@ -65,13 +64,16 @@ class AppNavbar extends HTMLElement {
                     })}"
                     @click="${(event) => this.navigateWidgets(event)}"
                     href="${stores.widgetsStore.widgetRoute}"
-                    >${this.t('widgets')}</a
+                    >${t('widgets')}</a
                   >
                 </li>
               </ul>
-              <div class="d-flex text-white py-2">
+              <div class="d-flex text-white py-2 mx-auto">
                 <app-clock></app-clock>
               </div>
+              <ul class="navbar-nav">
+                <li is="app-locale-nav-link" class="nav-item dropdown"></li>
+              </ul>
             </div>
           </div>
         </nav>

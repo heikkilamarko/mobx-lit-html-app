@@ -5,12 +5,9 @@ import './app-error';
 import './app-widgets.css';
 
 class AppWidgets extends HTMLElement {
-  constructor() {
-    super();
-    this.t = stores.i18nStore.t;
-  }
-
   connectedCallback() {
+    const { t } = stores.i18nStore;
+
     stores.widgetsStore.load();
 
     addWatchReaction(
@@ -45,7 +42,7 @@ class AppWidgets extends HTMLElement {
               .value=${stores.widgetsStore.widgetId ?? ''}
               @change="${(event) => this.handleWidgetChange(event)}"
             >
-              <option value="">${this.t('selectWidget')}</option>
+              <option value="">${t('selectWidget')}</option>
               ${this.selectOptions}
             </select>
           </div>

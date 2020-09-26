@@ -10,13 +10,14 @@ class AppDetailCard extends HTMLElement {
 
   constructor() {
     super();
-    this.t = stores.i18nStore.t;
     makeObservable(this, {
       data: observable.ref,
     });
   }
 
   connectedCallback() {
+    const { t } = stores.i18nStore;
+
     addRenderReaction(
       this,
       () => html`
@@ -30,7 +31,7 @@ class AppDetailCard extends HTMLElement {
               target="_blank"
               class="btn btn-primary app-detail-card__btn-homepage"
             >
-              ${this.t('homepage')} ${boxArrowUpRight}
+              ${t('homepage')} ${boxArrowUpRight}
             </a>
             <button
               type="button"

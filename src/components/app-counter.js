@@ -7,22 +7,19 @@ import './app-counter-modal';
 import './app-counter.css';
 
 class AppCounter extends HTMLElement {
-  constructor() {
-    super();
-    this.t = stores.i18nStore.t;
-  }
-
   connectedCallback() {
+    const { t } = stores.i18nStore;
+
     addWatchReaction(
       this,
       () => stores.counterStore.value,
       (value) => {
         if (value < -10) {
           stores.counterStore.setValue(-10);
-          alert(this.t('counterMinValueAlert', { value: -10 }));
+          alert(t('counterMinValueAlert', { value: -10 }));
         } else if (10 < value) {
           stores.counterStore.setValue(10);
-          alert(this.t('counterMaxValueAlert', { value: 10 }));
+          alert(t('counterMaxValueAlert', { value: 10 }));
         }
       },
     );
@@ -43,7 +40,7 @@ class AppCounter extends HTMLElement {
               >
                 ${value}
               </h1>
-              <p class="card-text">${this.t('counter')}</p>
+              <p class="card-text">${t('counter')}</p>
               <a
                 href
                 class="btn btn-link text-danger"
