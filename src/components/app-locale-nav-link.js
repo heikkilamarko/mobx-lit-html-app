@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
-import { addRenderReaction, clearReactions } from '../utils';
 import { stores } from '../stores';
+import { addRenderReaction, clearReactions } from '../utils';
 
 class AppLocaleNavLink extends HTMLLIElement {
   connectedCallback() {

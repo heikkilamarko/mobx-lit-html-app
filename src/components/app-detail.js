@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit-html';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import { stores } from '../stores';
+import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import './app-detail-card';
 import './app-error';
 

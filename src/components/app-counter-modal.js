@@ -1,12 +1,14 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
 import { stores } from '../stores';
+import { addRenderReaction, clearReactions } from '../utils';
 
 class AppCounterModal extends HTMLElement {
   connectedCallback() {
     const { t } = stores.i18nStore;
 
-    render(
-      html`
+    addRenderReaction(
+      this,
+      () => html`
         <div class="modal" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -44,8 +46,11 @@ class AppCounterModal extends HTMLElement {
           </div>
         </div>
       `,
-      this,
     );
+  }
+
+  disconnectedCallback() {
+    clearReactions(this);
   }
 
   handleOk() {

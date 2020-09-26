@@ -1,17 +1,12 @@
 import { html } from 'lit-html';
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
+import { stores } from '../stores';
 import {
   addRenderReaction,
   addInterval,
   clearReactions,
   clearIntervals,
 } from '../utils';
-
-const timeFormat = new Intl.DateTimeFormat('default', {
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-});
 
 class AppClock extends HTMLElement {
   time;
@@ -20,6 +15,8 @@ class AppClock extends HTMLElement {
     super();
     makeObservable(this, {
       time: observable.ref,
+      formattedTime: computed,
+      timeFormat: computed,
       updateTime: action,
     });
     this.updateTime();
@@ -30,7 +27,7 @@ class AppClock extends HTMLElement {
 
     addRenderReaction(
       this,
-      () => html`<div class="font-monospace">${this.time}</div>`,
+      () => html`<div class="font-monospace">${this.formattedTime}</div>`,
     );
   }
 
@@ -39,8 +36,21 @@ class AppClock extends HTMLElement {
     clearIntervals(this);
   }
 
+  get formattedTime() {
+    return this.timeFormat.format(this.time);
+  }
+
+  get timeFormat() {
+    return new Intl.DateTimeFormat(stores.i18nStore.locale, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+  }
+
   updateTime() {
-    this.time = timeFormat.format(new Date());
+    this.time = new Date();
   }
 }
 

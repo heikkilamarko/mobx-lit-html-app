@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { addRenderReaction, clearReactions } from '../utils';
 import { stores } from '../stores';
+import { addRenderReaction, clearReactions } from '../utils';
 import './app-locale-nav-link';
 import './app-clock';
 

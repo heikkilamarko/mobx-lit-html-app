@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import { stores } from '../stores';
+import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
 import './app-counter.css';
