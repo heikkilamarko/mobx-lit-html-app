@@ -36,5 +36,21 @@ export default class I18nStore {
     this.locale = locale;
   }
 
-  t = (key) => this.localeResources?.[key] ?? key;
+  t = (key, values) => {
+    let template = this.localeResources?.[key];
+
+    if (template == null) {
+      return key;
+    }
+
+    if (!values) {
+      return template;
+    }
+
+    for (const key in values) {
+      template = template.replace(`{${key}}`, values[key]);
+    }
+
+    return template;
+  };
 }
