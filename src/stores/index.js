@@ -9,9 +9,8 @@ export const stores = {};
 
 export async function createStores() {
   const resources = await getResources();
-  const locale = Object.keys(resources)[0];
 
-  const i18nStore = new I18nStore(locale, resources);
+  const i18nStore = new I18nStore(resources);
   const routeStore = new RouteStore();
   const browseStore = new BrowseStore();
   const counterStore = new CounterStore();
