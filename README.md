@@ -1,8 +1,10 @@
-# MobX + lit-html App
+# MobX ❤️ lit-html App
 
 This repository contains the source code of a simple web application written in [MobX](https://mobx.js.org/), [lit-html](https://lit-html.polymer-project.org/), [Router5](https://router5.js.org/), and [Bootstrap](https://getbootstrap.com/).
 
 Build tool: [Snowpack](https://www.snowpack.dev/)
+
+See the app running [here](https://stmobxlithtmlapp.z6.web.core.windows.net/).
 
 ## Development
 
@@ -11,13 +13,13 @@ Build tool: [Snowpack](https://www.snowpack.dev/)
 > npm start
 ```
 
-## Bundle for Production
+## Bundle for production
 
 ```bash
 > npm run build
 ```
 
-## Test Drive the Production App
+## Test-drive the production bundle
 
 ```bash
 > npx serve -s build
