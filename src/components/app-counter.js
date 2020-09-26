@@ -1,28 +1,17 @@
-import { html } from 'lit-html';
+import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { stores } from '../stores';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
+import { addRenderReaction, clearReactions } from '../utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
 import './app-counter.css';
 
+const MIN_VALUE = -10;
+const MAX_VALUE = 10;
+
 class AppCounter extends HTMLElement {
   connectedCallback() {
     const { t } = stores.i18nStore;
-
-    addWatchReaction(
-      this,
-      () => stores.counterStore.value,
-      (value) => {
-        if (value < -10) {
-          stores.counterStore.setValue(-10);
-          alert(t('counter.alert.min', { value: -10 }));
-        } else if (10 < value) {
-          stores.counterStore.setValue(10);
-          alert(t('counter.alert.max', { value: 10 }));
-        }
-      },
-    );
 
     addRenderReaction(this, () => {
       const value = stores.counterStore.value;
@@ -39,29 +28,42 @@ class AppCounter extends HTMLElement {
                 })}
               >
                 ${value}
+                ${value === MIN_VALUE
+                  ? html`
+                      <span class="text-muted app-counter-card__minmax"
+                        >min</span
+                      >
+                    `
+                  : value === MAX_VALUE
+                  ? html`
+                      <span class="text-muted app-counter-card__minmax"
+                        >max</span
+                      >
+                    `
+                  : nothing}
               </h1>
               <p class="card-text">${t('counter')}</p>
-              <a
-                href
+              <button
                 class="btn btn-link text-danger"
+                ?disabled=${value === MIN_VALUE}
                 @click="${(event) => this.handleDecrement(event)}"
               >
                 ${dashCircle}
-              </a>
-              <a
-                href
+              </button>
+              <button
                 class="btn btn-link text-success"
+                ?disabled=${value === MAX_VALUE}
                 @click="${(event) => this.handleIncrement(event)}"
               >
                 ${plusCircle}
-              </a>
-              <a
-                href
+              </button>
+              <button
                 class="btn btn-link"
+                ?disabled=${value === 0}
                 @click=${(event) => this.handleReset(event)}
               >
                 ${xCircle}
-              </a>
+              </button>
             </div>
           </div>
         </section>
