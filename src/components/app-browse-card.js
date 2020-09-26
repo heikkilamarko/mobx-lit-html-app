@@ -22,10 +22,10 @@ class AppBrowseCard extends HTMLElement {
           href="/browse/${this.data.id}"
         >
           <div class="card-body">
-            <h4 class="card-title">${this.data.name}</h4>
+            <h4 class="card-title text-truncate">${this.data.name}</h4>
             <img
               src="${this.data.logo_url}"
-              width="100"
+              width="90%"
               height="100"
               alt="logo"
             />

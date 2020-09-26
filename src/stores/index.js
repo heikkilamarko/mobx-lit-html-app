@@ -1,9 +1,9 @@
 import { getResources } from '../api';
 import I18nStore from './I18nStore';
-import RouteStore from './routeStore';
-import BrowseStore from './browseStore';
-import CounterStore from './counterStore';
-import WidgetsStore from './widgetsStore';
+import RouteStore from './RouteStore';
+import BrowseStore from './BrowseStore';
+import CounterStore from './CounterStore';
+import WidgetsStore from './WidgetsStore';
 
 export const stores = {};
 

@@ -29,17 +29,9 @@ class AppCounter extends HTMLElement {
               >
                 ${value}
                 ${value === MIN_VALUE
-                  ? html`
-                      <span class="text-muted app-counter-card__minmax"
-                        >min</span
-                      >
-                    `
+                  ? html`<span class="text-muted display-6">min</span>`
                   : value === MAX_VALUE
-                  ? html`
-                      <span class="text-muted app-counter-card__minmax"
-                        >max</span
-                      >
-                    `
+                  ? html`<span class="text-muted display-6">max</span>`
                   : nothing}
               </h1>
               <p class="card-text">${t('counter')}</p>

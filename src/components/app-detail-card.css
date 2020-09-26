@@ -1,5 +1,5 @@
 .card.app-detail-card {
-  width: 30rem;
+  max-width: 30rem;
 }
 
 .card.app-detail-card img {
