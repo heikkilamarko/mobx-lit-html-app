@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
-import './app-locale-nav-link';
+import './app-locale-nav-item';
 import './app-clock';
 
 class AppNavbar extends HTMLElement {
@@ -72,7 +72,7 @@ class AppNavbar extends HTMLElement {
                 <app-clock></app-clock>
               </div>
               <ul class="navbar-nav">
-                <li is="app-locale-nav-link" class="nav-item dropdown"></li>
+                <li is="app-locale-nav-item" class="nav-item dropdown"></li>
               </ul>
             </div>
           </div>

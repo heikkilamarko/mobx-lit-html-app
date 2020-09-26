@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 
-class AppLocaleNavLink extends HTMLLIElement {
+class AppLocaleNavItem extends HTMLLIElement {
   connectedCallback() {
     addRenderReaction(this, () => {
       const { locale, locales } = stores.i18nStore;
@@ -46,6 +46,6 @@ class AppLocaleNavLink extends HTMLLIElement {
   }
 }
 
-customElements.define('app-locale-nav-link', AppLocaleNavLink, {
+customElements.define('app-locale-nav-item', AppLocaleNavItem, {
   extends: 'li',
 });
