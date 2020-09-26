@@ -46,21 +46,21 @@ class AppCounter extends HTMLElement {
               <button
                 class="btn btn-link text-danger"
                 ?disabled=${value === MIN_VALUE}
-                @click="${(event) => this.handleDecrement(event)}"
+                @click="${() => this.handleDecrement()}"
               >
                 ${dashCircle}
               </button>
               <button
                 class="btn btn-link text-success"
                 ?disabled=${value === MAX_VALUE}
-                @click="${(event) => this.handleIncrement(event)}"
+                @click="${() => this.handleIncrement()}"
               >
                 ${plusCircle}
               </button>
               <button
                 class="btn btn-link"
                 ?disabled=${value === 0}
-                @click=${(event) => this.handleReset(event)}
+                @click=${() => this.handleReset()}
               >
                 ${xCircle}
               </button>
@@ -83,18 +83,15 @@ class AppCounter extends HTMLElement {
     this.modal = undefined;
   }
 
-  handleDecrement(event) {
-    event.preventDefault();
+  handleDecrement() {
     stores.counterStore.decrement();
   }
 
-  handleIncrement(event) {
-    event.preventDefault();
+  handleIncrement() {
     stores.counterStore.increment();
   }
 
-  handleReset(event) {
-    event.preventDefault();
+  handleReset() {
     this.modal ??= new bootstrap.Modal(
       this.querySelector('app-counter-modal > .modal'),
     );
