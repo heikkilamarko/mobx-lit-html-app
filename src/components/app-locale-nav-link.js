@@ -11,14 +11,14 @@ class AppLocaleNavLink extends HTMLLIElement {
         <a
           class="nav-link dropdown-toggle"
           href="#"
-          id="navbarDropdown"
+          id="localeDropdown"
           role="button"
           data-toggle="dropdown"
           aria-expanded="false"
         >
           ${locale}
         </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <ul class="dropdown-menu" aria-labelledby="localeDropdown">
           ${locales.map(
             (l) => html`
               <li>
