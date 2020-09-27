@@ -1,0 +1,10 @@
+.card {
+  &.app-counter-card {
+    width: 30rem;
+
+    svg {
+      width: 2em;
+      height: 2em;
+    }
+  }
+}

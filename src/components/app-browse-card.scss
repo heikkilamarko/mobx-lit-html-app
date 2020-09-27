@@ -1,0 +1,14 @@
+.card {
+  &.app-browse-card {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      box-shadow: var(--app-box-shadow);
+    }
+
+    .card-title {
+      white-space: nowrap;
+    }
+  }
+}

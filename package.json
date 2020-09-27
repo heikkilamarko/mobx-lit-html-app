@@ -2,8 +2,9 @@
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "format": "prettier --write \"src/**/*.js\"",
-    "lint": "prettier --check \"src/**/*.js\""
+    "format": "prettier --write \"src/**/*.{js,scss}\"",
+    "lint": "prettier --check \"src/**/*.{js,scss}\"",
+    "sass": "sass src:src --no-source-map"
   },
   "dependencies": {
     "axios": "0.20.0",
@@ -19,6 +20,7 @@
     "@snowpack/plugin-dotenv": "2.0.1",
     "@snowpack/plugin-webpack": "2.0.12",
     "prettier": "2.1.2",
+    "sass": "1.26.11",
     "snowpack": "2.11.1"
   }
 }
