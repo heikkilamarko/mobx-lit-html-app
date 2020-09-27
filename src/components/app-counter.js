@@ -1,5 +1,6 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
+import { Modal } from 'bootstrap';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
@@ -84,9 +85,7 @@ class AppCounter extends HTMLElement {
   }
 
   handleReset() {
-    this.modal ??= new bootstrap.Modal(
-      this.querySelector('app-counter-modal > .modal'),
-    );
+    this.modal ??= new Modal(this.querySelector('app-counter-modal > .modal'));
     this.modal.show();
   }
 
