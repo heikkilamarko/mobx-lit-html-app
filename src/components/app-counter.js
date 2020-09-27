@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
