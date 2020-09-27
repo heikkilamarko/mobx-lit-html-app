@@ -1,19 +1,50 @@
-import { autorun, reaction } from 'mobx';
-import { render } from 'lit-html';
+import { autorun, configure, reaction } from 'mobx';
+import { html, nothing, render } from 'lit-html';
 
 const R = Symbol('reactions');
 const I = Symbol('intervals');
 
-export function renderApp(options) {
-  const el = createElement(options);
+export function configureMobX() {
+  configure({
+    enforceActions: 'never',
+    computedRequiresReaction: true,
+    reactionRequiresObservable: true,
+    observableRequiresReaction: true,
+    isolateGlobalState: true,
+  });
+}
+
+export function renderApp({
+  tagName = 'app-root',
+  props = {},
+  target = document.body,
+} = {}) {
+  const el = createElement({ tagName, props });
 
   if (!el) {
     throw new Error(
-      `Element <${options.tagName}> not found in the custom element registry.`,
+      `Element <${tagName}> not found in the custom element registry.`,
     );
   }
 
-  (options.target ?? document.body).appendChild(el);
+  target.appendChild(el);
+}
+
+export function renderAppStartupError({
+  title = 'Close, but No Cigar',
+  message,
+} = {}) {
+  render(
+    html`
+      <main
+        class="px-4 py-5 overflow-auto d-flex flex-column align-items-center vh-100 bg-danger text-white"
+      >
+        <h1 class="display-1 font-weight-lighter">${title}</h1>
+        ${message ? html`<p class="pt-2">${message}</p>` : nothing}
+      </main>
+    `,
+    document.body,
+  );
 }
 
 export function createElement({ tagName, props }) {
