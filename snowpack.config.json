@@ -3,5 +3,9 @@
     "public": "/",
     "src": "/_dist_"
   },
-  "plugins": ["@snowpack/plugin-dotenv", "@snowpack/plugin-optimize"]
+  "plugins": [
+    "@snowpack/plugin-babel",
+    "@snowpack/plugin-dotenv",
+    "@snowpack/plugin-webpack"
+  ]
 }
