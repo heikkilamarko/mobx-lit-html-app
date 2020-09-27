@@ -1,4 +1,8 @@
 {
+  "name": "mobx-lit-html-app",
+  "repository": "heikkilamarko/mobx-lit-html-app",
+  "author": "Marko Heikkilä",
+  "license": "MIT",
   "scripts": {
     "start": "snowpack dev --reload",
     "build": "snowpack build",
