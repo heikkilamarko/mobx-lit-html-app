@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "axios": "0.20.0",
-    "bootstrap": "5.0.0-alpha1",
+    "bootstrap": "next",
     "lit-html": "next-major",
     "mobx": "beta",
     "popper.js": "1.16.1",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "7.11.5",
     "@snowpack/plugin-babel": "2.1.0",
     "@snowpack/plugin-dotenv": "2.0.1",
+    "@snowpack/plugin-run-script": "2.1.2",
     "@snowpack/plugin-webpack": "2.0.12",
     "prettier": "2.1.2",
     "sass": "1.26.11",

@@ -1,13 +1,12 @@
-// Customizations
-@import './custom';
+@import './styles/custom';
+@import './styles/icons';
 
-// Configuration
+// Comment out unused bootstrap imports.
+
 @import '../node_modules/bootstrap/scss/functions';
 @import '../node_modules/bootstrap/scss/variables';
 @import '../node_modules/bootstrap/scss/mixins';
 @import '../node_modules/bootstrap/scss/utilities';
-
-// Layout & components
 @import '../node_modules/bootstrap/scss/root';
 @import '../node_modules/bootstrap/scss/reboot';
 @import '../node_modules/bootstrap/scss/type';
