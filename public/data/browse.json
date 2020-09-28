@@ -7,18 +7,18 @@
     "homepage_url": "https://www.webcomponents.org/"
   },
   {
-    "id": "react",
-    "name": "React",
-    "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
-    "logo_url": "/data/images/react.svg",
-    "homepage_url": "https://reactjs.org/"
-  },
-  {
     "id": "svelte",
     "name": "Svelte",
     "description": "Cybernetically enhanced web apps.",
     "logo_url": "/data/images/svelte.svg",
     "homepage_url": "https://svelte.dev/"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+    "logo_url": "/data/images/react.svg",
+    "homepage_url": "https://reactjs.org/"
   },
   {
     "id": "vue",
@@ -33,5 +33,19 @@
     "description": "One framework. Mobile & desktop.",
     "logo_url": "/data/images/angular.svg",
     "homepage_url": "https://angular.io/"
+  },
+  {
+    "id": "bootstrap",
+    "name": "Bootstrap",
+    "description": "Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.",
+    "logo_url": "/data/images/bootstrap.svg",
+    "homepage_url": "https://v5.getbootstrap.com/"
+  },
+  {
+    "id": "mobx",
+    "name": "MobX",
+    "description": "Simple, scalable state management.",
+    "logo_url": "/data/images/mobx.svg",
+    "homepage_url": "https://mobx.js.org/"
   }
 ]

@@ -10,5 +10,9 @@
     .card-title {
       white-space: nowrap;
     }
+
+    img {
+      object-fit: contain;
+    }
   }
 }
