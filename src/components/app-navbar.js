@@ -5,6 +5,8 @@ import { addRenderReaction, clearReactions } from '../utils';
 import './app-locale-nav-item';
 import './app-clock';
 
+const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
+
 class AppNavbar extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this, () => {
@@ -73,6 +75,11 @@ class AppNavbar extends HTMLElement {
               </div>
               <ul class="navbar-nav">
                 <li is="app-locale-nav-item" class="nav-item dropdown"></li>
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank" href=${GITHUB_URL}
+                    >GitHub</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
