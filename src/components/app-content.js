@@ -6,6 +6,7 @@ import './app-detail';
 import './app-counter';
 import './app-widgets';
 import './app-error';
+import './app-content.css';
 
 class AppContent extends HTMLElement {
   connectedCallback() {
