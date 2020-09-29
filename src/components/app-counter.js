@@ -16,53 +16,51 @@ class AppCounter extends HTMLElement {
 
     addRenderReaction(this, () => {
       const value = stores.counterStore.value;
+
       return html`
-        <section class="d-flex align-items-center justify-content-center p-4">
-          <div class="card app-counter-card">
-            <div class="card-body">
-              <h1
-                class=${classMap({
-                  'card-title': true,
-                  'display-1': true,
-                  'text-danger': value < 0,
-                  'text-success': 0 < value,
-                })}
-              >
-                ${value}
-                ${value === MIN_VALUE
-                  ? html`<span class="text-muted display-6">min</span>`
-                  : value === MAX_VALUE
-                  ? html`<span class="text-muted display-6">max</span>`
-                  : nothing}
-              </h1>
-              <p class="card-text">${t('counter')}</p>
-              <button
-                class="btn btn-link text-danger"
-                ?disabled=${value === MIN_VALUE}
-                @click="${() => this.handleDecrement()}"
-              >
-                ${dashCircle}
-              </button>
-              <button
-                class="btn btn-link text-success"
-                ?disabled=${value === MAX_VALUE}
-                @click="${() => this.handleIncrement()}"
-              >
-                ${plusCircle}
-              </button>
-              <button
-                class="btn btn-link"
-                ?disabled=${value === 0}
-                @click=${() => this.handleReset()}
-              >
-                ${xCircle}
-              </button>
-            </div>
+        <div class="card mx-auto app-counter">
+          <div class="card-body">
+            <h1
+              class=${classMap({
+                'card-title': true,
+                'display-1': true,
+                'text-danger': value < 0,
+                'text-success': 0 < value,
+              })}
+            >
+              ${value}
+              ${value === MIN_VALUE
+                ? html`<span class="text-muted display-6">min</span>`
+                : value === MAX_VALUE
+                ? html`<span class="text-muted display-6">max</span>`
+                : nothing}
+            </h1>
+            <p class="card-text">${t('counter')}</p>
+            <button
+              class="btn btn-link text-danger p-0 mr-4"
+              ?disabled=${value === MIN_VALUE}
+              @click="${() => this.handleDecrement()}"
+            >
+              ${dashCircle('app-counter__icon')}
+            </button>
+            <button
+              class="btn btn-link text-success p-0"
+              ?disabled=${value === MAX_VALUE}
+              @click="${() => this.handleIncrement()}"
+            >
+              ${plusCircle('app-counter__icon')}
+            </button>
+            <button
+              class="btn btn-link float-right p-0"
+              ?disabled=${value === 0}
+              @click=${() => this.handleReset()}
+            >
+              ${xCircle('app-counter__icon')}
+            </button>
           </div>
-        </section>
+        </div>
         <app-counter-modal
           @ok=${() => this.handleResetOk()}
-          @cancel=${() => this.handleResetCancel()}
         ></app-counter-modal>
       `;
     });
@@ -92,10 +90,6 @@ class AppCounter extends HTMLElement {
   handleResetOk() {
     this.modal?.hide();
     stores.counterStore.reset();
-  }
-
-  handleResetCancel() {
-    this.modal?.hide();
   }
 }
 

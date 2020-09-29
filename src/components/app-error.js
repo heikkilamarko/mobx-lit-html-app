@@ -21,18 +21,14 @@ class AppError extends HTMLElement {
       const { t } = stores.i18nStore;
 
       return html`
-        <section
-          class="d-flex align-items-center justify-content-center p-4 app-error"
-        >
-          <div class="card text-center text-danger">
-            <div class="card-body">
-              <h1 class="card-title display-1">${this.title || t('error')}</h1>
-              ${this.text
-                ? html`<p class="card-text">${this.text}</p>`
-                : nothing}
-            </div>
+        <div class="card mx-auto text-center text-danger app-error">
+          <div class="card-body">
+            <h1 class="card-title display-1">${this.title || t('error')}</h1>
+            ${this.text
+              ? html`<p class="card-text font-weight-lighter">${this.text}</p>`
+              : nothing}
           </div>
-        </section>
+        </div>
       `;
     });
   }

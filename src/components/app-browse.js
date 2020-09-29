@@ -20,11 +20,11 @@ class AppBrowse extends HTMLElement {
       }
 
       return html`
-        <div class="row p-2">
+        <div class="row g-3">
           ${stores.browseStore.items.map(
             (item) => html`
               <app-browse-card
-                class="col-6 col-md-4 col-lg-3 p-2"
+                class="col-6 col-md-4 col-lg-3"
                 .data="${item}"
                 @click="${(event) => this.handleCardClick(event, item)}"
               ></app-browse-card>

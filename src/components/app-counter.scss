@@ -1,16 +1,8 @@
-.card {
-  &.app-counter-card {
-    width: 30rem;
+.app-counter.card {
+  max-width: 30rem;
 
-    .btn {
-      padding: 0;
-      margin-right: 1rem;
-    }
-
-    svg {
-      width: 2em;
-      height: 2em;
-      vertical-align: middle;
-    }
+  .app-counter__icon {
+    width: 2.5em;
+    height: 2.5em;
   }
 }

@@ -1,8 +1,7 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
 import createRouter, { constants } from 'router5';
 import browserPlugin from 'router5-plugin-browser';
-
-const GA_MEASUREMENT_ID = import.meta.env.SNOWPACK_PUBLIC_GA_MEASUREMENT_ID;
+import { analyticsPageview } from '../utils';
 
 const routes = [
   { name: 'browse', path: '/' },
@@ -33,8 +32,7 @@ export default class RouteStore {
 
     reaction(
       () => this.route,
-      (route) =>
-        gtag && gtag('config', GA_MEASUREMENT_ID, { page_path: route.path }),
+      (route) => analyticsPageview(route.path),
     );
   }
 

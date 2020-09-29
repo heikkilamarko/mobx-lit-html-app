@@ -16,12 +16,10 @@ class AppCounterModal extends HTMLElement {
                 <h5 class="modal-title">${t('counter')}</h5>
                 <button
                   type="button"
-                  class="close"
+                  class="btn-close"
+                  data-dismiss="modal"
                   aria-label="Close"
-                  @click=${() => this.handleCancel()}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                ></button>
               </div>
               <div class="modal-body">
                 <p>${t('counter.modal.message')}</p>
@@ -29,8 +27,8 @@ class AppCounterModal extends HTMLElement {
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
-                  @click=${() => this.handleCancel()}
+                  class="btn btn-light"
+                  data-dismiss="modal"
                 >
                   ${t('cancel')}
                 </button>
@@ -55,10 +53,6 @@ class AppCounterModal extends HTMLElement {
 
   handleOk() {
     this.dispatchEvent(new Event('ok'));
-  }
-
-  handleCancel() {
-    this.dispatchEvent(new Event('cancel'));
   }
 }
 

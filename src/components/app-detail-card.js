@@ -21,7 +21,7 @@ class AppDetailCard extends HTMLElement {
     addRenderReaction(
       this,
       () => html`
-        <div class="card app-detail-card">
+        <div class="card mx-auto app-detail-card">
           <img src="${this.data.logo_url}" class="card-img-top" alt="logo" />
           <div class="card-body">
             <h4 class="card-title">${this.data.name}</h4>
@@ -29,16 +29,17 @@ class AppDetailCard extends HTMLElement {
             <a
               href="${this.data.homepage_url}"
               target="_blank"
-              class="btn btn-primary app-detail-card__btn-homepage"
+              class="btn btn-primary"
             >
-              ${t('browse.detail.homepage')} ${boxArrowUpRight}
+              ${t('browse.detail.homepage')}
+              ${boxArrowUpRight('align-text-top ml-1')}
             </a>
             <button
               type="button"
-              class="btn btn-light app-detail-card__btn-back"
+              class="btn btn-light float-right"
               @click=${stores.routeStore.navigateBack}
             >
-              ${arrowLeft}
+              ${arrowLeft('align-text-bottom')}
             </button>
           </div>
         </div>

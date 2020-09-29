@@ -33,21 +33,16 @@ class AppWidgets extends HTMLElement {
       }
 
       return html`
-        <main class="container">
-          <div class="row mx-1 my-5 justify-content-center">
-            <select
-              id="select-widget"
-              class="form-select form-select-lg"
-              aria-label="Widget select"
-              .value=${stores.widgetsStore.widgetId ?? ''}
-              @change="${(event) => this.handleWidgetChange(event)}"
-            >
-              <option value="">${t('widgets.select.placeholder')}</option>
-              ${this.selectOptions}
-            </select>
-          </div>
-          ${this.widgetElement}
-        </main>
+        <select
+          class="form-select form-select-lg mx-auto mt-3 mb-5 app-widgets__select"
+          aria-label="Widget select"
+          .value=${stores.widgetsStore.widgetId ?? ''}
+          @change="${(event) => this.handleWidgetChange(event)}"
+        >
+          <option value="">${t('widgets.select.placeholder')}</option>
+          ${this.selectOptions}
+        </select>
+        ${this.widgetElement}
       `;
     });
   }

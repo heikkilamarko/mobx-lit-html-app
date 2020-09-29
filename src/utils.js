@@ -1,6 +1,8 @@
 import { autorun, configure, reaction } from 'mobx';
 import { html, nothing, render } from 'lit-html';
 
+const GA_MEASUREMENT_ID = import.meta.env.SNOWPACK_PUBLIC_GA_MEASUREMENT_ID;
+
 const R = Symbol('reactions');
 const I = Symbol('intervals');
 
@@ -84,4 +86,10 @@ export function addInterval(target, fn, delay) {
 export function clearIntervals(target) {
   target[I] && target[I].forEach((h) => clearInterval(h));
   target[I] = [];
+}
+
+export function analyticsPageview(path) {
+  if (window.gtag) {
+    window.gtag('config', GA_MEASUREMENT_ID, { page_path: path });
+  }
 }

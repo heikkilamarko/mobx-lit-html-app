@@ -6,13 +6,12 @@ import './app-detail';
 import './app-counter';
 import './app-widgets';
 import './app-error';
-import './app-content.css';
 
 class AppContent extends HTMLElement {
   connectedCallback() {
     addRenderReaction(
       this,
-      () => html`<main class="container">${this.content}</main>`,
+      () => html`<main class="container p-3">${this.content}</main>`,
     );
   }
 
