@@ -1,18 +1,16 @@
-.card {
-  &.app-browse-card {
-    text-decoration: none;
-    color: inherit;
+.app-browse-card.card {
+  text-decoration: none;
+  color: inherit;
 
-    &:hover {
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
 
-    .card-title {
-      white-space: nowrap;
-    }
+  .card-title {
+    white-space: nowrap;
+  }
 
-    img {
-      object-fit: contain;
-    }
+  img {
+    object-fit: contain;
   }
 }

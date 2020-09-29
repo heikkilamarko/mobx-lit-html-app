@@ -17,9 +17,9 @@ class AppError extends HTMLElement {
   }
 
   connectedCallback() {
-    addRenderReaction(this, () => {
-      const { t } = stores.i18nStore;
+    const { t } = stores.i18nStore;
 
+    addRenderReaction(this, () => {
       return html`
         <div class="card mx-auto text-center text-danger app-error">
           <div class="card-body">
