@@ -1,6 +1,7 @@
 {
   "name": "Demo App",
   "short_name": "Demo App",
+  "description": "A simple web application written in MobX and lit-html",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,6 +14,8 @@
       "type": "image/png"
     }
   ],
+  "start_url": "/",
+  "scope": "/",
   "theme_color": "#6f42c1",
   "background_color": "#ffffff",
   "display": "standalone"
