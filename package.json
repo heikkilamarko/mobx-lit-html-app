@@ -14,7 +14,7 @@
     "axios": "0.20.0",
     "bootstrap": "next",
     "lit-html": "next-major",
-    "mobx": "beta",
+    "mobx": "6.0.0",
     "popper.js": "1.16.1",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1"
