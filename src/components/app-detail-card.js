@@ -29,6 +29,7 @@ class AppDetailCard extends HTMLElement {
             <a
               href="${this.data.homepage_url}"
               target="_blank"
+              rel="noreferrer"
               class="btn btn-primary"
             >
               ${t('browse.detail.homepage')}

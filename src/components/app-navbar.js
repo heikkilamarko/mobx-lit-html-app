@@ -76,7 +76,11 @@ class AppNavbar extends HTMLElement {
               <ul class="navbar-nav">
                 <li is="app-locale-nav-item" class="nav-item dropdown"></li>
                 <li class="nav-item">
-                  <a class="nav-link" target="_blank" href=${GITHUB_URL}
+                  <a
+                    class="nav-link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href=${GITHUB_URL}
                     >GitHub</a
                   >
                 </li>
