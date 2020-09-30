@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Demo App" />
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=%SNOWPACK_PUBLIC_GA_MEASUREMENT_ID%"
@@ -14,8 +11,13 @@
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-      gtag('config', '%SNOWPACK_PUBLIC_GA_MEASUREMENT_ID%');
+      gtag('config', '%SNOWPACK_PUBLIC_GA_MEASUREMENT_ID%', {
+        cookie_flags: 'SameSite=None;Secure',
+      });
     </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Demo App" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <title>Demo App</title>
   </head>
