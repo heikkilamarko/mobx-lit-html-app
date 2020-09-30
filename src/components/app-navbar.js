@@ -18,7 +18,7 @@ class AppNavbar extends HTMLElement {
           <div class="container-fluid">
             <a
               class="navbar-brand"
-              @click="${(event) => this.navigateHome(event)}"
+              @click="${(event) => this.navigate(event, 'browse')}"
               href="/"
             >
               Demo App
@@ -42,7 +42,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'browse' || route === 'detail',
                     })}"
-                    @click="${(event) => this.navigateHome(event)}"
+                    @click="${(event) => this.navigate(event, 'browse')}"
                     href="/"
                     >${t('browse')}</a
                   >
@@ -53,7 +53,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'counter',
                     })}"
-                    @click="${(event) => this.navigateCounter(event)}"
+                    @click="${(event) => this.navigate(event, 'counter')}"
                     href="/counter"
                     >${t('counter')}</a
                   >
@@ -64,7 +64,7 @@ class AppNavbar extends HTMLElement {
                       'nav-link': true,
                       active: route === 'widgets',
                     })}"
-                    @click="${(event) => this.navigateWidgets(event)}"
+                    @click="${(event) => this.navigate(event, 'widgets')}"
                     href="${stores.widgetsStore.widgetRoute}"
                     >${t('widgets')}</a
                   >
@@ -92,19 +92,11 @@ class AppNavbar extends HTMLElement {
     clearReactions(this);
   }
 
-  navigateHome(event) {
+  navigate(event, routeName) {
     event.preventDefault();
-    stores.routeStore.navigate('browse');
-  }
-
-  navigateCounter(event) {
-    event.preventDefault();
-    stores.routeStore.navigate('counter');
-  }
-
-  navigateWidgets(event) {
-    event.preventDefault();
-    stores.widgetsStore.navigate();
+    routeName === 'widgets'
+      ? stores.widgetsStore.navigate()
+      : stores.routeStore.navigate(routeName);
   }
 }
 
