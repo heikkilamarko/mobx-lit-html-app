@@ -21,6 +21,13 @@ class AppNavbar extends HTMLElement {
               @click="${(event) => this.navigate(event, 'browse')}"
               href="/"
             >
+              <img
+                src="/android-chrome-192x192.png"
+                alt="App brand image (rocket)"
+                width="24"
+                height="24"
+                class="d-inline-block align-text-bottom mr-2"
+              />
               Demo App
             </a>
             <button
