@@ -6,10 +6,10 @@ export default class CounterStore {
   constructor() {
     makeObservable(this, {
       value: observable,
-      setValue: action,
-      increment: action,
-      decrement: action,
-      reset: action,
+      setValue: action.bound,
+      increment: action.bound,
+      decrement: action.bound,
+      reset: action.bound,
     });
   }
 

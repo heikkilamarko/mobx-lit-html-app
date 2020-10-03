@@ -10,25 +10,32 @@ class AppJokes extends HTMLElement {
 
     stores.jokesStore.getJokeCategories();
 
-    addRenderReaction(this, () =>
-      stores.jokesStore.isReady
+    addRenderReaction(this, () => {
+      const {
+        setCategory,
+        getJoke,
+        isReady,
+        isLoading,
+        categories,
+        category,
+        jokeText,
+      } = stores.jokesStore;
+
+      return isReady
         ? html`
             <div class="mx-auto app-jokes">
-              <div class="input-group mb-3">
+              <div class="input-group mt-3 mb-5">
                 <select
                   class="form-select form-select-lg"
                   aria-label="Joke select"
-                  .value=${stores.jokesStore.category ?? ''}
-                  @change="${(event) => this.handleCategoryChange(event)}"
+                  .value=${category}
+                  @change="${(event) => setCategory(event.target.value)}"
                 >
                   <option value="">${t('jokes.select.all')}</option>
-                  ${stores.jokesStore.categories.map(
+                  ${categories.map(
                     (c) =>
                       html`
-                        <option
-                          .value=${c}
-                          ?selected=${c === stores.jokesStore.category}
-                        >
+                        <option .value=${c} ?selected=${c === category}>
                           ${c}
                         </option>
                       `,
@@ -37,28 +44,21 @@ class AppJokes extends HTMLElement {
                 <button
                   class="btn btn-primary"
                   type="button"
-                  @click=${() => this.handleGetJoke()}
+                  ?disabled=${isLoading}
+                  @click=${() => getJoke()}
                 >
                   ${t('jokes.get')}
                 </button>
               </div>
-              <app-joke .text=${stores.jokesStore.jokeText}></app-joke>
+              <app-joke .text=${jokeText}></app-joke>
             </div>
           `
-        : nothing,
-    );
+        : nothing;
+    });
   }
 
   disconnectedCallback() {
     clearReactions(this);
-  }
-
-  handleCategoryChange(event) {
-    stores.jokesStore.setCategory(event.target.value);
-  }
-
-  handleGetJoke() {
-    stores.jokesStore.getJoke();
   }
 }
 

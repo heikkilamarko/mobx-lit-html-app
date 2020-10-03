@@ -12,8 +12,8 @@ export default class I18nStore {
       locale: observable.ref,
       localeResources: computed,
       locales: computed,
-      setResources: action,
-      setLocale: action,
+      setResources: action.bound,
+      setLocale: action.bound,
     });
     this.setResources(resources);
     this.setLocale(locale);

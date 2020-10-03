@@ -20,12 +20,12 @@ export default class WidgetsStore {
       hasError: computed,
       widgetEl: computed,
       widgetRoute: computed,
-      setWidgets: action,
-      setWidgetId: action,
-      setLoading: action,
-      setError: action,
-      load: action,
-      navigate: action,
+      setWidgets: action.bound,
+      setWidgetId: action.bound,
+      setLoading: action.bound,
+      setError: action.bound,
+      load: action.bound,
+      navigate: action.bound,
     });
   }
 

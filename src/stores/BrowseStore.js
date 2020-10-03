@@ -15,11 +15,11 @@ export default class BrowseStore {
       error: observable.ref,
       selectedItem: computed,
       hasError: computed,
-      setItems: action,
-      setSelectedItemId: action,
-      setLoading: action,
-      setError: action,
-      load: action,
+      setItems: action.bound,
+      setSelectedItemId: action.bound,
+      setLoading: action.bound,
+      setError: action.bound,
+      load: action.bound,
     });
   }
 

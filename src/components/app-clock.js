@@ -17,7 +17,7 @@ class AppClock extends HTMLElement {
       time: observable.ref,
       formattedTime: computed,
       timeFormat: computed,
-      updateTime: action,
+      updateTime: action.bound,
     });
     this.updateTime();
   }

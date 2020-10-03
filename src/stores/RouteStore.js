@@ -22,7 +22,7 @@ export default class RouteStore {
       route: observable.ref,
       previousRoute: observable.ref,
       isNotFoundRoute: computed,
-      setRoute: action,
+      setRoute: action.bound,
     });
 
     this.router = createRouter(routes, {
@@ -48,7 +48,7 @@ export default class RouteStore {
 
   start() {
     if (!this.router.isStarted()) {
-      this.unsubscribe = this.router.subscribe(this.setRoute.bind(this));
+      this.unsubscribe = this.router.subscribe(this.setRoute);
       this.router.start();
     }
   }

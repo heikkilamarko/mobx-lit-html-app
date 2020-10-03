@@ -20,13 +20,13 @@ class JokesStore {
       isReady: computed,
       jokeText: computed,
       hasError: computed,
-      setCategories: action,
-      setCategory: action,
-      setJoke: action,
-      setLoading: action,
-      setError: action,
-      getJokeCategories: action,
-      getJoke: action,
+      setCategories: action.bound,
+      setCategory: action.bound,
+      setJoke: action.bound,
+      setLoading: action.bound,
+      setError: action.bound,
+      getJokeCategories: action.bound,
+      getJoke: action.bound,
     });
   }
 
@@ -68,9 +68,10 @@ class JokesStore {
     if (this.isReady) return;
 
     try {
-      this.setLoading(true);
       this.setError(null);
+      this.setLoading(true);
       const categories = await getJokeCategories();
+      this.setLoading(false);
       this.setCategories(categories);
     } catch (error) {
       this.setError(error);
@@ -80,10 +81,13 @@ class JokesStore {
   }
 
   async getJoke() {
+    if (this.isLoading) return;
+
     try {
-      this.setLoading(true);
       this.setError(null);
+      this.setLoading(true);
       const joke = await getJoke(this.category);
+      this.setLoading(false);
       this.setJoke(joke);
     } catch (error) {
       this.setError(error);
