@@ -13,6 +13,12 @@
   },
   {
     "id": 3,
+    "name": "Jokes",
+    "tagName": "app-jokes",
+    "props": {}
+  },
+  {
+    "id": 4,
     "name": "Unregistered",
     "tagName": "app-unregistered",
     "props": {}

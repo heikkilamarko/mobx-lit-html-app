@@ -8,6 +8,7 @@ const routes = [
   { name: 'detail', path: '/browse/:id' },
   { name: 'counter', path: '/counter' },
   { name: 'widgets', path: '/widgets' },
+  { name: 'jokes', path: '/jokes' },
 ];
 
 export default class RouteStore {

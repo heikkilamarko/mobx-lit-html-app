@@ -14,3 +14,21 @@ export async function getWidgets() {
   const { data } = await axios.get('/data/widgets.json');
   return data;
 }
+
+export async function getJokeCategories() {
+  const { data } = await axios.get(
+    'https://api.chucknorris.io/jokes/categories',
+  );
+  return data;
+}
+
+export async function getJoke(category) {
+  let url = 'https://api.chucknorris.io/jokes/random';
+
+  if (category) {
+    url += `?category=${category}`;
+  }
+
+  const { data } = await axios.get(url);
+  return data;
+}
