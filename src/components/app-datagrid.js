@@ -2,8 +2,8 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Grid } from 'ag-grid-community';
 import { stores } from '../stores';
-import './app-datagrid.css';
 import { addWatchReaction, clearReactions } from '../utils';
+import './app-datagrid.css';
 
 function createGridDiv() {
   const div = document.createElement('div');
@@ -34,7 +34,8 @@ function createGrid(gridDiv, rowData) {
     pagination: true,
     paginationPageSize: 10,
     domLayout: 'autoHeight',
-    onRowDataChanged: ({ columnApi }) => columnApi.autoSizeAllColumns(),
+    localeTextFunc,
+    onRowDataChanged,
   };
 
   return new Grid(gridDiv, gridOptions);
@@ -44,17 +45,27 @@ function headerValueGetter({ colDef }) {
   return stores.i18nStore.t(`datagrid.${colDef.field}`);
 }
 
+function localeTextFunc(key, defaultValue) {
+  return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
+}
+
+function onRowDataChanged({ columnApi }) {
+  columnApi.autoSizeAllColumns();
+}
+
 class AppDatagrid extends HTMLElement {
   connectedCallback() {
-    const gridDiv = createGridDiv();
-    const rowData = stores.datagridStore.rows;
-    this.grid = createGrid(gridDiv, rowData);
-    this.appendChild(gridDiv);
+    this.gridDiv = createGridDiv();
+    this.grid = createGrid(this.gridDiv, stores.datagridStore.rows);
+    this.appendChild(this.gridDiv);
 
     addWatchReaction(
       this,
       () => stores.i18nStore.locale,
-      () => this.gridApi?.refreshHeader(),
+      () => {
+        this.grid?.destroy();
+        this.grid = createGrid(this.gridDiv, stores.datagridStore.rows);
+      },
     );
 
     addWatchReaction(

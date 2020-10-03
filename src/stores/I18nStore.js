@@ -52,11 +52,11 @@ export default class I18nStore {
     this.locale = locale;
   }
 
-  t = (key, values) => {
+  t = (key, values, defaultValue) => {
     let template = this.localeResources[key];
 
     if (template == null) {
-      return key;
+      return defaultValue ?? key;
     }
 
     if (!values) {
