@@ -17,6 +17,7 @@ function createGrid(gridDiv, rowData) {
     sortable: true,
     filter: true,
     resizable: true,
+    floatingFilter: true,
   };
 
   const columnDefs = [
