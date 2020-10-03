@@ -32,3 +32,8 @@ export async function getJoke(category) {
   const { data } = await axios.get(url);
   return data;
 }
+
+export async function getDatagrid() {
+  const { data } = await axios.get('/data/datagrid.json');
+  return data;
+}

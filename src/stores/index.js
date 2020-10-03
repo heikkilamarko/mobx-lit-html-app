@@ -4,6 +4,7 @@ import RouteStore from './RouteStore';
 import BrowseStore from './BrowseStore';
 import CounterStore from './CounterStore';
 import JokesStore from './JokesStore';
+import DatagridStore from './DatagridStore';
 import WidgetsStore from './WidgetsStore';
 
 export const stores = {};
@@ -16,6 +17,7 @@ export async function createStores() {
   const browseStore = new BrowseStore();
   const counterStore = new CounterStore();
   const jokesStore = new JokesStore();
+  const datagridStore = new DatagridStore();
   const widgetsStore = new WidgetsStore(routeStore);
 
   routeStore.start();
@@ -26,6 +28,7 @@ export async function createStores() {
     browseStore,
     counterStore,
     jokesStore,
+    datagridStore,
     widgetsStore,
   });
 }

@@ -9,9 +9,9 @@ const I = Symbol('intervals');
 export function configureMobX() {
   configure({
     enforceActions: 'never',
+    observableRequiresReaction: false,
     computedRequiresReaction: true,
     reactionRequiresObservable: true,
-    observableRequiresReaction: true,
     isolateGlobalState: true,
   });
 }
