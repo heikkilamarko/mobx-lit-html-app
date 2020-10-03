@@ -80,6 +80,17 @@ class AppNavbar extends HTMLElement {
                   <a
                     class="${classMap({
                       'nav-link': true,
+                      active: route === 'datagrid',
+                    })}"
+                    @click="${(event) => this.navigate(event, 'datagrid')}"
+                    href="/jokes"
+                    >${t('datagrid')}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="${classMap({
+                      'nav-link': true,
                       active: route === 'widgets',
                     })}"
                     @click="${(event) => this.navigate(event, 'widgets')}"

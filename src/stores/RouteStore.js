@@ -7,8 +7,9 @@ const routes = [
   { name: 'browse', path: '/' },
   { name: 'detail', path: '/browse/:id' },
   { name: 'counter', path: '/counter' },
-  { name: 'widgets', path: '/widgets' },
   { name: 'jokes', path: '/jokes' },
+  { name: 'datagrid', path: '/datagrid' },
+  { name: 'widgets', path: '/widgets' },
 ];
 
 export default class RouteStore {

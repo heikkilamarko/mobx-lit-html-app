@@ -11,6 +11,7 @@
     "sass": "sass src:src --no-source-map"
   },
   "dependencies": {
+    "ag-grid-community": "24.0.0",
     "axios": "0.20.0",
     "bootstrap": "next",
     "lit-html": "next-major",

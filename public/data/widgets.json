@@ -19,6 +19,12 @@
   },
   {
     "id": 4,
+    "name": "Datagrid",
+    "tagName": "app-datagrid",
+    "props": {}
+  },
+  {
+    "id": 5,
     "name": "Unregistered",
     "tagName": "app-unregistered",
     "props": {}

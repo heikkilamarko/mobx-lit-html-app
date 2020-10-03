@@ -5,6 +5,7 @@ import './app-browse';
 import './app-detail';
 import './app-counter';
 import './app-jokes';
+import './app-datagrid';
 import './app-widgets';
 import './app-error';
 
@@ -30,6 +31,8 @@ class AppContent extends HTMLElement {
         return html`<app-counter></app-counter>`;
       case 'jokes':
         return html`<app-jokes></app-jokes>`;
+      case 'datagrid':
+        return html`<app-datagrid></app-datagrid>`;
       case 'widgets':
         return html`<app-widgets></app-widgets>`;
       default:
