@@ -72,7 +72,6 @@ class JokesStore {
       this.setError(null);
       const categories = await getJokeCategories();
       this.setCategories(categories);
-      this.getJoke(categories[0]);
     } catch (error) {
       this.setError(error);
     } finally {
