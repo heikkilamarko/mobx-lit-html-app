@@ -1,6 +1,7 @@
 import { html, nothing } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
+import './app-joke';
 import './app-jokes.css';
 
 class AppJokes extends HTMLElement {
@@ -41,7 +42,7 @@ class AppJokes extends HTMLElement {
                   ${t('jokes.get')}
                 </button>
               </div>
-              <h1 class="display-6">${stores.jokesStore.jokeText}</h1>
+              <app-joke .text=${stores.jokesStore.jokeText}></app-joke>
             </div>
           `
         : nothing,
