@@ -18,6 +18,7 @@ function createGrid(gridDiv, rowData) {
     filter: true,
     resizable: true,
     floatingFilter: true,
+    filterParams: { newRowsAction: 'keep' },
   };
 
   const columnDefs = [
@@ -36,8 +37,7 @@ function createGrid(gridDiv, rowData) {
     paginationPageSize: 10,
     domLayout: 'autoHeight',
     localeTextFunc: localeTextFunc.bind(this),
-    onRowDataChanged: onRowDataChanged.bind(this),
-    onFirstDataRendered: onRowDataChanged.bind(this),
+    onFirstDataRendered: onFirstDataRendered.bind(this),
   };
 
   return new Grid(gridDiv, gridOptions);
@@ -51,10 +51,11 @@ function localeTextFunc(key, defaultValue) {
   return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
 }
 
-function onRowDataChanged({ api, columnApi }) {
-  const state = JSON.parse(sessionStorage.getItem('app-gridstate'));
+function onFirstDataRendered({ api, columnApi }) {
+  let state = sessionStorage.getItem('app-gridstate');
 
   if (state) {
+    state = JSON.parse(state);
     columnApi.setColumnState(state.columnState);
     api.setFilterModel(state.filterModel);
     api.paginationSetPageSize(state.pageSize);
@@ -67,7 +68,6 @@ function onRowDataChanged({ api, columnApi }) {
 class AppDatagrid extends HTMLElement {
   connectedCallback() {
     this.gridDiv = createGridDiv();
-    this.grid = createGrid(this.gridDiv, stores.datagridStore.rows);
     this.appendChild(this.gridDiv);
 
     addWatchReaction(
@@ -82,7 +82,13 @@ class AppDatagrid extends HTMLElement {
     addWatchReaction(
       this,
       () => stores.datagridStore.rows,
-      (rows) => this.gridApi?.setRowData(rows),
+      (rows) => {
+        if (!this.grid) {
+          this.grid = createGrid(this.gridDiv, rows);
+        } else {
+          this.gridApi.setRowData(rows);
+        }
+      },
     );
 
     stores.datagridStore.load();
@@ -90,6 +96,8 @@ class AppDatagrid extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+
+    if (!this.grid) return;
 
     sessionStorage.setItem(
       'app-gridstate',
@@ -106,11 +114,11 @@ class AppDatagrid extends HTMLElement {
   }
 
   get gridApi() {
-    return this.grid?.gridOptions.api;
+    return this.grid.gridOptions.api;
   }
 
   get gridColumnApi() {
-    return this.grid?.gridOptions.columnApi;
+    return this.grid.gridOptions.columnApi;
   }
 }
 
