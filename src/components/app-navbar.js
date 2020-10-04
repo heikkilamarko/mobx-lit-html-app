@@ -83,7 +83,7 @@ class AppNavbar extends HTMLElement {
                       active: route === 'datagrid',
                     })}"
                     @click="${(event) => this.navigate(event, 'datagrid')}"
-                    href="/jokes"
+                    href="/datagrid"
                     >${t('datagrid')}</a
                   >
                 </li>
