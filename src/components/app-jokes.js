@@ -47,7 +47,7 @@ class AppJokes extends HTMLElement {
                   ?disabled=${isLoading}
                   @click=${() => getJoke()}
                 >
-                  ${t('jokes.get')}
+                  ${t('jokes.tell')}
                 </button>
               </div>
               <app-joke .text=${jokeText}></app-joke>
