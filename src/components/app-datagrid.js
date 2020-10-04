@@ -59,9 +59,9 @@ function onRowDataChanged({ api, columnApi }) {
     api.setFilterModel(state.filterModel);
     api.paginationSetPageSize(state.pageSize);
     api.paginationGoToPage(state.currentPage);
+  } else {
+    columnApi.autoSizeAllColumns();
   }
-
-  columnApi.autoSizeAllColumns();
 }
 
 class AppDatagrid extends HTMLElement {
