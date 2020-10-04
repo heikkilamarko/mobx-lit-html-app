@@ -35,8 +35,9 @@ function createGrid(gridDiv, rowData) {
     pagination: true,
     paginationPageSize: 10,
     domLayout: 'autoHeight',
-    localeTextFunc,
-    onRowDataChanged,
+    localeTextFunc: localeTextFunc.bind(this),
+    onRowDataChanged: onRowDataChanged.bind(this),
+    onFirstDataRendered: onRowDataChanged.bind(this),
   };
 
   return new Grid(gridDiv, gridOptions);
@@ -50,7 +51,16 @@ function localeTextFunc(key, defaultValue) {
   return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
 }
 
-function onRowDataChanged({ columnApi }) {
+function onRowDataChanged({ api, columnApi }) {
+  const state = JSON.parse(sessionStorage.getItem('app-gridstate'));
+
+  if (state) {
+    columnApi.setColumnState(state.columnState);
+    api.setFilterModel(state.filterModel);
+    api.paginationSetPageSize(state.pageSize);
+    api.paginationGoToPage(state.currentPage);
+  }
+
   columnApi.autoSizeAllColumns();
 }
 
@@ -81,12 +91,26 @@ class AppDatagrid extends HTMLElement {
   disconnectedCallback() {
     clearReactions(this);
 
+    sessionStorage.setItem(
+      'app-gridstate',
+      JSON.stringify({
+        columnState: this.gridColumnApi.getColumnState(),
+        filterModel: this.gridApi.getFilterModel(),
+        pageSize: this.gridApi.paginationGetPageSize(),
+        currentPage: this.gridApi.paginationGetCurrentPage(),
+      }),
+    );
+
     this.grid?.destroy();
     this.grid = null;
   }
 
   get gridApi() {
     return this.grid?.gridOptions.api;
+  }
+
+  get gridColumnApi() {
+    return this.grid?.gridOptions.columnApi;
   }
 }
 
