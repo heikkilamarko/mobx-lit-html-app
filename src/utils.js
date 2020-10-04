@@ -93,3 +93,10 @@ export function analyticsPageview(path) {
     window.gtag('config', GA_MEASUREMENT_ID, { page_path: path });
   }
 }
+
+export function runDefaultPrevented(fn) {
+  return (event) => {
+    event.preventDefault();
+    return fn(event);
+  };
+}
