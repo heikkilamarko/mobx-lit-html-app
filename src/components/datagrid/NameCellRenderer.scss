@@ -1,0 +1,11 @@
+.app-name-cell-renderer {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1rem;
+    color: var(--bs-primary);
+  }
+}
