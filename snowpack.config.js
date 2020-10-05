@@ -29,13 +29,9 @@ module.exports = {
         extendConfig: (config) => {
           config.plugins.push(
             new CompressionPlugin({
-              filename: '[path][base].br',
-              algorithm: 'brotliCompress',
+              filename: '[path][base].gz',
+              algorithm: 'gzip',
               test: /\.(js|css|html|svg)$/,
-              compressionOptions: {
-                // zlib’s `level` option matches Brotli’s `BROTLI_PARAM_QUALITY` option.
-                level: 11,
-              },
               threshold: 0,
               minRatio: Infinity,
               deleteOriginalAssets: false,
