@@ -37,6 +37,7 @@ class AppCounter extends HTMLElement {
             </h1>
             <p class="card-text">${t('counter')}</p>
             <button
+              aria-label=${t('counter.decrement')}
               class="btn btn-link text-danger p-0 mr-4"
               ?disabled=${value === MIN_VALUE}
               @click="${() => this.handleDecrement()}"
@@ -44,6 +45,7 @@ class AppCounter extends HTMLElement {
               ${dashCircle('app-counter__icon')}
             </button>
             <button
+              aria-label=${t('counter.increment')}
               class="btn btn-link text-success p-0"
               ?disabled=${value === MAX_VALUE}
               @click="${() => this.handleIncrement()}"
@@ -51,6 +53,7 @@ class AppCounter extends HTMLElement {
               ${plusCircle('app-counter__icon')}
             </button>
             <button
+              aria-label=${t('counter.reset')}
               class="btn btn-link float-right p-0"
               ?disabled=${value === 0}
               @click=${() => this.handleReset()}
