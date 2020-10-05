@@ -47,7 +47,6 @@ class AppCounter extends HTMLElement {
                 aria-valuemax=${maxValue}
               ></div>
             </div>
-
             <button
               aria-label=${t('counter.decrement')}
               class="btn btn-link text-danger p-0 mr-4"
