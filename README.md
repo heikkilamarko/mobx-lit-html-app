@@ -4,7 +4,7 @@ This repository contains the source code of a simple web application written in 
 
 Build tool: [Snowpack](https://www.snowpack.dev/)
 
-See the app running [here](https://stmobxlithtmlapp.z6.web.core.windows.net/).
+See the app running [here](https://app-mobx-lit-html-app.azurewebsites.net/).
 
 ## Development
 
