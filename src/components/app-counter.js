@@ -7,15 +7,12 @@ import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
 import './app-counter.css';
 
-const MIN_VALUE = -10;
-const MAX_VALUE = 10;
-
 class AppCounter extends HTMLElement {
   connectedCallback() {
     const { t } = stores.i18nStore;
 
     addRenderReaction(this, () => {
-      const value = stores.counterStore.value;
+      const { value, progress, minValue, maxValue } = stores.counterStore;
 
       return html`
         <div class="card mx-auto app-counter">
@@ -25,21 +22,36 @@ class AppCounter extends HTMLElement {
                 'card-title': true,
                 'display-1': true,
                 'text-danger': value < 0,
+                'text-primary': value === 0,
                 'text-success': 0 < value,
               })}
             >
               ${value}
-              ${value === MIN_VALUE
+              ${value === minValue
                 ? html`<span class="text-muted display-6">min</span>`
-                : value === MAX_VALUE
+                : value === maxValue
                 ? html`<span class="text-muted display-6">max</span>`
                 : nothing}
             </h1>
-            <p class="card-text">${t('counter')}</p>
+            <div class="progress mb-5" style="height:4px">
+              <div
+                class=${classMap({
+                  'progress-bar': true,
+                  'bg-danger': value < 0,
+                  'bg-success': 0 < value,
+                })}
+                role="progressbar"
+                style="width: ${progress}%"
+                aria-valuenow=${value}
+                aria-valuemin=${minValue}
+                aria-valuemax=${maxValue}
+              ></div>
+            </div>
+
             <button
               aria-label=${t('counter.decrement')}
               class="btn btn-link text-danger p-0 mr-4"
-              ?disabled=${value === MIN_VALUE}
+              ?disabled=${value === minValue}
               @click="${() => this.handleDecrement()}"
             >
               ${dashCircle('app-counter__icon')}
@@ -47,7 +59,7 @@ class AppCounter extends HTMLElement {
             <button
               aria-label=${t('counter.increment')}
               class="btn btn-link text-success p-0"
-              ?disabled=${value === MAX_VALUE}
+              ?disabled=${value === maxValue}
               @click="${() => this.handleIncrement()}"
             >
               ${plusCircle('app-counter__icon')}
