@@ -36,6 +36,7 @@ class AppDetailCard extends HTMLElement {
               ${boxArrowUpRight('align-text-top ml-1')}
             </a>
             <button
+              aria-label=${t('browse.detail.back')}
               type="button"
               class="btn btn-light float-right"
               @click=${stores.routeStore.navigateBack}

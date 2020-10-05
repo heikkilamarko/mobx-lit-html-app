@@ -1,6 +1,7 @@
 {
   "en-US": {
     "browse": "Browse",
+    "browse.detail.back": "Navigate back",
     "browse.detail.homepage": "Homepage",
     "cancel": "Cancel",
     "counter": "Counter",
@@ -65,6 +66,7 @@
     "ag_grid.firstPage": "Ensimmäinen sivu",
     "ag_grid.previousPage": "Edellinen sivu",
     "browse": "Selaa",
+    "browse.detail.back": "Navigoi takaisin",
     "browse.detail.homepage": "Kotisivu",
     "cancel": "Peruuta",
     "counter": "Laskuri",
