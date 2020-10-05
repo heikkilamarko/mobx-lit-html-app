@@ -1,5 +1,6 @@
 {
   "name": "mobx-lit-html-app",
+  "description": "A simple web application written in MobX and lit-html",
   "repository": "heikkilamarko/mobx-lit-html-app",
   "author": "Marko Heikkilä",
   "license": "MIT",
