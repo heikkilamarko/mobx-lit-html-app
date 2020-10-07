@@ -25,6 +25,12 @@
   },
   {
     "id": 5,
+    "name": "Charts",
+    "tagName": "app-charts",
+    "props": {}
+  },
+  {
+    "id": 6,
     "name": "Unregistered",
     "tagName": "app-unregistered",
     "props": {}

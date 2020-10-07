@@ -37,6 +37,12 @@ const NAV_ITEMS = [
     clickFn: () => stores.routeStore.navigate('datagrid'),
   },
   {
+    titleKey: 'charts',
+    activeRouteNames: ['charts'],
+    hrefFn: () => '/charts',
+    clickFn: () => stores.routeStore.navigate('charts'),
+  },
+  {
     titleKey: 'widgets',
     activeRouteNames: ['widgets'],
     hrefFn: () => stores.widgetsStore.widgetRoute,

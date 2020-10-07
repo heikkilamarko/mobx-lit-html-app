@@ -6,6 +6,7 @@ import './app-detail';
 import './app-counter';
 import './app-jokes';
 import './app-datagrid';
+import './app-charts';
 import './app-widgets';
 import './app-error';
 
@@ -33,6 +34,8 @@ class AppContent extends HTMLElement {
         return html`<app-jokes></app-jokes>`;
       case 'datagrid':
         return html`<app-datagrid></app-datagrid>`;
+      case 'charts':
+        return html`<app-charts></app-charts>`;
       case 'widgets':
         return html`<app-widgets></app-widgets>`;
       default:

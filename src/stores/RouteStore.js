@@ -9,6 +9,7 @@ const routes = [
   { name: 'counter', path: '/counter' },
   { name: 'jokes', path: '/jokes' },
   { name: 'datagrid', path: '/datagrid' },
+  { name: 'charts', path: '/charts' },
   { name: 'widgets', path: '/widgets' },
 ];
 

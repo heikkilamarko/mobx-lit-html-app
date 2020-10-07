@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "ag-grid-community": "24.0.0",
+    "apexcharts": "3.22.0",
     "axios": "0.20.0",
     "bootstrap": "next",
     "lit-html": "next-major",
