@@ -51,7 +51,7 @@ class AppCounter extends HTMLElement {
               aria-label=${t('counter.decrement')}
               class="btn btn-link text-danger p-0 mr-4"
               ?disabled=${value === minValue}
-              @click="${() => this.handleDecrement()}"
+              @click="${this.handleDecrement}"
             >
               ${dashCircle('app-counter__icon')}
             </button>
@@ -59,7 +59,7 @@ class AppCounter extends HTMLElement {
               aria-label=${t('counter.increment')}
               class="btn btn-link text-success p-0"
               ?disabled=${value === maxValue}
-              @click="${() => this.handleIncrement()}"
+              @click="${this.handleIncrement}"
             >
               ${plusCircle('app-counter__icon')}
             </button>
@@ -67,15 +67,13 @@ class AppCounter extends HTMLElement {
               aria-label=${t('counter.reset')}
               class="btn btn-link float-right p-0"
               ?disabled=${value === 0}
-              @click=${() => this.handleReset()}
+              @click=${this.handleReset}
             >
               ${xCircle('app-counter__icon')}
             </button>
           </div>
         </div>
-        <app-counter-modal
-          @ok=${() => this.handleResetOk()}
-        ></app-counter-modal>
+        <app-counter-modal @ok=${this.handleResetOk}></app-counter-modal>
       `;
     });
   }

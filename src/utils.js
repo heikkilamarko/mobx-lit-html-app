@@ -61,7 +61,10 @@ export function addReaction(target, reactionDisposer) {
 export function addRenderReaction(target, templateFn, options = undefined) {
   addReaction(
     target,
-    autorun(() => render(templateFn(), target), options),
+    autorun(
+      () => render(templateFn(), target, { eventContext: target }),
+      options,
+    ),
   );
 }
 

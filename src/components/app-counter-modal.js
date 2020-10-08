@@ -35,7 +35,7 @@ class AppCounterModal extends HTMLElement {
                 <button
                   type="button"
                   class="btn btn-primary"
-                  @click=${() => this.handleOk()}
+                  @click=${this.handleOk}
                 >
                   ${t('ok')}
                 </button>
