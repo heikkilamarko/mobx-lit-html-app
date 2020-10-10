@@ -1,10 +1,11 @@
 {
-  "en-US": {
+  "en": {
     "browse": "Browse",
     "browse.detail.back": "Navigate back",
     "browse.detail.homepage": "Homepage",
     "cancel": "Cancel",
     "charts": "Charts",
+    "charts.sales": "Sales",
     "counter": "Counter",
     "counter.decrement": "Decrement",
     "counter.increment": "Increment",
@@ -27,7 +28,7 @@
     "widgets.select.placeholder": "Select widget..."
   },
 
-  "fi-FI": {
+  "fi": {
     "ag_grid.loadingOoo": "Ladataan...",
     "ag_grid.noRowsToShow": "Ei rivejä näytettäväksi",
     "ag_grid.enabled": "Käytössä",
@@ -71,6 +72,7 @@
     "browse.detail.homepage": "Kotisivu",
     "cancel": "Peruuta",
     "charts": "Kuvaajat",
+    "charts.sales": "Myynti",
     "counter": "Laskuri",
     "counter.decrement": "Pienennä",
     "counter.increment": "Suurenna",

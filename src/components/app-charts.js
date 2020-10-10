@@ -1,27 +1,47 @@
 import ApexCharts from 'apexcharts';
-
-function createChartDiv() {
-  return document.createElement('div');
-}
+import en from 'apexcharts/dist/locales/en.json';
+import fi from 'apexcharts/dist/locales/fi.json';
+import { stores } from '../stores';
+import { addWatchReaction, clearReactions } from '../utils';
 
 class AppCharts extends HTMLElement {
   connectedCallback() {
-    this.chartDiv = createChartDiv();
+    this.chartDiv = document.createElement('div');
     this.appendChild(this.chartDiv);
 
-    var options = {
+    addWatchReaction(
+      this,
+      () => stores.i18nStore.locale,
+      () => this.createChart(),
+      { fireImmediately: true },
+    );
+  }
+
+  disconnectedCallback() {
+    clearReactions(this);
+
+    this.chart?.destroy();
+    this.chart = null;
+  }
+
+  createChart() {
+    const { locale, t } = stores.i18nStore;
+
+    const options = {
       chart: {
+        locales: [en, fi],
+        defaultLocale: locale,
         type: 'line',
         zoom: {
           enabled: false,
         },
         toolbar: {
-          show: false,
+          show: true,
         },
       },
       series: [
         {
-          name: 'sales',
+          name: t('charts.sales'),
           data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
         },
       ],
@@ -30,12 +50,9 @@ class AppCharts extends HTMLElement {
       },
     };
 
+    this.chart?.destroy();
     this.chart = new ApexCharts(this.chartDiv, options);
     this.chart.render();
-  }
-
-  disconnectedCallback() {
-    this.chart?.destroy();
   }
 }
 

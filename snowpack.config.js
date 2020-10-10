@@ -7,8 +7,6 @@ module.exports = {
   },
   plugins: [
     [
-      // TODO: Migrate to @snowpack/plugin-sass when published
-      // https://github.com/pikapkg/snowpack/tree/master/plugins/plugin-sass
       '@snowpack/plugin-run-script',
       {
         cmd: 'sass src:src --no-source-map',
