@@ -103,3 +103,10 @@ export function runDefaultPrevented(fn) {
     return fn(event);
   };
 }
+
+export function getPrimaryColor() {
+  return window
+    .getComputedStyle(document.body)
+    .getPropertyValue('--bs-primary')
+    .trim();
+}

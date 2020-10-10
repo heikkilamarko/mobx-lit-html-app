@@ -2,7 +2,7 @@ import ApexCharts from 'apexcharts';
 import en from 'apexcharts/dist/locales/en.json';
 import fi from 'apexcharts/dist/locales/fi.json';
 import { stores } from '../stores';
-import { addWatchReaction, clearReactions } from '../utils';
+import { addWatchReaction, clearReactions, getPrimaryColor } from '../utils';
 
 class AppCharts extends HTMLElement {
   connectedCallback() {
@@ -28,6 +28,7 @@ class AppCharts extends HTMLElement {
     const { locale, t } = stores.i18nStore;
 
     const options = {
+      colors: [getPrimaryColor()],
       chart: {
         locales: [en, fi],
         defaultLocale: locale,
