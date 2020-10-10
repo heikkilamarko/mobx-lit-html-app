@@ -20,9 +20,8 @@ export default class I18nStore {
 
     reaction(
       () => this.locale,
-      (l) => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, l);
-      },
+      (l) => localStorage.setItem(LOCAL_STORAGE_KEY, l),
+      { fireImmediately: true },
     );
   }
 
@@ -43,10 +42,10 @@ export default class I18nStore {
       throw new Error('Locales are not loaded yet.');
     }
 
-    locale ??= localStorage.getItem(LOCAL_STORAGE_KEY) || this.locales[0];
+    locale ??= localStorage.getItem(LOCAL_STORAGE_KEY);
 
     if (!this.locales.includes(locale)) {
-      throw new Error(`Locale '${locale}' is not supported.`);
+      locale = this.locales[0];
     }
 
     this.locale = locale;
