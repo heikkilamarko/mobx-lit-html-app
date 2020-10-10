@@ -1,0 +1,7 @@
+:root {
+  --app-card-shadow: #{$box-shadow};
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  font-weight: 500;
+}

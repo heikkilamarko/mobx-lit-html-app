@@ -1,4 +1,4 @@
-@import './styles/bootstrap-overrides';
+@import './styles/bootstrap';
 
 @import '../node_modules/bootstrap/scss/functions';
 @import '../node_modules/bootstrap/scss/variables';
@@ -38,5 +38,5 @@
 @import '../node_modules/ag-grid-community/dist/styles/ag-grid';
 @import '../node_modules/ag-grid-community/dist/styles/ag-theme-alpine/sass/_ag-theme-alpine-mixin';
 
-@import './styles/bootstrap';
 @import './styles/ag-grid';
+@import './styles/app';
