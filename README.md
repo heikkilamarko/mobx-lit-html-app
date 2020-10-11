@@ -31,3 +31,10 @@ See the app running [here](https://app-mobx-lit-html-app.azurewebsites.net/).
 ```bash
 > npx serve -s build
 ```
+
+## Run as Docker container
+
+```bash
+> docker-compose up --build
+> open http://localhost:5000
+```
