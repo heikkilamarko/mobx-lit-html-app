@@ -62,8 +62,8 @@ export default class I18nStore {
       return template;
     }
 
-    for (const key in values) {
-      template = template.replace(`{${key}}`, values[key]);
+    for (const [key, value] of Object.entries(values)) {
+      template = template.replace(`{${key}}`, value);
     }
 
     return template;
