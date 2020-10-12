@@ -7,8 +7,8 @@
   "scripts": {
     "start": "snowpack dev --reload",
     "build": "snowpack build --clean",
-    "format": "prettier --write \"src/**/*.{js,scss}\"",
-    "lint": "prettier --check \"src/**/*.{js,scss}\"",
+    "format": "prettier --write \"{src,public}/**/*.{js,scss,json}\"",
+    "lint": "prettier --check \"{src,public}/**/*.{js,scss,json}\"",
     "sass": "sass src:src --no-source-map"
   },
   "dependencies": {
