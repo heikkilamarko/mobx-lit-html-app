@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import './app-joke';
-import './app-jokes.css';
+import './app-jokes.scss';
 
 class AppJokes extends HTMLElement {
   connectedCallback() {

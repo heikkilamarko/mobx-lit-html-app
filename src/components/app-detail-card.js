@@ -3,7 +3,7 @@ import { makeObservable, observable } from 'mobx';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import { arrowLeft, boxArrowUpRight } from './icons';
-import './app-detail-card.css';
+import './app-detail-card.scss';
 
 class AppDetailCard extends HTMLElement {
   data;

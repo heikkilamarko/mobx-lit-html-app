@@ -3,7 +3,7 @@ import 'bootstrap/js/dist/collapse';
 import { createStores } from './stores';
 import { configureMobX, renderApp, renderAppStartupError } from './utils';
 import './components/app-root';
-import './index.css';
+import './index.scss';
 
 async function startup() {
   try {

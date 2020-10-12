@@ -5,7 +5,7 @@ import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
 import './app-counter-modal';
-import './app-counter.css';
+import './app-counter.scss';
 
 class AppCounter extends HTMLElement {
   connectedCallback() {

@@ -2,7 +2,7 @@ import { Grid } from 'ag-grid-community';
 import { stores } from '../stores';
 import { addWatchReaction, clearReactions } from '../utils';
 import NameCellRenderer from './datagrid/NameCellRenderer';
-import './app-datagrid.css';
+import './app-datagrid.scss';
 
 function createGridDiv() {
   const div = document.createElement('div');

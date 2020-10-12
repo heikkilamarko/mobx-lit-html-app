@@ -6,13 +6,7 @@ module.exports = {
     src: '/_dist_',
   },
   plugins: [
-    [
-      '@snowpack/plugin-run-script',
-      {
-        cmd: 'sass src:src --no-source-map',
-        watch: '$1 --watch',
-      },
-    ],
+    '@snowpack/plugin-sass',
     '@snowpack/plugin-postcss',
     '@snowpack/plugin-babel',
     '@snowpack/plugin-dotenv',

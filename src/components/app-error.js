@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
-import './app-error.css';
+import './app-error.scss';
 
 class AppError extends HTMLElement {
   title;

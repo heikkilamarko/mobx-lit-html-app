@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
 import { addRenderReaction, clearReactions } from '../utils';
-import './app-browse-card.css';
+import './app-browse-card.scss';
 
 class AppBrowseCard extends HTMLElement {
   data;

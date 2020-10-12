@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import { stores } from '../stores';
 import { addWatchReaction, addRenderReaction, clearReactions } from '../utils';
 import './app-error';
-import './app-widgets.css';
+import './app-widgets.scss';
 
 class AppWidgets extends HTMLElement {
   connectedCallback() {
