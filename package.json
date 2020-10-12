@@ -29,13 +29,13 @@
     "@snowpack/plugin-dotenv": "2.0.3",
     "@snowpack/plugin-postcss": "1.0.5",
     "@snowpack/plugin-run-script": "2.1.5",
-    "@snowpack/plugin-webpack": "2.0.15",
+    "@snowpack/plugin-webpack": "2.0.16",
     "autoprefixer": "10.0.1",
     "compression-webpack-plugin": "6.0.3",
     "postcss": "8.1.1",
     "postcss-cli": "8.1.0",
     "prettier": "2.1.2",
     "sass": "1.27.0",
-    "snowpack": "2.13.3"
+    "snowpack": "2.14.0"
   }
 }
