@@ -23,12 +23,7 @@ class AppBrowseCard extends HTMLElement {
         >
           <div class="card-body">
             <h4 class="card-title text-truncate">${this.data.name}</h4>
-            <img
-              src="${this.data.logo_url}"
-              width="90%"
-              height="100"
-              alt="logo"
-            />
+            <img src="${this.data.logo_url}" alt="logo" />
           </div>
         </a>
       `,
