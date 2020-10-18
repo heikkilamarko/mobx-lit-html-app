@@ -1,6 +1,6 @@
 # Build
 
-FROM node:12.18.4-slim AS build
+FROM node:14.14.0 AS build
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN rm -rf build/__snowpack__ build/_dist_ build/web_modules
 
 # Runtime
 
-FROM nginx:alpine AS runtime
+FROM nginx:1.19.3-alpine AS runtime
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
