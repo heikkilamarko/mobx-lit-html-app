@@ -12,6 +12,7 @@ export default class I18nStore {
       locale: observable.ref,
       localeResources: computed,
       locales: computed,
+      localesExcludeCurrent: computed,
       setResources: action.bound,
       setLocale: action.bound,
     });
@@ -31,6 +32,10 @@ export default class I18nStore {
 
   get locales() {
     return Object.keys(this.resources);
+  }
+
+  get localesExcludeCurrent() {
+    return this.locales.filter((l) => l !== this.locale);
   }
 
   setResources(resources) {
