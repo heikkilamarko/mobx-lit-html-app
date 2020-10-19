@@ -8,7 +8,7 @@ class AppRoot extends HTMLElement {
     render(
       html`
         <app-navbar></app-navbar>
-        <app-content class="overflow-auto"></app-content>
+        <app-content></app-content>
       `,
       this,
     );
