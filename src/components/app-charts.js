@@ -5,7 +5,7 @@ import en from 'apexcharts/dist/locales/en.json';
 import fi from 'apexcharts/dist/locales/fi.json';
 import { stores } from '../stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
-import './app-charts.css';
+import './app-charts.scss';
 
 function createChartDiv() {
   const div = document.createElement('div');
