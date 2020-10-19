@@ -7,11 +7,11 @@ This repository contains the source code of a simple responsive web application 
 - [Bootstrap](https://getbootstrap.com/)
 - [Router5](https://router5.js.org/)
 - [ag-Grid](https://www.ag-grid.com/)
-- [ApexCharts](https://apexcharts.com/).
+- [ApexCharts](https://apexcharts.com/)
 
 Build tool: [Snowpack](https://www.snowpack.dev/)
 
-See the app running [here](https://app-mobx-lit-html-app.azurewebsites.net/).
+See the app running [here](https://app-mobx-lit-html-app.azurewebsites.net/) 🚀
 
 ## Development
 

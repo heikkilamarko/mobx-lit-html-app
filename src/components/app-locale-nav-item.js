@@ -5,7 +5,7 @@ import { addRenderReaction, clearReactions } from '../utils';
 class AppLocaleNavItem extends HTMLLIElement {
   connectedCallback() {
     addRenderReaction(this, () => {
-      const { locale, locales } = stores.i18nStore;
+      const { locale, localesExcludeCurrent } = stores.i18nStore;
 
       return html`
         <a
@@ -19,7 +19,7 @@ class AppLocaleNavItem extends HTMLLIElement {
           ${locale}
         </a>
         <ul class="dropdown-menu" aria-labelledby="localeDropdown">
-          ${locales.map(
+          ${localesExcludeCurrent.map(
             (l) => html`
               <li>
                 <a

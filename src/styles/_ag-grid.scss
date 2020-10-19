@@ -2,6 +2,7 @@
   @include ag-theme-alpine(
     (
       alpine-active-color: $primary,
+      range-selection-border-color: $primary,
     )
   );
 }
