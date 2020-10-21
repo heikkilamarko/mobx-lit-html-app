@@ -97,10 +97,10 @@ export function analyticsPageview(path) {
   }
 }
 
-export function runDefaultPrevented(fn) {
-  return (event) => {
+export function preventDefault(fn) {
+  return function (event) {
     event.preventDefault();
-    return fn(event);
+    return fn.call(this, event);
   };
 }
 

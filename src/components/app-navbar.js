@@ -1,11 +1,7 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { stores } from '../stores';
-import {
-  addRenderReaction,
-  clearReactions,
-  runDefaultPrevented as rdp,
-} from '../utils';
+import { addRenderReaction, clearReactions, preventDefault } from '../utils';
 import './app-locale-nav-item';
 import './app-clock';
 
@@ -61,7 +57,7 @@ function navItem({ titleKey, activeRouteNames, hrefFn, clickFn }) {
           'nav-link': true,
           active: activeRouteNames.includes(route),
         })}"
-        @click=${rdp(clickFn)}
+        @click=${preventDefault(clickFn)}
         href=${hrefFn()}
         >${t(titleKey)}</a
       >
@@ -77,7 +73,9 @@ class AppNavbar extends HTMLElement {
           <div class="container-fluid">
             <a
               class="navbar-brand"
-              @click="${rdp(() => stores.routeStore.navigate('browse'))}"
+              @click="${preventDefault(() =>
+                stores.routeStore.navigate('browse'),
+              )}"
               href="/"
             >
               <img
