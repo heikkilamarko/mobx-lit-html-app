@@ -23,6 +23,7 @@ export default class RouteStore {
     makeObservable(this, {
       route: observable.ref,
       previousRoute: observable.ref,
+      routeName: computed,
       isNotFoundRoute: computed,
       setRoute: action.bound,
     });
@@ -39,8 +40,12 @@ export default class RouteStore {
     );
   }
 
+  get routeName() {
+    return this.route?.name;
+  }
+
   get isNotFoundRoute() {
-    return this.route?.name === constants.UNKNOWN_ROUTE;
+    return this.routeName === constants.UNKNOWN_ROUTE;
   }
 
   setRoute({ route, previousRoute }) {

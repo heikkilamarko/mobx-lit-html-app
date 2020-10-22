@@ -8,64 +8,62 @@ import './app-clock';
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
 function navItems() {
-  const { routeStore: r, widgetsStore: w } = stores;
+  const {
+    routeStore: r,
+    widgetsStore: w,
+    i18nStore: { t },
+  } = stores;
 
   const id = w.widgetId ?? undefined;
 
   return [
     {
-      titleKey: 'browse',
-      activeRouteNames: ['browse', 'detail'],
+      title: t('browse'),
+      active: ['browse', 'detail'].includes(r.routeName),
       href: r.buildPath('browse'),
       handleClick: () => r.navigate('browse'),
     },
     {
-      titleKey: 'counter',
-      activeRouteNames: ['counter'],
+      title: t('counter'),
+      active: ['counter'].includes(r.routeName),
       href: r.buildPath('counter'),
       handleClick: () => r.navigate('counter'),
     },
     {
-      titleKey: 'jokes',
-      activeRouteNames: ['jokes'],
+      title: t('jokes'),
+      active: ['jokes'].includes(r.routeName),
       href: r.buildPath('jokes'),
       handleClick: () => r.navigate('jokes'),
     },
     {
-      titleKey: 'datagrid',
-      activeRouteNames: ['datagrid'],
+      title: t('datagrid'),
+      active: ['datagrid'].includes(r.routeName),
       href: r.buildPath('datagrid'),
       handleClick: () => r.navigate('datagrid'),
     },
     {
-      titleKey: 'charts',
-      activeRouteNames: ['charts'],
+      title: t('charts'),
+      active: ['charts'].includes(r.routeName),
       href: r.buildPath('charts'),
       handleClick: () => r.navigate('charts'),
     },
     {
-      titleKey: 'widgets',
-      activeRouteNames: ['widgets'],
+      title: t('widgets'),
+      active: ['widgets'].includes(r.routeName),
       href: r.buildPath('widgets', { id }),
       handleClick: () => r.navigate('widgets', { id }),
     },
   ].map(navItem);
 }
 
-function navItem({ titleKey, activeRouteNames, href, handleClick }) {
-  const { t } = stores.i18nStore;
-  const routeName = stores.routeStore.route.name;
-
+function navItem({ title, active, href, handleClick }) {
   return html`
     <li class="nav-item">
       <a
-        class="${classMap({
-          'nav-link': true,
-          active: activeRouteNames.includes(routeName),
-        })}"
+        class=${classMap({ 'nav-link': true, active })}
         href=${href}
         @click=${preventDefault(handleClick)}
-        >${t(titleKey)}</a
+        >${title}</a
       >
     </li>
   `;
