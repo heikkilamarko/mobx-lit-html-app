@@ -41,8 +41,14 @@ const NAV_ITEMS = [
   {
     titleKey: 'widgets',
     activeRouteNames: ['widgets'],
-    hrefFn: () => stores.widgetsStore.widgetRoute,
-    clickFn: () => stores.widgetsStore.navigate(),
+    hrefFn: () =>
+      stores.routeStore.buildPath('widgets', {
+        id: stores.widgetsStore.widgetId ?? undefined,
+      }),
+    clickFn: () =>
+      stores.routeStore.navigate('widgets', {
+        id: stores.widgetsStore.widgetId ?? undefined,
+      }),
   },
 ];
 

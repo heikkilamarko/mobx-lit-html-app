@@ -83,7 +83,8 @@ class AppWidgets extends HTMLElement {
   }
 
   handleWidgetChange(event) {
-    stores.widgetsStore.navigate(+event.target.value);
+    const id = stores.widgetsStore.parseWidgetId(event.target.value);
+    stores.routeStore.navigate('widgets', id ? { id } : undefined);
   }
 }
 

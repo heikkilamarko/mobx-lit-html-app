@@ -68,4 +68,8 @@ export default class RouteStore {
   navigateBack() {
     history.back();
   }
+
+  buildPath(routeName, routeParams) {
+    return this.router.buildPath(routeName, routeParams);
+  }
 }

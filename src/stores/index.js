@@ -18,7 +18,7 @@ export async function createStores() {
   const counterStore = new CounterStore();
   const jokesStore = new JokesStore();
   const datagridStore = new DatagridStore();
-  const widgetsStore = new WidgetsStore(routeStore);
+  const widgetsStore = new WidgetsStore();
 
   routeStore.start();
 
