@@ -59,6 +59,7 @@ export default class WidgetsStore {
 
   async load(refresh = false) {
     if (this.hasWidgets && !refresh) return;
+
     try {
       this.setError(null);
       this.setLoading(true);
