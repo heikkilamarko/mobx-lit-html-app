@@ -7,64 +7,64 @@ import './app-clock';
 
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
-const NAV_ITEMS = [
-  {
-    titleKey: 'browse',
-    activeRouteNames: ['browse', 'detail'],
-    hrefFn: () => '/browse',
-    clickFn: () => stores.routeStore.navigate('browse'),
-  },
-  {
-    titleKey: 'counter',
-    activeRouteNames: ['counter'],
-    hrefFn: () => '/counter',
-    clickFn: () => stores.routeStore.navigate('counter'),
-  },
-  {
-    titleKey: 'jokes',
-    activeRouteNames: ['jokes'],
-    hrefFn: () => '/jokes',
-    clickFn: () => stores.routeStore.navigate('jokes'),
-  },
-  {
-    titleKey: 'datagrid',
-    activeRouteNames: ['datagrid'],
-    hrefFn: () => '/datagrid',
-    clickFn: () => stores.routeStore.navigate('datagrid'),
-  },
-  {
-    titleKey: 'charts',
-    activeRouteNames: ['charts'],
-    hrefFn: () => '/charts',
-    clickFn: () => stores.routeStore.navigate('charts'),
-  },
-  {
-    titleKey: 'widgets',
-    activeRouteNames: ['widgets'],
-    hrefFn: () =>
-      stores.routeStore.buildPath('widgets', {
-        id: stores.widgetsStore.widgetId ?? undefined,
-      }),
-    clickFn: () =>
-      stores.routeStore.navigate('widgets', {
-        id: stores.widgetsStore.widgetId ?? undefined,
-      }),
-  },
-];
+function navItems() {
+  const { routeStore: r, widgetsStore: w } = stores;
 
-function navItem({ titleKey, activeRouteNames, hrefFn, clickFn }) {
+  const id = w.widgetId ?? undefined;
+
+  return [
+    {
+      titleKey: 'browse',
+      activeRouteNames: ['browse', 'detail'],
+      href: r.buildPath('browse'),
+      handleClick: () => r.navigate('browse'),
+    },
+    {
+      titleKey: 'counter',
+      activeRouteNames: ['counter'],
+      href: r.buildPath('counter'),
+      handleClick: () => r.navigate('counter'),
+    },
+    {
+      titleKey: 'jokes',
+      activeRouteNames: ['jokes'],
+      href: r.buildPath('jokes'),
+      handleClick: () => r.navigate('jokes'),
+    },
+    {
+      titleKey: 'datagrid',
+      activeRouteNames: ['datagrid'],
+      href: r.buildPath('datagrid'),
+      handleClick: () => r.navigate('datagrid'),
+    },
+    {
+      titleKey: 'charts',
+      activeRouteNames: ['charts'],
+      href: r.buildPath('charts'),
+      handleClick: () => r.navigate('charts'),
+    },
+    {
+      titleKey: 'widgets',
+      activeRouteNames: ['widgets'],
+      href: r.buildPath('widgets', { id }),
+      handleClick: () => r.navigate('widgets', { id }),
+    },
+  ].map(navItem);
+}
+
+function navItem({ titleKey, activeRouteNames, href, handleClick }) {
   const { t } = stores.i18nStore;
-  const route = stores.routeStore.route.name;
+  const routeName = stores.routeStore.route.name;
 
   return html`
     <li class="nav-item">
       <a
         class="${classMap({
           'nav-link': true,
-          active: activeRouteNames.includes(route),
+          active: activeRouteNames.includes(routeName),
         })}"
-        @click=${preventDefault(clickFn)}
-        href=${hrefFn()}
+        href=${href}
+        @click=${preventDefault(handleClick)}
         >${t(titleKey)}</a
       >
     </li>
@@ -106,7 +106,7 @@ class AppNavbar extends HTMLElement {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
-                ${NAV_ITEMS.map(navItem)}
+                ${navItems()}
               </ul>
               <div class="d-flex text-white py-2 mx-auto">
                 <app-clock></app-clock>

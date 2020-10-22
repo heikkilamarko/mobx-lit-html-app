@@ -78,7 +78,7 @@ export function addWatchReaction(
 }
 
 export function clearReactions(target) {
-  target[R] && target[R].forEach((r) => r());
+  target[R]?.forEach((r) => r());
   target[R] = [];
 }
 
@@ -87,7 +87,7 @@ export function addInterval(target, fn, delay) {
 }
 
 export function clearIntervals(target) {
-  target[I] && target[I].forEach((h) => clearInterval(h));
+  target[I]?.forEach((h) => clearInterval(h));
   target[I] = [];
 }
 
