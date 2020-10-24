@@ -1,5 +1,6 @@
 import { getResources } from '../api';
 import I18nStore from './I18nStore';
+import ToastStore from './ToastStore';
 import RouteStore from './RouteStore';
 import BrowseStore from './BrowseStore';
 import CounterStore from './CounterStore';
@@ -13,6 +14,7 @@ export async function createStores() {
   const resources = await getResources();
 
   const i18nStore = new I18nStore(resources);
+  const toastStore = new ToastStore();
   const routeStore = new RouteStore();
   const browseStore = new BrowseStore();
   const counterStore = new CounterStore();
@@ -24,6 +26,7 @@ export async function createStores() {
 
   Object.assign(stores, {
     i18nStore,
+    toastStore,
     routeStore,
     browseStore,
     counterStore,

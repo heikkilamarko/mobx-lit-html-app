@@ -102,6 +102,10 @@ class AppCounter extends HTMLElement {
   handleResetOk() {
     this.modal?.hide();
     stores.counterStore.reset();
+
+    stores.toastStore.showSuccess({
+      message: stores.i18nStore.t('counter.toast.message'),
+    });
   }
 }
 
