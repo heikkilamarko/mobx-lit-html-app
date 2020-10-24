@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
+import './app-toast.css';
 
 class AppToast extends HTMLElement {
   connectedCallback() {
@@ -9,8 +10,7 @@ class AppToast extends HTMLElement {
 
       return html`
         <div
-          class="toast position-fixed text-white bg-${toast.type} border-0"
-          style="bottom:1rem;right:1rem"
+          class="toast position-fixed bottom-0 right-0 border-0 m-3 px-2 py-1 text-white bg-${toast.type}"
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
@@ -21,7 +21,6 @@ class AppToast extends HTMLElement {
             <button
               type="button"
               class="btn-close btn-close-white ml-auto mr-2"
-              style="flex:1 0 auto"
               data-dismiss="toast"
               aria-label="Close"
             ></button>
