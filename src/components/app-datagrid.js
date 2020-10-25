@@ -13,6 +13,7 @@ function createGridDiv() {
 function createGrid(gridDiv, rowData) {
   const defaultColDef = {
     headerValueGetter,
+    lockVisible: true,
     sortable: true,
     filter: true,
     resizable: true,
