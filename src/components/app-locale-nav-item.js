@@ -18,7 +18,10 @@ class AppLocaleNavItem extends HTMLElement {
         >
           ${locale}
         </a>
-        <ul class="dropdown-menu" aria-labelledby="localeDropdown">
+        <ul
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="localeDropdown"
+        >
           ${localesExcludeCurrent.map(
             (l) => html`
               <li>
