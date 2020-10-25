@@ -110,7 +110,9 @@ class AppNavbar extends HTMLElement {
                 <app-clock></app-clock>
               </div>
               <ul class="navbar-nav">
-                <li is="app-locale-nav-item" class="nav-item dropdown"></li>
+                <app-locale-nav-item
+                  class="nav-item dropdown"
+                ></app-locale-nav-item>
                 <li class="nav-item">
                   <a
                     class="nav-link"
