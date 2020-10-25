@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 
-class AppLocaleNavItem extends HTMLElement {
+class AppLocalePicker extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this, () => {
       const { locale, localesExcludeCurrent } = stores.i18nStore;
@@ -49,4 +49,4 @@ class AppLocaleNavItem extends HTMLElement {
   }
 }
 
-customElements.define('app-locale-nav-item', AppLocaleNavItem);
+customElements.define('app-locale-picker', AppLocalePicker);

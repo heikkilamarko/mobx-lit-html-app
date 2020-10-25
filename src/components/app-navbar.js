@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions, preventDefault } from '../utils';
-import './app-locale-nav-item';
+import './app-locale-picker';
 import './app-clock';
 
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
@@ -111,7 +111,7 @@ class AppNavbar extends HTMLElement {
               </div>
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <app-locale-nav-item></app-locale-nav-item>
+                  <app-locale-picker></app-locale-picker>
                 </li>
                 <li class="nav-item">
                   <a
