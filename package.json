@@ -31,7 +31,7 @@
     "@snowpack/plugin-run-script": "2.1.7",
     "@snowpack/plugin-webpack": "2.0.17",
     "autoprefixer": "10.0.1",
-    "compression-webpack-plugin": "6.0.3",
+    "compression-webpack-plugin": "6.0.4",
     "postcss": "8.1.4",
     "postcss-cli": "8.1.0",
     "prettier": "2.1.2",
