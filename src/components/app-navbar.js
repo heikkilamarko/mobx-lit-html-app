@@ -48,6 +48,12 @@ function navItems() {
       handleClick: () => r.navigate('charts'),
     },
     {
+      title: t('form'),
+      active: ['form'].includes(r.routeName),
+      href: r.buildPath('form'),
+      handleClick: () => r.navigate('form'),
+    },
+    {
       title: t('widgets'),
       active: ['widgets'].includes(r.routeName),
       href: r.buildPath('widgets', { id }),

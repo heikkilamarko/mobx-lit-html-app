@@ -10,6 +10,7 @@ const routes = [
   { name: 'jokes', path: '/jokes' },
   { name: 'datagrid', path: '/datagrid' },
   { name: 'charts', path: '/charts' },
+  { name: 'form', path: '/form' },
   { name: 'widgets', path: '/widgets' },
 ];
 

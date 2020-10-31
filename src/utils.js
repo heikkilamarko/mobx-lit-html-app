@@ -110,3 +110,7 @@ export function getPrimaryColor() {
     .getPropertyValue('--bs-primary')
     .trim();
 }
+
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -17,6 +17,7 @@
     "axios": "0.21.0",
     "bootstrap": "next",
     "lit-html": "next-major",
+    "lodash-es": "4.17.15",
     "mobx": "6.0.1",
     "popper.js": "1.16.1",
     "router5": "8.0.1",
@@ -27,15 +28,15 @@
     "@babel/preset-env": "7.12.1",
     "@snowpack/plugin-babel": "2.1.4",
     "@snowpack/plugin-dotenv": "2.0.4",
-    "@snowpack/plugin-postcss": "1.0.6",
-    "@snowpack/plugin-run-script": "2.1.7",
-    "@snowpack/plugin-webpack": "2.0.17",
+    "@snowpack/plugin-postcss": "1.0.7",
+    "@snowpack/plugin-run-script": "2.2.0",
+    "@snowpack/plugin-webpack": "2.1.0",
     "autoprefixer": "10.0.1",
     "compression-webpack-plugin": "6.0.4",
     "postcss": "8.1.4",
     "postcss-cli": "8.2.0",
     "prettier": "2.1.2",
     "sass": "1.28.0",
-    "snowpack": "2.15.1"
+    "snowpack": "2.16.0"
   }
 }
