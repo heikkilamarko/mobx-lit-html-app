@@ -8,7 +8,9 @@ const USERNAME_DEBOUNCE_WAIT = 1000;
 export default class FormStore {
   fields;
 
-  constructor() {
+  constructor(stores) {
+    Object.assign(this, stores);
+
     makeObservable(this, {
       fields: observable.ref,
       name: computed,
@@ -143,9 +145,20 @@ export default class FormStore {
     this.fields.username.reset();
   }
 
-  submit() {
+  async submit() {
     if (!this.canSubmit) return;
-    alert(JSON.stringify(this.all, null, 2));
+
+    const body = { ...this.all };
+
+    await sleep(500); // Simulate async work.
+
+    const { t } = this.i18nStore;
+
+    this.toastStore.showSuccess({
+      title: t('form.submitted.title'),
+      body: t('form.submitted.body', body),
+    });
+
     this.reset();
   }
 }
@@ -155,6 +168,7 @@ function validateRequired(value) {
 }
 
 async function validateUsername(username) {
-  await sleep(500);
+  await sleep(500); // Simulate async work.
+
   return username === 'demo' ? 'form.validation.taken' : null;
 }

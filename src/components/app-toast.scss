@@ -1,9 +1,10 @@
 app-toast {
-  .btn-close {
-    flex: 1 0 auto;
+  .toast-header {
+    font-size: 1rem;
   }
 
   .toast-body {
     font-size: 1rem;
+    white-space: break-spaces;
   }
 }

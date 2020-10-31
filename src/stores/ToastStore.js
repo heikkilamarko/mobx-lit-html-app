@@ -3,7 +3,7 @@ import Toast from 'bootstrap/js/dist/toast';
 
 const DEFAULT_OPTIONS = {
   type: 'primary',
-  delay: 2500,
+  delay: 3000,
 };
 
 export default class ToastStore {

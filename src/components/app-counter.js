@@ -103,8 +103,11 @@ class AppCounter extends HTMLElement {
     this.modal?.hide();
     stores.counterStore.reset();
 
+    const { t } = stores.i18nStore;
+
     stores.toastStore.show({
-      message: stores.i18nStore.t('counter.toast.message'),
+      title: t('counter'),
+      body: t('counter.toast.message'),
     });
   }
 }
