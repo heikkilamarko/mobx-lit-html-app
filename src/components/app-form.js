@@ -1,60 +1,7 @@
-import { html, nothing } from 'lit-html';
-import { classMap } from 'lit-html/directives/class-map';
+import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions, preventDefault } from '../utils';
-
-function textField(field) {
-  const { t } = stores.i18nStore;
-
-  const feedbackId = `${field.id}_feedback`;
-
-  const isInvalid = !field.isValid && field.isTouched && !field.isValidating;
-  const isValid = field.isValid && field.isTouched && !field.isValidating;
-
-  return html`
-    <div class="mb-3">
-      ${field.data?.label
-        ? html`
-            <label for=${field.id} class="form-label">
-              ${t(field.data.label)}
-              ${field.data?.isRequired
-                ? html`<span class="text-danger">*</span>`
-                : nothing}
-            </label>
-          `
-        : nothing}
-      <input
-        type="text"
-        class=${classMap({
-          'form-control': true,
-          'is-invalid': isInvalid,
-          'is-valid': isValid,
-        })}
-        id=${field.id}
-        aria-describedby=${feedbackId}
-        placeholder=${t(field.data?.placeholder)}
-        .value=${field.value}
-        @input=${(event) => {
-          field.setTouched();
-          field.setValue(event.target.value);
-        }}
-      />
-      ${field.isValidating
-        ? html`
-            <div id=${feedbackId} class="form-text">
-              ${t('form.validating')}
-            </div>
-          `
-        : isInvalid
-        ? html`
-            <div id=${feedbackId} class="invalid-feedback">
-              ${t(field.error)}
-            </div>
-          `
-        : nothing}
-    </div>
-  `;
-}
+import './form/app-form-text-field';
 
 class AppForm extends HTMLElement {
   connectedCallback() {
@@ -70,7 +17,9 @@ class AppForm extends HTMLElement {
 
       return html`
         <form autocomplete="off" @submit=${preventDefault(submit)}>
-          ${textField(firstName)} ${textField(lastName)} ${textField(username)}
+          <app-form-text-field .field=${firstName}></app-form-text-field>
+          <app-form-text-field .field=${lastName}></app-form-text-field>
+          <app-form-text-field .field=${username}></app-form-text-field>
           <div class="pt-3">
             <button
               type="submit"
@@ -80,7 +29,7 @@ class AppForm extends HTMLElement {
               ${t('form.submit')}
             </button>
             <button
-              type="submit"
+              type="button"
               class="btn btn-outline-primary ml-3"
               ?disabled=${!canReset}
               @click=${reset}

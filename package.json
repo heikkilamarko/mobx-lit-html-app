@@ -37,6 +37,6 @@
     "postcss-cli": "8.2.0",
     "prettier": "2.1.2",
     "sass": "1.28.0",
-    "snowpack": "2.16.0"
+    "snowpack": "2.16.1"
   }
 }
