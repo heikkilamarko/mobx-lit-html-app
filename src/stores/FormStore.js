@@ -1,26 +1,24 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
 import { debounce } from 'lodash-es';
-import { FormField } from './form';
 import { sleep } from '../utils';
+import { FormField } from './form';
 
 const USERNAME_DEBOUNCE_WAIT = 1000;
 
 export default class FormStore {
   fields;
-  isValidatingUsername = false;
 
   constructor() {
     makeObservable(this, {
       fields: observable.ref,
-      isValidatingUsername: observable.ref,
       name: computed,
       username: computed,
       all: computed,
       isDirty: computed,
-      isInvalid: computed,
+      isValid: computed,
+      isValidating: computed,
       canSubmit: computed,
       canReset: computed,
-      setValidatingUsername: action.bound,
       reset: action.bound,
       submit: action.bound,
     });
@@ -71,7 +69,7 @@ export default class FormStore {
         if (error) {
           this.fields.username.setError(error);
         } else {
-          this.setValidatingUsername(true);
+          this.fields.username.setValidating(true);
         }
       },
       { fireImmediately: true },
@@ -83,7 +81,7 @@ export default class FormStore {
         if (username) {
           this.fields.username.setError(await validateUsername(username));
         }
-        this.setValidatingUsername(false);
+        this.fields.username.setValidating(false);
       }, USERNAME_DEBOUNCE_WAIT),
       { fireImmediately: true },
     );
@@ -115,24 +113,28 @@ export default class FormStore {
     );
   }
 
-  get isInvalid() {
+  get isValid() {
     return (
-      this.fields.firstName.isInvalid ||
-      this.fields.lastName.isInvalid ||
-      this.fields.username.isInvalid
+      this.fields.firstName.isValid &&
+      this.fields.lastName.isValid &&
+      this.fields.username.isValid
+    );
+  }
+
+  get isValidating() {
+    return (
+      this.fields.firstName.isValidating ||
+      this.fields.lastName.isValidating ||
+      this.fields.username.isValidating
     );
   }
 
   get canSubmit() {
-    return !this.isInvalid && !this.isValidatingUsername;
+    return this.isValid && !this.isValidating;
   }
 
   get canReset() {
-    return this.isDirty && !this.isValidatingUsername;
-  }
-
-  setValidatingUsername(isValidating) {
-    this.isValidatingUsername = isValidating;
+    return this.isDirty && !this.isValidating;
   }
 
   reset() {

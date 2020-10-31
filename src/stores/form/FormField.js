@@ -6,6 +6,7 @@ export default class FormField {
   originalValue = null;
   error = null;
   isTouched = false;
+  isValidating = false;
   data = null;
 
   constructor(field) {
@@ -15,19 +16,19 @@ export default class FormField {
       originalValue: observable.ref,
       error: observable.ref,
       isTouched: observable.ref,
+      isValidating: observable.ref,
       data: observable.ref,
       isDirty: computed,
-      isInvalid: computed,
-      isInvalidTouched: computed,
       isValid: computed,
       setField: action.bound,
       setId: action.bound,
-      setData: action.bound,
-      setTouched: action.bound,
       setValue: action.bound,
       resetValue: action.bound,
+      setOriginalValue: action.bound,
       setError: action.bound,
-      clearError: action.bound,
+      setTouched: action.bound,
+      setValidating: action.bound,
+      setData: action.bound,
       reset: action.bound,
     });
 
@@ -38,16 +39,8 @@ export default class FormField {
     return this.value !== this.originalValue;
   }
 
-  get isInvalid() {
-    return !!this.error;
-  }
-
-  get isInvalidTouched() {
-    return this.isTouched && this.isInvalid;
-  }
-
   get isValid() {
-    return !this.isInvalid;
+    return !this.error;
   }
 
   setField(field) {
@@ -59,14 +52,6 @@ export default class FormField {
     this.id = id;
   }
 
-  setData(data) {
-    this.data = data;
-  }
-
-  setTouched(isTouched = true) {
-    this.isTouched = isTouched;
-  }
-
   setValue(value) {
     this.value = value;
   }
@@ -75,17 +60,30 @@ export default class FormField {
     this.setValue(this.originalValue);
   }
 
+  setOriginalValue(originalValue) {
+    this.originalValue = originalValue;
+  }
+
   setError(error) {
     this.error = error;
   }
 
-  clearError() {
-    this.setError(null);
+  setTouched(isTouched = true) {
+    this.isTouched = isTouched;
+  }
+
+  setValidating(isValidating) {
+    this.isValidating = isValidating;
+  }
+
+  setData(data) {
+    this.data = data;
   }
 
   reset() {
     this.resetValue();
-    this.clearError();
+    this.setError(null);
     this.setTouched(false);
+    this.setValidating(false);
   }
 }

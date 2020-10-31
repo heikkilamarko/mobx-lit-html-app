@@ -8,6 +8,9 @@ function textField(field) {
 
   const feedbackId = `${field.id}_feedback`;
 
+  const isInvalid = !field.isValid && field.isTouched && !field.isValidating;
+  const isValid = field.isValid && field.isTouched && !field.isValidating;
+
   return html`
     <div class="mb-3">
       ${field.data?.label
@@ -24,7 +27,8 @@ function textField(field) {
         type="text"
         class=${classMap({
           'form-control': true,
-          'is-invalid': field.isInvalidTouched,
+          'is-invalid': isInvalid,
+          'is-valid': isValid,
         })}
         id=${field.id}
         aria-describedby=${feedbackId}
@@ -35,7 +39,13 @@ function textField(field) {
           field.setValue(event.target.value);
         }}
       />
-      ${field.isInvalidTouched
+      ${field.isValidating
+        ? html`
+            <div id=${feedbackId} class="form-text">
+              ${t('form.validating')}
+            </div>
+          `
+        : isInvalid
         ? html`
             <div id=${feedbackId} class="invalid-feedback">
               ${t(field.error)}
