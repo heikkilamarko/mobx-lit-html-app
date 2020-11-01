@@ -67,6 +67,7 @@ export default class FormStore {
         data: {
           label: 'form.tags',
           placeholder: 'form.tags.tag',
+          isRequired: true,
         },
         isDirtyFn: (a, b) => !isEqual(a, b),
       }),
