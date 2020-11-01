@@ -2,13 +2,14 @@ import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions, preventDefault } from '../utils';
 import './form/app-form-text-field';
+import './form/app-form-tags-field';
 
 class AppForm extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this, () => {
       const { t } = stores.i18nStore;
       const {
-        fields: { firstName, lastName, username },
+        fields: { firstName, lastName, username, tags },
         canSubmit,
         canReset,
         submit,
@@ -20,6 +21,7 @@ class AppForm extends HTMLElement {
           <app-form-text-field .field=${firstName}></app-form-text-field>
           <app-form-text-field .field=${lastName}></app-form-text-field>
           <app-form-text-field .field=${username}></app-form-text-field>
+          <app-form-tags-field .field=${tags}></app-form-tags-field>
           <div class="pt-3">
             <button
               type="submit"

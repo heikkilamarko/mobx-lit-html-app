@@ -8,6 +8,7 @@ export default class FormField {
   isTouched = false;
   isValidating = false;
   data = null;
+  isDirtyFn = defaultIsDirtyFn;
 
   constructor(field) {
     makeObservable(this, {
@@ -18,6 +19,7 @@ export default class FormField {
       isTouched: observable.ref,
       isValidating: observable.ref,
       data: observable.ref,
+      isDirtyFn: observable.ref,
       isDirty: computed,
       isValid: computed,
       setField: action.bound,
@@ -36,7 +38,7 @@ export default class FormField {
   }
 
   get isDirty() {
-    return this.value !== this.originalValue;
+    return this.isDirtyFn(this.value, this.originalValue);
   }
 
   get isValid() {
@@ -86,4 +88,8 @@ export default class FormField {
     this.setTouched(false);
     this.setValidating(false);
   }
+}
+
+function defaultIsDirtyFn(a, b) {
+  return a !== b;
 }

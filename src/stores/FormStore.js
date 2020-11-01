@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
-import { debounce } from 'lodash-es';
+import { debounce, isEqual } from 'lodash-es';
 import { sleep } from '../utils';
 import { FormField } from './form';
 
@@ -15,6 +15,7 @@ export default class FormStore {
       fields: observable.ref,
       name: computed,
       username: computed,
+      tags: computed,
       all: computed,
       isDirty: computed,
       isValid: computed,
@@ -53,6 +54,15 @@ export default class FormStore {
           isRequired: true,
         },
       }),
+      tags: new FormField({
+        id: 'tags',
+        value: [],
+        data: {
+          label: 'form.tags',
+          placeholder: 'form.tags.tag',
+        },
+        isDirtyFn: (a, b) => !isEqual(a, b),
+      }),
     };
 
     reaction(
@@ -87,6 +97,14 @@ export default class FormStore {
       }, USERNAME_DEBOUNCE_WAIT),
       { fireImmediately: true },
     );
+
+    reaction(
+      () => this.tags,
+      (tags) => {
+        this.fields.tags.setError(validateTags(tags));
+      },
+      { fireImmediately: true },
+    );
   }
 
   get name() {
@@ -100,10 +118,15 @@ export default class FormStore {
     return this.fields.username.value;
   }
 
+  get tags() {
+    return this.fields.tags.value;
+  }
+
   get all() {
     return {
       ...this.name,
       username: this.username,
+      tags: [...this.tags],
     };
   }
 
@@ -111,7 +134,8 @@ export default class FormStore {
     return (
       this.fields.firstName.isDirty ||
       this.fields.lastName.isDirty ||
-      this.fields.username.isDirty
+      this.fields.username.isDirty ||
+      this.fields.tags.isDirty
     );
   }
 
@@ -119,7 +143,8 @@ export default class FormStore {
     return (
       this.fields.firstName.isValid &&
       this.fields.lastName.isValid &&
-      this.fields.username.isValid
+      this.fields.username.isValid &&
+      this.fields.tags.isValid
     );
   }
 
@@ -127,7 +152,8 @@ export default class FormStore {
     return (
       this.fields.firstName.isValidating ||
       this.fields.lastName.isValidating ||
-      this.fields.username.isValidating
+      this.fields.username.isValidating ||
+      this.fields.tags.isValidating
     );
   }
 
@@ -143,12 +169,13 @@ export default class FormStore {
     this.fields.firstName.reset();
     this.fields.lastName.reset();
     this.fields.username.reset();
+    this.fields.tags.reset();
   }
 
   async submit() {
     if (!this.canSubmit) return;
 
-    const body = { ...this.all };
+    const body = { ...this.all, tags: this.tags.join(', ') };
 
     await sleep(500); // Simulate async work.
 
@@ -171,4 +198,8 @@ async function validateUsername(username) {
   await sleep(500); // Simulate async work.
 
   return username === 'demo' ? 'form.validation.taken' : null;
+}
+
+function validateTags(tags) {
+  return tags?.length ? null : 'form.tags.validation.required';
 }

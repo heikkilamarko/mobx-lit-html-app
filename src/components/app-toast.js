@@ -6,6 +6,7 @@ import './app-toast.css';
 class AppToast extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this, () => {
+      const { t } = stores.i18nStore;
       const { toast = {} } = stores.toastStore;
 
       return html`
@@ -22,7 +23,7 @@ class AppToast extends HTMLElement {
               type="button"
               class="btn-close btn-close-white"
               data-dismiss="toast"
-              aria-label="Close"
+              aria-label=${t('close')}
             ></button>
           </div>
           <div class="toast-body">${toast.body}</div>
