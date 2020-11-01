@@ -3,7 +3,7 @@ import { debounce, isEqual } from 'lodash-es';
 import { sleep } from '../utils';
 import { FormField } from './form';
 
-const DEBOUNCE_WAIT = 1000;
+const DEBOUNCE_WAIT = 800;
 
 export default class FormStore {
   fields;

@@ -1,18 +1,16 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { computed, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable } from 'mobx';
 import { stores } from '../../stores';
 import { addRenderReaction, clearReactions } from '../../utils';
-import './app-form-tags-field.css';
 
 class AppFormTagsField extends HTMLElement {
-  tag = '';
-
   constructor() {
     super();
     makeObservable(this, {
-      tag: observable.ref,
       canAddTag: computed,
+      addTag: action.bound,
+      removeTag: action.bound,
     });
   }
 
@@ -27,13 +25,13 @@ class AppFormTagsField extends HTMLElement {
       const {
         id,
         value,
+        helperValue,
         error,
         data,
         isTouched,
         isValid,
         isValidating,
-        setValue,
-        setTouched,
+        setHelperValue,
       } = this.field;
 
       const feedbackId = `${id}_feedback`;
@@ -69,18 +67,15 @@ class AppFormTagsField extends HTMLElement {
               aria-describedby=${feedbackId}
               placeholder=${placeholder}
               ?readonly=${isValidating}
-              .value=${this.tag}
-              @input=${(event) => (this.tag = event.target.value)}
+              .value=${helperValue ?? ''}
+              @input=${(event) => setHelperValue(event.target.value)}
+              @keydown=${this.handleKeydown}
             />
             <button
-              class="btn btn-primary"
+              class="btn btn-primary app-append-button"
               type="button"
               ?disabled=${!this.canAddTag}
-              @click=${() => {
-                setTouched();
-                setValue([...value, this.tag]);
-                this.tag = '';
-              }}
+              @click=${this.addTag}
             >
               ${t('form.tags.add')}
             </button>
@@ -109,10 +104,7 @@ class AppFormTagsField extends HTMLElement {
                       type="button"
                       class="btn-close btn-close-white ml-2"
                       aria-label=${t('close')}
-                      @click=${() => {
-                        setTouched();
-                        setValue(value.filter((v) => v !== tag));
-                      }}
+                      @click=${() => this.removeTag(tag)}
                     ></button
                   ></span>
                 `,
@@ -128,7 +120,35 @@ class AppFormTagsField extends HTMLElement {
   }
 
   get canAddTag() {
-    return !!this.tag && !this.field.value.includes(this.tag);
+    const { value, helperValue } = this.field;
+    return !!helperValue && !value.includes(helperValue);
+  }
+
+  addTag() {
+    if (!this.canAddTag) return;
+    const {
+      value,
+      helperValue,
+      setTouched,
+      setValue,
+      setHelperValue,
+    } = this.field;
+    setTouched();
+    setValue([...value, helperValue]);
+    setHelperValue('');
+  }
+
+  removeTag(tag) {
+    const { value, setTouched, setValue } = this.field;
+    setTouched();
+    setValue(value.filter((t) => t !== tag));
+  }
+
+  handleKeydown(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      this.addTag();
+    }
   }
 }
 

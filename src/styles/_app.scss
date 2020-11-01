@@ -9,3 +9,14 @@ body {
 .navbar-dark .navbar-nav .nav-link.active {
   font-weight: 500;
 }
+
+.form-control[readonly] {
+  background-color: $input-bg;
+}
+
+.input-group {
+  .app-append-button {
+    border-bottom-right-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}

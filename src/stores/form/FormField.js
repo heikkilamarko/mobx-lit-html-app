@@ -3,6 +3,7 @@ import { action, computed, makeObservable, observable } from 'mobx';
 export default class FormField {
   id = null;
   value = null;
+  helperValue = null;
   originalValue = null;
   error = null;
   isTouched = false;
@@ -14,6 +15,7 @@ export default class FormField {
     makeObservable(this, {
       id: observable.ref,
       value: observable.ref,
+      helperValue: observable.ref,
       originalValue: observable.ref,
       error: observable.ref,
       isTouched: observable.ref,
@@ -26,6 +28,7 @@ export default class FormField {
       setId: action.bound,
       setValue: action.bound,
       resetValue: action.bound,
+      setHelperValue: action.bound,
       setOriginalValue: action.bound,
       setError: action.bound,
       setTouched: action.bound,
@@ -62,6 +65,10 @@ export default class FormField {
     this.setValue(this.originalValue);
   }
 
+  setHelperValue(helperValue) {
+    this.helperValue = helperValue;
+  }
+
   setOriginalValue(originalValue) {
     this.originalValue = originalValue;
   }
@@ -84,6 +91,7 @@ export default class FormField {
 
   reset() {
     this.resetValue();
+    this.setHelperValue(null);
     this.setError(null);
     this.setTouched(false);
     this.setValidating(false);
