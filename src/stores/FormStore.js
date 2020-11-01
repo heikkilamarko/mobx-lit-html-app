@@ -3,16 +3,18 @@ import { debounce, isEqual } from 'lodash-es';
 import { sleep } from '../utils';
 import { FormField } from './form';
 
-const USERNAME_DEBOUNCE_WAIT = 1000;
+const DEBOUNCE_WAIT = 1000;
 
 export default class FormStore {
   fields;
+  isValidatingUsername = false;
 
   constructor(stores) {
     Object.assign(this, stores);
 
     makeObservable(this, {
       fields: observable.ref,
+      isValidatingUsername: observable.ref,
       name: computed,
       username: computed,
       tags: computed,
@@ -24,6 +26,10 @@ export default class FormStore {
       canReset: computed,
       reset: action.bound,
       submit: action.bound,
+      validate: action.bound,
+      validateName: action.bound,
+      validateUsername: action.bound,
+      validateTags: action.bound,
     });
 
     this.fields = {
@@ -52,6 +58,7 @@ export default class FormStore {
           label: 'form.username',
           placeholder: 'form.username',
           isRequired: true,
+          isTouchDisabled: true,
         },
       }),
       tags: new FormField({
@@ -67,44 +74,25 @@ export default class FormStore {
 
     reaction(
       () => this.name,
-      (name) => {
-        this.fields.firstName.setError(validateRequired(name.firstName));
-        this.fields.lastName.setError(validateRequired(name.lastName));
-      },
-      { fireImmediately: true },
+      () => this.validateName(),
     );
 
     reaction(
       () => this.username,
-      (username) => {
-        const error = validateRequired(username);
-        if (error) {
-          this.fields.username.setError(error);
-        } else {
-          this.fields.username.setValidating(true);
-        }
-      },
-      { fireImmediately: true },
+      () => (this.isValidatingUsername = true),
     );
 
     reaction(
       () => this.username,
-      debounce(async (username) => {
-        if (username) {
-          this.fields.username.setError(await validateUsername(username));
-        }
-        this.fields.username.setValidating(false);
-      }, USERNAME_DEBOUNCE_WAIT),
-      { fireImmediately: true },
+      debounce(() => this.validateUsername(), DEBOUNCE_WAIT),
     );
 
     reaction(
       () => this.tags,
-      (tags) => {
-        this.fields.tags.setError(validateTags(tags));
-      },
-      { fireImmediately: true },
+      () => this.validateTags(),
     );
+
+    this.validate();
   }
 
   get name() {
@@ -153,7 +141,8 @@ export default class FormStore {
       this.fields.firstName.isValidating ||
       this.fields.lastName.isValidating ||
       this.fields.username.isValidating ||
-      this.fields.tags.isValidating
+      this.fields.tags.isValidating ||
+      this.isValidatingUsername
     );
   }
 
@@ -170,6 +159,38 @@ export default class FormStore {
     this.fields.lastName.reset();
     this.fields.username.reset();
     this.fields.tags.reset();
+    this.validate();
+  }
+
+  validate() {
+    this.validateName();
+    this.validateUsername();
+    this.validateTags();
+  }
+
+  validateName() {
+    const { firstName, lastName } = this.fields;
+    firstName.setError(validateRequired(firstName.value));
+    lastName.setError(validateRequired(lastName.value));
+  }
+
+  async validateUsername() {
+    const { username } = this.fields;
+    const error = validateRequired(username.value);
+    if (error) {
+      username.setError(error);
+    } else {
+      username.setValidating(true);
+      username.setError(await validateUsername(username.value));
+      username.setValidating(false);
+      username.setTouched(true);
+    }
+    this.isValidatingUsername = false;
+  }
+
+  validateTags() {
+    const { tags } = this.fields;
+    tags.setError(validateTags(tags.value));
   }
 
   async submit() {

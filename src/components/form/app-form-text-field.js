@@ -28,6 +28,7 @@ class AppFormTextField extends HTMLElement {
 
       const label = data?.label ? t(data.label) : undefined;
       const isRequired = !!data?.isRequired;
+      const isTouchDisabled = !!data?.isTouchDisabled;
       const placeholder = data?.placeholder ? t(data.placeholder) : undefined;
 
       const isTouchedInvalid = !isValid && isTouched && !isValidating;
@@ -55,9 +56,10 @@ class AppFormTextField extends HTMLElement {
             id=${id}
             aria-describedby=${feedbackId}
             placeholder=${placeholder}
+            ?readonly=${isValidating}
             .value=${value}
             @input=${(event) => {
-              setTouched();
+              !isTouchDisabled && setTouched();
               setValue(event.target.value);
             }}
           />

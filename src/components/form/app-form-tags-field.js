@@ -68,6 +68,7 @@ class AppFormTagsField extends HTMLElement {
               id=${id}
               aria-describedby=${feedbackId}
               placeholder=${placeholder}
+              ?readonly=${isValidating}
               .value=${this.tag}
               @input=${(event) => (this.tag = event.target.value)}
             />
