@@ -16,7 +16,7 @@ body {
 
 .input-group {
   .app-append-button {
-    border-bottom-right-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius !important;
+    border-top-right-radius: $border-radius !important;
   }
 }
