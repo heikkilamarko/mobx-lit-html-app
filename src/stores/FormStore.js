@@ -120,30 +120,17 @@ export default class FormStore {
   }
 
   get isDirty() {
-    return (
-      this.fields.firstName.isDirty ||
-      this.fields.lastName.isDirty ||
-      this.fields.username.isDirty ||
-      this.fields.tags.isDirty
-    );
+    return Object.values(this.fields).some((f) => f.isDirty);
   }
 
   get isValid() {
-    return (
-      this.fields.firstName.isValid &&
-      this.fields.lastName.isValid &&
-      this.fields.username.isValid &&
-      this.fields.tags.isValid
-    );
+    return Object.values(this.fields).every((f) => f.isValid);
   }
 
   get isValidating() {
     return (
-      this.fields.firstName.isValidating ||
-      this.fields.lastName.isValidating ||
-      this.fields.username.isValidating ||
-      this.fields.tags.isValidating ||
-      this.isValidatingUsername
+      this.isValidatingUsername ||
+      Object.values(this.fields).some((f) => f.isValidating)
     );
   }
 
@@ -156,10 +143,7 @@ export default class FormStore {
   }
 
   reset() {
-    this.fields.firstName.reset();
-    this.fields.lastName.reset();
-    this.fields.username.reset();
-    this.fields.tags.reset();
+    Object.values(this.fields).forEach((f) => f.reset());
     this.validate();
   }
 
