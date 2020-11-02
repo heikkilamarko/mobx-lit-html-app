@@ -1,5 +1,11 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
 import { debounce, isEqual } from 'lodash-es';
+import {
+  validateRequired,
+  validateAge,
+  validateUsername,
+  validateTags,
+} from '../validators';
 import { sleep } from '../utils';
 import { FormField } from './form';
 
@@ -8,6 +14,7 @@ const DEBOUNCE_WAIT = 800;
 export default class FormStore {
   fields;
   isValidatingUsername = false;
+  isSubmitting = false;
 
   constructor(stores) {
     Object.assign(this, stores);
@@ -15,7 +22,8 @@ export default class FormStore {
     makeObservable(this, {
       fields: observable.ref,
       isValidatingUsername: observable.ref,
-      name: computed,
+      isSubmitting: observable.ref,
+      nameAndAge: computed,
       username: computed,
       tags: computed,
       all: computed,
@@ -27,7 +35,7 @@ export default class FormStore {
       reset: action.bound,
       submit: action.bound,
       validate: action.bound,
-      validateName: action.bound,
+      validateNameAndAge: action.bound,
       validateUsername: action.bound,
       validateTags: action.bound,
     });
@@ -48,6 +56,15 @@ export default class FormStore {
         data: {
           label: 'form.lastname',
           placeholder: 'form.lastname',
+          isRequired: true,
+        },
+      }),
+      age: new FormField({
+        id: 'age',
+        value: '',
+        data: {
+          label: 'form.age',
+          placeholder: 'form.age',
           isRequired: true,
         },
       }),
@@ -74,8 +91,8 @@ export default class FormStore {
     };
 
     reaction(
-      () => this.name,
-      () => this.validateName(),
+      () => this.nameAndAge,
+      () => this.validateNameAndAge(),
     );
 
     reaction(
@@ -96,10 +113,11 @@ export default class FormStore {
     this.validate();
   }
 
-  get name() {
+  get nameAndAge() {
     return {
       firstName: this.fields.firstName.value,
       lastName: this.fields.lastName.value,
+      age: this.fields.age.value,
     };
   }
 
@@ -113,7 +131,7 @@ export default class FormStore {
 
   get all() {
     return {
-      ...this.name,
+      ...this.nameAndAge,
       username: this.username,
       tags: [...this.tags],
     };
@@ -135,11 +153,11 @@ export default class FormStore {
   }
 
   get canSubmit() {
-    return this.isValid && !this.isValidating;
+    return this.isValid && !this.isValidating && !this.isSubmitting;
   }
 
   get canReset() {
-    return this.isDirty && !this.isValidating;
+    return this.isDirty && !this.isValidating && !this.isSubmitting;
   }
 
   reset() {
@@ -148,15 +166,16 @@ export default class FormStore {
   }
 
   validate() {
-    this.validateName();
+    this.validateNameAndAge();
     this.validateUsername();
     this.validateTags();
   }
 
-  validateName() {
-    const { firstName, lastName } = this.fields;
+  validateNameAndAge() {
+    const { firstName, lastName, age } = this.fields;
     firstName.setError(validateRequired(firstName.value));
     lastName.setError(validateRequired(lastName.value));
+    age.setError(validateAge(age.value));
   }
 
   async validateUsername() {
@@ -181,31 +200,33 @@ export default class FormStore {
   async submit() {
     if (!this.canSubmit) return;
 
-    const body = { ...this.all, tags: this.tags.join(', ') };
-
-    await sleep(500); // Simulate async work.
-
     const { t } = this.i18nStore;
 
-    this.toastStore.showSuccess({
-      title: t('form.submitted.title'),
-      body: t('form.submitted.body', body),
-    });
+    this.isSubmitting = true;
 
-    this.reset();
+    try {
+      const body = {
+        ...this.all,
+        tags: this.tags.join(', '),
+      };
+
+      await sleep(500); // Simulate async work.
+
+      this.toastStore.showSuccess({
+        title: t('form.submit.success.title'),
+        body: t('form.submit.success.body', body),
+        delay: 5000,
+      });
+
+      this.reset();
+    } catch (error) {
+      console.log(error);
+      this.toastStore.showError({
+        title: t('form.submit.error.title'),
+        body: t('form.submit.error.body'),
+      });
+    } finally {
+      this.isSubmitting = false;
+    }
   }
-}
-
-function validateRequired(value) {
-  return value ? null : 'form.validation.required';
-}
-
-async function validateUsername(username) {
-  await sleep(500); // Simulate async work.
-
-  return username === 'demo' ? 'form.validation.taken' : null;
-}
-
-function validateTags(tags) {
-  return tags?.length ? null : 'form.tags.validation.required';
 }

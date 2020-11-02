@@ -9,7 +9,7 @@ class AppForm extends HTMLElement {
     addRenderReaction(this, () => {
       const { t } = stores.i18nStore;
       const {
-        fields: { firstName, lastName, username, tags },
+        fields: { firstName, lastName, age, username, tags },
         canSubmit,
         canReset,
         submit,
@@ -20,6 +20,7 @@ class AppForm extends HTMLElement {
         <form autocomplete="off" @submit=${preventDefault(submit)}>
           <app-form-text-field .field=${firstName}></app-form-text-field>
           <app-form-text-field .field=${lastName}></app-form-text-field>
+          <app-form-text-field .field=${age}></app-form-text-field>
           <app-form-text-field .field=${username}></app-form-text-field>
           <app-form-tags-field .field=${tags}></app-form-tags-field>
           <div class="pt-3">
