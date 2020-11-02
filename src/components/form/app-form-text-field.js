@@ -48,6 +48,7 @@ class AppFormTextField extends HTMLElement {
             : nothing}
           <input
             type="text"
+            spellcheck="false"
             class=${classMap({
               'form-control': true,
               'is-invalid': isTouchedInvalid,

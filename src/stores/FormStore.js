@@ -26,7 +26,6 @@ export default class FormStore {
       nameAndAge: computed,
       username: computed,
       tags: computed,
-      all: computed,
       isDirty: computed,
       isValid: computed,
       isValidating: computed,
@@ -129,14 +128,6 @@ export default class FormStore {
     return this.fields.tags.value;
   }
 
-  get all() {
-    return {
-      ...this.nameAndAge,
-      username: this.username,
-      tags: [...this.tags],
-    };
-  }
-
   get isDirty() {
     return Object.values(this.fields).some((f) => f.isDirty);
   }
@@ -205,16 +196,19 @@ export default class FormStore {
     this.isSubmitting = true;
 
     try {
-      const body = {
-        ...this.all,
-        tags: this.tags.join(', '),
+      const formData = {
+        firstName: this.fields.firstName.value.trim(),
+        lastName: this.fields.lastName.value.trim(),
+        username: this.fields.username.value.trim(),
+        age: Number(this.fields.age.value),
+        tags: this.fields.tags.value.join(', '),
       };
 
       await sleep(500); // Simulate async work.
 
       this.toastStore.showSuccess({
         title: t('form.submit.success.title'),
-        body: t('form.submit.success.body', body),
+        body: t('form.submit.success.body', formData),
         delay: 5000,
       });
 

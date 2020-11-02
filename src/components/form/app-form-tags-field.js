@@ -2,6 +2,7 @@ import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { action, computed, makeObservable } from 'mobx';
 import { stores } from '../../stores';
+import { validateRequired } from '../../validators';
 import { addRenderReaction, clearReactions } from '../../utils';
 
 class AppFormTagsField extends HTMLElement {
@@ -58,6 +59,7 @@ class AppFormTagsField extends HTMLElement {
           <div class="input-group mb-2">
             <input
               type="text"
+              spellcheck="false"
               class=${classMap({
                 'form-control': true,
                 'is-invalid': isTouchedInvalid,
@@ -121,7 +123,9 @@ class AppFormTagsField extends HTMLElement {
 
   get canAddTag() {
     const { value, helperValue } = this.field;
-    return !!helperValue && !value.includes(helperValue);
+    return (
+      !validateRequired(helperValue) && !value.includes(helperValue.trim())
+    );
   }
 
   addTag() {
@@ -134,7 +138,7 @@ class AppFormTagsField extends HTMLElement {
       setHelperValue,
     } = this.field;
     setTouched();
-    setValue([...value, helperValue]);
+    setValue([...value, helperValue.trim()]);
     setHelperValue('');
   }
 
