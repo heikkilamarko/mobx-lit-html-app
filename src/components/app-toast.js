@@ -11,7 +11,7 @@ class AppToast extends HTMLElement {
 
       return html`
         <div
-          class="toast position-fixed bottom-0 right-0 border-0 m-3"
+          class="toast hide position-fixed bottom-0 right-0 border-0 m-3"
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
