@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
-export default class FormField {
+export default class FieldStore {
   id = null;
   value = null;
   helperValue = null;

@@ -7,7 +7,7 @@ import {
   validateTags,
 } from '../validators';
 import { sleep } from '../utils';
-import { FormField } from './form';
+import { FieldStore, RolesStore } from './form';
 
 const DEBOUNCE_WAIT = 800;
 
@@ -37,10 +37,11 @@ export default class FormStore {
       validateNameAndAge: action.bound,
       validateUsername: action.bound,
       validateTags: action.bound,
+      validateRoles: action.bound,
     });
 
     this.fields = {
-      firstName: new FormField({
+      firstName: new FieldStore({
         id: 'firstname',
         value: '',
         data: {
@@ -49,7 +50,7 @@ export default class FormStore {
           isRequired: true,
         },
       }),
-      lastName: new FormField({
+      lastName: new FieldStore({
         id: 'lastname',
         value: '',
         data: {
@@ -58,7 +59,7 @@ export default class FormStore {
           isRequired: true,
         },
       }),
-      age: new FormField({
+      age: new FieldStore({
         id: 'age',
         value: '',
         data: {
@@ -67,7 +68,7 @@ export default class FormStore {
           isRequired: true,
         },
       }),
-      username: new FormField({
+      username: new FieldStore({
         id: 'username',
         value: '',
         data: {
@@ -77,7 +78,7 @@ export default class FormStore {
           isTouchDisabled: true,
         },
       }),
-      tags: new FormField({
+      tags: new FieldStore({
         id: 'tags',
         value: [],
         data: {
@@ -87,6 +88,7 @@ export default class FormStore {
         },
         isDirtyFn: (a, b) => !isEqual(a, b),
       }),
+      roles: new RolesStore(),
     };
 
     reaction(
@@ -160,6 +162,7 @@ export default class FormStore {
     this.validateNameAndAge();
     this.validateUsername();
     this.validateTags();
+    this.validateRoles();
   }
 
   validateNameAndAge() {
@@ -188,6 +191,10 @@ export default class FormStore {
     tags.setError(validateTags(tags.value));
   }
 
+  validateRoles() {
+    this.fields.roles.validate();
+  }
+
   async submit() {
     if (!this.canSubmit) return;
 
@@ -202,6 +209,7 @@ export default class FormStore {
         username: this.fields.username.value.trim(),
         age: Number(this.fields.age.value),
         tags: this.fields.tags.value.join(', '),
+        roles: this.fields.roles.value.join(', '),
       };
 
       await sleep(500); // Simulate async work.
