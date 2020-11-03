@@ -40,10 +40,10 @@ class AppForm extends HTMLElement {
                 `,
             )}
           </div>
-          <div class="d-flex flex-row justify-content-between mt-5">
+          <div class="d-flex flex-row flex-wrap justify-content-between mt-5">
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary mt-2"
               ?disabled=${isSubmitting}
               @click=${roles.addRole}
             >
@@ -52,7 +52,7 @@ class AppForm extends HTMLElement {
             <div>
               <button
                 type="button"
-                class="btn btn-outline-primary"
+                class="btn btn-outline-primary mr-2 mt-2"
                 ?disabled=${!canReset}
                 @click=${reset}
               >
@@ -60,7 +60,7 @@ class AppForm extends HTMLElement {
               </button>
               <button
                 type="submit"
-                class="btn btn-primary ml-2"
+                class="btn btn-primary mt-2"
                 ?disabled=${!canSubmit}
               >
                 ${t('form.submit')}
