@@ -35,47 +35,45 @@ class AppFormTextField extends HTMLElement {
       const isTouchedValid = isValid && isTouched && !isValidating;
 
       return html`
-        <div class="mb-3">
-          ${label
-            ? html`
-                <label for=${id} class="form-label">
-                  ${label}
-                  ${isRequired
-                    ? html`<span class="text-danger">*</span>`
-                    : nothing}
-                </label>
-              `
-            : nothing}
-          <input
-            type="text"
-            spellcheck="false"
-            class=${classMap({
-              'form-control': true,
-              'is-invalid': isTouchedInvalid,
-              'is-valid': isTouchedValid,
-            })}
-            id=${id}
-            aria-describedby=${feedbackId}
-            placeholder=${placeholder}
-            ?readonly=${isValidating}
-            .value=${value}
-            @input=${(event) => {
-              !isTouchDisabled && setTouched();
-              setValue(event.target.value);
-            }}
-          />
-          ${isValidating
-            ? html`
-                <div id=${feedbackId} class="form-text">
-                  ${t('form.validating')}
-                </div>
-              `
-            : isTouchedInvalid
-            ? html`
-                <div id=${feedbackId} class="invalid-feedback">${t(error)}</div>
-              `
-            : nothing}
-        </div>
+        ${label
+          ? html`
+              <label for=${id} class="form-label">
+                ${label}
+                ${isRequired
+                  ? html`<span class="text-danger">*</span>`
+                  : nothing}
+              </label>
+            `
+          : nothing}
+        <input
+          type="text"
+          spellcheck="false"
+          class=${classMap({
+            'form-control': true,
+            'is-invalid': isTouchedInvalid,
+            'is-valid': isTouchedValid,
+          })}
+          id=${id}
+          aria-describedby=${feedbackId}
+          placeholder=${placeholder}
+          ?readonly=${isValidating}
+          .value=${value}
+          @input=${(event) => {
+            !isTouchDisabled && setTouched();
+            setValue(event.target.value);
+          }}
+        />
+        ${isValidating
+          ? html`
+              <div id=${feedbackId} class="form-text">
+                ${t('form.validating')}
+              </div>
+            `
+          : isTouchedInvalid
+          ? html`
+              <div id=${feedbackId} class="invalid-feedback">${t(error)}</div>
+            `
+          : nothing}
       `;
     });
   }

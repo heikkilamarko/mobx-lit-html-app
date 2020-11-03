@@ -5,6 +5,7 @@ import { addRenderReaction, clearReactions, preventDefault } from '../utils';
 import './form/app-form-text-field';
 import './form/app-form-tags-field';
 import './form/app-form-role-field';
+import './app-form.css';
 
 class AppForm extends HTMLElement {
   connectedCallback() {
@@ -12,6 +13,7 @@ class AppForm extends HTMLElement {
       const { t } = stores.i18nStore;
       const {
         fields: { firstName, lastName, age, username, tags, roles },
+        isSubmitting,
         canSubmit,
         canReset,
         submit,
@@ -25,40 +27,45 @@ class AppForm extends HTMLElement {
           <app-form-text-field .field=${age}></app-form-text-field>
           <app-form-text-field .field=${username}></app-form-text-field>
           <app-form-tags-field .field=${tags}></app-form-tags-field>
-          ${repeat(
-            roles.roles,
-            (role) => role.id,
-            (role) =>
-              html`
-                <app-form-role-field
-                  .field=${role}
-                  @remove=${() => roles.removeRole(role)}
-                ></app-form-role-field>
-              `,
-          )}
-          <div class="pt-3">
+          <div>
+            ${repeat(
+              roles.roles,
+              (role) => role.id,
+              (role) =>
+                html`
+                  <app-form-role-field
+                    .field=${role}
+                    @remove=${() => roles.removeRole(role)}
+                  ></app-form-role-field>
+                `,
+            )}
+          </div>
+          <div class="d-flex flex-row justify-content-between mt-5">
             <button
               type="button"
               class="btn btn-primary"
+              ?disabled=${isSubmitting}
               @click=${roles.addRole}
             >
               ${t('form.roles.add')}
             </button>
-            <button
-              type="submit"
-              class="btn btn-primary ml-3"
-              ?disabled=${!canSubmit}
-            >
-              ${t('form.submit')}
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary ml-3"
-              ?disabled=${!canReset}
-              @click=${reset}
-            >
-              ${t('form.reset')}
-            </button>
+            <div>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                ?disabled=${!canReset}
+                @click=${reset}
+              >
+                ${t('form.reset')}
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary ml-2"
+                ?disabled=${!canSubmit}
+              >
+                ${t('form.submit')}
+              </button>
+            </div>
           </div>
         </form>
       `;

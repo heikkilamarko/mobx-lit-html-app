@@ -34,57 +34,53 @@ class AppFormRoleField extends HTMLElement {
       const isTouchedValid = isValid && isTouched && !isValidating;
 
       return html`
-        <div class="mb-3">
-          ${label
+        ${label
+          ? html`
+              <label for=${id} class="form-label">
+                ${label}
+                ${isRequired
+                  ? html`<span class="text-danger">*</span>`
+                  : nothing}
+              </label>
+            `
+          : nothing}
+        <div class="input-group mb-2">
+          <input
+            type="text"
+            spellcheck="false"
+            class=${classMap({
+              'form-control': true,
+              'is-invalid': isTouchedInvalid,
+              'is-valid': isTouchedValid,
+            })}
+            id=${id}
+            aria-describedby=${feedbackId}
+            placeholder=${placeholder}
+            ?readonly=${isValidating}
+            .value=${value ?? ''}
+            @input=${(event) => {
+              setTouched();
+              setValue(event.target.value);
+            }}
+          />
+          <button
+            class="btn btn-danger app-append-button"
+            type="button"
+            @click=${() => this.dispatchEvent(new Event('remove'))}
+          >
+            ${t('form.roles.remove')}
+          </button>
+          ${isValidating
             ? html`
-                <label for=${id} class="form-label">
-                  ${label}
-                  ${isRequired
-                    ? html`<span class="text-danger">*</span>`
-                    : nothing}
-                </label>
+                <div id=${feedbackId} class="form-text">
+                  ${t('form.validating')}
+                </div>
+              `
+            : isTouchedInvalid
+            ? html`
+                <div id=${feedbackId} class="invalid-feedback">${t(error)}</div>
               `
             : nothing}
-          <div class="input-group mb-2">
-            <input
-              type="text"
-              spellcheck="false"
-              class=${classMap({
-                'form-control': true,
-                'is-invalid': isTouchedInvalid,
-                'is-valid': isTouchedValid,
-              })}
-              id=${id}
-              aria-describedby=${feedbackId}
-              placeholder=${placeholder}
-              ?readonly=${isValidating}
-              .value=${value ?? ''}
-              @input=${(event) => {
-                setTouched();
-                setValue(event.target.value);
-              }}
-            />
-            <button
-              class="btn btn-danger app-append-button"
-              type="button"
-              @click=${() => this.dispatchEvent(new Event('remove'))}
-            >
-              ${t('form.roles.remove')}
-            </button>
-            ${isValidating
-              ? html`
-                  <div id=${feedbackId} class="form-text">
-                    ${t('form.validating')}
-                  </div>
-                `
-              : isTouchedInvalid
-              ? html`
-                  <div id=${feedbackId} class="invalid-feedback">
-                    ${t(error)}
-                  </div>
-                `
-              : nothing}
-          </div>
         </div>
       `;
     });

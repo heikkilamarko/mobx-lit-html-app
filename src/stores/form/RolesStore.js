@@ -26,7 +26,7 @@ export default class RolesStore {
   }
 
   get value() {
-    return this.roles.map((role) => role.value);
+    return this.roles.map((role) => role.value.trim());
   }
 
   get isDirty() {

@@ -45,73 +45,69 @@ class AppFormTagsField extends HTMLElement {
       const isTouchedValid = isValid && isTouched && !isValidating;
 
       return html`
-        <div class="mb-3">
-          ${label
+        ${label
+          ? html`
+              <label for=${id} class="form-label">
+                ${label}
+                ${isRequired
+                  ? html`<span class="text-danger">*</span>`
+                  : nothing}
+              </label>
+            `
+          : nothing}
+        <div class="input-group mb-2">
+          <input
+            type="text"
+            spellcheck="false"
+            class=${classMap({
+              'form-control': true,
+              'is-invalid': isTouchedInvalid,
+              'is-valid': isTouchedValid,
+            })}
+            id=${id}
+            aria-describedby=${feedbackId}
+            placeholder=${placeholder}
+            ?readonly=${isValidating}
+            .value=${helperValue ?? ''}
+            @input=${(event) => setHelperValue(event.target.value)}
+            @keydown=${this.handleKeydown}
+          />
+          <button
+            class="btn btn-primary app-append-button"
+            type="button"
+            ?disabled=${!this.canAddTag}
+            @click=${this.addTag}
+          >
+            ${t('form.tags.add')}
+          </button>
+          ${isValidating
             ? html`
-                <label for=${id} class="form-label">
-                  ${label}
-                  ${isRequired
-                    ? html`<span class="text-danger">*</span>`
-                    : nothing}
-                </label>
+                <div id=${feedbackId} class="form-text">
+                  ${t('form.validating')}
+                </div>
+              `
+            : isTouchedInvalid
+            ? html`
+                <div id=${feedbackId} class="invalid-feedback">${t(error)}</div>
               `
             : nothing}
-          <div class="input-group mb-2">
-            <input
-              type="text"
-              spellcheck="false"
-              class=${classMap({
-                'form-control': true,
-                'is-invalid': isTouchedInvalid,
-                'is-valid': isTouchedValid,
-              })}
-              id=${id}
-              aria-describedby=${feedbackId}
-              placeholder=${placeholder}
-              ?readonly=${isValidating}
-              .value=${helperValue ?? ''}
-              @input=${(event) => setHelperValue(event.target.value)}
-              @keydown=${this.handleKeydown}
-            />
-            <button
-              class="btn btn-primary app-append-button"
-              type="button"
-              ?disabled=${!this.canAddTag}
-              @click=${this.addTag}
-            >
-              ${t('form.tags.add')}
-            </button>
-            ${isValidating
-              ? html`
-                  <div id=${feedbackId} class="form-text">
-                    ${t('form.validating')}
-                  </div>
-                `
-              : isTouchedInvalid
-              ? html`
-                  <div id=${feedbackId} class="invalid-feedback">
-                    ${t(error)}
-                  </div>
-                `
-              : nothing}
-          </div>
-          <div>
-            ${value.map(
-              (tag) =>
-                html`
-                  <span
-                    class="d-inline-flex flex-row align-items-center badge rounded-pill bg-primary mb-1 pl-3"
-                    >${tag}
-                    <button
-                      type="button"
-                      class="btn-close btn-close-white ml-2"
-                      aria-label=${t('close')}
-                      @click=${() => this.removeTag(tag)}
-                    ></button
-                  ></span>
-                `,
-            )}
-          </div>
+        </div>
+        <div>
+          ${value.map(
+            (tag) =>
+              html`
+                <span
+                  class="d-inline-flex flex-row align-items-center badge rounded-pill bg-primary mb-1 pl-3"
+                  >${tag}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ml-2"
+                    aria-label=${t('close')}
+                    @click=${() => this.removeTag(tag)}
+                  ></button
+                ></span>
+              `,
+          )}
         </div>
       `;
     });
