@@ -1,0 +1,13 @@
+app-toast {
+  z-index: 2000;
+
+  .toast-header {
+    font-size: 1rem;
+  }
+
+  .toast-body {
+    font-size: 1rem;
+    white-space: break-spaces;
+    background-color: #ffffff;
+  }
+}

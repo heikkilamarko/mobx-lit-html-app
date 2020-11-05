@@ -31,6 +31,12 @@
   },
   {
     "id": 6,
+    "name": "Form",
+    "tagName": "app-form",
+    "props": {}
+  },
+  {
+    "id": 7,
     "name": "Unregistered",
     "tagName": "app-unregistered",
     "props": {}

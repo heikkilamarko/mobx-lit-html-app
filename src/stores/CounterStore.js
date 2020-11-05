@@ -8,7 +8,7 @@ export default class CounterStore {
 
   constructor() {
     makeObservable(this, {
-      value: observable,
+      value: observable.ref,
       progress: computed,
       setValue: action.bound,
       increment: action.bound,

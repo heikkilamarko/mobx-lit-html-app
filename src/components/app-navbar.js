@@ -1,69 +1,75 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { stores } from '../stores';
-import {
-  addRenderReaction,
-  clearReactions,
-  runDefaultPrevented as rdp,
-} from '../utils';
-import './app-locale-nav-item';
+import { addRenderReaction, clearReactions, preventDefault } from '../utils';
+import './app-locale-picker';
 import './app-clock';
 
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
-const NAV_ITEMS = [
-  {
-    titleKey: 'browse',
-    activeRouteNames: ['browse', 'detail'],
-    hrefFn: () => '/browse',
-    clickFn: () => stores.routeStore.navigate('browse'),
-  },
-  {
-    titleKey: 'counter',
-    activeRouteNames: ['counter'],
-    hrefFn: () => '/counter',
-    clickFn: () => stores.routeStore.navigate('counter'),
-  },
-  {
-    titleKey: 'jokes',
-    activeRouteNames: ['jokes'],
-    hrefFn: () => '/jokes',
-    clickFn: () => stores.routeStore.navigate('jokes'),
-  },
-  {
-    titleKey: 'datagrid',
-    activeRouteNames: ['datagrid'],
-    hrefFn: () => '/datagrid',
-    clickFn: () => stores.routeStore.navigate('datagrid'),
-  },
-  {
-    titleKey: 'charts',
-    activeRouteNames: ['charts'],
-    hrefFn: () => '/charts',
-    clickFn: () => stores.routeStore.navigate('charts'),
-  },
-  {
-    titleKey: 'widgets',
-    activeRouteNames: ['widgets'],
-    hrefFn: () => stores.widgetsStore.widgetRoute,
-    clickFn: () => stores.widgetsStore.navigate(),
-  },
-];
+function navItems() {
+  const {
+    routeStore: r,
+    widgetsStore: w,
+    i18nStore: { t },
+  } = stores;
 
-function navItem({ titleKey, activeRouteNames, hrefFn, clickFn }) {
-  const { t } = stores.i18nStore;
-  const route = stores.routeStore.route.name;
+  const id = w.widgetId ?? undefined;
 
+  return [
+    {
+      title: t('browse'),
+      active: ['browse', 'detail'].includes(r.routeName),
+      href: r.buildPath('browse'),
+      handleClick: () => r.navigate('browse'),
+    },
+    {
+      title: t('counter'),
+      active: ['counter'].includes(r.routeName),
+      href: r.buildPath('counter'),
+      handleClick: () => r.navigate('counter'),
+    },
+    {
+      title: t('jokes'),
+      active: ['jokes'].includes(r.routeName),
+      href: r.buildPath('jokes'),
+      handleClick: () => r.navigate('jokes'),
+    },
+    {
+      title: t('datagrid'),
+      active: ['datagrid'].includes(r.routeName),
+      href: r.buildPath('datagrid'),
+      handleClick: () => r.navigate('datagrid'),
+    },
+    {
+      title: t('charts'),
+      active: ['charts'].includes(r.routeName),
+      href: r.buildPath('charts'),
+      handleClick: () => r.navigate('charts'),
+    },
+    {
+      title: t('form'),
+      active: ['form'].includes(r.routeName),
+      href: r.buildPath('form'),
+      handleClick: () => r.navigate('form'),
+    },
+    {
+      title: t('widgets'),
+      active: ['widgets'].includes(r.routeName),
+      href: r.buildPath('widgets', { id }),
+      handleClick: () => r.navigate('widgets', { id }),
+    },
+  ].map(navItem);
+}
+
+function navItem({ title, active, href, handleClick }) {
   return html`
     <li class="nav-item">
       <a
-        class="${classMap({
-          'nav-link': true,
-          active: activeRouteNames.includes(route),
-        })}"
-        @click=${rdp(clickFn)}
-        href=${hrefFn()}
-        >${t(titleKey)}</a
+        class=${classMap({ 'nav-link': true, active })}
+        href=${href}
+        @click=${preventDefault(handleClick)}
+        >${title}</a
       >
     </li>
   `;
@@ -77,7 +83,9 @@ class AppNavbar extends HTMLElement {
           <div class="container-fluid">
             <a
               class="navbar-brand"
-              @click="${rdp(() => stores.routeStore.navigate('browse'))}"
+              @click="${preventDefault(() =>
+                stores.routeStore.navigate('browse'),
+              )}"
               href="/"
             >
               <img
@@ -102,13 +110,15 @@ class AppNavbar extends HTMLElement {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
-                ${NAV_ITEMS.map(navItem)}
+                ${navItems()}
               </ul>
               <div class="d-flex text-white py-2 mx-auto">
                 <app-clock></app-clock>
               </div>
               <ul class="navbar-nav">
-                <li is="app-locale-nav-item" class="nav-item dropdown"></li>
+                <li class="nav-item dropdown">
+                  <app-locale-picker></app-locale-picker>
+                </li>
                 <li class="nav-item">
                   <a
                     class="nav-link"

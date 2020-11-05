@@ -1,5 +1,6 @@
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/toast';
 import { createStores } from './stores';
 import { configureMobX, renderApp, renderAppStartupError } from './utils';
 import './components/app-root';

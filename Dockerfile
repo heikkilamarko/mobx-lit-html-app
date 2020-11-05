@@ -1,12 +1,12 @@
 # Build
 
-FROM node:14.14.0 AS build
+FROM node:14.15.0 AS build
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 

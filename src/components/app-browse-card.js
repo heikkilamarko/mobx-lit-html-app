@@ -1,25 +1,14 @@
-import { html } from 'lit-html';
-import { makeObservable, observable } from 'mobx';
-import { addRenderReaction, clearReactions } from '../utils';
+import { html, render } from 'lit-html';
+import { stores } from '../stores';
 import './app-browse-card.scss';
 
 class AppBrowseCard extends HTMLElement {
-  data;
-
-  constructor() {
-    super();
-    makeObservable(this, {
-      data: observable.ref,
-    });
-  }
-
   connectedCallback() {
-    addRenderReaction(
-      this,
-      () => html`
+    render(
+      html`
         <a
           class="card text-center app-browse-card"
-          href="/browse/${this.data.id}"
+          href=${stores.routeStore.buildPath('detail', { id: this.data.id })}
         >
           <div class="card-body">
             <h4 class="card-title text-truncate">${this.data.name}</h4>
@@ -27,11 +16,8 @@ class AppBrowseCard extends HTMLElement {
           </div>
         </a>
       `,
+      this,
     );
-  }
-
-  disconnectedCallback() {
-    clearReactions(this);
   }
 }
 

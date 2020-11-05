@@ -8,9 +8,7 @@ export default class WidgetsStore {
   isLoading = false;
   error = null;
 
-  constructor(routeStore) {
-    this.routeStore = routeStore;
-
+  constructor() {
     makeObservable(this, {
       widgets: observable.ref,
       widgetId: observable.ref,
@@ -19,13 +17,11 @@ export default class WidgetsStore {
       hasWidgets: computed,
       hasError: computed,
       widgetEl: computed,
-      widgetRoute: computed,
       setWidgets: action.bound,
       setWidgetId: action.bound,
       setLoading: action.bound,
       setError: action.bound,
       load: action.bound,
-      navigate: action.bound,
     });
   }
 
@@ -45,22 +41,12 @@ export default class WidgetsStore {
     return createElement(widget);
   }
 
-  get widgetRoute() {
-    const id = this.widgetId;
-    return id != null ? `/widgets?id=${id}` : '/widgets';
-  }
-
   setWidgets(widgets) {
     this.widgets = widgets;
   }
 
   setWidgetId(widgetId) {
-    this.widgetId =
-      widgetId != null
-        ? Number.isInteger(+widgetId)
-          ? +widgetId
-          : null
-        : null;
+    this.widgetId = this.parseWidgetId(widgetId);
   }
 
   setLoading(isLoading) {
@@ -73,10 +59,12 @@ export default class WidgetsStore {
 
   async load(refresh = false) {
     if (this.hasWidgets && !refresh) return;
+
     try {
-      this.setLoading(true);
       this.setError(null);
+      this.setLoading(true);
       const widgets = await getWidgets();
+      this.setLoading(false);
       this.setWidgets(widgets);
     } catch (error) {
       this.setError(error);
@@ -85,10 +73,7 @@ export default class WidgetsStore {
     }
   }
 
-  navigate(widgetId = null) {
-    const id =
-      widgetId == null ? this.widgetId ?? undefined : widgetId || undefined;
-
-    this.routeStore.navigate('widgets', { id });
+  parseWidgetId(value) {
+    return value != null ? (Number.isInteger(+value) ? +value : null) : null;
   }
 }

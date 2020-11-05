@@ -27,7 +27,7 @@ class AppCounterModal extends HTMLElement {
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-light"
+                  class="btn btn-outline-primary"
                   data-dismiss="modal"
                 >
                   ${t('cancel')}

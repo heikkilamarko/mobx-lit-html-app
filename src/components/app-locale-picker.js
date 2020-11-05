@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 
-class AppLocaleNavItem extends HTMLLIElement {
+class AppLocalePicker extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this, () => {
       const { locale, localesExcludeCurrent } = stores.i18nStore;
@@ -18,7 +18,10 @@ class AppLocaleNavItem extends HTMLLIElement {
         >
           ${locale}
         </a>
-        <ul class="dropdown-menu" aria-labelledby="localeDropdown">
+        <ul
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="localeDropdown"
+        >
           ${localesExcludeCurrent.map(
             (l) => html`
               <li>
@@ -46,6 +49,4 @@ class AppLocaleNavItem extends HTMLLIElement {
   }
 }
 
-customElements.define('app-locale-nav-item', AppLocaleNavItem, {
-  extends: 'li',
-});
+customElements.define('app-locale-picker', AppLocalePicker);

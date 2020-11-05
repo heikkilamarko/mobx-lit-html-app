@@ -26,7 +26,7 @@ export async function getJoke(category) {
   let url = 'https://api.chucknorris.io/jokes/random';
 
   if (category) {
-    url += `?category=${category}`;
+    url += `?category=${encodeURIComponent(category)}`;
   }
 
   const { data } = await axios.get(url);

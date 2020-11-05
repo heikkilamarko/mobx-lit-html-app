@@ -78,7 +78,7 @@ export function addWatchReaction(
 }
 
 export function clearReactions(target) {
-  target[R] && target[R].forEach((r) => r());
+  target[R]?.forEach((r) => r());
   target[R] = [];
 }
 
@@ -87,7 +87,7 @@ export function addInterval(target, fn, delay) {
 }
 
 export function clearIntervals(target) {
-  target[I] && target[I].forEach((h) => clearInterval(h));
+  target[I]?.forEach((h) => clearInterval(h));
   target[I] = [];
 }
 
@@ -97,10 +97,10 @@ export function analyticsPageview(path) {
   }
 }
 
-export function runDefaultPrevented(fn) {
-  return (event) => {
+export function preventDefault(fn) {
+  return function (event) {
     event.preventDefault();
-    return fn(event);
+    return fn.call(this, event);
   };
 }
 
@@ -109,4 +109,8 @@ export function getPrimaryColor() {
     .getComputedStyle(document.body)
     .getPropertyValue('--bs-primary')
     .trim();
+}
+
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

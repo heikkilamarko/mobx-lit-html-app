@@ -49,10 +49,11 @@ export default class BrowseStore {
 
   async load(itemId = null) {
     try {
-      this.setLoading(true);
       this.setError(null);
+      this.setLoading(true);
       this.setSelectedItemId(itemId);
       const items = await getBrowseItems();
+      this.setLoading(false);
       this.setItems(items);
     } catch (error) {
       this.setError(error);
