@@ -20,8 +20,6 @@ class AppFormRoleField extends HTMLElement {
         isTouched,
         isValid,
         isValidating,
-        setTouched,
-        setValue,
       } = this.field;
 
       const feedbackId = `${id}_feedback`;
@@ -56,12 +54,8 @@ class AppFormRoleField extends HTMLElement {
             id=${id}
             aria-describedby=${feedbackId}
             placeholder=${placeholder}
-            ?readonly=${isValidating}
             .value=${value ?? ''}
-            @input=${(event) => {
-              setTouched();
-              setValue(event.target.value);
-            }}
+            @input=${this.handleInput}
           />
           <button
             class="btn btn-danger app-append-button"
@@ -88,6 +82,18 @@ class AppFormRoleField extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  handleInput(event) {
+    const { id, value, data, isValidating, setValue, setTouched } = this.field;
+    const isTouchDisabled = !!data?.isTouchDisabled;
+
+    if (isValidating) {
+      this.querySelector(`#${id}`).value = value;
+    } else {
+      !isTouchDisabled && setTouched();
+      setValue(event.target.value);
+    }
   }
 }
 
