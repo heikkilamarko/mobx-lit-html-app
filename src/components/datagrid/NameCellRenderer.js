@@ -4,7 +4,7 @@ import './NameCellRenderer.css';
 
 export default class NameCellRenderer {
   init(params) {
-    this.gui = document.createElement('div');
+    this.gui = document.createElement('span');
     this.gui.classList.add('app-name-cell-renderer');
     this._renderGui(params.value);
   }
