@@ -27,19 +27,17 @@ class AppForm extends HTMLElement {
           <app-form-text-field .field=${age}></app-form-text-field>
           <app-form-text-field .field=${username}></app-form-text-field>
           <app-form-tags-field .field=${tags}></app-form-tags-field>
-          <div>
-            ${repeat(
-              roles.roles,
-              (role) => role.id,
-              (role) =>
-                html`
-                  <app-form-role-field
-                    .field=${role}
-                    @remove=${() => roles.removeRole(role)}
-                  ></app-form-role-field>
-                `,
-            )}
-          </div>
+          ${repeat(
+            roles.fields,
+            (field) => field.id,
+            (field) =>
+              html`
+                <app-form-role-field
+                  .field=${field}
+                  @remove=${() => roles.removeRole(field)}
+                ></app-form-role-field>
+              `,
+          )}
           <div class="d-flex flex-row flex-wrap justify-content-between mt-5">
             <button
               type="button"

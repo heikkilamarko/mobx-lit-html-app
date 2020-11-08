@@ -212,7 +212,12 @@ export default class FormStore {
         roles: this.fields.roles.value.join(', '),
       };
 
-      await sleep(500); // Simulate async work.
+      this.toastStore.show({
+        title: t('form.submit.submitting.title'),
+        body: t('form.submit.submitting.body'),
+      });
+
+      await sleep(2000); // Simulate async work.
 
       this.toastStore.showSuccess({
         title: t('form.submit.success.title'),
