@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "ag-grid-community": "24.1.0",
-    "apexcharts": "3.22.0",
+    "apexcharts": "3.22.2",
     "axios": "0.21.0",
     "bootstrap": "next",
     "lit-html": "next-major",
@@ -33,7 +33,7 @@
     "@snowpack/plugin-run-script": "2.2.0",
     "@snowpack/plugin-webpack": "2.1.1",
     "autoprefixer": "10.0.1",
-    "compression-webpack-plugin": "6.0.5",
+    "compression-webpack-plugin": "6.1.0",
     "postcss": "8.1.6",
     "postcss-cli": "8.2.0",
     "prettier": "2.1.2",
