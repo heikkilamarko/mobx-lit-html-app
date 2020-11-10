@@ -63,6 +63,7 @@ class AppDatagrid extends HTMLElement {
 function createGridDiv() {
   const div = document.createElement('div');
   div.classList.add('ag-theme-alpine');
+  div.style.height = '40rem';
   return div;
 }
 
@@ -90,8 +91,8 @@ function createGrid(gridDiv, rowData) {
     columnDefs,
     rowData,
     pagination: true,
-    paginationPageSize: 10,
-    domLayout: 'autoHeight',
+    paginationPageSize: 50,
+    // domLayout: 'autoHeight',
     localeTextFunc: localeTextFunc.bind(this),
     onFirstDataRendered: onFirstDataRendered.bind(this),
   };
