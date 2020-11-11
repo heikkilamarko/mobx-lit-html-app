@@ -42,7 +42,7 @@ class AppFormRoleField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group mb-2">
+        <div class="input-group has-validation mb-2">
           <input
             type="text"
             spellcheck="false"
@@ -58,7 +58,7 @@ class AppFormRoleField extends HTMLElement {
             @input=${this.handleInput}
           />
           <button
-            class="btn btn-danger app-append-button"
+            class="btn btn-danger"
             type="button"
             @click=${() => this.dispatchEvent(new Event('remove'))}
           >

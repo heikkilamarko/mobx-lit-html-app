@@ -56,7 +56,7 @@ class AppFormTagsField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group mb-2">
+        <div class="input-group has-validation mb-2">
           <input
             type="text"
             spellcheck="false"
@@ -81,7 +81,7 @@ class AppFormTagsField extends HTMLElement {
               `
             : nothing}
           <button
-            class="btn btn-primary app-append-button"
+            class="btn btn-primary"
             type="button"
             ?disabled=${!this.canAddTag}
             @click=${this.addTag}
