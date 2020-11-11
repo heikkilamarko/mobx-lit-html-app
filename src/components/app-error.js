@@ -25,7 +25,7 @@ class AppError extends HTMLElement {
           <div class="card-body">
             <h1 class="card-title display-1">${this.title || t('error')}</h1>
             ${this.text
-              ? html`<p class="card-text font-weight-lighter">${this.text}</p>`
+              ? html`<p class="card-text fw-lighter">${this.text}</p>`
               : nothing}
           </div>
         </div>
