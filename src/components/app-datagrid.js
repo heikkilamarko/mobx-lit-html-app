@@ -3,6 +3,8 @@ import { stores } from '../stores';
 import { addWatchReaction, clearReactions } from '../utils';
 import NameCellRenderer from './datagrid/NameCellRenderer';
 
+const APP_DATAGRID_STORAGE_KEY = 'app-datagrid';
+
 class AppDatagrid extends HTMLElement {
   connectedCallback() {
     this.gridDiv = createGridDiv();
@@ -38,7 +40,7 @@ class AppDatagrid extends HTMLElement {
     if (!this.grid) return;
 
     sessionStorage.setItem(
-      'app-gridstate',
+      APP_DATAGRID_STORAGE_KEY,
       JSON.stringify({
         columnState: this.gridColumnApi.getColumnState(),
         filterModel: this.gridApi.getFilterModel(),
@@ -63,7 +65,7 @@ class AppDatagrid extends HTMLElement {
 function createGridDiv() {
   const div = document.createElement('div');
   div.classList.add('ag-theme-alpine');
-  div.style.height = '40rem';
+  div.style.height = '36rem';
   return div;
 }
 
@@ -109,7 +111,7 @@ function localeTextFunc(key, defaultValue) {
 }
 
 function onFirstDataRendered({ api, columnApi }) {
-  let state = sessionStorage.getItem('app-gridstate');
+  let state = sessionStorage.getItem(APP_DATAGRID_STORAGE_KEY);
 
   if (state) {
     state = JSON.parse(state);

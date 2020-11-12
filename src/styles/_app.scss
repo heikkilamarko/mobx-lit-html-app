@@ -13,10 +13,3 @@ body {
 .form-control[readonly] {
   background-color: $input-bg;
 }
-
-.input-group.has-validation {
-  button {
-    border-bottom-right-radius: $border-radius !important;
-    border-top-right-radius: $border-radius !important;
-  }
-}

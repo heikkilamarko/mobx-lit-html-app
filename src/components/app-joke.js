@@ -15,7 +15,7 @@ class AppJoke extends HTMLElement {
   connectedCallback() {
     addRenderReaction(
       this,
-      () => html`<h1 class="display-6">${this.text}</h1>`,
+      () => html`<h1 class="display-6 text-primary">${this.text}</h1>`,
     );
 
     addWatchReaction(

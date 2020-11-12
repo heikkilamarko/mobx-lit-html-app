@@ -56,7 +56,13 @@ class AppFormTagsField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group has-validation mb-2">
+        <div
+          class=${classMap({
+            'input-group': true,
+            'mb-2': true,
+            'has-validation': isValidating || isTouchedInvalid,
+          })}
+        >
           <input
             type="text"
             spellcheck="false"
@@ -73,13 +79,6 @@ class AppFormTagsField extends HTMLElement {
             @input=${(event) => setHelperValue(event.target.value)}
             @keydown=${this.handleKeydown}
           />
-          ${datalist
-            ? html`
-                <datalist id="tags-datalist">
-                  ${datalist.map((item) => html`<option>${item}</option>`)}
-                </datalist>
-              `
-            : nothing}
           <button
             class="btn btn-primary"
             type="button"
@@ -117,6 +116,13 @@ class AppFormTagsField extends HTMLElement {
               `,
           )}
         </div>
+        ${datalist
+          ? html`
+              <datalist id="tags-datalist">
+                ${datalist.map((item) => html`<option>${item}</option>`)}
+              </datalist>
+            `
+          : nothing}
       `;
     });
   }

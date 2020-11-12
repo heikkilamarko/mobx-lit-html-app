@@ -42,7 +42,13 @@ class AppFormRoleField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group has-validation mb-2">
+        <div
+          class=${classMap({
+            'input-group': true,
+            'mb-2': true,
+            'has-validation': isValidating || isTouchedInvalid,
+          })}
+        >
           <input
             type="text"
             spellcheck="false"
