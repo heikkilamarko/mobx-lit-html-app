@@ -1,3 +1,5 @@
+/** @type {import("snowpack").SnowpackUserConfig } */
+
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
@@ -35,4 +37,22 @@ module.exports = {
       },
     ],
   ],
+  install: [
+    /* ... */
+  ],
+  installOptions: {
+    /* ... */
+  },
+  devOptions: {
+    /* ... */
+  },
+  buildOptions: {
+    /* ... */
+  },
+  proxy: {
+    /* ... */
+  },
+  alias: {
+    /* ... */
+  },
 };
