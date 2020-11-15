@@ -41,7 +41,7 @@ export function renderAppStartupError({
       <main
         class="px-4 py-5 overflow-auto d-flex flex-column align-items-center vh-100 bg-danger text-white"
       >
-        <h1 class="display-1 font-weight-lighter">${title}</h1>
+        <h1 class="display-1 fw-lighter">${title}</h1>
         ${message ? html`<p class="pt-2">${message}</p>` : nothing}
       </main>
     `,

@@ -27,14 +27,14 @@ class AppCounterModal extends HTMLElement {
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-primary rounded-pill"
                   data-dismiss="modal"
                 >
                   ${t('cancel')}
                 </button>
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-primary rounded-pill"
                   @click=${this.handleOk}
                 >
                   ${t('ok')}

@@ -20,15 +20,13 @@ class AppFormTextField extends HTMLElement {
         isTouched,
         isValid,
         isValidating,
-        setValue,
-        setTouched,
       } = this.field;
 
       const feedbackId = `${id}_feedback`;
 
       const label = data?.label ? t(data.label) : undefined;
       const isRequired = !!data?.isRequired;
-      const isTouchDisabled = !!data?.isTouchDisabled;
+
       const placeholder = data?.placeholder ? t(data.placeholder) : undefined;
 
       const isTouchedInvalid = !isValid && isTouched && !isValidating;
@@ -56,12 +54,8 @@ class AppFormTextField extends HTMLElement {
           id=${id}
           aria-describedby=${feedbackId}
           placeholder=${placeholder}
-          ?readonly=${isValidating}
           .value=${value}
-          @input=${(event) => {
-            !isTouchDisabled && setTouched();
-            setValue(event.target.value);
-          }}
+          @input=${this.handleInput}
         />
         ${isValidating
           ? html`
@@ -80,6 +74,18 @@ class AppFormTextField extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  handleInput(event) {
+    const { id, value, data, isValidating, setValue, setTouched } = this.field;
+    const isTouchDisabled = !!data?.isTouchDisabled;
+
+    if (isValidating) {
+      this.querySelector(`#${id}`).value = value;
+    } else {
+      !isTouchDisabled && setTouched();
+      setValue(event.target.value);
+    }
   }
 }
 

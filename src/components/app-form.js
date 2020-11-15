@@ -27,23 +27,21 @@ class AppForm extends HTMLElement {
           <app-form-text-field .field=${age}></app-form-text-field>
           <app-form-text-field .field=${username}></app-form-text-field>
           <app-form-tags-field .field=${tags}></app-form-tags-field>
-          <div>
-            ${repeat(
-              roles.roles,
-              (role) => role.id,
-              (role) =>
-                html`
-                  <app-form-role-field
-                    .field=${role}
-                    @remove=${() => roles.removeRole(role)}
-                  ></app-form-role-field>
-                `,
-            )}
-          </div>
+          ${repeat(
+            roles.fields,
+            (field) => field.id,
+            (field) =>
+              html`
+                <app-form-role-field
+                  .field=${field}
+                  @remove=${() => roles.removeRole(field)}
+                ></app-form-role-field>
+              `,
+          )}
           <div class="d-flex flex-row flex-wrap justify-content-between mt-5">
             <button
               type="button"
-              class="btn btn-primary mt-2"
+              class="btn btn-primary rounded-pill mt-2"
               ?disabled=${isSubmitting}
               @click=${roles.addRole}
             >
@@ -52,7 +50,7 @@ class AppForm extends HTMLElement {
             <div>
               <button
                 type="button"
-                class="btn btn-outline-primary mr-2 mt-2"
+                class="btn btn-outline-primary rounded-pill mr-2 mt-2"
                 ?disabled=${!canReset}
                 @click=${reset}
               >
@@ -60,7 +58,7 @@ class AppForm extends HTMLElement {
               </button>
               <button
                 type="submit"
-                class="btn btn-primary mt-2"
+                class="btn btn-primary rounded-pill mt-2"
                 ?disabled=${!canSubmit}
               >
                 ${t('form.submit')}

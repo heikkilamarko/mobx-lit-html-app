@@ -4,11 +4,11 @@ import { validateRequired } from '../../validators';
 import FieldStore from './FieldStore';
 
 export default class RolesStore {
-  roles = [];
+  fields = [];
 
   constructor() {
     makeObservable(this, {
-      roles: observable.ref,
+      fields: observable.ref,
       value: computed,
       isDirty: computed,
       isValid: computed,
@@ -26,24 +26,24 @@ export default class RolesStore {
   }
 
   get value() {
-    return this.roles.map((role) => role.value.trim());
+    return this.fields.map(({ value }) => value.trim());
   }
 
   get isDirty() {
-    return !!this.roles.length;
+    return !!this.fields.length;
   }
 
   get isValid() {
-    return this.roles.every((role) => role.isValid);
+    return this.fields.every(({ isValid }) => isValid);
   }
 
   get isValidating() {
-    return this.roles.some((role) => role.isValidating);
+    return this.fields.some(({ isValidating }) => isValidating);
   }
 
   addRole() {
-    this.roles = [
-      ...this.roles,
+    this.fields = [
+      ...this.fields,
       new FieldStore({
         id: uniqueId('role_'),
         value: '',
@@ -56,26 +56,26 @@ export default class RolesStore {
     ];
   }
 
-  removeRole(role) {
-    this.roles = this.roles.filter((r) => r !== role);
+  removeRole(field) {
+    this.fields = this.fields.filter((f) => f !== field);
   }
 
   reset() {
-    this.roles = [];
+    this.fields = [];
   }
 
   validate() {
-    this.roles.forEach((role) => {
-      let error = validateRequired(role.value);
+    this.fields.forEach((field) => {
+      let error = validateRequired(field.value);
       if (
         !error &&
-        this.roles.some(
-          (r) => r !== role && r.value?.trim() === role.value?.trim(),
+        this.fields.some(
+          (f) => f !== field && f.value?.trim() === field.value?.trim(),
         )
       ) {
         error = 'form.validation.duplicate';
       }
-      role.setError(error);
+      field.setError(error);
     });
   }
 }

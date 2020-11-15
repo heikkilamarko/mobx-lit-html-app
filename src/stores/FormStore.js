@@ -11,6 +11,8 @@ import { FieldStore, RolesStore } from './form';
 
 const DEBOUNCE_WAIT = 800;
 
+const TAGS_DATALIST = ['demo', 'dev', 'staging', 'prod'];
+
 export default class FormStore {
   fields;
   isValidatingUsername = false;
@@ -38,6 +40,7 @@ export default class FormStore {
       validateUsername: action.bound,
       validateTags: action.bound,
       validateRoles: action.bound,
+      updateTagsDatalist: action.bound,
     });
 
     this.fields = {
@@ -85,6 +88,7 @@ export default class FormStore {
           label: 'form.tags',
           placeholder: 'form.tags.tag',
           isRequired: true,
+          datalist: TAGS_DATALIST,
         },
         isDirtyFn: (a, b) => !isEqual(a, b),
       }),
@@ -108,7 +112,10 @@ export default class FormStore {
 
     reaction(
       () => this.tags,
-      () => this.validateTags(),
+      () => {
+        this.validateTags();
+        this.updateTagsDatalist();
+      },
     );
 
     this.validate();
@@ -195,6 +202,14 @@ export default class FormStore {
     this.fields.roles.validate();
   }
 
+  updateTagsDatalist() {
+    const { tags } = this.fields;
+    tags.data = {
+      ...tags.data,
+      datalist: TAGS_DATALIST.filter((i) => !tags.value.includes(i)),
+    };
+  }
+
   async submit() {
     if (!this.canSubmit) return;
 
@@ -212,7 +227,12 @@ export default class FormStore {
         roles: this.fields.roles.value.join(', '),
       };
 
-      await sleep(500); // Simulate async work.
+      this.toastStore.show({
+        title: t('form.submit.submitting.title'),
+        body: t('form.submit.submitting.body'),
+      });
+
+      await sleep(2000); // Simulate async work.
 
       this.toastStore.showSuccess({
         title: t('form.submit.success.title'),

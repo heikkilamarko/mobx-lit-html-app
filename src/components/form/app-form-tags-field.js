@@ -40,6 +40,7 @@ class AppFormTagsField extends HTMLElement {
       const label = data?.label ? t(data.label) : undefined;
       const isRequired = !!data?.isRequired;
       const placeholder = data?.placeholder ? t(data.placeholder) : undefined;
+      const datalist = data?.datalist;
 
       const isTouchedInvalid = !isValid && isTouched && !isValidating;
       const isTouchedValid = isValid && isTouched && !isValidating;
@@ -55,7 +56,13 @@ class AppFormTagsField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group mb-2">
+        <div
+          class=${classMap({
+            'input-group': true,
+            'mb-2': true,
+            'has-validation': isValidating || isTouchedInvalid,
+          })}
+        >
           <input
             type="text"
             spellcheck="false"
@@ -65,15 +72,15 @@ class AppFormTagsField extends HTMLElement {
               'is-valid': isTouchedValid,
             })}
             id=${id}
+            list="tags-datalist"
             aria-describedby=${feedbackId}
             placeholder=${placeholder}
-            ?readonly=${isValidating}
             .value=${helperValue ?? ''}
             @input=${(event) => setHelperValue(event.target.value)}
             @keydown=${this.handleKeydown}
           />
           <button
-            class="btn btn-primary app-append-button"
+            class="btn btn-primary"
             type="button"
             ?disabled=${!this.canAddTag}
             @click=${this.addTag}
@@ -109,6 +116,13 @@ class AppFormTagsField extends HTMLElement {
               `,
           )}
         </div>
+        ${datalist
+          ? html`
+              <datalist id="tags-datalist">
+                ${datalist.map((item) => html`<option>${item}</option>`)}
+              </datalist>
+            `
+          : nothing}
       `;
     });
   }

@@ -2,7 +2,6 @@ import { html, nothing } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, clearReactions } from '../utils';
 import './app-joke';
-import './app-jokes.scss';
 
 class AppJokes extends HTMLElement {
   connectedCallback() {
@@ -23,7 +22,7 @@ class AppJokes extends HTMLElement {
 
       return isReady
         ? html`
-            <div class="mx-auto app-jokes">
+            <div class="mx-auto">
               <div class="input-group mt-3 mb-5">
                 <select
                   class="form-select form-select-lg"

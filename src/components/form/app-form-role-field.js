@@ -20,8 +20,6 @@ class AppFormRoleField extends HTMLElement {
         isTouched,
         isValid,
         isValidating,
-        setTouched,
-        setValue,
       } = this.field;
 
       const feedbackId = `${id}_feedback`;
@@ -44,7 +42,13 @@ class AppFormRoleField extends HTMLElement {
               </label>
             `
           : nothing}
-        <div class="input-group mb-2">
+        <div
+          class=${classMap({
+            'input-group': true,
+            'mb-2': true,
+            'has-validation': isValidating || isTouchedInvalid,
+          })}
+        >
           <input
             type="text"
             spellcheck="false"
@@ -56,15 +60,11 @@ class AppFormRoleField extends HTMLElement {
             id=${id}
             aria-describedby=${feedbackId}
             placeholder=${placeholder}
-            ?readonly=${isValidating}
             .value=${value ?? ''}
-            @input=${(event) => {
-              setTouched();
-              setValue(event.target.value);
-            }}
+            @input=${this.handleInput}
           />
           <button
-            class="btn btn-danger app-append-button"
+            class="btn btn-danger"
             type="button"
             @click=${() => this.dispatchEvent(new Event('remove'))}
           >
@@ -88,6 +88,18 @@ class AppFormRoleField extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  handleInput(event) {
+    const { id, value, data, isValidating, setValue, setTouched } = this.field;
+    const isTouchDisabled = !!data?.isTouchDisabled;
+
+    if (isValidating) {
+      this.querySelector(`#${id}`).value = value;
+    } else {
+      !isTouchDisabled && setTouched();
+      setValue(event.target.value);
+    }
   }
 }
 

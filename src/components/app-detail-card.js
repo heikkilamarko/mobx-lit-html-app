@@ -30,7 +30,7 @@ class AppDetailCard extends HTMLElement {
               href="${this.data.homepage_url}"
               target="_blank"
               rel="noreferrer"
-              class="btn btn-primary"
+              class="btn btn-primary rounded-pill"
             >
               ${t('browse.detail.homepage')}
               ${boxArrowUpRight('align-text-top ml-1')}
@@ -38,7 +38,7 @@ class AppDetailCard extends HTMLElement {
             <button
               aria-label=${t('browse.detail.back')}
               type="button"
-              class="btn btn-outline-primary float-right"
+              class="btn btn-outline-primary float-right rounded-pill"
               @click=${stores.routeStore.navigateBack}
             >
               ${arrowLeft('align-text-bottom')}
