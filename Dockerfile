@@ -15,7 +15,7 @@ RUN rm -rf build/__snowpack__ build/_dist_ build/web_modules
 
 # Runtime
 
-FROM nginx:1.19.3-alpine AS runtime
+FROM nginx:1.19.4-alpine AS runtime
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
