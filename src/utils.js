@@ -59,6 +59,7 @@ export function addReaction(target, reactionDisposer) {
 }
 
 export function addRenderReaction(target, templateFn, options = undefined) {
+  templateFn ??= target.render.bind(target);
   addReaction(
     target,
     autorun(

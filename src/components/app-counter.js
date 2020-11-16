@@ -9,73 +9,7 @@ import './app-counter.css';
 
 class AppCounter extends HTMLElement {
   connectedCallback() {
-    const { t } = stores.i18nStore;
-
-    addRenderReaction(this, () => {
-      const { value, progress, minValue, maxValue } = stores.counterStore;
-
-      return html`
-        <div class="card mx-auto app-counter">
-          <div class="card-body">
-            <h1
-              class=${classMap({
-                'card-title': true,
-                'display-1': true,
-                'text-danger': value < 0,
-                'text-primary': value === 0,
-                'text-success': 0 < value,
-              })}
-            >
-              ${value}
-              ${value === minValue
-                ? html`<span class="text-muted display-6">min</span>`
-                : value === maxValue
-                ? html`<span class="text-muted display-6">max</span>`
-                : nothing}
-            </h1>
-            <div class="progress mb-5" style="height:4px">
-              <div
-                class=${classMap({
-                  'progress-bar': true,
-                  'bg-danger': value < 0,
-                  'bg-success': 0 < value,
-                })}
-                role="progressbar"
-                style="width: ${progress}%"
-                aria-valuenow=${value}
-                aria-valuemin=${minValue}
-                aria-valuemax=${maxValue}
-              ></div>
-            </div>
-            <button
-              aria-label=${t('counter.decrement')}
-              class="btn btn-link text-danger p-0 mr-4"
-              ?disabled=${value === minValue}
-              @click="${this.handleDecrement}"
-            >
-              ${dashCircle('app-counter__icon')}
-            </button>
-            <button
-              aria-label=${t('counter.increment')}
-              class="btn btn-link text-success p-0"
-              ?disabled=${value === maxValue}
-              @click="${this.handleIncrement}"
-            >
-              ${plusCircle('app-counter__icon')}
-            </button>
-            <button
-              aria-label=${t('counter.reset')}
-              class="btn btn-link float-right p-0"
-              ?disabled=${value === 0}
-              @click=${this.handleReset}
-            >
-              ${xCircle('app-counter__icon')}
-            </button>
-          </div>
-        </div>
-        <app-counter-modal @ok=${this.handleResetOk}></app-counter-modal>
-      `;
-    });
+    addRenderReaction(this);
   }
 
   disconnectedCallback() {
@@ -84,6 +18,73 @@ class AppCounter extends HTMLElement {
     this.modal?.hide();
     this.modal?.dispose();
     this.modal = undefined;
+  }
+
+  render() {
+    const { t } = stores.i18nStore;
+    const { value, progress, minValue, maxValue } = stores.counterStore;
+
+    return html`
+      <div class="card mx-auto app-counter">
+        <div class="card-body">
+          <h1
+            class=${classMap({
+              'card-title': true,
+              'display-1': true,
+              'text-danger': value < 0,
+              'text-primary': value === 0,
+              'text-success': 0 < value,
+            })}
+          >
+            ${value}
+            ${value === minValue
+              ? html`<span class="text-muted display-6">min</span>`
+              : value === maxValue
+              ? html`<span class="text-muted display-6">max</span>`
+              : nothing}
+          </h1>
+          <div class="progress mb-5" style="height:4px">
+            <div
+              class=${classMap({
+                'progress-bar': true,
+                'bg-danger': value < 0,
+                'bg-success': 0 < value,
+              })}
+              role="progressbar"
+              style="width: ${progress}%"
+              aria-valuenow=${value}
+              aria-valuemin=${minValue}
+              aria-valuemax=${maxValue}
+            ></div>
+          </div>
+          <button
+            aria-label=${t('counter.decrement')}
+            class="btn btn-link text-danger p-0 mr-4"
+            ?disabled=${value === minValue}
+            @click="${this.handleDecrement}"
+          >
+            ${dashCircle('app-counter__icon')}
+          </button>
+          <button
+            aria-label=${t('counter.increment')}
+            class="btn btn-link text-success p-0"
+            ?disabled=${value === maxValue}
+            @click="${this.handleIncrement}"
+          >
+            ${plusCircle('app-counter__icon')}
+          </button>
+          <button
+            aria-label=${t('counter.reset')}
+            class="btn btn-link float-right p-0"
+            ?disabled=${value === 0}
+            @click=${this.handleReset}
+          >
+            ${xCircle('app-counter__icon')}
+          </button>
+        </div>
+      </div>
+      <app-counter-modal @ok=${this.handleResetOk}></app-counter-modal>
+    `;
   }
 
   handleDecrement() {

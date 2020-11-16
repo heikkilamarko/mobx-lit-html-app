@@ -77,67 +77,69 @@ function navItem({ title, active, href, handleClick }) {
 
 class AppNavbar extends HTMLElement {
   connectedCallback() {
-    addRenderReaction(this, () => {
-      return html`
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <div class="container-fluid">
-            <a
-              class="navbar-brand"
-              @click="${preventDefault(() =>
-                stores.routeStore.navigate('browse'),
-              )}"
-              href="/"
-            >
-              <img
-                src="/android-chrome-192x192.png"
-                alt="App brand image (rocket)"
-                width="24"
-                height="24"
-                class="d-inline-block align-text-bottom mr-2"
-              />
-              Demo App
-            </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                ${navItems()}
-              </ul>
-              <div class="d-flex text-white py-2 mx-auto">
-                <app-clock></app-clock>
-              </div>
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                  <app-locale-picker></app-locale-picker>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    target="_blank"
-                    rel="noreferrer"
-                    href=${GITHUB_URL}
-                    >GitHub</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      `;
-    });
+    addRenderReaction(this);
   }
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    return html`
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a
+            class="navbar-brand"
+            @click="${preventDefault(() =>
+              stores.routeStore.navigate('browse'),
+            )}"
+            href="/"
+          >
+            <img
+              src="/android-chrome-192x192.png"
+              alt="App brand image (rocket)"
+              width="24"
+              height="24"
+              class="d-inline-block align-text-bottom mr-2"
+            />
+            Demo App
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              ${navItems()}
+            </ul>
+            <div class="d-flex text-white py-2 mx-auto">
+              <app-clock></app-clock>
+            </div>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <app-locale-picker></app-locale-picker>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  target="_blank"
+                  rel="noreferrer"
+                  href=${GITHUB_URL}
+                  >GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    `;
   }
 }
 

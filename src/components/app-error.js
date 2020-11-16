@@ -17,24 +17,26 @@ class AppError extends HTMLElement {
   }
 
   connectedCallback() {
-    const { t } = stores.i18nStore;
-
-    addRenderReaction(this, () => {
-      return html`
-        <div class="card mx-auto text-center text-danger app-error">
-          <div class="card-body">
-            <h1 class="card-title display-1">${this.title || t('error')}</h1>
-            ${this.text
-              ? html`<p class="card-text fw-lighter">${this.text}</p>`
-              : nothing}
-          </div>
-        </div>
-      `;
-    });
+    addRenderReaction(this);
   }
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    const { t } = stores.i18nStore;
+
+    return html`
+      <div class="card mx-auto text-center text-danger app-error">
+        <div class="card-body">
+          <h1 class="card-title display-1">${this.title || t('error')}</h1>
+          ${this.text
+            ? html`<p class="card-text fw-lighter">${this.text}</p>`
+            : nothing}
+        </div>
+      </div>
+    `;
   }
 }
 

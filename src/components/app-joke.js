@@ -13,10 +13,7 @@ class AppJoke extends HTMLElement {
   }
 
   connectedCallback() {
-    addRenderReaction(
-      this,
-      () => html`<h1 class="display-6 text-primary">${this.text}</h1>`,
-    );
+    addRenderReaction(this);
 
     addWatchReaction(
       this,
@@ -37,6 +34,10 @@ class AppJoke extends HTMLElement {
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    return html`<h1 class="display-6 text-primary">${this.text}</h1>`;
   }
 }
 

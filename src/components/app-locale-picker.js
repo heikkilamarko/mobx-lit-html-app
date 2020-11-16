@@ -4,43 +4,45 @@ import { addRenderReaction, clearReactions } from '../utils';
 
 class AppLocalePicker extends HTMLElement {
   connectedCallback() {
-    addRenderReaction(this, () => {
-      const { locale, localesExcludeCurrent } = stores.i18nStore;
-
-      return html`
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="localeDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-expanded="false"
-        >
-          ${locale}
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-right"
-          aria-labelledby="localeDropdown"
-        >
-          ${localesExcludeCurrent.map(
-            (l) => html`
-              <li>
-                <a
-                  class="dropdown-item"
-                  href
-                  @click=${(event) => this.handleClick(event, l)}
-                  >${l}</a
-                >
-              </li>
-            `,
-          )}
-        </ul>
-      `;
-    });
+    addRenderReaction(this);
   }
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    const { locale, localesExcludeCurrent } = stores.i18nStore;
+
+    return html`
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="localeDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-expanded="false"
+      >
+        ${locale}
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="localeDropdown"
+      >
+        ${localesExcludeCurrent.map(
+          (l) => html`
+            <li>
+              <a
+                class="dropdown-item"
+                href
+                @click=${(event) => this.handleClick(event, l)}
+                >${l}</a
+              >
+            </li>
+          `,
+        )}
+      </ul>
+    `;
   }
 
   handleClick(event, locale) {

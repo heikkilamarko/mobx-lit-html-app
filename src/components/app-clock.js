@@ -23,17 +23,17 @@ class AppClock extends HTMLElement {
   }
 
   connectedCallback() {
+    addRenderReaction(this);
     addInterval(this, () => this.updateTime(), 1000);
-
-    addRenderReaction(
-      this,
-      () => html`<div class="font-monospace">${this.formattedTime}</div>`,
-    );
   }
 
   disconnectedCallback() {
-    clearReactions(this);
     clearIntervals(this);
+    clearReactions(this);
+  }
+
+  render() {
+    return html`<div class="font-monospace">${this.formattedTime}</div>`;
   }
 
   get formattedTime() {

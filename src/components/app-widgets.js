@@ -6,10 +6,6 @@ import './app-widgets.css';
 
 class AppWidgets extends HTMLElement {
   connectedCallback() {
-    const { t } = stores.i18nStore;
-
-    stores.widgetsStore.load();
-
     addWatchReaction(
       this,
       () => stores.routeStore.route,
@@ -21,34 +17,40 @@ class AppWidgets extends HTMLElement {
       { fireImmediately: true },
     );
 
-    addRenderReaction(this, () => {
-      if (stores.widgetsStore.isLoading) {
-        return nothing;
-      }
+    addRenderReaction(this);
 
-      if (stores.widgetsStore.hasError) {
-        return html`
-          <app-error .text=${stores.widgetsStore.error.message}></app-error>
-        `;
-      }
-
-      return html`
-        <select
-          class="form-select form-select-lg mx-auto mt-3 mb-5 app-widgets__select"
-          aria-label="Widget select"
-          .value=${stores.widgetsStore.widgetId ?? ''}
-          @change="${(event) => this.handleWidgetChange(event)}"
-        >
-          <option value="">${t('widgets.select.placeholder')}</option>
-          ${this.selectOptions}
-        </select>
-        ${this.widgetElement}
-      `;
-    });
+    stores.widgetsStore.load();
   }
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    const { t } = stores.i18nStore;
+
+    if (stores.widgetsStore.isLoading) {
+      return nothing;
+    }
+
+    if (stores.widgetsStore.hasError) {
+      return html`
+        <app-error .text=${stores.widgetsStore.error.message}></app-error>
+      `;
+    }
+
+    return html`
+      <select
+        class="form-select form-select-lg mx-auto mt-3 mb-5 app-widgets__select"
+        aria-label="Widget select"
+        .value=${stores.widgetsStore.widgetId ?? ''}
+        @change="${(event) => this.handleWidgetChange(event)}"
+      >
+        <option value="">${t('widgets.select.placeholder')}</option>
+        ${this.selectOptions}
+      </select>
+      ${this.widgetElement}
+    `;
   }
 
   get selectOptions() {

@@ -7,12 +7,6 @@ import { stores } from '../stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import './app-charts.css';
 
-function createChartDiv() {
-  const div = document.createElement('div');
-  div.classList.add('app-charts__div');
-  return div;
-}
-
 class AppCharts extends HTMLElement {
   charts = [];
 
@@ -25,29 +19,7 @@ class AppCharts extends HTMLElement {
   }
 
   connectedCallback() {
-    addRenderReaction(
-      this,
-      () =>
-        html`
-          <div class="row g-3">
-            ${this.charts.map(
-              (chart) =>
-                html`
-                  <div class="col-12 col-lg-6">
-                    <div class="card">
-                      <div class="card-body">
-                        <h4 class="card-title text-truncate mb-4">
-                          ${chart.title}
-                        </h4>
-                        ${chart.el}
-                      </div>
-                    </div>
-                  </div>
-                `,
-            )}
-          </div>
-        `,
-    );
+    addRenderReaction(this);
 
     addWatchReaction(
       this,
@@ -61,6 +33,28 @@ class AppCharts extends HTMLElement {
     clearReactions(this);
 
     this.charts.forEach(({ chart }) => chart?.destroy());
+  }
+
+  render() {
+    return html`
+      <div class="row g-3">
+        ${this.charts.map(
+          (chart) =>
+            html`
+              <div class="col-12 col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title text-truncate mb-4">
+                      ${chart.title}
+                    </h4>
+                    ${chart.el}
+                  </div>
+                </div>
+              </div>
+            `,
+        )}
+      </div>
+    `;
   }
 
   createCharts() {
@@ -144,6 +138,12 @@ class AppCharts extends HTMLElement {
       chart.chart.render();
     });
   }
+}
+
+function createChartDiv() {
+  const div = document.createElement('div');
+  div.classList.add('app-charts__div');
+  return div;
 }
 
 customElements.define('app-charts', AppCharts);

@@ -13,14 +13,15 @@ import './app-error';
 
 class AppContent extends HTMLElement {
   connectedCallback() {
-    addRenderReaction(
-      this,
-      () => html`<main class="container p-3">${this.content}</main>`,
-    );
+    addRenderReaction(this);
   }
 
   disconnectedCallback() {
     clearReactions(this);
+  }
+
+  render() {
+    return html`<main class="container p-3">${this.content}</main>`;
   }
 
   get content() {
