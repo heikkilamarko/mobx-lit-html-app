@@ -10,6 +10,7 @@ import './app-charts';
 import './app-form';
 import './app-widgets';
 import './app-error';
+import './app-not-found';
 
 class AppContent extends HTMLElement {
   connectedCallback() {
@@ -43,12 +44,7 @@ class AppContent extends HTMLElement {
       case 'widgets':
         return html`<app-widgets></app-widgets>`;
       default:
-        return html`
-          <app-error
-            .title=${'404'}
-            .text=${stores.i18nStore.t('notfound')}
-          ></app-error>
-        `;
+        return html`<app-not-found></app-not-found>`;
     }
   }
 }

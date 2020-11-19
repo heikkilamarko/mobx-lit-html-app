@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import { stores } from '../stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
 import './app-detail-card';
-import './app-error';
+import './app-not-found';
 
 class AppDetail extends HTMLElement {
   connectedCallback() {
@@ -43,12 +43,7 @@ class AppDetail extends HTMLElement {
       `;
     }
 
-    return html`
-      <app-error
-        .title=${'404'}
-        .text=${stores.i18nStore.t('notfound')}
-      ></app-error>
-    `;
+    return html`<app-not-found></app-not-found>`;
   }
 }
 
