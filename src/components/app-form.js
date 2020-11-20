@@ -20,6 +20,7 @@ class AppForm extends HTMLElement {
     const { t } = stores.i18nStore;
     const {
       fields: { firstName, lastName, age, username, tags, roles },
+      tagsOptions,
       isSubmitting,
       canSubmit,
       canReset,
@@ -33,7 +34,10 @@ class AppForm extends HTMLElement {
         <app-form-text-field .field=${lastName}></app-form-text-field>
         <app-form-text-field .field=${age}></app-form-text-field>
         <app-form-text-field .field=${username}></app-form-text-field>
-        <app-form-tags-field .field=${tags}></app-form-tags-field>
+        <app-form-tags-field
+          .field=${tags}
+          .options=${tagsOptions}
+        ></app-form-tags-field>
         ${repeat(
           roles.fields,
           (field) => field.id,

@@ -1,14 +1,17 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { action, computed, makeObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import { stores } from '../../stores';
 import { validateRequired } from '../../validators';
 import { addRenderReaction, clearReactions } from '../../utils';
 
 class AppFormTagsField extends HTMLElement {
+  options;
+
   constructor() {
     super();
     makeObservable(this, {
+      options: observable.ref,
       canAddTag: computed,
       addTag: action.bound,
       removeTag: action.bound,
@@ -47,7 +50,6 @@ class AppFormTagsField extends HTMLElement {
     const label = data?.label ? t(data.label) : undefined;
     const isRequired = !!data?.isRequired;
     const placeholder = data?.placeholder ? t(data.placeholder) : undefined;
-    const datalist = data?.datalist;
 
     const isTouchedInvalid = !isValid && isTouched && !isValidating;
     const isTouchedValid = isValid && isTouched && !isValidating;
@@ -121,10 +123,10 @@ class AppFormTagsField extends HTMLElement {
             `,
         )}
       </div>
-      ${datalist
+      ${this.options
         ? html`
             <datalist id="tags-datalist">
-              ${datalist.map((item) => html`<option>${item}</option>`)}
+              ${this.options.map((option) => html`<option>${option}</option>`)}
             </datalist>
           `
         : nothing}
