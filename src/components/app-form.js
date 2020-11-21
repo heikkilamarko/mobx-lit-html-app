@@ -30,26 +30,28 @@ class AppForm extends HTMLElement {
 
     return html`
       <form autocomplete="off" @submit=${preventDefault(submit)}>
-        <app-form-text-field .field=${firstName}></app-form-text-field>
-        <app-form-text-field .field=${lastName}></app-form-text-field>
-        <app-form-text-field .field=${age}></app-form-text-field>
-        <app-form-text-field .field=${username}></app-form-text-field>
-        <app-form-tags-field
-          .field=${tags}
-          .options=${tagsOptions}
-        ></app-form-tags-field>
-        ${repeat(
-          roles.fields,
-          (field) => field.id,
-          (field) =>
-            html`
-              <app-form-role-field
-                .field=${field}
-                @remove=${() => roles.removeRole(field)}
-              ></app-form-role-field>
-            `,
-        )}
-        <div class="d-flex flex-row flex-wrap justify-content-between mt-5">
+        <fieldset ?disabled=${isSubmitting}>
+          <app-form-text-field .field=${firstName}></app-form-text-field>
+          <app-form-text-field .field=${lastName}></app-form-text-field>
+          <app-form-text-field .field=${age}></app-form-text-field>
+          <app-form-text-field .field=${username}></app-form-text-field>
+          <app-form-tags-field
+            .field=${tags}
+            .options=${tagsOptions}
+          ></app-form-tags-field>
+          ${repeat(
+            roles.fields,
+            (field) => field.id,
+            (field) =>
+              html`
+                <app-form-role-field
+                  .field=${field}
+                  @remove=${() => roles.removeRole(field)}
+                ></app-form-role-field>
+              `,
+          )}
+        </fieldset>
+        <div class="d-flex flex-row flex-wrap justify-content-between mt-4">
           <button
             type="button"
             class="btn btn-primary rounded-pill mt-2"
