@@ -1,18 +1,8 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
 import createRouter, { constants } from 'router5';
 import browserPlugin from 'router5-plugin-browser';
+import { routes } from '../routes';
 import { analyticsPageview } from '../utils';
-
-const routes = [
-  { name: 'browse', path: '/' },
-  { name: 'detail', path: '/browse/:id' },
-  { name: 'counter', path: '/counter' },
-  { name: 'jokes', path: '/jokes' },
-  { name: 'datagrid', path: '/datagrid' },
-  { name: 'charts', path: '/charts' },
-  { name: 'form', path: '/form' },
-  { name: 'widgets', path: '/widgets' },
-];
 
 export default class RouteStore {
   route = null;
@@ -25,11 +15,20 @@ export default class RouteStore {
       route: observable.ref,
       previousRoute: observable.ref,
       routeName: computed,
+      routeTemplate: computed,
       isNotFoundRoute: computed,
       setRoute: action.bound,
     });
 
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.isActive = this.isActive.bind(this);
+    this.navigate = this.navigate.bind(this);
+    this.navigateBack = this.navigateBack.bind(this);
+    this.buildPath = this.buildPath.bind(this);
+
     this.router = createRouter(routes, {
+      defaultRoute: 'browse',
       allowNotFound: true,
       queryParamsMode: 'loose',
     });
@@ -41,8 +40,17 @@ export default class RouteStore {
     );
   }
 
+  get routes() {
+    return routes;
+  }
+
   get routeName() {
     return this.route?.name;
+  }
+
+  get routeTemplate() {
+    const route = this.routes.find((r) => r.name === this.routeName);
+    return route ? route.template : undefined;
   }
 
   get isNotFoundRoute() {
@@ -65,6 +73,15 @@ export default class RouteStore {
     this.router.stop();
     this.unsubscribe?.();
     this.unsubscribe = null;
+  }
+
+  isActive(name, params, strictEquality, ignoreQueryParams) {
+    return this.router.isActive(
+      name,
+      params,
+      strictEquality,
+      ignoreQueryParams,
+    );
   }
 
   navigate(routeName, routeParams, options, done) {

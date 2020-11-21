@@ -43,7 +43,7 @@ class AppBrowse extends HTMLElement {
 
   handleCardClick(event, item) {
     event.preventDefault();
-    stores.routeStore.navigate('detail', { id: item.id });
+    stores.routeStore.navigate('browse.detail', { id: item.id });
   }
 }
 

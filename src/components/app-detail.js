@@ -10,7 +10,7 @@ class AppDetail extends HTMLElement {
       this,
       () => stores.routeStore.route,
       (route) => {
-        if (route.name === 'detail') {
+        if (route.name === 'browse.detail') {
           stores.browseStore.load(route.params.id);
         }
       },

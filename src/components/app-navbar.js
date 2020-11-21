@@ -8,58 +8,22 @@ import './app-clock';
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
 function navItems() {
-  const {
-    routeStore: r,
-    widgetsStore: w,
-    i18nStore: { t },
-  } = stores;
+  const { routeStore, widgetsStore, i18nStore } = stores;
 
-  const id = w.widgetId ?? undefined;
-
-  return [
-    {
-      title: t('browse'),
-      active: ['browse', 'detail'].includes(r.routeName),
-      href: r.buildPath('browse'),
-      handleClick: () => r.navigate('browse'),
-    },
-    {
-      title: t('counter'),
-      active: ['counter'].includes(r.routeName),
-      href: r.buildPath('counter'),
-      handleClick: () => r.navigate('counter'),
-    },
-    {
-      title: t('jokes'),
-      active: ['jokes'].includes(r.routeName),
-      href: r.buildPath('jokes'),
-      handleClick: () => r.navigate('jokes'),
-    },
-    {
-      title: t('datagrid'),
-      active: ['datagrid'].includes(r.routeName),
-      href: r.buildPath('datagrid'),
-      handleClick: () => r.navigate('datagrid'),
-    },
-    {
-      title: t('charts'),
-      active: ['charts'].includes(r.routeName),
-      href: r.buildPath('charts'),
-      handleClick: () => r.navigate('charts'),
-    },
-    {
-      title: t('form'),
-      active: ['form'].includes(r.routeName),
-      href: r.buildPath('form'),
-      handleClick: () => r.navigate('form'),
-    },
-    {
-      title: t('widgets'),
-      active: ['widgets'].includes(r.routeName),
-      href: r.buildPath('widgets', { id }),
-      handleClick: () => r.navigate('widgets', { id }),
-    },
-  ].map(navItem);
+  return routeStore.routes
+    .filter(({ navbar }) => navbar)
+    .map(({ name }) =>
+      navItem({
+        title: i18nStore.t(name),
+        active: routeStore.isActive(name),
+        href: routeStore.buildPath(name),
+        handleClick: () =>
+          routeStore.navigate(
+            name,
+            name === 'widgets' ? widgetsStore.widgetId ?? undefined : undefined,
+          ),
+      }),
+    );
 }
 
 function navItem({ title, active, href, handleClick }) {
@@ -85,15 +49,17 @@ class AppNavbar extends HTMLElement {
   }
 
   render() {
+    const {
+      routeStore: { navigate, route: _ },
+    } = stores;
+
     return html`
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
           <a
             class="navbar-brand"
-            @click="${preventDefault(() =>
-              stores.routeStore.navigate('browse'),
-            )}"
-            href="/"
+            @click="${preventDefault(() => navigate('browse'))}"
+            href="/browse"
           >
             <img
               src="/android-chrome-192x192.png"
