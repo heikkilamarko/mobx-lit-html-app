@@ -20,43 +20,49 @@ export class Jokes extends HTMLElement {
       getJoke,
       isReady,
       isLoading,
+      hasError,
+      error,
       categories,
       category,
       jokeText,
     } = stores.jokesStore;
 
-    return isReady
-      ? html`
-          <div class="mx-auto">
-            <div class="input-group mt-3 mb-5">
-              <select
-                class="form-select form-select-lg"
-                aria-label="Joke select"
-                .value=${category}
-                @change="${(event) => setCategory(event.target.value)}"
-              >
-                <option value="">${t('jokes.select.all')}</option>
-                ${categories.map(
-                  (c) =>
-                    html`
-                      <option .value=${c} ?selected=${c === category}>
-                        ${c}
-                      </option>
-                    `,
-                )}
-              </select>
-              <button
-                class="btn btn-primary"
-                type="button"
-                ?disabled=${isLoading}
-                @click=${() => getJoke()}
-              >
-                ${t('jokes.tell')}
-              </button>
-            </div>
-            <app-joke .text=${jokeText}></app-joke>
-          </div>
-        `
-      : nothing;
+    if (!isReady) {
+      return hasError
+        ? html`<app-error-card .text=${error.message}></app-error-card>`
+        : nothing;
+    }
+
+    return html`
+      <div class="mx-auto">
+        <div class="input-group mt-3 mb-5">
+          <select
+            class="form-select form-select-lg"
+            aria-label="Joke select"
+            .value=${category}
+            @change="${(event) => setCategory(event.target.value)}"
+          >
+            <option value="">${t('jokes.select.all')}</option>
+            ${categories.map(
+              (c) =>
+                html`
+                  <option .value=${c} ?selected=${c === category}>${c}</option>
+                `,
+            )}
+          </select>
+          <button
+            class="btn btn-primary"
+            type="button"
+            ?disabled=${isLoading}
+            @click=${() => getJoke()}
+          >
+            ${t('jokes.tell')}
+          </button>
+        </div>
+        ${hasError
+          ? html`<app-error-card .text=${error.message}></app-error-card>`
+          : html`<app-joke .text=${jokeText}></app-joke>`}
+      </div>
+    `;
   }
 }
