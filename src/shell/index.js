@@ -9,7 +9,7 @@ import { LocalePicker } from './LocalePicker';
 import { I18nStore } from './I18nStore';
 import { ToastStore } from './ToastStore';
 import { RouteStore } from './RouteStore';
-import { getResources } from '../shared/api';
+import { getLocales } from '../shared/api';
 
 export function registerComponents() {
   customElements.define('app-toast', Toast);
@@ -23,9 +23,7 @@ export function registerComponents() {
 }
 
 export async function registerStores(stores) {
-  const resources = await getResources();
-
-  const i18nStore = new I18nStore(resources);
+  const i18nStore = new I18nStore();
   const toastStore = new ToastStore();
   const routeStore = new RouteStore();
 
@@ -36,4 +34,10 @@ export async function registerStores(stores) {
     toastStore,
     routeStore,
   });
+}
+
+export async function registerLocales(locales) {
+  const moduleLocales = await getLocales();
+  Object.assign((locales.en ??= {}), moduleLocales.en);
+  Object.assign((locales.fi ??= {}), moduleLocales.fi);
 }

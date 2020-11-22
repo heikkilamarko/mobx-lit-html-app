@@ -1,0 +1,13 @@
+{
+  "en": {
+    "jokes": "Jokes",
+    "jokes.select.all": "All categories",
+    "jokes.tell": "Tell a joke"
+  },
+
+  "fi": {
+    "jokes": "Vitsit",
+    "jokes.select.all": "Kaikki kategoriat",
+    "jokes.tell": "Kerro vitsi"
+  }
+}

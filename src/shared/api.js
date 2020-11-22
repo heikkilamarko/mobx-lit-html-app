@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export async function getResources() {
-  const { data } = await axios.get('/data/resources.json');
+export async function getLocales() {
+  const { data } = await axios.get('/data/locales.json');
   return data;
 }
 

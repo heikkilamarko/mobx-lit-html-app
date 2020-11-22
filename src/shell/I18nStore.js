@@ -1,4 +1,5 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
+import { locales as resources } from '../shared/locales';
 
 const LOCAL_STORAGE_KEY = 'app-locale';
 
@@ -6,7 +7,7 @@ export class I18nStore {
   resources = {};
   locale;
 
-  constructor(resources, locale) {
+  constructor(locale) {
     makeObservable(this, {
       resources: observable.ref,
       locale: observable.ref,

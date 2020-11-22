@@ -1,0 +1,23 @@
+{
+  "en": {
+    "charts": "Charts",
+    "charts.clothing": "Clothing",
+    "charts.departmentsales": "Department Sales",
+    "charts.electronics": "Electronics",
+    "charts.food": "Food",
+    "charts.gardening": "Gardening",
+    "charts.kitchen": "Kitchen",
+    "charts.monthlysales": "Monthly Sales"
+  },
+
+  "fi": {
+    "charts": "Kuvaajat",
+    "charts.clothing": "Vaatteet",
+    "charts.departmentsales": "Yksikkökohtainen myynti",
+    "charts.electronics": "Elektroniikka",
+    "charts.food": "Ruoka",
+    "charts.gardening": "Puutarhanhoito",
+    "charts.kitchen": "Keittiö",
+    "charts.monthlysales": "Kuukausittainen myynti"
+  }
+}

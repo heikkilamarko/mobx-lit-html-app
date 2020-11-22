@@ -3,6 +3,7 @@ import { FormTextField } from './FormTextField';
 import { FormTagsField } from './FormTagsField';
 import { FormRoleField } from './FormRoleField';
 import { FormStore } from './FormStore';
+import moduleLocales from './locales.json';
 
 export function registerComponents() {
   customElements.define('app-form', Form);
@@ -15,4 +16,9 @@ export async function registerStores(stores) {
   const { i18nStore, toastStore } = stores;
   const formStore = new FormStore({ i18nStore, toastStore });
   Object.assign(stores, { formStore });
+}
+
+export async function registerLocales(locales) {
+  Object.assign((locales.en ??= {}), moduleLocales.en);
+  Object.assign((locales.fi ??= {}), moduleLocales.fi);
 }

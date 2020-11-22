@@ -3,6 +3,7 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/toast';
 import { configure } from 'mobx';
 import { html, render } from 'lit-html';
+import { locales } from './shared/locales';
 import { stores } from './shared/stores';
 import * as shell from './shell';
 import * as browse from './browse';
@@ -28,8 +29,9 @@ const modules = [
 async function startup() {
   try {
     configureMobX();
-    registerComponents();
+    await registerLocales();
     await registerStores();
+    registerComponents();
     renderApp();
   } catch (error) {
     renderError(error);
@@ -48,15 +50,21 @@ function configureMobX() {
   });
 }
 
-function registerComponents() {
+async function registerLocales() {
   for (const m of modules) {
-    m.registerComponents();
+    await m.registerLocales?.(locales);
   }
 }
 
 async function registerStores() {
   for (const m of modules) {
-    await m.registerStores(stores);
+    await m.registerStores?.(stores);
+  }
+}
+
+function registerComponents() {
+  for (const m of modules) {
+    m.registerComponents?.();
   }
 }
 
