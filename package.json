@@ -34,7 +34,7 @@
     "@snowpack/plugin-webpack": "2.1.1",
     "autoprefixer": "10.0.2",
     "compression-webpack-plugin": "6.1.1",
-    "postcss": "8.1.8",
+    "postcss": "8.1.9",
     "postcss-cli": "8.3.0",
     "prettier": "2.2.0",
     "sass": "1.29.0",

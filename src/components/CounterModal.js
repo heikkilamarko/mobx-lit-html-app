@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppCounterModal extends HTMLElement {
+export class CounterModal extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -56,5 +56,3 @@ class AppCounterModal extends HTMLElement {
     this.dispatchEvent(new Event('ok'));
   }
 }
-
-customElements.define('app-counter-modal', AppCounterModal);

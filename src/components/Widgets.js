@@ -1,10 +1,13 @@
 import { html, nothing } from 'lit-html';
-import { stores } from '../stores';
-import { addWatchReaction, addRenderReaction, clearReactions } from '../utils';
-import './app-error';
-import './app-widgets.css';
+import { stores } from '../shared/stores';
+import {
+  addWatchReaction,
+  addRenderReaction,
+  clearReactions,
+} from '../shared/utils';
+import './Widgets.css';
 
-class AppWidgets extends HTMLElement {
+export class Widgets extends HTMLElement {
   connectedCallback() {
     addWatchReaction(
       this,
@@ -89,5 +92,3 @@ class AppWidgets extends HTMLElement {
     stores.routeStore.navigate('widgets', id ? { id } : undefined);
   }
 }
-
-customElements.define('app-widgets', AppWidgets);

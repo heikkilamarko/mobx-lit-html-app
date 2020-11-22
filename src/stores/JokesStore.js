@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { getJoke, getJokeCategories } from '../api';
+import { getJoke, getJokeCategories } from '../shared/api';
 
 const CATEGORY_ALL = '';
 

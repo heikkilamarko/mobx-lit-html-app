@@ -1,9 +1,9 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { stores } from '../../stores';
-import { addRenderReaction, clearReactions } from '../../utils';
+import { stores } from '../../shared/stores';
+import { addRenderReaction, clearReactions } from '../../shared/utils';
 
-class AppFormTextField extends HTMLElement {
+export class FormTextField extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -88,5 +88,3 @@ class AppFormTextField extends HTMLElement {
     }
   }
 }
-
-customElements.define('app-form-text-field', AppFormTextField);

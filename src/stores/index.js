@@ -1,4 +1,4 @@
-import { getResources } from '../api';
+import { getResources } from '../shared/api';
 import I18nStore from './I18nStore';
 import ToastStore from './ToastStore';
 import RouteStore from './RouteStore';
@@ -9,9 +9,7 @@ import DatagridStore from './DatagridStore';
 import FormStore from './FormStore';
 import WidgetsStore from './WidgetsStore';
 
-export const stores = {};
-
-export async function createStores() {
+export async function registerStores(stores) {
   const resources = await getResources();
 
   const i18nStore = new I18nStore(resources);

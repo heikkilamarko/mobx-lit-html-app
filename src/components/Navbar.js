@@ -1,9 +1,11 @@
 import { html } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions, preventDefault } from '../utils';
-import './app-locale-picker';
-import './app-clock';
+import { stores } from '../shared/stores';
+import {
+  addRenderReaction,
+  clearReactions,
+  preventDefault,
+} from '../shared/utils';
 
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
@@ -39,7 +41,7 @@ function navItem({ title, active, href, handleClick }) {
   `;
 }
 
-class AppNavbar extends HTMLElement {
+export class Navbar extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -108,5 +110,3 @@ class AppNavbar extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-navbar', AppNavbar);

@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
 import { uniqueId } from 'lodash-es';
-import { validateRequired } from '../../validators';
+import { validateRequired } from '../../shared/validators';
 import FieldStore from './FieldStore';
 
 export default class RolesStore {

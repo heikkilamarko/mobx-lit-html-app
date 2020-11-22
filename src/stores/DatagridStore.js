@@ -1,5 +1,5 @@
 import { makeObservable, action, computed, observable } from 'mobx';
-import { getDatagrid } from '../api';
+import { getDatagrid } from '../shared/api';
 
 export default class DatagridStore {
   rows = [];

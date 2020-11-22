@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppLocalePicker extends HTMLElement {
+export class LocalePicker extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -50,5 +50,3 @@ class AppLocalePicker extends HTMLElement {
     stores.i18nStore.setLocale(locale);
   }
 }
-
-customElements.define('app-locale-picker', AppLocalePicker);

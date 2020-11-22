@@ -3,11 +3,15 @@ import { makeObservable, observable } from 'mobx';
 import ApexCharts from 'apexcharts';
 import en from 'apexcharts/dist/locales/en.json';
 import fi from 'apexcharts/dist/locales/fi.json';
-import { stores } from '../stores';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
-import './app-charts.css';
+import { stores } from '../shared/stores';
+import {
+  addRenderReaction,
+  addWatchReaction,
+  clearReactions,
+} from '../shared/utils';
+import './Charts.css';
 
-class AppCharts extends HTMLElement {
+export class Charts extends HTMLElement {
   charts = [];
 
   constructor() {
@@ -145,5 +149,3 @@ function createChartDiv() {
   div.classList.add('app-charts__div');
   return div;
 }
-
-customElements.define('app-charts', AppCharts);

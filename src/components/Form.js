@@ -1,13 +1,14 @@
 import { html } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions, preventDefault } from '../utils';
-import './form/app-form-text-field';
-import './form/app-form-tags-field';
-import './form/app-form-role-field';
-import './app-form.css';
+import { stores } from '../shared/stores';
+import {
+  addRenderReaction,
+  clearReactions,
+  preventDefault,
+} from '../shared/utils';
+import './Form.css';
 
-class AppForm extends HTMLElement {
+export class Form extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -82,5 +83,3 @@ class AppForm extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-form', AppForm);

@@ -5,8 +5,8 @@ import {
   validateAge,
   validateUsername,
   validateTags,
-} from '../validators';
-import { sleep } from '../utils';
+} from '../shared/validators';
+import { sleep } from '../shared/utils';
 import { FieldStore, RolesStore } from './form';
 
 const DEBOUNCE_WAIT = 800;

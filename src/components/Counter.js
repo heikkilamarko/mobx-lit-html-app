@@ -1,13 +1,12 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import Modal from 'bootstrap/js/dist/modal';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 import { dashCircle, plusCircle, xCircle } from './icons';
-import './app-counter-modal';
-import './app-counter.css';
+import './Counter.css';
 
-class AppCounter extends HTMLElement {
+export class Counter extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -112,5 +111,3 @@ class AppCounter extends HTMLElement {
     });
   }
 }
-
-customElements.define('app-counter', AppCounter);

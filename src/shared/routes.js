@@ -1,12 +1,4 @@
 import { html } from 'lit-html';
-import './components/app-browse';
-import './components/app-detail';
-import './components/app-counter';
-import './components/app-jokes';
-import './components/app-datagrid';
-import './components/app-charts';
-import './components/app-form';
-import './components/app-widgets';
 
 export const routes = [
   {

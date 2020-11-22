@@ -1,10 +1,12 @@
 import { html, nothing } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
-import './app-detail-card';
-import './app-not-found';
+import { stores } from '../shared/stores';
+import {
+  addRenderReaction,
+  addWatchReaction,
+  clearReactions,
+} from '../shared/utils';
 
-class AppDetail extends HTMLElement {
+export class Detail extends HTMLElement {
   connectedCallback() {
     addWatchReaction(
       this,
@@ -46,5 +48,3 @@ class AppDetail extends HTMLElement {
     return html`<app-not-found></app-not-found>`;
   }
 }
-
-customElements.define('app-detail', AppDetail);

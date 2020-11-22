@@ -1,5 +1,5 @@
 import { makeObservable, action, computed, observable } from 'mobx';
-import { getBrowseItems } from '../api';
+import { getBrowseItems } from '../shared/api';
 
 export default class BrowseStore {
   items = [];

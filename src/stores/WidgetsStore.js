@@ -1,6 +1,6 @@
 import { makeObservable, action, computed, observable } from 'mobx';
-import { getWidgets } from '../api';
-import { createElement } from '../utils';
+import { getWidgets } from '../shared/api';
+import { createElement } from '../shared/utils';
 
 export default class WidgetsStore {
   widgets = [];

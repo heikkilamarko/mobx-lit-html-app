@@ -1,14 +1,14 @@
 import { html } from 'lit-html';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { stores } from '../stores';
+import { stores } from '../shared/stores';
 import {
   addRenderReaction,
   addInterval,
   clearReactions,
   clearIntervals,
-} from '../utils';
+} from '../shared/utils';
 
-class AppClock extends HTMLElement {
+export class Clock extends HTMLElement {
   time;
 
   constructor() {
@@ -55,5 +55,3 @@ class AppClock extends HTMLElement {
     this.time = new Date();
   }
 }
-
-customElements.define('app-clock', AppClock);

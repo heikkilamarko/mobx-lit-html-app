@@ -1,10 +1,10 @@
 import { html, nothing } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
-import './app-error.css';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
+import './Error.css';
 
-class AppError extends HTMLElement {
+export class Error extends HTMLElement {
   title;
   text;
 
@@ -39,5 +39,3 @@ class AppError extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-error', AppError);

@@ -1,8 +1,8 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
 import createRouter, { constants } from 'router5';
 import browserPlugin from 'router5-plugin-browser';
-import { routes } from '../routes';
-import { analyticsPageview } from '../utils';
+import { routes } from '../shared/routes';
+import { analyticsPageview } from '../shared/utils';
 
 export default class RouteStore {
   route = null;

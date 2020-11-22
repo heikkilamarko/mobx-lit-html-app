@@ -1,10 +1,8 @@
 import { html, nothing } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
-import './app-browse-card';
-import './app-error';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppBrowse extends HTMLElement {
+export class Browse extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
 
@@ -46,5 +44,3 @@ class AppBrowse extends HTMLElement {
     stores.routeStore.navigate('browse.detail', { id: item.id });
   }
 }
-
-customElements.define('app-browse', AppBrowse);

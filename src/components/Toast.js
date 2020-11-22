@@ -1,9 +1,9 @@
 import { html } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
-import './app-toast.css';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
+import './Toast.css';
 
-class AppToast extends HTMLElement {
+export class Toast extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -38,5 +38,3 @@ class AppToast extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-toast', AppToast);

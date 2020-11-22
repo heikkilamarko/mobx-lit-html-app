@@ -1,9 +1,8 @@
 import { html } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
-import './app-not-found';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppContent extends HTMLElement {
+export class Content extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -21,5 +20,3 @@ class AppContent extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-content', AppContent);

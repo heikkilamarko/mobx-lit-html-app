@@ -1,9 +1,9 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
-import { stores } from '../../stores';
-import { addRenderReaction, clearReactions } from '../../utils';
+import { stores } from '../../shared/stores';
+import { addRenderReaction, clearReactions } from '../../shared/utils';
 
-class AppFormRoleField extends HTMLElement {
+export class FormRoleField extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -102,5 +102,3 @@ class AppFormRoleField extends HTMLElement {
     }
   }
 }
-
-customElements.define('app-form-role-field', AppFormRoleField);

@@ -1,11 +1,11 @@
 import { html } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 import { arrowLeft, boxArrowUpRight } from './icons';
-import './app-detail-card.css';
+import './DetailCard.css';
 
-class AppDetailCard extends HTMLElement {
+export class DetailCard extends HTMLElement {
   data;
 
   constructor() {
@@ -54,5 +54,3 @@ class AppDetailCard extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-detail-card', AppDetailCard);

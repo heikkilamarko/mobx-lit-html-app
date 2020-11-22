@@ -1,9 +1,8 @@
 import { html, nothing } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
-import './app-joke';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppJokes extends HTMLElement {
+export class Jokes extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
 
@@ -61,5 +60,3 @@ class AppJokes extends HTMLElement {
       : nothing;
   }
 }
-
-customElements.define('app-jokes', AppJokes);

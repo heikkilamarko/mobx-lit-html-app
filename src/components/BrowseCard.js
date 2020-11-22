@@ -1,8 +1,8 @@
 import { html, render } from 'lit-html';
-import { stores } from '../stores';
-import './app-browse-card.css';
+import { stores } from '../shared/stores';
+import './BrowseCard.css';
 
-class AppBrowseCard extends HTMLElement {
+export class BrowseCard extends HTMLElement {
   connectedCallback() {
     render(
       html`
@@ -22,5 +22,3 @@ class AppBrowseCard extends HTMLElement {
     );
   }
 }
-
-customElements.define('app-browse-card', AppBrowseCard);

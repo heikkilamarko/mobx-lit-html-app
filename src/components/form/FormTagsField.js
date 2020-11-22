@@ -1,11 +1,11 @@
 import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { stores } from '../../stores';
-import { validateRequired } from '../../validators';
-import { addRenderReaction, clearReactions } from '../../utils';
+import { stores } from '../../shared/stores';
+import { validateRequired } from '../../shared/validators';
+import { addRenderReaction, clearReactions } from '../../shared/utils';
 
-class AppFormTagsField extends HTMLElement {
+export class FormTagsField extends HTMLElement {
   options;
 
   constructor() {
@@ -167,5 +167,3 @@ class AppFormTagsField extends HTMLElement {
     }
   }
 }
-
-customElements.define('app-form-tags-field', AppFormTagsField);

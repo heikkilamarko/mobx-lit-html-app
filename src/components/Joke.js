@@ -1,8 +1,12 @@
 import { html } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
-import { addRenderReaction, addWatchReaction, clearReactions } from '../utils';
+import {
+  addRenderReaction,
+  addWatchReaction,
+  clearReactions,
+} from '../shared/utils';
 
-class AppJoke extends HTMLElement {
+export class Joke extends HTMLElement {
   text;
 
   constructor() {
@@ -40,5 +44,3 @@ class AppJoke extends HTMLElement {
     return html`<h1 class="display-6 text-primary">${this.text}</h1>`;
   }
 }
-
-customElements.define('app-joke', AppJoke);

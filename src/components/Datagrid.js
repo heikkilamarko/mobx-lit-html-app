@@ -1,11 +1,11 @@
 import { Grid } from 'ag-grid-community';
-import { stores } from '../stores';
-import { addWatchReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addWatchReaction, clearReactions } from '../shared/utils';
 import NameCellRenderer from './datagrid/NameCellRenderer';
 
 const APP_DATAGRID_STORAGE_KEY = 'app-datagrid';
 
-class AppDatagrid extends HTMLElement {
+export class Datagrid extends HTMLElement {
   connectedCallback() {
     this.gridDiv = createGridDiv();
     this.appendChild(this.gridDiv);
@@ -123,5 +123,3 @@ function onFirstDataRendered({ api, columnApi }) {
     columnApi.autoSizeAllColumns();
   }
 }
-
-customElements.define('app-datagrid', AppDatagrid);

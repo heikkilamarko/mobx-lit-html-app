@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
-import { stores } from '../stores';
-import { addRenderReaction, clearReactions } from '../utils';
+import { stores } from '../shared/stores';
+import { addRenderReaction, clearReactions } from '../shared/utils';
 
-class AppNotFound extends HTMLElement {
+export class NotFound extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
   }
@@ -20,5 +20,3 @@ class AppNotFound extends HTMLElement {
     `;
   }
 }
-
-customElements.define('app-not-found', AppNotFound);

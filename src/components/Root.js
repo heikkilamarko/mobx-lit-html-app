@@ -1,10 +1,7 @@
 import { html, render } from 'lit-html';
-import './app-navbar';
-import './app-content';
-import './app-toast';
-import './app-root.css';
+import './Root.css';
 
-class AppRoot extends HTMLElement {
+export class Root extends HTMLElement {
   connectedCallback() {
     render(
       html`
@@ -16,5 +13,3 @@ class AppRoot extends HTMLElement {
     );
   }
 }
-
-customElements.define('app-root', AppRoot);
