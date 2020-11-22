@@ -1,20 +1,10 @@
-import { autorun, configure, reaction } from 'mobx';
+import { autorun, reaction } from 'mobx';
 import { render } from 'lit-html';
 
 const GA_MEASUREMENT_ID = import.meta.env.SNOWPACK_PUBLIC_GA_MEASUREMENT_ID;
 
 const R = Symbol('reactions');
 const I = Symbol('intervals');
-
-export function configureMobX() {
-  configure({
-    enforceActions: 'never',
-    observableRequiresReaction: false,
-    computedRequiresReaction: true,
-    reactionRequiresObservable: true,
-    isolateGlobalState: true,
-  });
-}
 
 export function createElement({ tagName, props }) {
   const ctor = customElements.get(tagName);

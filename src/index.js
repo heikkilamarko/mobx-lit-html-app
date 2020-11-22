@@ -1,11 +1,11 @@
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/toast';
+import { configure } from 'mobx';
 import { html, render } from 'lit-html';
 import { registerComponents } from './components';
 import { registerStores } from './stores';
 import { stores } from './shared/stores';
-import { configureMobX } from './shared/utils';
 import './index.css';
 
 async function startup() {
@@ -17,6 +17,16 @@ async function startup() {
   } catch (error) {
     renderError(error);
   }
+}
+
+function configureMobX() {
+  configure({
+    enforceActions: 'never',
+    observableRequiresReaction: false,
+    computedRequiresReaction: true,
+    reactionRequiresObservable: true,
+    isolateGlobalState: true,
+  });
 }
 
 function renderApp() {
