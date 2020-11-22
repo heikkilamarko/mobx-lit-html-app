@@ -1,14 +1,18 @@
+import { html, nothing } from 'lit-html';
 import { Grid } from 'ag-grid-community';
 import { stores } from '../shared/stores';
-import { addWatchReaction, clearReactions } from '../shared/utils';
+import {
+  addRenderReaction,
+  addWatchReaction,
+  clearReactions,
+} from '../shared/utils';
 import NameCellRenderer from './NameCellRenderer';
 
 const APP_DATAGRID_STORAGE_KEY = 'app-datagrid';
 
 export class Datagrid extends HTMLElement {
   connectedCallback() {
-    this.gridDiv = createGridDiv();
-    this.appendChild(this.gridDiv);
+    addRenderReaction(this);
 
     addWatchReaction(
       this,
@@ -53,6 +57,24 @@ export class Datagrid extends HTMLElement {
     this.grid = null;
   }
 
+  render() {
+    const { isLoading, hasError, error } = stores.datagridStore;
+
+    if (isLoading) {
+      return nothing;
+    }
+
+    if (hasError) {
+      return html`<app-error-card .text=${error.message}></app-error-card>`;
+    }
+
+    return html`<div class="ag-theme-alpine" style="height:36rem"></div>`;
+  }
+
+  get gridDiv() {
+    return this.querySelector('.ag-theme-alpine');
+  }
+
   get gridApi() {
     return this.grid.gridOptions.api;
   }
@@ -60,13 +82,6 @@ export class Datagrid extends HTMLElement {
   get gridColumnApi() {
     return this.grid.gridOptions.columnApi;
   }
-}
-
-function createGridDiv() {
-  const div = document.createElement('div');
-  div.classList.add('ag-theme-alpine');
-  div.style.height = '36rem';
-  return div;
 }
 
 function createGrid(gridDiv, rowData) {
