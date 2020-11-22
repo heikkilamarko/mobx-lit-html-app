@@ -1,5 +1,5 @@
 import { autorun, configure, reaction } from 'mobx';
-import { html, nothing, render } from 'lit-html';
+import { render } from 'lit-html';
 
 const GA_MEASUREMENT_ID = import.meta.env.SNOWPACK_PUBLIC_GA_MEASUREMENT_ID;
 
@@ -14,39 +14,6 @@ export function configureMobX() {
     reactionRequiresObservable: true,
     isolateGlobalState: true,
   });
-}
-
-export function renderApp({
-  tagName = 'app-root',
-  props = {},
-  target = document.body,
-} = {}) {
-  const el = createElement({ tagName, props });
-
-  if (!el) {
-    throw new Error(
-      `Element <${tagName}> not found in the custom element registry.`,
-    );
-  }
-
-  target.appendChild(el);
-}
-
-export function renderAppStartupError({
-  title = 'Close, but No Cigar',
-  message,
-} = {}) {
-  render(
-    html`
-      <main
-        class="px-4 py-5 overflow-auto d-flex flex-column align-items-center vh-100 bg-danger text-white"
-      >
-        <h1 class="display-1 fw-lighter">${title}</h1>
-        ${message ? html`<p class="pt-2">${message}</p>` : nothing}
-      </main>
-    `,
-    document.body,
-  );
 }
 
 export function createElement({ tagName, props }) {
