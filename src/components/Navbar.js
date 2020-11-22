@@ -70,7 +70,7 @@ export class Navbar extends HTMLElement {
               height="24"
               class="d-inline-block align-text-bottom mr-2"
             />
-            Demo App
+            <span>Demo App</span>
           </a>
           <button
             class="navbar-toggler"
