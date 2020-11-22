@@ -2,8 +2,8 @@ import { html, nothing } from 'lit-html';
 import { classMap } from 'lit-html/directives/class-map';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { stores } from '../shared/stores';
-import { validateRequired } from '../shared/validators';
 import { addRenderReaction, clearReactions } from '../shared/utils';
+import { validateRequired } from './validators';
 
 export class FormTagsField extends HTMLElement {
   options;

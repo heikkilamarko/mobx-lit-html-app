@@ -1,5 +1,5 @@
 import isInt from 'validator/es/lib/isInt';
-import { sleep } from './utils';
+import { sleep } from '../shared/utils';
 
 export function validateRequired(value) {
   value = toTrimmedString(value);

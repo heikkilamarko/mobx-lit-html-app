@@ -1,12 +1,12 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
 import { debounce, isEqual } from 'lodash-es';
+import { sleep } from '../shared/utils';
 import {
   validateRequired,
   validateAge,
   validateUsername,
   validateTags,
-} from '../shared/validators';
-import { sleep } from '../shared/utils';
+} from './validators';
 import { FieldStore } from './FieldStore';
 import { RolesStore } from './RolesStore';
 
