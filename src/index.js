@@ -14,16 +14,29 @@ import * as form from './form';
 import * as widgets from './widgets';
 import './index.css';
 
+const modules = [
+  shell,
+  browse,
+  counter,
+  jokes,
+  datagrid,
+  charts,
+  form,
+  widgets,
+];
+
 async function startup() {
   try {
     configureMobX();
     registerComponents();
-    await registerStores(stores);
+    await registerStores();
     renderApp();
   } catch (error) {
     renderError(error);
   }
 }
+
+startup();
 
 function configureMobX() {
   configure({
@@ -36,25 +49,15 @@ function configureMobX() {
 }
 
 function registerComponents() {
-  shell.registerComponents();
-  browse.registerComponents();
-  counter.registerComponents();
-  jokes.registerComponents();
-  datagrid.registerComponents();
-  charts.registerComponents();
-  form.registerComponents();
-  widgets.registerComponents();
+  for (const m of modules) {
+    m.registerComponents();
+  }
 }
 
 async function registerStores() {
-  await shell.registerStores(stores);
-  await browse.registerStores(stores);
-  await counter.registerStores(stores);
-  await jokes.registerStores(stores);
-  await datagrid.registerStores(stores);
-  await charts.registerStores(stores);
-  await form.registerStores(stores);
-  await widgets.registerStores(stores);
+  for (const m of modules) {
+    await m.registerStores(stores);
+  }
 }
 
 function renderApp() {
@@ -74,5 +77,3 @@ function renderError(error) {
     document.body,
   );
 }
-
-startup();

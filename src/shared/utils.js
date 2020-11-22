@@ -62,13 +62,6 @@ export function preventDefault(fn) {
   };
 }
 
-export function getPrimaryColor() {
-  return window
-    .getComputedStyle(document.body)
-    .getPropertyValue('--bs-primary')
-    .trim();
-}
-
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
