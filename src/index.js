@@ -3,9 +3,15 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/toast';
 import { configure } from 'mobx';
 import { html, render } from 'lit-html';
-import { registerComponents } from './components';
-import { registerStores } from './stores';
 import { stores } from './shared/stores';
+import * as shell from './shell';
+import * as browse from './browse';
+import * as counter from './counter';
+import * as jokes from './jokes';
+import * as datagrid from './datagrid';
+import * as charts from './charts';
+import * as form from './form';
+import * as widgets from './widgets';
 import './index.css';
 
 async function startup() {
@@ -27,6 +33,28 @@ function configureMobX() {
     reactionRequiresObservable: true,
     isolateGlobalState: true,
   });
+}
+
+function registerComponents() {
+  shell.registerComponents();
+  browse.registerComponents();
+  counter.registerComponents();
+  jokes.registerComponents();
+  datagrid.registerComponents();
+  charts.registerComponents();
+  form.registerComponents();
+  widgets.registerComponents();
+}
+
+async function registerStores() {
+  await shell.registerStores(stores);
+  await browse.registerStores(stores);
+  await counter.registerStores(stores);
+  await jokes.registerStores(stores);
+  await datagrid.registerStores(stores);
+  await charts.registerStores(stores);
+  await form.registerStores(stores);
+  await widgets.registerStores(stores);
 }
 
 function renderApp() {
