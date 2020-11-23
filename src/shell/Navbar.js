@@ -9,37 +9,6 @@ import {
 
 const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 
-function navItems() {
-  const { routeStore, widgetsStore, i18nStore } = stores;
-
-  const id = widgetsStore.widgetId ?? undefined;
-
-  return routeStore.routes
-    .filter(({ navbar }) => navbar)
-    .map(({ name }) => {
-      const routeParams = name === 'widgets' ? { id } : undefined;
-      return navItem({
-        title: i18nStore.t(name),
-        active: routeStore.isActive(name),
-        href: routeStore.buildPath(name, routeParams),
-        handleClick: () => routeStore.navigate(name, routeParams),
-      });
-    });
-}
-
-function navItem({ title, active, href, handleClick }) {
-  return html`
-    <li class="nav-item">
-      <a
-        class=${classMap({ 'nav-link': true, active })}
-        href=${href}
-        @click=${preventDefault(handleClick)}
-        >${title}</a
-      >
-    </li>
-  `;
-}
-
 export class Navbar extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
@@ -108,4 +77,41 @@ export class Navbar extends HTMLElement {
       </nav>
     `;
   }
+}
+
+function navItems() {
+  const {
+    routeStore: { routes, isActive, buildPath, navigate },
+    i18nStore: { t },
+  } = stores;
+
+  return routes
+    .filter(({ navbar }) => navbar)
+    .map(({ name }) => {
+      const params = routeParams(name);
+      return navItem({
+        title: t(name),
+        active: isActive(name),
+        href: buildPath(name, params),
+        handleClick: () => navigate(name, params),
+      });
+    });
+}
+
+function navItem({ title, active, href, handleClick }) {
+  return html`
+    <li class="nav-item">
+      <a
+        class=${classMap({ 'nav-link': true, active })}
+        href=${href}
+        @click=${preventDefault(handleClick)}
+        >${title}</a
+      >
+    </li>
+  `;
+}
+
+function routeParams(name) {
+  const id = stores.widgetsStore.widgetId ?? undefined;
+  return name === 'widgets' ? { id } : undefined;
 }
