@@ -1,5 +1,6 @@
 import { action, computed, makeObservable, observable, reaction } from 'mobx';
 import { debounce, isEqual } from 'lodash-es';
+import { stores } from '../shared/stores';
 import { sleep } from '../shared/utils';
 import {
   validateRequired,
@@ -19,9 +20,7 @@ export class FormStore {
   isValidatingUsername = false;
   isSubmitting = false;
 
-  constructor(stores) {
-    Object.assign(this, stores);
-
+  constructor() {
     makeObservable(this, {
       fields: observable.ref,
       isValidatingUsername: observable.ref,
@@ -207,7 +206,7 @@ export class FormStore {
   async submit() {
     if (!this.canSubmit) return;
 
-    const { t } = this.i18nStore;
+    const { t } = stores.i18nStore;
 
     this.isSubmitting = true;
 
@@ -221,14 +220,14 @@ export class FormStore {
         roles: this.fields.roles.value.join(', '),
       };
 
-      this.toastStore.show({
+      stores.toastStore.show({
         title: t('form.submit.submitting.title'),
         body: t('form.submit.submitting.body'),
       });
 
       await sleep(2000); // Simulate async work.
 
-      this.toastStore.showSuccess({
+      stores.toastStore.showSuccess({
         title: t('form.submit.success.title'),
         body: t('form.submit.success.body', formData),
         delay: 5000,
@@ -237,7 +236,7 @@ export class FormStore {
       this.reset();
     } catch (error) {
       console.log(error);
-      this.toastStore.showError({
+      stores.toastStore.showError({
         title: t('form.submit.error.title'),
         body: t('form.submit.error.body'),
       });

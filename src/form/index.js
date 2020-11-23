@@ -13,8 +13,7 @@ export function registerComponents() {
 }
 
 export async function registerStores(stores) {
-  const { i18nStore, toastStore } = stores;
-  const formStore = new FormStore({ i18nStore, toastStore });
+  const formStore = new FormStore();
   Object.assign(stores, { formStore });
 }
 
