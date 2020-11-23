@@ -1,23 +1,20 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
-import { locales as resources } from '../shared/locales';
+import { locales } from '../shared/locales';
 
 const LOCAL_STORAGE_KEY = 'app-locale';
 
 export class I18nStore {
-  resources = {};
   locale;
 
   constructor(locale) {
+    this.t = this.t.bind(this);
+
     makeObservable(this, {
-      resources: observable.ref,
       locale: observable.ref,
-      localeResources: computed,
-      locales: computed,
       localesExcludeCurrent: computed,
-      setResources: action.bound,
       setLocale: action.bound,
     });
-    this.setResources(resources);
+
     this.setLocale(locale);
 
     reaction(
@@ -27,27 +24,15 @@ export class I18nStore {
     );
   }
 
-  get localeResources() {
-    return this.resources?.[this.locale] ?? {};
-  }
-
   get locales() {
-    return Object.keys(this.resources);
+    return Object.keys(locales);
   }
 
   get localesExcludeCurrent() {
-    return this.locales.filter((l) => l !== this.locale);
-  }
-
-  setResources(resources) {
-    this.resources = resources ?? {};
+    return this.locales.filter((locale) => locale !== this.locale);
   }
 
   setLocale(locale) {
-    if (!this.locales?.length) {
-      throw new Error('Locales are not loaded yet.');
-    }
-
     locale ??= localStorage.getItem(LOCAL_STORAGE_KEY);
 
     if (!this.locales.includes(locale)) {
@@ -57,8 +42,8 @@ export class I18nStore {
     this.locale = locale;
   }
 
-  t = (key, values, defaultValue) => {
-    let template = this.localeResources[key];
+  t(key, values, defaultValue) {
+    let template = locales[this.locale]?.[key];
 
     if (template == null) {
       return defaultValue ?? key;
@@ -73,5 +58,5 @@ export class I18nStore {
     }
 
     return template;
-  };
+  }
 }
