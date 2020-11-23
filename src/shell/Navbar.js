@@ -12,20 +12,19 @@ const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
 function navItems() {
   const { routeStore, widgetsStore, i18nStore } = stores;
 
+  const id = widgetsStore.widgetId ?? undefined;
+
   return routeStore.routes
     .filter(({ navbar }) => navbar)
-    .map(({ name }) =>
-      navItem({
+    .map(({ name }) => {
+      const routeParams = name === 'widgets' ? { id } : undefined;
+      return navItem({
         title: i18nStore.t(name),
         active: routeStore.isActive(name),
-        href: routeStore.buildPath(name),
-        handleClick: () =>
-          routeStore.navigate(
-            name,
-            name === 'widgets' ? widgetsStore.widgetId ?? undefined : undefined,
-          ),
-      }),
-    );
+        href: routeStore.buildPath(name, routeParams),
+        handleClick: () => routeStore.navigate(name, routeParams),
+      });
+    });
 }
 
 function navItem({ title, active, href, handleClick }) {

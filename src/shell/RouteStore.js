@@ -11,6 +11,13 @@ export class RouteStore {
   unsubscribe = null;
 
   constructor() {
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.isActive = this.isActive.bind(this);
+    this.navigate = this.navigate.bind(this);
+    this.navigateBack = this.navigateBack.bind(this);
+    this.buildPath = this.buildPath.bind(this);
+
     makeObservable(this, {
       route: observable.ref,
       previousRoute: observable.ref,
@@ -20,18 +27,12 @@ export class RouteStore {
       setRoute: action.bound,
     });
 
-    this.start = this.start.bind(this);
-    this.stop = this.stop.bind(this);
-    this.isActive = this.isActive.bind(this);
-    this.navigate = this.navigate.bind(this);
-    this.navigateBack = this.navigateBack.bind(this);
-    this.buildPath = this.buildPath.bind(this);
-
     this.router = createRouter(routes, {
       defaultRoute: 'browse',
       allowNotFound: true,
       queryParamsMode: 'loose',
     });
+
     this.router.usePlugin(browserPlugin());
 
     reaction(
