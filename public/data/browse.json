@@ -42,6 +42,13 @@
     "homepage_url": "https://v5.getbootstrap.com/"
   },
   {
+    "id": "tailwindcss",
+    "name": "Tailwind CSS",
+    "description": "Rapidly build modern websites without ever leaving your HTML.",
+    "logo_url": "/data/images/tailwindcss.svg",
+    "homepage_url": "https://tailwindcss.com/"
+  },
+  {
     "id": "mobx",
     "name": "MobX",
     "description": "Simple, scalable state management.",
