@@ -54,5 +54,12 @@
     "description": "Simple, scalable state management.",
     "logo_url": "/data/images/mobx.svg",
     "homepage_url": "https://mobx.js.org/"
+  },
+  {
+    "id": "nats",
+    "name": "NATS",
+    "description": "A simple, secure and high performance open source messaging system for cloud native applications, IoT messaging, and microservices architectures.",
+    "logo_url": "/data/images/nats.svg",
+    "homepage_url": "https://nats.io/"
   }
 ]
