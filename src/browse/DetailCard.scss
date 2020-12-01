@@ -1,18 +1,20 @@
-.app-detail-card.card {
-  max-width: 30rem;
+app-detail-card {
+  .card {
+    max-width: 30rem;
 
-  img {
-    align-self: center;
-    padding: 1rem;
-    height: 20rem;
-    object-fit: contain;
-  }
+    img {
+      align-self: center;
+      padding: 1rem;
+      height: 20rem;
+      object-fit: contain;
+    }
 
-  .card-title {
-    white-space: nowrap;
-  }
+    .card-title {
+      white-space: nowrap;
+    }
 
-  .card-text {
-    white-space: pre-wrap;
+    .card-text {
+      white-space: pre-wrap;
+    }
   }
 }

@@ -28,7 +28,7 @@ export class ErrorCard extends HTMLElement {
     const { t } = stores.i18nStore;
 
     return html`
-      <div class="card mx-auto text-center text-danger app-error-card">
+      <div class="card mx-auto text-center text-danger">
         <div class="card-body">
           <h1 class="card-title display-1">${this.title || t('error')}</h1>
           ${this.text

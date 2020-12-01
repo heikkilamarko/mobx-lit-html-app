@@ -146,6 +146,6 @@ export class Charts extends HTMLElement {
 
 function createChartDiv() {
   const div = document.createElement('div');
-  div.classList.add('app-charts__div');
+  div.classList.add('app-chart');
   return div;
 }

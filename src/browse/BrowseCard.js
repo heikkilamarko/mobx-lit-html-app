@@ -7,7 +7,7 @@ export class BrowseCard extends HTMLElement {
     render(
       html`
         <a
-          class="card text-center app-browse-card"
+          class="card text-center"
           href=${stores.routeStore.buildPath('browse.detail', {
             id: this.data.id,
           })}

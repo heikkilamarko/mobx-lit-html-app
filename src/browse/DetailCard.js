@@ -27,7 +27,7 @@ export class DetailCard extends HTMLElement {
     const { t } = stores.i18nStore;
 
     return html`
-      <div class="card mx-auto app-detail-card">
+      <div class="card mx-auto">
         <img src="${this.data.logo_url}" class="card-img-top" alt="logo" />
         <div class="card-body">
           <h4 class="card-title">${this.data.name}</h4>

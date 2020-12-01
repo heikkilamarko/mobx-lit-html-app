@@ -46,7 +46,7 @@ export class Widgets extends HTMLElement {
 
     return html`
       <select
-        class="form-select form-select-lg mx-auto mt-3 mb-5 app-widgets__select"
+        class="form-select form-select-lg mx-auto mt-3 mb-5 app-widgets-select"
         aria-label="Widget select"
         .value=${stores.widgetsStore.widgetId ?? ''}
         @change="${(event) => this.handleWidgetChange(event)}"

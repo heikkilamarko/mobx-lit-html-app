@@ -24,7 +24,7 @@ export class Counter extends HTMLElement {
     const { value, progress, minValue, maxValue } = stores.counterStore;
 
     return html`
-      <div class="card mx-auto app-counter">
+      <div class="card mx-auto">
         <div class="card-body">
           <h1
             class=${classMap({
@@ -62,7 +62,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === minValue}
             @click="${this.handleDecrement}"
           >
-            ${dashCircle('app-counter__icon')}
+            ${dashCircle('app-btn-icon')}
           </button>
           <button
             aria-label=${t('counter.increment')}
@@ -70,7 +70,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === maxValue}
             @click="${this.handleIncrement}"
           >
-            ${plusCircle('app-counter__icon')}
+            ${plusCircle('app-btn-icon')}
           </button>
           <button
             aria-label=${t('counter.reset')}
@@ -78,7 +78,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === 0}
             @click=${this.handleReset}
           >
-            ${xCircle('app-counter__icon')}
+            ${xCircle('app-btn-icon')}
           </button>
         </div>
       </div>
