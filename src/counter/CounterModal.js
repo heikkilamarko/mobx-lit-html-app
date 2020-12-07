@@ -15,7 +15,7 @@ export class CounterModal extends HTMLElement {
     const { t } = stores.i18nStore;
 
     return html`
-      <div class="modal" tabindex="-1">
+      <div class="modal fade" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">

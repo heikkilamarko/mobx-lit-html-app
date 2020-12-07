@@ -14,9 +14,12 @@ export class Counter extends HTMLElement {
   disconnectedCallback() {
     clearReactions(this);
 
-    this.modal?.hide();
-    this.modal?.dispose();
-    this.modal = undefined;
+    if (this.modal) {
+      this.modal._element?.classList.remove('fade');
+      this.modal.hide();
+      this.modal.dispose();
+      this.modal = undefined;
+    }
   }
 
   render() {
