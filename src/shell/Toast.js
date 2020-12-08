@@ -22,14 +22,14 @@ export class Toast extends HTMLElement {
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        data-delay=${toast.delay}
+        data-bs-delay=${toast.delay}
       >
         <div class="toast-header text-white bg-${toast.type}">
           <strong class="mr-auto">${toast.title}</strong>
           <button
             type="button"
             class="btn-close btn-close-white"
-            data-dismiss="toast"
+            data-bs-dismiss="toast"
             aria-label=${t('close')}
           ></button>
         </div>

@@ -20,7 +20,7 @@ export class LocalePicker extends HTMLElement {
         href="#"
         id="localeDropdown"
         role="button"
-        data-toggle="dropdown"
+        data-bs-toggle="dropdown"
         aria-expanded="false"
       >
         ${locale}

@@ -23,7 +23,7 @@ export class CounterModal extends HTMLElement {
               <button
                 type="button"
                 class="btn-close"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
@@ -34,7 +34,7 @@ export class CounterModal extends HTMLElement {
               <button
                 type="button"
                 class="btn btn-outline-primary rounded-pill"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
               >
                 ${t('cancel')}
               </button>
