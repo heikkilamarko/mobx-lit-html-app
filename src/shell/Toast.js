@@ -18,14 +18,14 @@ export class Toast extends HTMLElement {
 
     return html`
       <div
-        class="toast hide position-fixed bottom-0 right-0 border-0 m-3"
+        class="toast hide position-fixed bottom-0 end-0 border-0 m-3"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
         data-bs-delay=${toast.delay}
       >
         <div class="toast-header text-white bg-${toast.type}">
-          <strong class="mr-auto">${toast.title}</strong>
+          <strong class="me-auto">${toast.title}</strong>
           <button
             type="button"
             class="btn-close btn-close-white"

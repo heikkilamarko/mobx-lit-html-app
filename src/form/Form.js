@@ -64,7 +64,7 @@ export class Form extends HTMLElement {
           <div>
             <button
               type="button"
-              class="btn btn-outline-primary rounded-pill mr-2 mt-2"
+              class="btn btn-outline-primary rounded-pill me-2 mt-2"
               ?disabled=${!canReset}
               @click=${reset}
             >

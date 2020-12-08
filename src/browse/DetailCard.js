@@ -39,12 +39,12 @@ export class DetailCard extends HTMLElement {
             class="btn btn-primary rounded-pill"
           >
             ${t('browse.detail.homepage')}
-            ${boxArrowUpRight('align-text-top ml-1')}
+            ${boxArrowUpRight('align-text-top ms-1')}
           </a>
           <button
             aria-label=${t('browse.detail.back')}
             type="button"
-            class="btn btn-outline-primary float-right rounded-pill"
+            class="btn btn-outline-primary float-end rounded-pill"
             @click=${stores.routeStore.navigateBack}
           >
             ${arrowLeft('align-text-bottom')}

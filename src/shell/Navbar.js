@@ -36,7 +36,7 @@ export class Navbar extends HTMLElement {
               alt="App brand image (rocket)"
               width="24"
               height="24"
-              class="d-inline-block align-text-bottom mr-2"
+              class="d-inline-block align-text-bottom me-2"
             />
             <span>Demo App</span>
           </a>

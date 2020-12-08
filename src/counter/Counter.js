@@ -61,7 +61,7 @@ export class Counter extends HTMLElement {
           </div>
           <button
             aria-label=${t('counter.decrement')}
-            class="btn btn-link text-danger p-0 mr-4"
+            class="btn btn-link text-danger p-0 me-4"
             ?disabled=${value === minValue}
             @click="${this.handleDecrement}"
           >
@@ -77,7 +77,7 @@ export class Counter extends HTMLElement {
           </button>
           <button
             aria-label=${t('counter.reset')}
-            class="btn btn-link float-right p-0"
+            class="btn btn-link float-end p-0"
             ?disabled=${value === 0}
             @click=${this.handleReset}
           >

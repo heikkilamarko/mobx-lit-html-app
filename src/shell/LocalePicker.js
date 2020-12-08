@@ -26,7 +26,7 @@ export class LocalePicker extends HTMLElement {
         ${locale}
       </a>
       <ul
-        class="dropdown-menu dropdown-menu-right"
+        class="dropdown-menu dropdown-menu-end"
         aria-labelledby="localeDropdown"
       >
         ${localesExcludeCurrent.map(

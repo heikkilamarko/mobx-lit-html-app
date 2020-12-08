@@ -111,11 +111,11 @@ export class FormTagsField extends HTMLElement {
           (tag) =>
             html`
               <span
-                class="d-inline-flex flex-row align-items-center badge rounded-pill bg-primary mb-1 pl-3"
+                class="d-inline-flex flex-row align-items-center badge rounded-pill bg-primary mb-1 ps-3"
                 >${tag}
                 <button
                   type="button"
-                  class="btn-close btn-close-white ml-2"
+                  class="btn-close btn-close-white ms-2"
                   aria-label=${t('close')}
                   @click=${() => this.removeTag(tag)}
                 ></button
