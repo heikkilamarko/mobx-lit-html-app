@@ -12,13 +12,13 @@
     "sass": "sass src:src --no-source-map"
   },
   "dependencies": {
-    "@popperjs/core": "2.5.4",
+    "@popperjs/core": "2.6.0",
     "ag-grid-community": "24.1.0",
-    "apexcharts": "3.22.3",
-    "axios": "0.21.0",
-    "bootstrap": "next",
-    "lit-html": "next-major",
-    "lodash-es": "4.17.15",
+    "apexcharts": "3.23.1",
+    "axios": "0.21.1",
+    "bootstrap": "5.0.0-beta1",
+    "lit-html": "1.3.0",
+    "lodash-es": "4.17.20",
     "mobx": "6.0.4",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
@@ -26,18 +26,18 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/preset-env": "7.12.10",
+    "@babel/preset-env": "7.12.11",
     "@snowpack/plugin-babel": "2.1.5",
     "@snowpack/plugin-dotenv": "2.0.5",
-    "@snowpack/plugin-postcss": "1.0.10",
+    "@snowpack/plugin-postcss": "1.0.11",
     "@snowpack/plugin-run-script": "2.2.1",
     "@snowpack/plugin-webpack": "2.2.0",
     "autoprefixer": "10.1.0",
     "compression-webpack-plugin": "6.1.1",
-    "postcss": "8.2.1",
+    "postcss": "8.2.2",
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
-    "sass": "1.30.0",
-    "snowpack": "2.18.3"
+    "sass": "1.32.0",
+    "snowpack": "2.18.5"
   }
 }
