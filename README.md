@@ -11,8 +11,6 @@ This repository contains the source code of a simple responsive web application 
 
 Build tool: [Snowpack](https://www.snowpack.dev/)
 
-See the app running [here](https://app-mobx-lit-html-app.azurewebsites.net/) 🚀
-
 ## Development
 
 ```bash
