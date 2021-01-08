@@ -49,12 +49,6 @@ export function clearIntervals(target) {
   target[I] = [];
 }
 
-export function analyticsPageview(path) {
-  if (window.gtag) {
-    window.gtag('config', GA_MEASUREMENT_ID, { page_path: path });
-  }
-}
-
 export function preventDefault(fn) {
   return function (event) {
     event.preventDefault();
