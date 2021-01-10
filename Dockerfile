@@ -1,6 +1,6 @@
 # Build
 
-FROM node:14.15.3 AS build
+FROM node:14.15.4 AS build
 
 WORKDIR /app
 
