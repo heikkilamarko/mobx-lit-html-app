@@ -1,8 +1,6 @@
 import { autorun, reaction } from 'mobx';
 import { render } from 'lit-html';
 
-const GA_MEASUREMENT_ID = import.meta.env.SNOWPACK_PUBLIC_GA_MEASUREMENT_ID;
-
 const R = Symbol('reactions');
 const I = Symbol('intervals');
 
