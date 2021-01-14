@@ -17,7 +17,7 @@
     "apexcharts": "3.23.1",
     "axios": "0.21.1",
     "bootstrap": "5.0.0-beta1",
-    "lit-html": "1.3.0",
+    "lit-html": "next-major",
     "lodash-es": "4.17.20",
     "mobx": "6.0.4",
     "router5": "8.0.1",
@@ -38,6 +38,6 @@
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
     "sass": "1.32.4",
-    "snowpack": "3.0.6"
+    "snowpack": "3.0.10"
   }
 }

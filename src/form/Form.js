@@ -1,5 +1,5 @@
 import { html } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
+import { repeat } from 'lit-html/directives/repeat.js';
 import { stores } from '../shared/stores';
 import {
   addRenderReaction,

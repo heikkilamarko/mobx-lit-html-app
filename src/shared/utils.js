@@ -17,10 +17,7 @@ export function addRenderReaction(target, templateFn, options = undefined) {
   templateFn ??= target.render.bind(target);
   addReaction(
     target,
-    autorun(
-      () => render(templateFn(), target, { eventContext: target }),
-      options,
-    ),
+    autorun(() => render(templateFn(), target, { host: target }), options),
   );
 }
 
