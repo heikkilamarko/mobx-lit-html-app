@@ -32,12 +32,12 @@
     "@snowpack/plugin-postcss": "1.1.0",
     "@snowpack/plugin-run-script": "2.3.0",
     "@snowpack/plugin-webpack": "2.3.0",
-    "autoprefixer": "10.2.1",
+    "autoprefixer": "10.2.3",
     "compression-webpack-plugin": "6.1.1",
     "postcss": "8.2.4",
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
-    "sass": "1.32.4",
-    "snowpack": "3.0.10"
+    "sass": "1.32.5",
+    "snowpack": "3.0.11"
   }
 }
