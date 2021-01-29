@@ -19,7 +19,7 @@
     "bootstrap": "5.0.0-beta1",
     "lit-html": "next-major",
     "lodash-es": "4.17.20",
-    "mobx": "6.0.4",
+    "mobx": "6.1.1",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
     "validator": "13.5.2"
