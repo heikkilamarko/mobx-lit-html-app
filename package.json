@@ -19,14 +19,14 @@
     "bootstrap": "5.0.0-beta1",
     "lit-html": "next-major",
     "lodash-es": "4.17.20",
-    "mobx": "6.1.4",
+    "mobx": "6.1.5",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/preset-env": "7.12.11",
+    "@babel/plugin-proposal-class-properties": "7.12.13",
+    "@babel/preset-env": "7.12.13",
     "@snowpack/plugin-babel": "2.1.6",
     "@snowpack/plugin-dotenv": "2.0.5",
     "@snowpack/plugin-postcss": "1.1.0",
