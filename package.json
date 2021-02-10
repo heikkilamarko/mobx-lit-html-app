@@ -16,7 +16,7 @@
     "ag-grid-community": "25.0.1",
     "apexcharts": "3.24.0",
     "axios": "0.21.1",
-    "bootstrap": "5.0.0-beta1",
+    "bootstrap": "5.0.0-beta2",
     "lit-html": "next-major",
     "lodash-es": "4.17.20",
     "mobx": "6.1.5",
@@ -34,10 +34,10 @@
     "@snowpack/plugin-webpack": "2.3.0",
     "autoprefixer": "10.2.4",
     "compression-webpack-plugin": "6.1.1",
-    "postcss": "8.2.4",
+    "postcss": "8.2.6",
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
-    "sass": "1.32.6",
+    "sass": "1.32.7",
     "snowpack": "3.0.11"
   }
 }
