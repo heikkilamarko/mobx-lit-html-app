@@ -15,6 +15,8 @@ export class Jokes extends HTMLElement {
 
   render() {
     const { t } = stores.i18nStore;
+
+    /** @type import("./JokesStore").JokesStore */
     const {
       setCategory,
       getJoke,

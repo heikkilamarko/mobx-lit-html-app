@@ -1,13 +1,26 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { getJoke, getJokeCategories } from '../shared/api';
 
+/**
+ * @typedef { import("./JokesStore").JokesStore } IJokesStore
+ * @typedef { import("./JokesStore").Joke } Joke
+ */
+
 const CATEGORY_ALL = '';
 
+/**
+ * @implements {IJokesStore}
+ */
 export class JokesStore {
+  /** @type {string[]} */
   categories = [];
+  /** @type {string} */
   category = null;
+  /** @type {Joke} */
   joke = null;
+  /** @type {boolean} */
   isLoading = false;
+  /** @type {Error} */
   error = null;
 
   constructor() {
@@ -30,40 +43,72 @@ export class JokesStore {
     });
   }
 
+  /**
+   * Is ready state.
+   */
   get isReady() {
     return !!this.categories?.length;
   }
 
+  /**
+   * Joke text.
+   */
   get jokeText() {
     return this.joke?.value ?? null;
   }
 
+  /**
+   * Has error state.
+   */
   get hasError() {
     return !!this.error;
   }
 
+  /**
+   * Set categories.
+   * @param {string[]} categories
+   */
   setCategories(categories) {
     this.categories = categories;
     this.setCategory(CATEGORY_ALL);
   }
 
+  /**
+   * Set category.
+   * @param {string} category
+   */
   setCategory(category) {
     this.category = category;
     this.getJoke();
   }
 
+  /**
+   * Set joke.
+   * @param {Joke} joke
+   */
   setJoke(joke) {
     this.joke = joke;
   }
 
+  /**
+   * Set loading state.
+   * @param {boolean} isLoading
+   */
   setLoading(isLoading) {
     this.isLoading = isLoading;
   }
 
+  /**
+   * Set error.
+   * @param {Error} error
+   */
   setError(error) {
     this.error = error;
   }
 
+  /**
+   * Get joke categories.
+   */
   async getJokeCategories() {
     if (this.isReady) return;
 
@@ -80,6 +125,9 @@ export class JokesStore {
     }
   }
 
+  /**
+   * Get joke.
+   */
   async getJoke() {
     if (this.isLoading) return;
 

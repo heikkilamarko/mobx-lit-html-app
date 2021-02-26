@@ -1,12 +1,12 @@
-/** @type {import("snowpack").SnowpackUserConfig } */
-
 const CompressionPlugin = require('compression-webpack-plugin');
 
+/** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
     public: { url: '/', static: true },
     src: { url: '/dist' },
   },
+  exclude: ['**/*.d.ts'],
   plugins: [
     [
       '@snowpack/plugin-run-script',
