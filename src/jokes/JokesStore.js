@@ -2,8 +2,8 @@ import { action, computed, makeObservable, observable } from 'mobx';
 import { getJoke, getJokeCategories } from '../shared/api';
 
 /**
- * @typedef { import("./JokesStore").JokesStore } IJokesStore
- * @typedef { import("./JokesStore").Joke } Joke
+ * @typedef { import("./types").JokesStore } IJokesStore
+ * @typedef { import("./types").Joke } Joke
  */
 
 const CATEGORY_ALL = '';

@@ -3,6 +3,7 @@
     "checkJs": true,
     "target": "es2020",
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   }
 }
