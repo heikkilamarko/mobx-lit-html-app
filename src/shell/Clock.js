@@ -9,6 +9,7 @@ import {
 } from '../shared/utils';
 
 export class Clock extends HTMLElement {
+  /** @type {Date} */
   time;
 
   constructor() {

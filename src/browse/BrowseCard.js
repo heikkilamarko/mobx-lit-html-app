@@ -3,6 +3,9 @@ import { stores } from '../shared/stores';
 import './BrowseCard.css';
 
 export class BrowseCard extends HTMLElement {
+  /** @type {import("./types").BrowseItem} */
+  data;
+
   connectedCallback() {
     render(
       html`

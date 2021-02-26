@@ -5,7 +5,9 @@ import { addRenderReaction, clearReactions } from '../shared/utils';
 import './ErrorCard.css';
 
 export class ErrorCard extends HTMLElement {
+  /** @type {string} */
   title;
+  /** @type {string} */
   text;
 
   constructor() {

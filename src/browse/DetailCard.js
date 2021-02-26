@@ -6,6 +6,7 @@ import { arrowLeft, boxArrowUpRight } from '../shared/icons';
 import './DetailCard.css';
 
 export class DetailCard extends HTMLElement {
+  /** @type {import("./types").BrowseItem} */
   data;
 
   constructor() {

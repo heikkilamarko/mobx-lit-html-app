@@ -1,11 +1,21 @@
 import { makeObservable, action, observable, computed, reaction } from 'mobx';
 import { locales } from '../shared/locales';
 
+/**
+ * @typedef { import("./types").I18nStore } II18nStore
+ */
+
 const LOCAL_STORAGE_KEY = 'app-locale';
 
+/** @implements {II18nStore} */
 export class I18nStore {
+  /** @type {string} */
   locale;
 
+  /**
+   * Constructor.
+   * @param {string=} locale
+   */
   constructor(locale) {
     this.t = this.t.bind(this);
 
@@ -32,6 +42,10 @@ export class I18nStore {
     return this.locales.filter((locale) => locale !== this.locale);
   }
 
+  /**
+   * Set locale.
+   * @param {string} locale
+   */
   setLocale(locale) {
     locale ??= localStorage.getItem(LOCAL_STORAGE_KEY);
 
@@ -42,7 +56,15 @@ export class I18nStore {
     this.locale = locale;
   }
 
+  /**
+   * Translate.
+   * @param {string} key Key
+   * @param {Object.<string, any>=} values Template values.
+   * @param {string=} defaultValue Default text.
+   * @returns {string} Translated text.
+   */
   t(key, values, defaultValue) {
+    /** @type {string} */
     let template = locales[this.locale]?.[key];
 
     if (template == null) {
