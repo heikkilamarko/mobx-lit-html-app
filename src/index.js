@@ -13,7 +13,7 @@ import * as datagrid from './datagrid';
 import * as charts from './charts';
 import * as form from './form';
 import * as widgets from './widgets';
-import './index.css';
+import './index.scss';
 
 const modules = [
   shell,

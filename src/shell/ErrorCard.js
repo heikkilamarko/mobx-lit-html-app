@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import { makeObservable, observable } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
-import './ErrorCard.css';
+import './ErrorCard.scss';
 
 export class ErrorCard extends HTMLElement {
   /** @type {string} */

@@ -3,7 +3,7 @@ import { makeObservable, observable } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 import { arrowLeft, boxArrowUpRight } from '../shared/icons';
-import './DetailCard.css';
+import './DetailCard.scss';
 
 export class DetailCard extends HTMLElement {
   /** @type {import("./types").BrowseItem} */

@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import './Root.css';
+import './Root.scss';
 
 export class Root extends HTMLElement {
   connectedCallback() {

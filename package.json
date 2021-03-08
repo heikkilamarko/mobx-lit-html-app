@@ -5,10 +5,11 @@
   "author": "Marko Heikkilä",
   "license": "MIT",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "prettier --check \"{src,public}/**/*.{js,scss,json}\""
+    "prettier": "prettier --check \"{src,public}/**/*.{js,scss,json}\""
   },
   "dependencies": {
     "@popperjs/core": "2.8.4",

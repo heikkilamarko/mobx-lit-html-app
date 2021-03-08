@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import { stores } from '../shared/stores';
-import './BrowseCard.css';
+import './BrowseCard.scss';
 
 export class BrowseCard extends HTMLElement {
   /** @type {import("./types").BrowseItem} */

@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import { personFill } from '../shared/icons';
-import './NameCellRenderer.css';
+import './NameCellRenderer.scss';
 
 export default class NameCellRenderer {
   init(params) {

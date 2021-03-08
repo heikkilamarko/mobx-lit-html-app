@@ -9,7 +9,7 @@ import {
   addWatchReaction,
   clearReactions,
 } from '../shared/utils';
-import './Charts.css';
+import './Charts.scss';
 
 export class Charts extends HTMLElement {
   charts = [];

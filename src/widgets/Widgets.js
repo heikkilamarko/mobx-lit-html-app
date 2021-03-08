@@ -5,7 +5,7 @@ import {
   addRenderReaction,
   clearReactions,
 } from '../shared/utils';
-import './Widgets.css';
+import './Widgets.scss';
 
 export class Widgets extends HTMLElement {
   connectedCallback() {

@@ -4,7 +4,7 @@ import Modal from 'bootstrap/js/dist/modal';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 import { dashCircle, plusCircle, xCircle } from '../shared/icons';
-import './Counter.css';
+import './Counter.scss';
 
 export class Counter extends HTMLElement {
   connectedCallback() {

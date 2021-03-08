@@ -1,7 +1,7 @@
 import { html } from 'lit-html';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
-import './Toast.css';
+import './Toast.scss';
 
 export class Toast extends HTMLElement {
   connectedCallback() {

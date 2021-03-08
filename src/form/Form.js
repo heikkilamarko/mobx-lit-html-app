@@ -6,7 +6,7 @@ import {
   clearReactions,
   preventDefault,
 } from '../shared/utils';
-import './Form.css';
+import './Form.scss';
 
 export class Form extends HTMLElement {
   connectedCallback() {
