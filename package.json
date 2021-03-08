@@ -5,11 +5,10 @@
   "author": "Marko Heikkilä",
   "license": "MIT",
   "scripts": {
-    "start": "snowpack dev --reload",
-    "build": "snowpack build --clean",
-    "format": "prettier --write \"{src,public}/**/*.{js,scss,json}\"",
-    "lint": "prettier --check \"{src,public}/**/*.{js,scss,json}\"",
-    "sass": "sass src:src --no-source-map"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "prettier --check \"{src,public}/**/*.{js,scss,json}\""
   },
   "dependencies": {
     "@popperjs/core": "2.8.4",
@@ -25,19 +24,9 @@
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.13.0",
-    "@babel/preset-env": "7.13.5",
-    "@snowpack/plugin-babel": "2.1.6",
-    "@snowpack/plugin-dotenv": "2.0.5",
-    "@snowpack/plugin-postcss": "1.1.0",
-    "@snowpack/plugin-run-script": "2.3.0",
-    "@snowpack/plugin-webpack": "2.3.0",
     "autoprefixer": "10.2.4",
-    "compression-webpack-plugin": "6.1.1",
-    "postcss": "8.2.6",
-    "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
     "sass": "1.32.8",
-    "snowpack": "3.0.13"
+    "vite": "^2.0.5"
   }
 }

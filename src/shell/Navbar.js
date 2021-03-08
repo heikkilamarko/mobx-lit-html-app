@@ -8,7 +8,7 @@ import {
 } from '../shared/utils';
 
 // @ts-ignore
-const GITHUB_URL = import.meta.env.SNOWPACK_PUBLIC_GITHUB_URL;
+const GITHUB_URL = import.meta.env.VITE_PUBLIC_GITHUB_URL;
 
 export class Navbar extends HTMLElement {
   connectedCallback() {

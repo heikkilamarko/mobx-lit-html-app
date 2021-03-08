@@ -9,7 +9,7 @@ This repository contains the source code of a simple responsive web application 
 - [ag-Grid](https://www.ag-grid.com/)
 - [ApexCharts](https://apexcharts.com/)
 
-Build tool: [Snowpack](https://www.snowpack.dev/)
+Build tool: [Vite](https://vitejs.dev/)
 
 ## Development
 
