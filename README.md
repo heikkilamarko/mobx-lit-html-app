@@ -27,7 +27,7 @@ Build tool: [Vite](https://vitejs.dev/)
 ## Test-drive the production bundle
 
 ```bash
-> npx serve -s build
+> npx serve -s dist
 ```
 
 ## Run as Docker container
