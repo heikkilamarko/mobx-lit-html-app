@@ -3,6 +3,7 @@
  */
 const config = {
   build: {
+    target: "esnext",
     brotliSize: false,
     chunkSizeWarningLimit: 2_000,
   },
