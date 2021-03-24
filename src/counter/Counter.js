@@ -54,6 +54,7 @@ export class Counter extends HTMLElement {
               })}
               role="progressbar"
               style="width: ${progress}%"
+              aria-label=${t('counter')}
               aria-valuenow=${value}
               aria-valuemin=${minValue}
               aria-valuemax=${maxValue}
