@@ -28,6 +28,6 @@
     "autoprefixer": "10.2.5",
     "prettier": "2.2.1",
     "sass": "1.32.8",
-    "vite": "2.1.2"
+    "vite": "2.1.3"
   }
 }
