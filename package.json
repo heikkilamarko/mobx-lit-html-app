@@ -17,9 +17,9 @@
     "apexcharts": "3.26.0",
     "axios": "0.21.1",
     "bootstrap": "5.0.0-beta3",
-    "lit-html": "2.0.0-pre.6",
+    "lit-html": "2.0.0-pre.7",
     "lodash-es": "4.17.21",
-    "mobx": "6.1.8",
+    "mobx": "6.2.0",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
     "validator": "13.5.2"
