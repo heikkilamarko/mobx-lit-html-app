@@ -3,10 +3,10 @@
 This repository contains the source code of a simple responsive web application written in the following framework-agnostic technologies:
 
 - [MobX](https://mobx.js.org/)
-- [lit](https://github.com/lit/lit)
+- [Lit](https://github.com/lit/lit)
 - [Bootstrap](https://getbootstrap.com/)
 - [Router5](https://router5.js.org/)
-- [ag-Grid](https://www.ag-grid.com/)
+- [AG Grid](https://www.ag-grid.com/)
 - [ApexCharts](https://apexcharts.com/)
 
 Build tool: [Vite](https://vitejs.dev/)
@@ -34,5 +34,5 @@ Build tool: [Vite](https://vitejs.dev/)
 
 ```bash
 > docker-compose up --build
-> open http://localhost:5000
+> open http://localhost:8000
 ```
