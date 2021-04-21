@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 
 function c(existing, added) {
   return existing + (added ? ` ${added}` : '');

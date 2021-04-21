@@ -2,7 +2,7 @@ import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/toast';
 import { configure } from 'mobx';
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 import { locales } from './shared/locales';
 import { stores } from './shared/stores';
 import * as shell from './shell';

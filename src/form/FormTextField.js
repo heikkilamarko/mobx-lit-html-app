@@ -1,5 +1,5 @@
-import { html, nothing } from 'lit-html';
-import { classMap } from 'lit-html/directives/class-map.js';
+import { html, nothing } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 

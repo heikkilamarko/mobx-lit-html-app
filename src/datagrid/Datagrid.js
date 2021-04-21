@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit-html';
+import { html, nothing } from 'lit';
 import { Grid } from 'ag-grid-community';
 import { stores } from '../shared/stores';
 import {

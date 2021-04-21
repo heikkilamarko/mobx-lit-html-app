@@ -1,5 +1,5 @@
 import { autorun, reaction } from 'mobx';
-import { render } from 'lit-html';
+import { render } from 'lit';
 
 const R = Symbol('reactions');
 const I = Symbol('intervals');

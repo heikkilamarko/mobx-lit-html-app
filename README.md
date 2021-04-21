@@ -1,9 +1,9 @@
-# MobX ❤️ lit-html App
+# MobX ❤️ Lit App
 
 This repository contains the source code of a simple responsive web application written in the following framework-agnostic technologies:
 
 - [MobX](https://mobx.js.org/)
-- [lit-html](https://lit-html.polymer-project.org/)
+- [lit](https://github.com/lit/lit)
 - [Bootstrap](https://getbootstrap.com/)
 - [Router5](https://router5.js.org/)
 - [ag-Grid](https://www.ag-grid.com/)

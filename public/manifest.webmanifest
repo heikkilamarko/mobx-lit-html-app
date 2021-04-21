@@ -1,7 +1,7 @@
 {
   "name": "Demo App",
   "short_name": "Demo App",
-  "description": "A simple web application written in MobX and lit-html",
+  "description": "A simple web application written in MobX and Lit",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { makeObservable, observable } from 'mobx';
 import ApexCharts from 'apexcharts';
 import en from 'apexcharts/dist/locales/en.json';
