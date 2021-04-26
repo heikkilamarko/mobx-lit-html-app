@@ -3,7 +3,7 @@
 This repository contains the source code of a simple responsive web application written in the following framework-agnostic technologies:
 
 - [MobX](https://mobx.js.org/)
-- [Lit](https://github.com/lit/lit)
+- [Lit](https://lit.dev/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Router5](https://router5.js.org/)
 - [AG Grid](https://www.ag-grid.com/)

@@ -19,7 +19,7 @@
     "bootstrap": "5.0.0-beta3",
     "lit": "2.0.0-rc.1",
     "lodash-es": "4.17.21",
-    "mobx": "6.2.0",
+    "mobx": "6.3.0",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
     "validator": "13.6.0"
@@ -28,6 +28,6 @@
     "autoprefixer": "10.2.5",
     "prettier": "2.2.1",
     "sass": "1.32.11",
-    "vite": "2.2.1"
+    "vite": "2.2.3"
   }
 }

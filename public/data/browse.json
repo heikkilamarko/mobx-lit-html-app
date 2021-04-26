@@ -1,12 +1,5 @@
 [
   {
-    "id": "web-components",
-    "name": "Web Components",
-    "description": "Web components are a set of web platform APIs that allow you to create new custom, reusable, encapsulated HTML tags to use in web pages and web apps. Custom components and widgets build on the Web Component standards, will work across modern browsers, and can be used with any JavaScript library or framework that works with HTML.\n\nWeb components are based on existing web standards. Features to support web components are currently being added to the HTML and DOM specs, letting web developers easily extend HTML with new elements with encapsulated styling and custom behavior.",
-    "logo_url": "/data/images/web-components.svg",
-    "homepage_url": "https://www.webcomponents.org/"
-  },
-  {
     "id": "svelte",
     "name": "Svelte",
     "description": "Cybernetically enhanced web apps.",
@@ -21,18 +14,11 @@
     "homepage_url": "https://reactjs.org/"
   },
   {
-    "id": "vue",
-    "name": "Vue",
-    "description": "The Progressive JavaScript Framework.",
-    "logo_url": "/data/images/vue.svg",
-    "homepage_url": "https://v3.vuejs.org/"
-  },
-  {
-    "id": "angular",
-    "name": "Angular",
-    "description": "One framework. Mobile & desktop.",
-    "logo_url": "/data/images/angular.svg",
-    "homepage_url": "https://angular.io/"
+    "id": "lit",
+    "name": "Lit",
+    "description": "Simple. Fast. Web Components.",
+    "logo_url": "/data/images/lit.svg",
+    "homepage_url": "https://lit.dev/"
   },
   {
     "id": "bootstrap",
