@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@popperjs/core": "2.9.2",
-    "ag-grid-community": "25.1.0",
+    "ag-grid-community": "25.2.1",
     "apexcharts": "3.26.1",
     "axios": "0.21.1",
     "bootstrap": "5.0.0-beta3",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "autoprefixer": "10.2.5",
     "prettier": "2.2.1",
-    "sass": "1.32.11",
-    "vite": "2.2.3"
+    "sass": "1.32.12",
+    "vite": "2.2.4"
   }
 }
