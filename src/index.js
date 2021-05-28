@@ -32,6 +32,7 @@ async function startup() {
     await registerLocales();
     await registerStores();
     registerComponents();
+    await stores.configStore.load();
     renderApp();
   } catch (error) {
     renderError(error);

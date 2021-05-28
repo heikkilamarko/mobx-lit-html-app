@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export async function getConfig() {
+  const { data } = await axios.get('/config.json');
+  return data;
+}
+
 export async function getLocales() {
   const { data } = await axios.get('/data/locales.json');
   return data;

@@ -7,9 +7,6 @@ import {
   preventDefault,
 } from '../shared/utils';
 
-// @ts-ignore
-const GITHUB_URL = import.meta.env.VITE_PUBLIC_GITHUB_URL;
-
 export class Navbar extends HTMLElement {
   connectedCallback() {
     addRenderReaction(this);
@@ -68,7 +65,7 @@ export class Navbar extends HTMLElement {
                   class="nav-link"
                   target="_blank"
                   rel="noreferrer"
-                  href=${GITHUB_URL}
+                  href=${stores.configStore.config.gitHubUrl}
                   >GitHub</a
                 >
               </li>

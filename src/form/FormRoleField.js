@@ -19,15 +19,8 @@ export class FormRoleField extends HTMLElement {
       return nothing;
     }
 
-    const {
-      id,
-      value,
-      error,
-      data,
-      isTouched,
-      isValid,
-      isValidating,
-    } = this.field;
+    const { id, value, error, data, isTouched, isValid, isValidating } =
+      this.field;
 
     const feedbackId = `${id}_feedback`;
 

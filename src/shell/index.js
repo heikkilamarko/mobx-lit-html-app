@@ -6,6 +6,7 @@ import { Navbar } from './Navbar';
 import { Content } from './Content';
 import { Clock } from './Clock';
 import { LocalePicker } from './LocalePicker';
+import { ConfigStore } from './ConfigStore';
 import { I18nStore } from './I18nStore';
 import { ToastStore } from './ToastStore';
 import { RouteStore } from './RouteStore';
@@ -23,6 +24,7 @@ export function registerComponents() {
 }
 
 export async function registerStores(stores) {
+  const configStore = new ConfigStore();
   const i18nStore = new I18nStore();
   const toastStore = new ToastStore();
   const routeStore = new RouteStore();
@@ -30,6 +32,7 @@ export async function registerStores(stores) {
   routeStore.start();
 
   Object.assign(stores, {
+    configStore,
     i18nStore,
     toastStore,
     routeStore,

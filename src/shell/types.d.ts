@@ -1,3 +1,7 @@
+export interface Config {
+  gitHubUrl: string;
+}
+
 export interface I18nStore {
   locales: string[];
   localesExcludeCurrent: string[];

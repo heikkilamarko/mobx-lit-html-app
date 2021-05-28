@@ -1,8 +1,11 @@
 version: '3.9'
 
 services:
-  app:
+  mobx-lit-html-app:
     build: .
-    image: app
+    image: mobx-lit-html-app
+    restart: on-failure
+    env_file:
+      - ./env/mobx-lit-html-app.env
     ports:
       - 8000:80

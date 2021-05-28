@@ -142,13 +142,8 @@ export class FormTagsField extends HTMLElement {
 
   addTag() {
     if (!this.canAddTag) return;
-    const {
-      value,
-      helperValue,
-      setTouched,
-      setValue,
-      setHelperValue,
-    } = this.field;
+    const { value, helperValue, setTouched, setValue, setHelperValue } =
+      this.field;
     setTouched();
     setValue([...value, helperValue.trim()]);
     setHelperValue('');
