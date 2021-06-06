@@ -15,8 +15,6 @@ export class Counter extends HTMLElement {
     clearReactions(this);
 
     if (this.modal) {
-      this.modal._element?.classList.remove('fade');
-      this.modal.hide();
       this.modal.dispose();
       this.modal = undefined;
     }
