@@ -6,8 +6,10 @@ COPY . .
 RUN npm run build
 
 FROM nginx:1.21.0-alpine
+ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/mobx-lit-html-app
+ENV NGINX_ENVSUBST_OUTPUT_DIR=/usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY config.json.template /etc/mobx-lit-html-app/
+COPY nginx/ /etc/mobx-lit-html-app/
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 
