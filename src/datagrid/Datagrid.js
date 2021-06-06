@@ -1,4 +1,5 @@
 import { html, nothing } from 'lit';
+import { ref } from 'lit/directives/ref.js';
 import { Grid } from 'ag-grid-community';
 import { stores } from '../shared/stores';
 import {
@@ -68,11 +69,11 @@ export class Datagrid extends HTMLElement {
       return html`<app-error-card .text=${error.message}></app-error-card>`;
     }
 
-    return html`<div class="ag-theme-alpine" style="height:36rem"></div>`;
-  }
-
-  get gridDiv() {
-    return this.querySelector('.ag-theme-alpine');
+    return html`<div
+      class="ag-theme-alpine"
+      style="height:36rem"
+      ${ref((el) => (this.gridDiv = el))}
+    ></div>`;
   }
 
   get gridApi() {
