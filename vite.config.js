@@ -1,12 +1,12 @@
-/**
- * @type {import('vite').UserConfig}
- */
-const config = {
-  build: {
-    target: "esnext",
-    brotliSize: false,
-    chunkSizeWarningLimit: 2_000,
-  },
-};
+import { defineConfig } from 'vite';
 
-export default config;
+// https://vitejs.dev/config/
+export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+      },
+    },
+  },
+});
