@@ -5,7 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:1.21.0-alpine
+FROM nginx:alpine
 ENV NGINX_ENVSUBST_TEMPLATE_DIR=/etc/mobx-lit-html-app
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
