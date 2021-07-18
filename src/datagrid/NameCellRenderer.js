@@ -1,5 +1,6 @@
 import { html, render } from 'lit';
-import { personFill } from '../shared/icons';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import PersonFillIcon from 'bootstrap-icons/icons/person-fill.svg?raw';
 import './NameCellRenderer.scss';
 
 export default class NameCellRenderer {
@@ -23,6 +24,6 @@ export default class NameCellRenderer {
   }
 
   _renderGui(value) {
-    render(html`${personFill()} ${value}`, this.gui);
+    render(html`${unsafeSVG(PersonFillIcon)} ${value}`, this.gui);
   }
 }

@@ -1,8 +1,10 @@
 import { html } from 'lit';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import ArrowLeftIcon from 'bootstrap-icons/icons/arrow-left.svg?raw';
+import BoxArrowUpRightIcon from 'bootstrap-icons/icons/box-arrow-up-right.svg?raw';
 import { makeObservable, observable } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
-import { arrowLeft, boxArrowUpRight } from '../shared/icons';
 import './DetailCard.scss';
 
 export class DetailCard extends HTMLElement {
@@ -39,8 +41,7 @@ export class DetailCard extends HTMLElement {
             rel="noreferrer"
             class="btn btn-primary rounded-pill"
           >
-            ${t('browse.detail.homepage')}
-            ${boxArrowUpRight('align-text-top ms-1')}
+            ${t('browse.detail.homepage')} ${unsafeSVG(BoxArrowUpRightIcon)}
           </a>
           <button
             aria-label=${t('browse.detail.back')}
@@ -48,7 +49,7 @@ export class DetailCard extends HTMLElement {
             class="btn btn-outline-primary float-end rounded-pill"
             @click=${stores.routeStore.navigateBack}
           >
-            ${arrowLeft('align-text-bottom')}
+            ${unsafeSVG(ArrowLeftIcon)}
           </button>
         </div>
       </div>

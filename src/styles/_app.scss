@@ -13,3 +13,8 @@ body {
 .form-control[readonly] {
   background-color: $input-bg;
 }
+
+/* TODO: Temporary workaround for https://github.com/twbs/icons/issues/921 */
+svg.bi {
+  vertical-align: -0.125em;
+}

@@ -1,9 +1,13 @@
 import { html, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import DashCircleIcon from 'bootstrap-icons/icons/dash-circle.svg?raw';
+import PlusCircleIcon from 'bootstrap-icons/icons/plus-circle.svg?raw';
+import XCircleIcon from 'bootstrap-icons/icons/x-circle.svg?raw';
 import Modal from 'bootstrap/js/dist/modal';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
-import { dashCircle, plusCircle, xCircle } from '../shared/icons';
+
 import './Counter.scss';
 
 export class Counter extends HTMLElement {
@@ -64,7 +68,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === minValue}
             @click="${this.handleDecrement}"
           >
-            ${dashCircle('app-btn-icon')}
+            <span class="app-btn-icon">${unsafeSVG(DashCircleIcon)}</span>
           </button>
           <button
             aria-label=${t('counter.increment')}
@@ -72,7 +76,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === maxValue}
             @click="${this.handleIncrement}"
           >
-            ${plusCircle('app-btn-icon')}
+            <span class="app-btn-icon">${unsafeSVG(PlusCircleIcon)}</span>
           </button>
           <button
             aria-label=${t('counter.reset')}
@@ -80,7 +84,7 @@ export class Counter extends HTMLElement {
             ?disabled=${value === 0}
             @click=${this.handleReset}
           >
-            ${xCircle('app-btn-icon')}
+            <span class="app-btn-icon">${unsafeSVG(XCircleIcon)}</span>
           </button>
         </div>
       </div>
