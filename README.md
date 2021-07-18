@@ -33,6 +33,6 @@ Build tool: [Vite](https://vitejs.dev/)
 ## Run as Docker container
 
 ```bash
-> docker compose up --build
+> docker compose up --build -d
 > open http://localhost:8000
 ```
