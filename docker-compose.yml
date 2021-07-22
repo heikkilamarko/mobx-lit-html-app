@@ -9,3 +9,8 @@ services:
       - ./env/mobx-lit-html-app.env
     ports:
       - 8000:80
+    networks:
+      - mobx-lit-html-app
+
+networks:
+  mobx-lit-html-app:
