@@ -12,11 +12,11 @@
     "prettier": "prettier --check \"{src,public}/**/*.{js,scss,json}\""
   },
   "dependencies": {
-    "@popperjs/core": "2.9.2",
+    "@popperjs/core": "2.9.3",
     "ag-grid-community": "25.3.0",
     "apexcharts": "3.27.3",
     "axios": "0.21.1",
-    "bootstrap": "5.0.2",
+    "bootstrap": "5.1.0",
     "bootstrap-icons": "1.5.0",
     "lit": "2.0.0-rc.2",
     "lodash-es": "4.17.21",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "autoprefixer": "10.3.1",
     "prettier": "2.3.2",
-    "sass": "1.37.0",
+    "sass": "1.37.5",
     "vite": "2.4.4"
   }
 }
