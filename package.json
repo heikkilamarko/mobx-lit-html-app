@@ -26,9 +26,9 @@
     "validator": "13.6.0"
   },
   "devDependencies": {
-    "autoprefixer": "10.3.2",
+    "autoprefixer": "10.3.3",
     "prettier": "2.3.2",
-    "sass": "1.38.1",
+    "sass": "1.38.2",
     "vite": "2.5.1"
   }
 }
