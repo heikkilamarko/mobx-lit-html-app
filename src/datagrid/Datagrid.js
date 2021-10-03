@@ -131,7 +131,7 @@ function onFirstDataRendered({ api, columnApi }) {
 
   if (state) {
     state = JSON.parse(state);
-    columnApi.setColumnState(state.columnState);
+    columnApi.applyColumnState({ state: state.columnState });
     api.setFilterModel(state.filterModel);
     api.paginationSetPageSize(state.pageSize);
     api.paginationGoToPage(state.currentPage);
