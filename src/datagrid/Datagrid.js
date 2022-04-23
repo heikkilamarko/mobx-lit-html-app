@@ -111,7 +111,7 @@ function createGrid(gridDiv, rowData) {
     pagination: true,
     paginationPageSize: 50,
     // domLayout: 'autoHeight',
-    localeTextFunc: localeTextFunc.bind(this),
+    getLocaleText: getLocaleText.bind(this),
     onFirstDataRendered: onFirstDataRendered.bind(this),
   };
 
@@ -122,7 +122,7 @@ function headerValueGetter({ colDef }) {
   return stores.i18nStore.t(`datagrid.${colDef.field}`);
 }
 
-function localeTextFunc(key, defaultValue) {
+function getLocaleText({ key, defaultValue }) {
   return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
 }
 
