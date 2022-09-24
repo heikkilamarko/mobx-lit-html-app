@@ -1,6 +1,6 @@
-# MobX ❤️ Lit App
+# MobX Lit App
 
-This repository contains the source code of a simple responsive web application written in the following framework-agnostic technologies:
+This repository contains the source code of a simple responsive web application written in the following technologies:
 
 - [MobX](https://mobx.js.org/)
 - [Lit](https://lit.dev/)
@@ -11,28 +11,12 @@ This repository contains the source code of a simple responsive web application 
 
 Build tool: [Vite](https://vitejs.dev/)
 
-## Development
-
-```bash
-> npm i
-> npm start
-```
-
-## Bundle for production
-
-```bash
-> npm run build
-```
-
-## Test-drive the production bundle
-
-```bash
-> npx serve -s dist
-```
-
 ## Run as Docker container
 
 ```bash
-> docker compose up --build -d
-> open http://localhost:8000
+docker compose up --build -d
+```
+
+```bash
+open http://localhost:8000
 ```
