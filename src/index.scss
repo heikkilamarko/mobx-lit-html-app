@@ -47,10 +47,6 @@
 // Utilities
 @import 'bootstrap/scss/utilities/api';
 
-// AG Grid
-@import 'ag-grid-community/dist/styles/ag-grid';
-@import 'ag-grid-community/dist/styles/ag-theme-alpine/sass/_ag-theme-alpine-mixin';
-
 // App
 @import './styles/ag-grid';
 @import './styles/app';
