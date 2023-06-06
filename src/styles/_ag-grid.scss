@@ -1,7 +1,10 @@
 @use 'ag-grid-community/styles' as ag;
 @include ag.grid-styles(
   (
-    theme: alpine,
+    themes: (
+      alpine,
+      alpine-dark,
+    ),
     alpine-active-color: $primary,
     range-selection-border-color: $primary,
   )

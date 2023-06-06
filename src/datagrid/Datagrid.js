@@ -59,7 +59,10 @@ export class Datagrid extends HTMLElement {
   }
 
   render() {
-    const { isLoading, hasError, error } = stores.datagridStore;
+    const {
+      themeStore: { theme },
+      datagridStore: { isLoading, hasError, error },
+    } = stores;
 
     if (isLoading) {
       return nothing;
@@ -69,8 +72,11 @@ export class Datagrid extends HTMLElement {
       return html`<app-error-card .text=${error.message}></app-error-card>`;
     }
 
+    const themeClass =
+      theme === 'light' ? 'ag-theme-alpine' : 'ag-theme-alpine-dark';
+
     return html`<div
-      class="ag-theme-alpine"
+      class=${themeClass}
       style="height:36rem"
       ${ref((el) => (this.gridDiv = el))}
     ></div>`;
