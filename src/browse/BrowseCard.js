@@ -10,14 +10,20 @@ export class BrowseCard extends HTMLElement {
     render(
       html`
         <a
-          class="card text-center"
+          class="card text-center text-decoration-none"
           href=${stores.routeStore.buildPath('browse.detail', {
             id: this.data.id,
           })}
         >
           <div class="card-body">
-            <h4 class="card-title text-truncate">${this.data.name}</h4>
-            <img src="${this.data.logo_url}" alt="logo" />
+            <h4 class="card-title text-nowrap text-truncate">
+              ${this.data.name}
+            </h4>
+            <img
+              class="object-fit-contain p-2"
+              src="${this.data.logo_url}"
+              alt="logo"
+            />
           </div>
         </a>
       `,

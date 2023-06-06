@@ -2,14 +2,6 @@
   --app-card-shadow: #{$box-shadow};
 }
 
-body {
-  background-color: rgba($primary, 0.05);
-}
-
-.navbar-dark .navbar-nav .nav-link.active {
-  font-weight: 500;
-}
-
 .form-control[readonly] {
   background-color: $input-bg;
 }

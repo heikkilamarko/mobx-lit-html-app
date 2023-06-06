@@ -30,10 +30,14 @@ export class DetailCard extends HTMLElement {
     const { t } = stores.i18nStore;
 
     return html`
-      <div class="card mx-auto">
-        <img src="${this.data.logo_url}" class="card-img-top" alt="logo" />
+      <div class="card mx-auto text-decoration-none">
+        <img
+          class="align-self-center object-fit-contain p-3"
+          src="${this.data.logo_url}"
+          alt="logo"
+        />
         <div class="card-body">
-          <h4 class="card-title">${this.data.name}</h4>
+          <h4 class="card-title text-nowrap">${this.data.name}</h4>
           <p class="card-text">${this.data.description}</p>
           <a
             href="${this.data.homepage_url}"

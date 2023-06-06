@@ -1,20 +1,11 @@
 app-browse-card {
   .card {
-    text-decoration: none;
-    color: inherit;
-
     &:hover {
       box-shadow: var(--app-card-shadow);
     }
 
-    .card-title {
-      white-space: nowrap;
-    }
-
     img {
       height: 6rem;
-      padding: 0.5rem;
-      object-fit: contain;
     }
   }
 }

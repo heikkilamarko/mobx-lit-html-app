@@ -2,15 +2,8 @@ app-detail-card {
   .card {
     max-width: 30rem;
 
-    .card-img-top {
-      align-self: center;
-      padding: 1rem;
+    > img {
       height: 20rem;
-      object-fit: contain;
-    }
-
-    .card-title {
-      white-space: nowrap;
     }
 
     .card-text {
