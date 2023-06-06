@@ -6,8 +6,10 @@ import { Navbar } from './Navbar';
 import { Content } from './Content';
 import { Clock } from './Clock';
 import { LocalePicker } from './LocalePicker';
+import { ThemePicker } from './ThemePicker';
 import { ConfigStore } from './ConfigStore';
 import { I18nStore } from './I18nStore';
+import { ThemeStore } from './ThemeStore';
 import { ToastStore } from './ToastStore';
 import { RouteStore } from './RouteStore';
 import { getLocales } from '../shared/api';
@@ -21,11 +23,13 @@ export function registerComponents() {
   customElements.define('app-content', Content);
   customElements.define('app-clock', Clock);
   customElements.define('app-locale-picker', LocalePicker);
+  customElements.define('app-theme-picker', ThemePicker);
 }
 
 export async function registerStores(stores) {
   const configStore = new ConfigStore();
   const i18nStore = new I18nStore();
+  const themeStore = new ThemeStore();
   const toastStore = new ToastStore();
   const routeStore = new RouteStore();
 
@@ -34,6 +38,7 @@ export async function registerStores(stores) {
   Object.assign(stores, {
     configStore,
     i18nStore,
+    themeStore,
     toastStore,
     routeStore,
   });

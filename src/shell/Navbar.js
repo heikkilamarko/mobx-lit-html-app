@@ -58,6 +58,9 @@ export class Navbar extends HTMLElement {
             </div>
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
+                <app-theme-picker></app-theme-picker>
+              </li>
+              <li class="nav-item dropdown">
                 <app-locale-picker></app-locale-picker>
               </li>
               <li class="nav-item">

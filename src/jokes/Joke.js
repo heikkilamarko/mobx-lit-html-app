@@ -41,6 +41,6 @@ export class Joke extends HTMLElement {
   }
 
   render() {
-    return html`<h1 class="display-6 text-primary">${this.text}</h1>`;
+    return html`<p class="fs-4">${this.text}</p>`;
   }
 }
