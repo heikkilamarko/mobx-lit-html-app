@@ -31,6 +31,13 @@ export class Charts extends HTMLElement {
       () => this.createCharts(),
       { fireImmediately: true },
     );
+
+    addWatchReaction(
+      this,
+      () => stores.themeStore.theme,
+      () => this.createCharts(),
+      { fireImmediately: true },
+    );
   }
 
   disconnectedCallback() {
@@ -62,13 +69,19 @@ export class Charts extends HTMLElement {
   }
 
   createCharts() {
-    const { locale, t } = stores.i18nStore;
+    const {
+      i18nStore: { locale, t },
+      themeStore: { theme },
+    } = stores;
 
     this.charts = [
       {
         ...this.charts[0],
         title: t('charts.monthlysales'),
         options: {
+          theme: {
+            mode: theme,
+          },
           chart: {
             type: 'bar',
             stacked: true,
@@ -78,6 +91,7 @@ export class Charts extends HTMLElement {
             },
             locales: [en, fi],
             defaultLocale: locale,
+            background: 'transparent',
           },
           xaxis: {
             labels: {
@@ -109,6 +123,9 @@ export class Charts extends HTMLElement {
         ...this.charts[1],
         title: t('charts.departmentsales'),
         options: {
+          theme: {
+            mode: theme,
+          },
           chart: {
             type: 'donut',
             height: 400,
@@ -117,6 +134,7 @@ export class Charts extends HTMLElement {
             },
             locales: [en, fi],
             defaultLocale: locale,
+            background: 'transparent',
           },
           legend: {
             position: 'bottom',
