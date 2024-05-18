@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit';
 import { ref } from 'lit/directives/ref.js';
-import { Grid } from 'ag-grid-community';
+import { createGrid } from 'ag-grid-community';
 import { stores } from '../shared/stores';
 import {
   addRenderReaction,
@@ -19,8 +19,8 @@ export class Datagrid extends HTMLElement {
       this,
       () => stores.i18nStore.locale,
       () => {
-        this.grid?.destroy();
-        this.grid = createGrid(this.gridDiv, stores.datagridStore.rows);
+        this.gridApi?.destroy();
+        this.gridApi = createDatagrid(this.gridDiv, stores.datagridStore.rows);
       },
     );
 
@@ -28,10 +28,10 @@ export class Datagrid extends HTMLElement {
       this,
       () => stores.datagridStore.rows,
       (rows) => {
-        if (!this.grid) {
-          this.grid = createGrid(this.gridDiv, rows);
+        if (!this.gridApi) {
+          this.gridApi = createDatagrid(this.gridDiv, rows);
         } else {
-          this.gridApi.setRowData(rows);
+          this.gridApi.setGridOption('rowData', rows);
         }
       },
     );
@@ -42,20 +42,20 @@ export class Datagrid extends HTMLElement {
   disconnectedCallback() {
     clearReactions(this);
 
-    if (!this.grid) return;
+    if (!this.gridApi) return;
 
     sessionStorage.setItem(
       APP_DATAGRID_STORAGE_KEY,
       JSON.stringify({
-        columnState: this.gridColumnApi.getColumnState(),
+        columnState: this.gridApi.getColumnState(),
         filterModel: this.gridApi.getFilterModel(),
         pageSize: this.gridApi.paginationGetPageSize(),
         currentPage: this.gridApi.paginationGetCurrentPage(),
       }),
     );
 
-    this.grid?.destroy();
-    this.grid = null;
+    this.gridApi?.destroy();
+    this.gridApi = null;
   }
 
   render() {
@@ -81,17 +81,9 @@ export class Datagrid extends HTMLElement {
       ${ref((el) => (this.gridDiv = el))}
     ></div>`;
   }
-
-  get gridApi() {
-    return this.grid.gridOptions.api;
-  }
-
-  get gridColumnApi() {
-    return this.grid.gridOptions.columnApi;
-  }
 }
 
-function createGrid(gridDiv, rowData) {
+function createDatagrid(gridDiv, rowData) {
   const defaultColDef = {
     headerValueGetter,
     lockVisible: true,
@@ -102,6 +94,7 @@ function createGrid(gridDiv, rowData) {
     filterParams: { newRowsAction: 'keep' },
   };
 
+  /** @type {import('ag-grid-community').ColDef[]} */
   const columnDefs = [
     { field: 'name', sort: 'asc', cellRenderer: NameCellRenderer },
     { field: 'language' },
@@ -110,18 +103,18 @@ function createGrid(gridDiv, rowData) {
     { field: 'notes' },
   ];
 
+  /** @type {import('ag-grid-community').GridOptions<any>} */
   const gridOptions = {
     defaultColDef,
     columnDefs,
     rowData,
     pagination: true,
     paginationPageSize: 50,
-    // domLayout: 'autoHeight',
     getLocaleText: getLocaleText.bind(this),
     onFirstDataRendered: onFirstDataRendered.bind(this),
   };
 
-  return new Grid(gridDiv, gridOptions);
+  return createGrid(gridDiv, gridOptions);
 }
 
 function headerValueGetter({ colDef }) {
@@ -132,16 +125,21 @@ function getLocaleText({ key, defaultValue }) {
   return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
 }
 
-function onFirstDataRendered({ api, columnApi }) {
-  let state = sessionStorage.getItem(APP_DATAGRID_STORAGE_KEY);
+function onFirstDataRendered(
+  /** @type {import('ag-grid-community').FirstDataRenderedEvent<any, any>} */ {
+    api,
+  },
+) {
+  const storedState = sessionStorage.getItem(APP_DATAGRID_STORAGE_KEY);
 
-  if (state) {
-    state = JSON.parse(state);
-    columnApi.applyColumnState({ state: state.columnState });
+  if (storedState) {
+    /** @type {import('./types').DatagridState} */
+    const state = JSON.parse(storedState);
+    api.applyColumnState({ state: state.columnState });
+    api.setGridOption('paginationPageSize', state.pageSize);
     api.setFilterModel(state.filterModel);
-    api.paginationSetPageSize(state.pageSize);
     api.paginationGoToPage(state.currentPage);
   } else {
-    columnApi.autoSizeAllColumns();
+    api.autoSizeAllColumns();
   }
 }
