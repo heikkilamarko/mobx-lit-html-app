@@ -1,12 +1,12 @@
 :root {
-  --app-card-shadow: #{$box-shadow};
+	--app-card-shadow: #{$box-shadow};
 }
 
 .form-control[readonly] {
-  background-color: $input-bg;
+	background-color: $input-bg;
 }
 
 /* TODO: Temporary workaround for https://github.com/twbs/icons/issues/913 */
 svg.bi {
-  vertical-align: -0.125em;
+	vertical-align: -0.125em;
 }

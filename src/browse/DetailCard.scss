@@ -1,13 +1,13 @@
 app-detail-card {
-  .card {
-    max-width: 30rem;
+	.card {
+		max-width: 30rem;
 
-    > img {
-      height: 20rem;
-    }
+		> img {
+			height: 20rem;
+		}
 
-    .card-text {
-      white-space: pre-wrap;
-    }
-  }
+		.card-text {
+			white-space: pre-wrap;
+		}
+	}
 }

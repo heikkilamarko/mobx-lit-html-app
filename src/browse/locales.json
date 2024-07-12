@@ -1,13 +1,13 @@
 {
-  "en": {
-    "browse": "Browse",
-    "browse.detail.back": "Navigate back",
-    "browse.detail.homepage": "Homepage"
-  },
+	"en": {
+		"browse": "Browse",
+		"browse.detail.back": "Navigate back",
+		"browse.detail.homepage": "Homepage"
+	},
 
-  "fi": {
-    "browse": "Selaa",
-    "browse.detail.back": "Navigoi takaisin",
-    "browse.detail.homepage": "Kotisivu"
-  }
+	"fi": {
+		"browse": "Selaa",
+		"browse.detail.back": "Navigoi takaisin",
+		"browse.detail.homepage": "Kotisivu"
+	}
 }

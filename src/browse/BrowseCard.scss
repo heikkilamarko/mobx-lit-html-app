@@ -1,11 +1,11 @@
 app-browse-card {
-  .card {
-    &:hover {
-      box-shadow: var(--app-card-shadow);
-    }
+	.card {
+		&:hover {
+			box-shadow: var(--app-card-shadow);
+		}
 
-    img {
-      height: 6rem;
-    }
-  }
+		img {
+			height: 6rem;
+		}
+	}
 }

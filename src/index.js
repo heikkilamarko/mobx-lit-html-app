@@ -15,74 +15,65 @@ import * as form from './form';
 import * as widgets from './widgets';
 import './index.scss';
 
-const modules = [
-  shell,
-  browse,
-  counter,
-  jokes,
-  datagrid,
-  charts,
-  form,
-  widgets,
-];
+const modules = [shell, browse, counter, jokes, datagrid, charts, form, widgets];
 
 async function startup() {
-  try {
-    configureMobX();
-    await registerLocales();
-    await registerStores();
-    registerComponents();
-    await stores.configStore.load();
-    renderApp();
-  } catch (error) {
-    renderError(error);
-  }
+	try {
+		configureMobX();
+		await registerLocales();
+		await registerStores();
+		registerComponents();
+		await stores.configStore.load();
+		renderApp();
+	} catch (error) {
+		renderError(error);
+	}
 }
 
 startup();
 
 function configureMobX() {
-  configure({
-    enforceActions: 'never',
-    observableRequiresReaction: false,
-    computedRequiresReaction: true,
-    reactionRequiresObservable: true,
-    isolateGlobalState: true,
-  });
+	configure({
+		enforceActions: 'never',
+		observableRequiresReaction: false,
+		computedRequiresReaction: true,
+		reactionRequiresObservable: true,
+		isolateGlobalState: true
+	});
 }
 
 async function registerLocales() {
-  for (const m of modules) {
-    await m.registerLocales?.(locales);
-  }
+	for (const m of modules) {
+		await m.registerLocales?.(locales);
+	}
 }
 
 async function registerStores() {
-  for (const m of modules) {
-    await m.registerStores?.(stores);
-  }
+	for (const m of modules) {
+		await m.registerStores?.(stores);
+	}
 }
 
 function registerComponents() {
-  for (const m of modules) {
-    m.registerComponents?.();
-  }
+	for (const m of modules) {
+		m.registerComponents?.();
+	}
 }
 
 function renderApp() {
-  render(html`<app-root></app-root>`, document.body);
+	render(html`<app-root></app-root>`, document.body);
 }
 
 function renderError(error) {
-  render(
-    html`
-      <main
-        class="px-4 py-5 overflow-auto d-flex flex-column align-items-center vh-100 bg-danger text-white"
-      >
-        <h1 class="display-1 fw-lighter">Close, but No Cigar</h1>
-        <p class="pt-2">${error}</p>
-      </main>
-    `,
-    document.body,
-  );
+	render(
+		html`
+			<main
+				class="px-4 py-5 overflow-auto d-flex flex-column align-items-center vh-100 bg-danger text-white"
+			>
+				<h1 class="display-1 fw-lighter">Close, but No Cigar</h1>
+				<p class="pt-2">${error}</p>
+			</main>
+		`,
+		document.body
+	);
 }

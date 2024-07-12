@@ -8,55 +8,55 @@ import { addRenderReaction, clearReactions } from '../shared/utils';
 import './DetailCard.scss';
 
 export class DetailCard extends HTMLElement {
-  /** @type {import("./types").BrowseItem} */
-  data;
+	/** @type {import("./types").BrowseItem} */
+	data;
 
-  constructor() {
-    super();
-    makeObservable(this, {
-      data: observable.ref,
-    });
-  }
+	constructor() {
+		super();
+		makeObservable(this, {
+			data: observable.ref
+		});
+	}
 
-  connectedCallback() {
-    addRenderReaction(this);
-  }
+	connectedCallback() {
+		addRenderReaction(this);
+	}
 
-  disconnectedCallback() {
-    clearReactions(this);
-  }
+	disconnectedCallback() {
+		clearReactions(this);
+	}
 
-  render() {
-    const { t } = stores.i18nStore;
+	render() {
+		const { t } = stores.i18nStore;
 
-    return html`
-      <div class="card mx-auto text-decoration-none">
-        <img
-          class="align-self-center object-fit-contain p-3"
-          src="${this.data.logo_url}"
-          alt="logo"
-        />
-        <div class="card-body">
-          <h4 class="card-title text-nowrap">${this.data.name}</h4>
-          <p class="card-text">${this.data.description}</p>
-          <a
-            href="${this.data.homepage_url}"
-            target="_blank"
-            rel="noreferrer"
-            class="btn btn-primary rounded-pill"
-          >
-            ${t('browse.detail.homepage')} ${unsafeSVG(BoxArrowUpRightIcon)}
-          </a>
-          <button
-            aria-label=${t('browse.detail.back')}
-            type="button"
-            class="btn btn-outline-primary float-end rounded-pill"
-            @click=${stores.routeStore.navigateBack}
-          >
-            ${unsafeSVG(ArrowLeftIcon)}
-          </button>
-        </div>
-      </div>
-    `;
-  }
+		return html`
+			<div class="card mx-auto text-decoration-none">
+				<img
+					class="align-self-center object-fit-contain p-3"
+					src="${this.data.logo_url}"
+					alt="logo"
+				/>
+				<div class="card-body">
+					<h4 class="card-title text-nowrap">${this.data.name}</h4>
+					<p class="card-text">${this.data.description}</p>
+					<a
+						href="${this.data.homepage_url}"
+						target="_blank"
+						rel="noreferrer"
+						class="btn btn-primary rounded-pill"
+					>
+						${t('browse.detail.homepage')} ${unsafeSVG(BoxArrowUpRightIcon)}
+					</a>
+					<button
+						aria-label=${t('browse.detail.back')}
+						type="button"
+						class="btn btn-outline-primary float-end rounded-pill"
+						@click=${stores.routeStore.navigateBack}
+					>
+						${unsafeSVG(ArrowLeftIcon)}
+					</button>
+				</div>
+			</div>
+		`;
+	}
 }

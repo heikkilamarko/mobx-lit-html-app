@@ -1,19 +1,19 @@
 {
-  "en": {
-    "datagrid": "Datagrid",
-    "datagrid.country": "Country",
-    "datagrid.job_title": "Job title",
-    "datagrid.language": "Language",
-    "datagrid.name": "Name",
-    "datagrid.notes": "Notes"
-  },
+	"en": {
+		"datagrid": "Datagrid",
+		"datagrid.country": "Country",
+		"datagrid.job_title": "Job title",
+		"datagrid.language": "Language",
+		"datagrid.name": "Name",
+		"datagrid.notes": "Notes"
+	},
 
-  "fi": {
-    "datagrid": "Datagrid",
-    "datagrid.country": "Maa",
-    "datagrid.job_title": "Työnimike",
-    "datagrid.language": "Kieli",
-    "datagrid.name": "Nimi",
-    "datagrid.notes": "Muistiinpanot"
-  }
+	"fi": {
+		"datagrid": "Datagrid",
+		"datagrid.country": "Maa",
+		"datagrid.job_title": "Työnimike",
+		"datagrid.language": "Kieli",
+		"datagrid.name": "Nimi",
+		"datagrid.notes": "Muistiinpanot"
+	}
 }

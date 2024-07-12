@@ -1,19 +1,19 @@
 {
-  "en": {
-    "counter": "Counter",
-    "counter.decrement": "Decrement",
-    "counter.increment": "Increment",
-    "counter.reset": "Reset",
-    "counter.modal.message": "Are you sure you want to reset the counter?",
-    "counter.toast.message": "Counter set to zero."
-  },
+	"en": {
+		"counter": "Counter",
+		"counter.decrement": "Decrement",
+		"counter.increment": "Increment",
+		"counter.reset": "Reset",
+		"counter.modal.message": "Are you sure you want to reset the counter?",
+		"counter.toast.message": "Counter set to zero."
+	},
 
-  "fi": {
-    "counter": "Laskuri",
-    "counter.decrement": "Pienennä",
-    "counter.increment": "Suurenna",
-    "counter.reset": "Nollaa",
-    "counter.modal.message": "Oletko varma, että haluat nollata laskurin?",
-    "counter.toast.message": "Laskuri nollattu."
-  }
+	"fi": {
+		"counter": "Laskuri",
+		"counter.decrement": "Pienennä",
+		"counter.increment": "Suurenna",
+		"counter.reset": "Nollaa",
+		"counter.modal.message": "Oletko varma, että haluat nollata laskurin?",
+		"counter.toast.message": "Laskuri nollattu."
+	}
 }

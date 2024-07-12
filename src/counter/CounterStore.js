@@ -1,46 +1,40 @@
 import { makeObservable, action, observable, computed } from 'mobx';
 
 export class CounterStore {
-  minValue = -10;
-  maxValue = 10;
+	minValue = -10;
+	maxValue = 10;
 
-  value = 0;
+	value = 0;
 
-  constructor() {
-    makeObservable(this, {
-      value: observable.ref,
-      progress: computed,
-      setValue: action.bound,
-      increment: action.bound,
-      decrement: action.bound,
-      reset: action.bound,
-    });
-  }
+	constructor() {
+		makeObservable(this, {
+			value: observable.ref,
+			progress: computed,
+			setValue: action.bound,
+			increment: action.bound,
+			decrement: action.bound,
+			reset: action.bound
+		});
+	}
 
-  get progress() {
-    return (
-      (100 * (this.value + this.maxValue)) / (this.maxValue - this.minValue)
-    );
-  }
+	get progress() {
+		return (100 * (this.value + this.maxValue)) / (this.maxValue - this.minValue);
+	}
 
-  setValue(value) {
-    this.value =
-      value < this.minValue
-        ? this.minValue
-        : this.maxValue < value
-        ? this.maxValue
-        : value;
-  }
+	setValue(value) {
+		this.value =
+			value < this.minValue ? this.minValue : this.maxValue < value ? this.maxValue : value;
+	}
 
-  increment() {
-    this.setValue(this.value + 1);
-  }
+	increment() {
+		this.setValue(this.value + 1);
+	}
 
-  decrement() {
-    this.setValue(this.value - 1);
-  }
+	decrement() {
+		this.setValue(this.value - 1);
+	}
 
-  reset() {
-    this.value = 0;
-  }
+	reset() {
+		this.value = 0;
+	}
 }

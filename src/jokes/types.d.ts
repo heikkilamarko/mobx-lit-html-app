@@ -1,17 +1,17 @@
 export interface Joke {
-  value: string;
+	value: string;
 }
 
 export interface JokesStore {
-  categories: string[];
-  category: string;
-  joke: Joke;
-  error: Error;
-  jokeText: string;
-  hasError: boolean;
-  isLoading: boolean;
-  isReady: boolean;
+	categories: string[];
+	category: string;
+	joke: Joke;
+	error: Error;
+	jokeText: string;
+	hasError: boolean;
+	isLoading: boolean;
+	isReady: boolean;
 
-  setCategory: (category: string) => void;
-  getJoke: () => void;
+	setCategory: (category: string) => void;
+	getJoke: () => void;
 }

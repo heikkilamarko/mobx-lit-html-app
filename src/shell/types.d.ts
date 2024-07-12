@@ -1,16 +1,12 @@
 export interface Config {
-  gitHubUrl: string;
+	gitHubUrl: string;
 }
 
 export interface I18nStore {
-  locales: string[];
-  localesExcludeCurrent: string[];
+	locales: string[];
+	localesExcludeCurrent: string[];
 
-  setLocale: (locale: string) => void;
+	setLocale: (locale: string) => void;
 
-  t: (
-    key: string,
-    values?: { [x: string]: any },
-    defaultValue?: string,
-  ) => string;
+	t: (key: string, values?: { [x: string]: any }, defaultValue?: string) => string;
 }

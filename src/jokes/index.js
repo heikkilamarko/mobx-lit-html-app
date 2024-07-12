@@ -4,16 +4,16 @@ import { JokesStore } from './JokesStore';
 import moduleLocales from './locales.json';
 
 export function registerComponents() {
-  customElements.define('app-jokes', Jokes);
-  customElements.define('app-joke', Joke);
+	customElements.define('app-jokes', Jokes);
+	customElements.define('app-joke', Joke);
 }
 
 export async function registerStores(stores) {
-  const jokesStore = new JokesStore();
-  Object.assign(stores, { jokesStore });
+	const jokesStore = new JokesStore();
+	Object.assign(stores, { jokesStore });
 }
 
 export async function registerLocales(locales) {
-  Object.assign((locales.en ??= {}), moduleLocales.en);
-  Object.assign((locales.fi ??= {}), moduleLocales.fi);
+	Object.assign((locales.en ??= {}), moduleLocales.en);
+	Object.assign((locales.fi ??= {}), moduleLocales.fi);
 }

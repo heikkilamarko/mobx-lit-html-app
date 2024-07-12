@@ -5,39 +5,37 @@ import { addRenderReaction, clearReactions } from '../shared/utils';
 import './ErrorCard.scss';
 
 export class ErrorCard extends HTMLElement {
-  /** @type {string} */
-  title;
-  /** @type {string} */
-  text;
+	/** @type {string} */
+	title;
+	/** @type {string} */
+	text;
 
-  constructor() {
-    super();
-    makeObservable(this, {
-      title: observable.ref,
-      text: observable.ref,
-    });
-  }
+	constructor() {
+		super();
+		makeObservable(this, {
+			title: observable.ref,
+			text: observable.ref
+		});
+	}
 
-  connectedCallback() {
-    addRenderReaction(this);
-  }
+	connectedCallback() {
+		addRenderReaction(this);
+	}
 
-  disconnectedCallback() {
-    clearReactions(this);
-  }
+	disconnectedCallback() {
+		clearReactions(this);
+	}
 
-  render() {
-    const { t } = stores.i18nStore;
+	render() {
+		const { t } = stores.i18nStore;
 
-    return html`
-      <div class="card mx-auto text-center text-danger">
-        <div class="card-body">
-          <h1 class="card-title display-1">${this.title || t('error')}</h1>
-          ${this.text
-            ? html`<p class="card-text fw-lighter">${this.text}</p>`
-            : nothing}
-        </div>
-      </div>
-    `;
-  }
+		return html`
+			<div class="card mx-auto text-center text-danger">
+				<div class="card-body">
+					<h1 class="card-title display-1">${this.title || t('error')}</h1>
+					${this.text ? html`<p class="card-text fw-lighter">${this.text}</p>` : nothing}
+				</div>
+			</div>
+		`;
+	}
 }

@@ -1,17 +1,17 @@
 app-toast {
-  z-index: 1080;
+	z-index: 1080;
 
-  .toast {
-    min-width: 15rem;
-    max-width: 25rem;
+	.toast {
+		min-width: 15rem;
+		max-width: 25rem;
 
-    .toast-header {
-      border-bottom: none;
-    }
+		.toast-header {
+			border-bottom: none;
+		}
 
-    .toast-body {
-      font-size: 1rem;
-      white-space: break-spaces;
-    }
-  }
+		.toast-body {
+			font-size: 1rem;
+			white-space: break-spaces;
+		}
+	}
 }

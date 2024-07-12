@@ -1,44 +1,44 @@
 [
-  {
-    "id": 1,
-    "name": "Browse",
-    "tagName": "app-browse",
-    "props": {}
-  },
-  {
-    "id": 2,
-    "name": "Counter",
-    "tagName": "app-counter",
-    "props": {}
-  },
-  {
-    "id": 3,
-    "name": "Jokes",
-    "tagName": "app-jokes",
-    "props": {}
-  },
-  {
-    "id": 4,
-    "name": "Datagrid",
-    "tagName": "app-datagrid",
-    "props": {}
-  },
-  {
-    "id": 5,
-    "name": "Charts",
-    "tagName": "app-charts",
-    "props": {}
-  },
-  {
-    "id": 6,
-    "name": "Form",
-    "tagName": "app-form",
-    "props": {}
-  },
-  {
-    "id": 7,
-    "name": "Unregistered",
-    "tagName": "app-unregistered",
-    "props": {}
-  }
+	{
+		"id": 1,
+		"name": "Browse",
+		"tagName": "app-browse",
+		"props": {}
+	},
+	{
+		"id": 2,
+		"name": "Counter",
+		"tagName": "app-counter",
+		"props": {}
+	},
+	{
+		"id": 3,
+		"name": "Jokes",
+		"tagName": "app-jokes",
+		"props": {}
+	},
+	{
+		"id": 4,
+		"name": "Datagrid",
+		"tagName": "app-datagrid",
+		"props": {}
+	},
+	{
+		"id": 5,
+		"name": "Charts",
+		"tagName": "app-charts",
+		"props": {}
+	},
+	{
+		"id": 6,
+		"name": "Form",
+		"tagName": "app-form",
+		"props": {}
+	},
+	{
+		"id": 7,
+		"name": "Unregistered",
+		"tagName": "app-unregistered",
+		"props": {}
+	}
 ]

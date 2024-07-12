@@ -1,13 +1,13 @@
 {
-  "en": {
-    "widgets": "Widgets",
-    "widgets.error.notfound": "The selected widget was not found in the custom element registry.",
-    "widgets.select.placeholder": "Select widget..."
-  },
+	"en": {
+		"widgets": "Widgets",
+		"widgets.error.notfound": "The selected widget was not found in the custom element registry.",
+		"widgets.select.placeholder": "Select widget..."
+	},
 
-  "fi": {
-    "widgets": "Widgetit",
-    "widgets.error.notfound": "Valittua widgettiä ei löydy rekisteristä.",
-    "widgets.select.placeholder": "Valitse widgetti..."
-  }
+	"fi": {
+		"widgets": "Widgetit",
+		"widgets.error.notfound": "Valittua widgettiä ei löydy rekisteristä.",
+		"widgets.select.placeholder": "Valitse widgetti..."
+	}
 }
