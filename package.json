@@ -14,21 +14,21 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"ag-grid-community": "32.0.1",
-		"apexcharts": "3.50.0",
-		"axios": "1.7.2",
+		"ag-grid-community": "32.2.2",
+		"apexcharts": "3.54.1",
+		"axios": "1.7.7",
 		"bootstrap": "5.3.3",
 		"bootstrap-icons": "1.11.3",
-		"lit": "3.1.4",
+		"lit": "3.2.1",
 		"lodash-es": "4.17.21",
-		"mobx": "6.13.0",
+		"mobx": "6.13.3",
 		"router5": "8.0.1",
 		"router5-plugin-browser": "8.0.1",
 		"validator": "13.12.0"
 	},
 	"devDependencies": {
-		"prettier": "3.3.2",
-		"sass": "1.77.8",
-		"vite": "5.3.3"
+		"prettier": "3.3.3",
+		"sass": "1.79.5",
+		"vite": "5.4.9"
 	}
 }

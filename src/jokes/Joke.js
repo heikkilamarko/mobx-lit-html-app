@@ -19,7 +19,7 @@ export class Joke extends HTMLElement {
 			this,
 			() => this.text,
 			() => {
-				this.querySelector('h1')?.animate(
+				this.querySelector('p')?.animate(
 					[
 						{ transform: 'translateX(-100px)', opacity: 0 },
 						{ transform: 'translateX(0)', opacity: 1 }
