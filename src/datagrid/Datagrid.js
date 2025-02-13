@@ -1,9 +1,17 @@
 import { html, nothing } from 'lit';
 import { ref } from 'lit/directives/ref.js';
-import { createGrid } from 'ag-grid-community';
+import {
+	createGrid,
+	AllCommunityModule,
+	ModuleRegistry,
+	provideGlobalGridOptions
+} from 'ag-grid-community';
 import { stores } from '../shared/stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../shared/utils';
 import NameCellRenderer from './NameCellRenderer';
+
+ModuleRegistry.registerModules([AllCommunityModule]);
+provideGlobalGridOptions({ theme: 'legacy' });
 
 const APP_DATAGRID_STORAGE_KEY = 'app-datagrid';
 
