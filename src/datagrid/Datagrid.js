@@ -4,20 +4,40 @@ import {
 	createGrid,
 	AllCommunityModule,
 	ModuleRegistry,
-	provideGlobalGridOptions
+	themeBalham,
+	colorSchemeLight,
+	colorSchemeDark
 } from 'ag-grid-community';
 import { stores } from '../shared/stores';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../shared/utils';
 import NameCellRenderer from './NameCellRenderer';
 
+const lightTheme = themeBalham.withPart(colorSchemeLight).withParams({
+	accentColor: 'var(--bs-primary)',
+	browserColorScheme: 'light'
+});
+
+const darkTheme = themeBalham.withPart(colorSchemeDark).withParams({
+	accentColor: 'var(--bs-primary)',
+	browserColorScheme: 'dark'
+});
+
 ModuleRegistry.registerModules([AllCommunityModule]);
-provideGlobalGridOptions({ theme: 'legacy' });
 
 const APP_DATAGRID_STORAGE_KEY = 'app-datagrid';
 
 export class Datagrid extends HTMLElement {
 	connectedCallback() {
 		addRenderReaction(this);
+
+		addWatchReaction(
+			this,
+			() => stores.themeStore.theme,
+			(themeMode) => {
+				document.body.dataset.agThemeMode = themeMode;
+				this.gridApi?.setGridOption('theme', themeMode === 'light' ? lightTheme : darkTheme);
+			}
+		);
 
 		addWatchReaction(
 			this,
@@ -64,7 +84,6 @@ export class Datagrid extends HTMLElement {
 
 	render() {
 		const {
-			themeStore: { theme },
 			datagridStore: { isLoading, hasError, error }
 		} = stores;
 
@@ -76,13 +95,7 @@ export class Datagrid extends HTMLElement {
 			return html`<app-error-card .text=${error.message}></app-error-card>`;
 		}
 
-		const themeClass = theme === 'light' ? 'ag-theme-alpine' : 'ag-theme-alpine-dark';
-
-		return html`<div
-			class=${themeClass}
-			style="height:36rem"
-			${ref((el) => (this.gridDiv = el))}
-		></div>`;
+		return html`<div style="height:36rem" ${ref((el) => (this.gridDiv = el))}></div>`;
 	}
 }
 
@@ -108,6 +121,7 @@ function createDatagrid(gridDiv, rowData) {
 
 	/** @type {import('ag-grid-community').GridOptions<any>} */
 	const gridOptions = {
+		theme: stores.themeStore.theme === 'light' ? lightTheme : darkTheme,
 		defaultColDef,
 		columnDefs,
 		rowData,
