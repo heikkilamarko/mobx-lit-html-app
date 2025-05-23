@@ -5,7 +5,7 @@ This repository contains the source code of a simple responsive web application 
 - [MobX](https://mobx.js.org/)
 - [Lit](https://lit.dev/)
 - [Bootstrap](https://getbootstrap.com/)
-- [Router5](https://router5.js.org/)
+- [Universal Router](https://github.com/kriasoft/universal-router)
 - [AG Grid](https://www.ag-grid.com/)
 - [ApexCharts](https://apexcharts.com/)
 

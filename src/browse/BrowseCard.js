@@ -11,9 +11,8 @@ export class BrowseCard extends HTMLElement {
 			html`
 				<a
 					class="card text-center text-decoration-none"
-					href=${stores.routeStore.buildPath('browse.detail', {
-						id: this.data.id
-					})}
+					href=${stores.routeStore.buildPath('browse.detail', { id: this.data.id })}
+					data-link
 				>
 					<div class="card-body">
 						<h4 class="card-title text-nowrap text-truncate">${this.data.name}</h4>

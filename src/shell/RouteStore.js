@@ -1,17 +1,15 @@
 import { makeObservable, action, observable, computed } from 'mobx';
-import createRouter, { constants } from 'router5';
-import browserPlugin from 'router5-plugin-browser';
+import UniversalRouter from 'universal-router';
+import generateUrls from 'universal-router/generateUrls';
 import { routes } from '../shared/routes';
 
 export class RouteStore {
 	route = null;
-	previousRoute = null;
 	router = null;
-	unsubscribe = null;
+	urls = null;
 
 	constructor() {
 		this.start = this.start.bind(this);
-		this.stop = this.stop.bind(this);
 		this.isActive = this.isActive.bind(this);
 		this.navigate = this.navigate.bind(this);
 		this.navigateBack = this.navigateBack.bind(this);
@@ -19,20 +17,15 @@ export class RouteStore {
 
 		makeObservable(this, {
 			route: observable.ref,
-			previousRoute: observable.ref,
 			routeName: computed,
 			routeTemplate: computed,
-			isNotFoundRoute: computed,
 			setRoute: action.bound
 		});
 
-		this.router = createRouter(routes, {
-			defaultRoute: 'browse',
-			allowNotFound: true,
-			queryParamsMode: 'loose'
+		this.router = new UniversalRouter(routes);
+		this.urls = generateUrls(this.router, {
+			stringifyQueryParams: (params) => new URLSearchParams(params).toString()
 		});
-
-		this.router.usePlugin(browserPlugin());
 	}
 
 	get routes() {
@@ -48,34 +41,33 @@ export class RouteStore {
 		return route ? route.template : undefined;
 	}
 
-	get isNotFoundRoute() {
-		return this.routeName === constants.UNKNOWN_ROUTE;
-	}
-
-	setRoute({ route, previousRoute }) {
+	setRoute(route) {
 		this.route = route;
-		this.previousRoute = previousRoute;
 	}
 
 	start() {
-		if (!this.router.isStarted()) {
-			this.unsubscribe = this.router.subscribe(this.setRoute);
-			this.router.start();
-		}
+		document.addEventListener('click', (e) => {
+			const link = e.target.closest('a[data-link]');
+			if (!link) return;
+			e.preventDefault();
+			const href = link.getAttribute('href');
+			history.pushState(null, '', href);
+			this.render(href);
+		});
+
+		window.addEventListener('popstate', () => this.render(location.href));
+
+		this.render(location.href);
 	}
 
-	stop() {
-		this.router.stop();
-		this.unsubscribe?.();
-		this.unsubscribe = null;
+	isActive(name) {
+		return this.routeName === name;
 	}
 
-	isActive(name, params, strictEquality, ignoreQueryParams) {
-		return this.router.isActive(name, params, strictEquality, ignoreQueryParams);
-	}
-
-	navigate(routeName, routeParams, options, done) {
-		this.router.navigate(routeName, routeParams, options, done);
+	navigate(routeName, routeParams) {
+		const href = this.buildPath(routeName, routeParams);
+		history.pushState(null, '', href);
+		this.render(href);
 	}
 
 	navigateBack() {
@@ -83,6 +75,18 @@ export class RouteStore {
 	}
 
 	buildPath(routeName, routeParams) {
-		return this.router.buildPath(routeName, routeParams);
+		return this.urls(routeName, routeParams);
+	}
+
+	async render(href) {
+		console.debug(href);
+		try {
+			const url = new URL(href, location.origin);
+			const queryParams = Object.fromEntries(new URLSearchParams(url.search));
+			const route = await this.router.resolve({ pathname: url.pathname, queryParams });
+			this.setRoute(route);
+		} catch (err) {
+			console.error(err);
+		}
 	}
 }

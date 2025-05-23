@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-export const routes = [
+export const routes = addActions([
 	{
 		name: 'browse',
 		path: '/browse',
@@ -9,7 +9,7 @@ export const routes = [
 	},
 	{
 		name: 'browse.detail',
-		path: '/:id',
+		path: '/browse/:id',
 		template: html`<app-detail></app-detail>`,
 		navbar: false
 	},
@@ -49,4 +49,16 @@ export const routes = [
 		template: html`<app-widgets></app-widgets>`,
 		navbar: true
 	}
-];
+]);
+
+function addActions(routes) {
+	routes.forEach(
+		(route) =>
+			(route.action = (ctx) => ({
+				name: route.name,
+				params: { ...ctx.params, ...ctx.queryParams }
+			}))
+	);
+
+	return routes;
+}

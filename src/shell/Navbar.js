@@ -14,17 +14,13 @@ export class Navbar extends HTMLElement {
 
 	render() {
 		const {
-			routeStore: { navigate, route: _ }
+			routeStore: { route: _ }
 		} = stores;
 
 		return html`
 			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 				<div class="container-fluid">
-					<a
-						class="navbar-brand"
-						@click="${preventDefault(() => navigate('browse'))}"
-						href="/browse"
-					>
+					<a class="navbar-brand" href="/browse" data-link>
 						<img
 							src="/android-chrome-192x192.png"
 							alt="App brand image (rocket)"
@@ -78,7 +74,7 @@ export class Navbar extends HTMLElement {
 
 function navItems() {
 	const {
-		routeStore: { routes, isActive, buildPath, navigate },
+		routeStore: { routes, isActive, buildPath },
 		i18nStore: { t }
 	} = stores;
 
@@ -89,21 +85,15 @@ function navItems() {
 			return navItem({
 				title: t(name),
 				active: isActive(name),
-				href: buildPath(name, params),
-				handleClick: () => navigate(name, params)
+				href: buildPath(name, params)
 			});
 		});
 }
 
-function navItem({ title, active, href, handleClick }) {
+function navItem({ title, active, href }) {
 	return html`
 		<li class="nav-item">
-			<a
-				class=${classMap({ 'nav-link': true, active })}
-				href=${href}
-				@click=${preventDefault(handleClick)}
-				>${title}</a
-			>
+			<a class=${classMap({ 'nav-link': true, active })} href=${href} data-link>${title}</a>
 		</li>
 	`;
 }

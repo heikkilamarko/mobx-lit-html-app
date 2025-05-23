@@ -101,7 +101,17 @@ export class Counter extends HTMLElement {
 	}
 
 	handleReset() {
-		this.modal ??= new Modal(this.querySelector('app-counter-modal > .modal'));
+		const modalEl = this.querySelector('app-counter-modal > .modal');
+		this.modal = Modal.getOrCreateInstance(modalEl);
+		modalEl.addEventListener(
+			'hide.bs.modal',
+			() => {
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur();
+				}
+			},
+			{ once: true }
+		);
 		this.modal.show();
 	}
 
