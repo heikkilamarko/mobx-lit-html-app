@@ -9,7 +9,7 @@ This repository contains the source code of a simple responsive web application 
 - [AG Grid](https://www.ag-grid.com/)
 - [ApexCharts](https://apexcharts.com/)
 
-Build tool: [Vite](https://vitejs.dev/)
+Build tool: [Vite](https://vite.dev/)
 
 ## Run as Docker container
 

@@ -84,6 +84,7 @@ export class RouteStore {
 			const url = new URL(href, location.origin);
 			const queryParams = Object.fromEntries(new URLSearchParams(url.search));
 			const route = await this.router.resolve({ pathname: url.pathname, queryParams });
+			if (route.redirect) location = route.redirect;
 			this.setRoute(route);
 		} catch (err) {
 			console.error(err);

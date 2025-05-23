@@ -51,6 +51,11 @@ export const routes = addActions([
 	}
 ]);
 
+routes.push({
+	path: '*all',
+	action: () => ({ redirect: '/browse' })
+});
+
 function addActions(routes) {
 	routes.forEach(
 		(route) =>
