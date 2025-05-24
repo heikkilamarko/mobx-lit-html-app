@@ -60,7 +60,7 @@ function addActions(routes) {
 	routes.forEach(
 		(route) =>
 			(route.action = (ctx) => ({
-				name: route.name,
+				...route,
 				params: { ...ctx.params, ...ctx.queryParams }
 			}))
 	);

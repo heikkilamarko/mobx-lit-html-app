@@ -1,3 +1,4 @@
+import { routes } from '../shared/routes.js';
 import { Toast } from './Toast';
 import { ErrorCard } from './ErrorCard';
 import { NotFound } from './NotFound';
@@ -33,6 +34,7 @@ export async function registerStores(stores) {
 	const toastStore = new ToastStore();
 	const routeStore = new RouteStore();
 
+	routeStore.routes = routes;
 	routeStore.start();
 
 	Object.assign(stores, {

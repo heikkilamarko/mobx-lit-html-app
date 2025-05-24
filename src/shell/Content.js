@@ -14,7 +14,7 @@ export class Content extends HTMLElement {
 	render() {
 		return html`
 			<main class="container p-3">
-				${stores.routeStore.routeTemplate ?? html`<app-not-found></app-not-found>`}
+				${stores.routeStore.route?.template ?? html`<app-not-found></app-not-found>`}
 			</main>
 		`;
 	}

@@ -74,7 +74,7 @@ export class Navbar extends HTMLElement {
 
 function navItems() {
 	const {
-		routeStore: { routes, isActive, buildPath },
+		routeStore: { routes, route, urls },
 		i18nStore: { t }
 	} = stores;
 
@@ -84,8 +84,8 @@ function navItems() {
 			const params = routeParams(name);
 			return navItem({
 				title: t(name),
-				active: isActive(name),
-				href: buildPath(name, params)
+				active: route?.name === name,
+				href: urls(name, params)
 			});
 		});
 }
