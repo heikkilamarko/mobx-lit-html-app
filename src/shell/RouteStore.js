@@ -55,9 +55,9 @@ export class RouteStore {
 			this.render(href);
 		});
 
-		window.addEventListener('popstate', () => this.render(location.href));
+		window.addEventListener('popstate', () => this.render(window.location.href));
 
-		this.render(location.href);
+		this.render(window.location.href);
 	}
 
 	isActive(name) {
@@ -81,10 +81,13 @@ export class RouteStore {
 	async render(href) {
 		console.debug(href);
 		try {
-			const url = new URL(href, location.origin);
+			const url = new URL(href, window.location.origin);
 			const queryParams = Object.fromEntries(new URLSearchParams(url.search));
 			const route = await this.router.resolve({ pathname: url.pathname, queryParams });
-			if (route.redirect) location = route.redirect;
+			if (route.redirect) {
+				window.location = route.redirect;
+				return;
+			}
 			this.setRoute(route);
 		} catch (err) {
 			console.error(err);
