@@ -227,7 +227,7 @@ export class FormStore {
 
 			this.reset();
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			stores.toastStore.showError({
 				title: t('form.submit.error.title'),
 				body: t('form.submit.error.body')

@@ -29,7 +29,7 @@ export class ConfigStore {
 			const config = await getConfig();
 			this.setConfig(config);
 		} catch (error) {
-			console.log('config loading failed');
+			console.error('config loading failed');
 		}
 	}
 
@@ -40,7 +40,7 @@ export class ConfigStore {
 				gitHubUrl: import.meta.env.VITE_PUBLIC_GITHUB_URL
 			});
 		} catch (e) {
-			console.log('config loading failed');
+			console.error('config loading failed');
 		}
 	}
 }

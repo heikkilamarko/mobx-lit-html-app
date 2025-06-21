@@ -66,18 +66,6 @@ export class Datagrid extends HTMLElement {
 	disconnectedCallback() {
 		clearReactions(this);
 
-		if (!this.gridApi) return;
-
-		sessionStorage.setItem(
-			APP_DATAGRID_STORAGE_KEY,
-			JSON.stringify({
-				columnState: this.gridApi.getColumnState(),
-				filterModel: this.gridApi.getFilterModel(),
-				pageSize: this.gridApi.paginationGetPageSize(),
-				currentPage: this.gridApi.paginationGetCurrentPage()
-			})
-		);
-
 		this.gridApi?.destroy();
 		this.gridApi = null;
 	}
@@ -100,6 +88,7 @@ export class Datagrid extends HTMLElement {
 }
 
 function createDatagrid(gridDiv, rowData) {
+	/** @type {import('ag-grid-community').ColDef<any>} */
 	const defaultColDef = {
 		headerValueGetter,
 		lockVisible: true,
@@ -128,7 +117,8 @@ function createDatagrid(gridDiv, rowData) {
 		pagination: true,
 		paginationPageSize: 50,
 		getLocaleText: getLocaleText.bind(this),
-		onFirstDataRendered: onFirstDataRendered.bind(this)
+		onGridReady: onGridReady.bind(this),
+		onGridPreDestroyed: onGridPreDestroyed.bind(this)
 	};
 
 	return createGrid(gridDiv, gridOptions);
@@ -142,19 +132,31 @@ function getLocaleText({ key, defaultValue }) {
 	return stores.i18nStore.t(`ag_grid.${key}`, null, defaultValue);
 }
 
-function onFirstDataRendered(
-	/** @type {import('ag-grid-community').FirstDataRenderedEvent<any, any>} */ { api }
-) {
+function onGridReady(/** @type {import('ag-grid-community').GridReadyEvent<any, any>} */ { api }) {
 	const storedState = sessionStorage.getItem(APP_DATAGRID_STORAGE_KEY);
 
 	if (storedState) {
 		/** @type {import('./types').DatagridState} */
 		const state = JSON.parse(storedState);
-		api.applyColumnState({ state: state.columnState });
+		api.applyColumnState({ state: state.columnState, applyOrder: true });
 		api.setGridOption('paginationPageSize', state.pageSize);
 		api.setFilterModel(state.filterModel);
 		api.paginationGoToPage(state.currentPage);
 	} else {
 		api.autoSizeAllColumns();
 	}
+}
+
+function onGridPreDestroyed(
+	/** @type {import('ag-grid-community').GridPreDestroyedEvent<any, any>} */ { api }
+) {
+	sessionStorage.setItem(
+		APP_DATAGRID_STORAGE_KEY,
+		JSON.stringify({
+			columnState: api.getColumnState(),
+			filterModel: api.getFilterModel(),
+			pageSize: api.paginationGetPageSize(),
+			currentPage: api.paginationGetCurrentPage()
+		})
+	);
 }
