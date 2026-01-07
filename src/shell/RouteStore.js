@@ -1,6 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 import UniversalRouter from 'universal-router';
-import generateUrls from 'universal-router/generateUrls';
+import generateUrls from 'universal-router/generate-urls';
 
 export class RouteStore {
 	routes = [];
