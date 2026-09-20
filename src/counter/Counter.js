@@ -41,11 +41,13 @@ export class Counter extends HTMLElement {
 						})}
 					>
 						${value}
-						${value === minValue
-							? html`<span class="text-muted display-6">min</span>`
-							: value === maxValue
-								? html`<span class="text-muted display-6">max</span>`
-								: nothing}
+						${
+							value === minValue
+								? html`<span class="text-muted display-6">min</span>`
+								: value === maxValue
+									? html`<span class="text-muted display-6">max</span>`
+									: nothing
+						}
 					</h1>
 					<div class="progress mb-5" style="height:4px">
 						<div

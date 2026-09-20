@@ -1,4 +1,4 @@
-import { makeObservable, action, observable, computed } from 'mobx';
+import { makeObservable, actionBound, observableRef, computed } from 'mobx';
 
 export class CounterStore {
 	minValue = -10;
@@ -8,12 +8,12 @@ export class CounterStore {
 
 	constructor() {
 		makeObservable(this, {
-			value: observable.ref,
+			value: observableRef,
 			progress: computed,
-			setValue: action.bound,
-			increment: action.bound,
-			decrement: action.bound,
-			reset: action.bound
+			setValue: actionBound,
+			increment: actionBound,
+			decrement: actionBound,
+			reset: actionBound
 		});
 	}
 

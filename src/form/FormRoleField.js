@@ -31,13 +31,15 @@ export class FormRoleField extends HTMLElement {
 		const isTouchedValid = isValid && isTouched && !isValidating;
 
 		return html`
-			${label
-				? html`
-						<label for=${id} class="form-label">
-							${label} ${isRequired ? html`<span class="text-danger">*</span>` : nothing}
-						</label>
-					`
-				: nothing}
+			${
+				label
+					? html`
+							<label for=${id} class="form-label">
+								${label} ${isRequired ? html`<span class="text-danger">*</span>` : nothing}
+							</label>
+						`
+					: nothing
+			}
 			<div
 				class=${classMap({
 					'input-group': true,
@@ -66,11 +68,13 @@ export class FormRoleField extends HTMLElement {
 				>
 					${t('form.roles.remove')}
 				</button>
-				${isValidating
-					? html` <div id=${feedbackId} class="form-text">${t('form.validating')}</div> `
-					: isTouchedInvalid
-						? html` <div id=${feedbackId} class="invalid-feedback">${t(error)}</div> `
-						: nothing}
+				${
+					isValidating
+						? html` <div id=${feedbackId} class="form-text">${t('form.validating')}</div> `
+						: isTouchedInvalid
+							? html` <div id=${feedbackId} class="invalid-feedback">${t(error)}</div> `
+							: nothing
+				}
 			</div>
 		`;
 	}

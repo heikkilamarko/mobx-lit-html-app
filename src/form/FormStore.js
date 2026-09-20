@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, reaction } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef, reaction } from 'mobx';
 import { debounce, isEqual } from 'lodash-es';
 import { stores } from '../shared/stores';
 import { sleep } from '../shared/utils';
@@ -17,9 +17,9 @@ export class FormStore {
 
 	constructor() {
 		makeObservable(this, {
-			fields: observable.ref,
-			isValidatingUsername: observable.ref,
-			isSubmitting: observable.ref,
+			fields: observableRef,
+			isValidatingUsername: observableRef,
+			isSubmitting: observableRef,
 			nameAndAge: computed,
 			username: computed,
 			tags: computed,
@@ -29,13 +29,13 @@ export class FormStore {
 			isValidating: computed,
 			canSubmit: computed,
 			canReset: computed,
-			reset: action.bound,
-			submit: action.bound,
-			validate: action.bound,
-			validateNameAndAge: action.bound,
-			validateUsername: action.bound,
-			validateTags: action.bound,
-			validateRoles: action.bound
+			reset: actionBound,
+			submit: actionBound,
+			validate: actionBound,
+			validateNameAndAge: actionBound,
+			validateUsername: actionBound,
+			validateTags: actionBound,
+			validateRoles: actionBound
 		});
 
 		this.fields = {

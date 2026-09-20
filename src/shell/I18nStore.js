@@ -1,4 +1,4 @@
-import { makeObservable, action, observable, computed, reaction } from 'mobx';
+import { makeObservable, actionBound, observableRef, computed, reaction } from 'mobx';
 import { locales } from '../shared/locales';
 
 /**
@@ -20,9 +20,9 @@ export class I18nStore {
 		this.t = this.t.bind(this);
 
 		makeObservable(this, {
-			locale: observable.ref,
+			locale: observableRef,
 			localesExcludeCurrent: computed,
-			setLocale: action.bound
+			setLocale: actionBound
 		});
 
 		this.setLocale(locale);

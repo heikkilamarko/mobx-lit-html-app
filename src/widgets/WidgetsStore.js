@@ -1,4 +1,4 @@
-import { makeObservable, action, computed, observable } from 'mobx';
+import { makeObservable, actionBound, computed, observableRef } from 'mobx';
 import { getWidgets } from '../shared/api';
 import { createElement } from '../shared/utils';
 
@@ -10,18 +10,18 @@ export class WidgetsStore {
 
 	constructor() {
 		makeObservable(this, {
-			widgets: observable.ref,
-			widgetId: observable.ref,
-			isLoading: observable.ref,
-			error: observable.ref,
+			widgets: observableRef,
+			widgetId: observableRef,
+			isLoading: observableRef,
+			error: observableRef,
 			hasWidgets: computed,
 			hasError: computed,
 			widgetEl: computed,
-			setWidgets: action.bound,
-			setWidgetId: action.bound,
-			setLoading: action.bound,
-			setError: action.bound,
-			load: action.bound
+			setWidgets: actionBound,
+			setWidgetId: actionBound,
+			setLoading: actionBound,
+			setError: actionBound,
+			load: actionBound
 		});
 	}
 

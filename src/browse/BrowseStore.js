@@ -1,4 +1,4 @@
-import { makeObservable, action, computed, observable } from 'mobx';
+import { makeObservable, actionBound, computed, observableRef } from 'mobx';
 import { getBrowseItems } from '../shared/api';
 
 export class BrowseStore {
@@ -13,17 +13,17 @@ export class BrowseStore {
 
 	constructor() {
 		makeObservable(this, {
-			items: observable.ref,
-			selectedItemId: observable.ref,
-			isLoading: observable.ref,
-			error: observable.ref,
+			items: observableRef,
+			selectedItemId: observableRef,
+			isLoading: observableRef,
+			error: observableRef,
 			selectedItem: computed,
 			hasError: computed,
-			setItems: action.bound,
-			setSelectedItemId: action.bound,
-			setLoading: action.bound,
-			setError: action.bound,
-			load: action.bound
+			setItems: actionBound,
+			setSelectedItemId: actionBound,
+			setLoading: actionBound,
+			setError: actionBound,
+			load: actionBound
 		});
 	}
 

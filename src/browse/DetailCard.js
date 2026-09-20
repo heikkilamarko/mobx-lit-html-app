@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import ArrowLeftIcon from 'bootstrap-icons/icons/arrow-left.svg?raw';
 import BoxArrowUpRightIcon from 'bootstrap-icons/icons/box-arrow-up-right.svg?raw';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observableRef } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 import './DetailCard.scss';
@@ -14,7 +14,7 @@ export class DetailCard extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			data: observable.ref
+			data: observableRef
 		});
 	}
 

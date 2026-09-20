@@ -1,5 +1,5 @@
 import { html, nothing } from 'lit';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observableRef } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 import './ErrorCard.scss';
@@ -13,8 +13,8 @@ export class ErrorCard extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			title: observable.ref,
-			text: observable.ref
+			title: observableRef,
+			text: observableRef
 		});
 	}
 

@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, addInterval, clearReactions, clearIntervals } from '../shared/utils';
 
@@ -10,10 +10,10 @@ export class Clock extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			time: observable.ref,
+			time: observableRef,
 			formattedTime: computed,
 			timeFormat: computed,
-			updateTime: action.bound
+			updateTime: actionBound
 		});
 		this.updateTime();
 	}

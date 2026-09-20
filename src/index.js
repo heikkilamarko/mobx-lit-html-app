@@ -65,6 +65,7 @@ function renderApp() {
 }
 
 function renderError(error) {
+	console.log(error);
 	render(
 		html`
 			<main

@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, reaction } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef, reaction } from 'mobx';
 import { uniqueId } from 'lodash-es';
 import { validateRequired } from './validators';
 import { FieldStore } from './FieldStore';
@@ -8,15 +8,15 @@ export class RolesStore {
 
 	constructor() {
 		makeObservable(this, {
-			fields: observable.ref,
+			fields: observableRef,
 			value: computed,
 			isDirty: computed,
 			isValid: computed,
 			isValidating: computed,
-			addRole: action.bound,
-			removeRole: action.bound,
-			reset: action.bound,
-			validate: action.bound
+			addRole: actionBound,
+			removeRole: actionBound,
+			reset: actionBound,
+			validate: actionBound
 		});
 
 		reaction(

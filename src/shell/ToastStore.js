@@ -1,4 +1,4 @@
-import { makeObservable, action, observable } from 'mobx';
+import { makeObservable, actionBound, observableRef } from 'mobx';
 import Toast from 'bootstrap/js/dist/toast';
 
 const DEFAULT_OPTIONS = {
@@ -11,11 +11,11 @@ export class ToastStore {
 
 	constructor() {
 		makeObservable(this, {
-			toast: observable.ref,
-			show: action.bound,
-			showSuccess: action.bound,
-			showWarning: action.bound,
-			showError: action.bound
+			toast: observableRef,
+			show: actionBound,
+			showSuccess: actionBound,
+			showWarning: actionBound,
+			showError: actionBound
 		});
 	}
 

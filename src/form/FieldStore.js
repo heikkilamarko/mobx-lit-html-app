@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef } from 'mobx';
 
 export class FieldStore {
 	id = null;
@@ -13,28 +13,28 @@ export class FieldStore {
 
 	constructor(field) {
 		makeObservable(this, {
-			id: observable.ref,
-			value: observable.ref,
-			helperValue: observable.ref,
-			originalValue: observable.ref,
-			error: observable.ref,
-			isTouched: observable.ref,
-			isValidating: observable.ref,
-			data: observable.ref,
-			isDirtyFn: observable.ref,
+			id: observableRef,
+			value: observableRef,
+			helperValue: observableRef,
+			originalValue: observableRef,
+			error: observableRef,
+			isTouched: observableRef,
+			isValidating: observableRef,
+			data: observableRef,
+			isDirtyFn: observableRef,
 			isDirty: computed,
 			isValid: computed,
-			setField: action.bound,
-			setId: action.bound,
-			setValue: action.bound,
-			resetValue: action.bound,
-			setHelperValue: action.bound,
-			setOriginalValue: action.bound,
-			setError: action.bound,
-			setTouched: action.bound,
-			setValidating: action.bound,
-			setData: action.bound,
-			reset: action.bound
+			setField: actionBound,
+			setId: actionBound,
+			setValue: actionBound,
+			resetValue: actionBound,
+			setHelperValue: actionBound,
+			setOriginalValue: actionBound,
+			setError: actionBound,
+			setTouched: actionBound,
+			setValidating: actionBound,
+			setData: actionBound,
+			reset: actionBound
 		});
 
 		this.setField(field);

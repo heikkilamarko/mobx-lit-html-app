@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observableRef } from 'mobx';
 import { addRenderReaction, addWatchReaction, clearReactions } from '../shared/utils';
 
 export class Joke extends HTMLElement {
@@ -8,7 +8,7 @@ export class Joke extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			text: observable.ref
+			text: observableRef
 		});
 	}
 

@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef } from 'mobx';
 import { stores } from '../shared/stores';
 import { addRenderReaction, clearReactions } from '../shared/utils';
 import { validateRequired } from './validators';
@@ -11,10 +11,10 @@ export class FormTagsField extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			options: observable.ref,
+			options: observableRef,
 			canAddTag: computed,
-			addTag: action.bound,
-			removeTag: action.bound
+			addTag: actionBound,
+			removeTag: actionBound
 		});
 	}
 
@@ -55,13 +55,15 @@ export class FormTagsField extends HTMLElement {
 		const isTouchedValid = isValid && isTouched && !isValidating;
 
 		return html`
-			${label
-				? html`
-						<label for=${id} class="form-label">
-							${label} ${isRequired ? html`<span class="text-danger">*</span>` : nothing}
-						</label>
-					`
-				: nothing}
+			${
+				label
+					? html`
+							<label for=${id} class="form-label">
+								${label} ${isRequired ? html`<span class="text-danger">*</span>` : nothing}
+							</label>
+						`
+					: nothing
+			}
 			<div
 				class=${classMap({
 					'input-group': true,
@@ -93,11 +95,13 @@ export class FormTagsField extends HTMLElement {
 				>
 					${t('form.tags.add')}
 				</button>
-				${isValidating
-					? html` <div id=${feedbackId} class="form-text">${t('form.validating')}</div> `
-					: isTouchedInvalid
-						? html` <div id=${feedbackId} class="invalid-feedback">${t(error)}</div> `
-						: nothing}
+				${
+					isValidating
+						? html` <div id=${feedbackId} class="form-text">${t('form.validating')}</div> `
+						: isTouchedInvalid
+							? html` <div id=${feedbackId} class="invalid-feedback">${t(error)}</div> `
+							: nothing
+				}
 			</div>
 			<div>
 				${value.map(
@@ -115,13 +119,15 @@ export class FormTagsField extends HTMLElement {
 					`
 				)}
 			</div>
-			${this.options
-				? html`
-						<datalist id="tags-datalist">
-							${this.options.map((option) => html`<option>${option}</option>`)}
-						</datalist>
-					`
-				: nothing}
+			${
+				this.options
+					? html`
+							<datalist id="tags-datalist">
+								${this.options.map((option) => html`<option>${option}</option>`)}
+							</datalist>
+						`
+					: nothing
+			}
 		`;
 	}
 

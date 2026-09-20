@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observableRef } from 'mobx';
 import ApexCharts from 'apexcharts';
 import en from 'apexcharts/dist/locales/en.json';
 import fi from 'apexcharts/dist/locales/fi.json';
@@ -13,7 +13,7 @@ export class Charts extends HTMLElement {
 	constructor() {
 		super();
 		makeObservable(this, {
-			charts: observable.ref
+			charts: observableRef
 		});
 		this.charts = [{ el: createChartDiv() }, { el: createChartDiv() }];
 	}

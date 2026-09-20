@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import { actionBound, computed, makeObservable, observableRef } from 'mobx';
 import { getJoke, getJokeCategories } from '../shared/api';
 
 /**
@@ -25,21 +25,21 @@ export class JokesStore {
 
 	constructor() {
 		makeObservable(this, {
-			categories: observable.ref,
-			category: observable.ref,
-			joke: observable.ref,
-			isLoading: observable.ref,
-			error: observable.ref,
+			categories: observableRef,
+			category: observableRef,
+			joke: observableRef,
+			isLoading: observableRef,
+			error: observableRef,
 			isReady: computed,
 			jokeText: computed,
 			hasError: computed,
-			setCategories: action.bound,
-			setCategory: action.bound,
-			setJoke: action.bound,
-			setLoading: action.bound,
-			setError: action.bound,
-			getJokeCategories: action.bound,
-			getJoke: action.bound
+			setCategories: actionBound,
+			setCategory: actionBound,
+			setJoke: actionBound,
+			setLoading: actionBound,
+			setError: actionBound,
+			getJokeCategories: actionBound,
+			getJoke: actionBound
 		});
 	}
 

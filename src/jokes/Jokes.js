@@ -56,9 +56,11 @@ export class Jokes extends HTMLElement {
 						${t('jokes.tell')}
 					</button>
 				</div>
-				${hasError
-					? html`<app-error-card .text=${error.message}></app-error-card>`
-					: html`<app-joke .text=${jokeText}></app-joke>`}
+				${
+					hasError
+						? html`<app-error-card .text=${error.message}></app-error-card>`
+						: html`<app-joke .text=${jokeText}></app-joke>`
+				}
 			</div>
 		`;
 	}

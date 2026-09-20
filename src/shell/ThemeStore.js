@@ -1,4 +1,4 @@
-import { makeObservable, action, observable, reaction } from 'mobx';
+import { makeObservable, actionBound, observableRef, reaction } from 'mobx';
 
 const LOCAL_STORAGE_KEY = 'app-theme';
 
@@ -8,8 +8,8 @@ export class ThemeStore {
 
 	constructor() {
 		makeObservable(this, {
-			theme: observable.ref,
-			setTheme: action.bound
+			theme: observableRef,
+			setTheme: actionBound
 		});
 
 		this.theme = this.#getTheme();

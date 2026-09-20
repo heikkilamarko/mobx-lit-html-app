@@ -1,4 +1,4 @@
-import { makeObservable, action, observable } from 'mobx';
+import { makeObservable, actionBound, observableRef } from 'mobx';
 import { getConfig } from '../shared/api';
 
 export class ConfigStore {
@@ -7,11 +7,11 @@ export class ConfigStore {
 
 	constructor() {
 		makeObservable(this, {
-			config: observable.ref,
-			setConfig: action.bound,
-			load: action.bound,
-			loadProd: action.bound,
-			loadDev: action.bound
+			config: observableRef,
+			setConfig: actionBound,
+			load: actionBound,
+			loadProd: actionBound,
+			loadDev: actionBound
 		});
 	}
 

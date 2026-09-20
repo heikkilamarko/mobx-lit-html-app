@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observableRef } from 'mobx';
 import UniversalRouter from 'universal-router';
 import generateUrls from 'universal-router/generate-urls';
 
@@ -14,8 +14,8 @@ export class RouteStore {
 		this.navigateBack = this.navigateBack.bind(this);
 
 		makeObservable(this, {
-			routes: observable.ref,
-			route: observable.ref
+			routes: observableRef,
+			route: observableRef
 		});
 	}
 

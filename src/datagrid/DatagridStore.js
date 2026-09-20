@@ -1,4 +1,4 @@
-import { makeObservable, action, computed, observable } from 'mobx';
+import { makeObservable, actionBound, computed, observableRef } from 'mobx';
 import { getDatagrid } from '../shared/api';
 
 export class DatagridStore {
@@ -8,14 +8,14 @@ export class DatagridStore {
 
 	constructor() {
 		makeObservable(this, {
-			rows: observable.ref,
-			isLoading: observable.ref,
-			error: observable.ref,
+			rows: observableRef,
+			isLoading: observableRef,
+			error: observableRef,
 			hasError: computed,
-			setRows: action.bound,
-			setLoading: action.bound,
-			setError: action.bound,
-			load: action.bound
+			setRows: actionBound,
+			setLoading: actionBound,
+			setError: actionBound,
+			load: actionBound
 		});
 	}
 
